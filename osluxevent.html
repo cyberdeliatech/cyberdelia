@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olivia & Soleil | Luxury Event Planning & Design</title>
+    <meta name="description" content="Olivia & Soleil creates elevated, unforgettable celebrations through luxury event planning, design, and thoughtful execution.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ivory: '#f5f1e9',
+                        cream: '#ebe4d8',
+                        offwhite: '#faf9f6',
+                        charcoal: '#20201d',
+                        muted: '#77736b',
+                        line: 'rgba(32,32,29,.16)'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"DM Sans"', 'Arial', 'sans-serif'],
+                    },
+                    fontSize: {
+                        'eyebrow': ['10px', { letterSpacing: '0.24em', fontWeight: '500', textTransform: 'uppercase' }],
+                        'label': ['10px', { letterSpacing: '0.18em', textTransform: 'uppercase' }],
+                        'nav': ['10px', { letterSpacing: '0.16em', textTransform: 'uppercase' }],
+                        'huge': ['clamp(4.5rem, 8.7vw, 9rem)', { lineHeight: '0.85', letterSpacing: '-0.05em' }],
+                        'h2': ['clamp(3.5rem, 6vw, 6.25rem)', { lineHeight: '0.9', letterSpacing: '-0.045em' }],
+                        'quote': ['clamp(3.5rem, 7vw, 6.875rem)', { lineHeight: '0.88', letterSpacing: '-0.045em' }],
+                    },
+                    animation: {
+                        'hero-zoom': 'heroZoom 12s ease-out forwards',
+                    },
+                    keyframes: {
+                        heroZoom: {
+                            '0%': { transform: 'scale(1.07)' },
+                            '100%': { transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: theme('colors.ivory');
+            color: theme('colors.charcoal');
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Form Input Styling */
+        .form-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid theme('colors.line');
+            border-radius: 0;
+            padding: 12px 0;
+            width: 100%;
+            font-family: theme('fontFamily.sans');
+            font-size: 13px;
+            color: theme('colors.charcoal');
+            transition: border-color 0.3s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-bottom-color: theme('colors.charcoal');
+        }
+        .form-input::placeholder {
+            color: theme('colors.muted');
+        }
+
+        /* Hamburger Menu Animation */
+        .hamburger span {
+            transition: all 0.3s ease-in-out;
+        }
+        .menu-open .hamburger span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .menu-open .hamburger span:nth-child(2) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Hide scrollbar when menu open */
+        body.menu-open {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body class="antialiased overflow-x-hidden selection:bg-charcoal selection:text-ivory">
+
+    <header id="siteHeader" class="fixed top-0 left-0 w-full z-50 h-[88px] px-6 md:px-[4vw] flex items-center justify-between text-white transition-all duration-400 ease-in-out">
+        <a href="#" class="flex items-center font-serif text-3xl tracking-tight z-50" aria-label="Olivia and Soleil home">
+            <span>O</span><span class="mx-1 text-lg opacity-70">&</span><span>S</span>
+        </a>
+        
+        <nav class="hidden md:flex gap-9" aria-label="Main navigation">
+            <a href="#about" class="text-nav opacity-80 hover:opacity-100 transition-opacity">About</a>
+            <a href="#services" class="text-nav opacity-80 hover:opacity-100 transition-opacity">Services</a>
+            <a href="#portfolio" class="text-nav opacity-80 hover:opacity-100 transition-opacity">Portfolio</a>
+            <a href="#experience" class="text-nav opacity-80 hover:opacity-100 transition-opacity">Experience</a>
+            <a href="#inquire" class="text-nav opacity-80 hover:opacity-100 transition-opacity">Inquire</a>
+        </nav>
+        
+        <a href="#inquire" class="hidden md:block text-nav pb-1 border-b border-current hover:opacity-70 transition-opacity z-50">Begin Your Event</a>
+        
+        <button id="menuToggle" class="hamburger flex md:hidden flex-col gap-[6px] border-none bg-transparent text-current cursor-pointer z-50 p-2" aria-label="Open navigation" aria-expanded="false">
+            <span class="block w-[27px] h-[1px] bg-current"></span>
+            <span class="block w-[27px] h-[1px] bg-current"></span>
+        </button>
+    </header>
+
+    <div id="mobileMenu" class="fixed inset-0 z-40 bg-charcoal text-ivory flex items-center justify-center -translate-y-full transition-transform duration-500 cubic-bezier(0.77, 0, 0.18, 1)">
+        <nav class="flex flex-col gap-8 text-center" aria-label="Mobile navigation">
+            <a href="#about" class="font-serif text-5xl leading-none mobile-link">About</a>
+            <a href="#services" class="font-serif text-5xl leading-none mobile-link">Services</a>
+            <a href="#portfolio" class="font-serif text-5xl leading-none mobile-link">Portfolio</a>
+            <a href="#experience" class="font-serif text-5xl leading-none mobile-link">Experience</a>
+            <a href="#inquire" class="font-serif text-5xl leading-none mobile-link text-cream/70 mt-4">Inquire</a>
+        </nav>
+    </div>
+
+    <main>
+        <section class="relative h-[100svh] min-h-[680px] md:min-h-[700px] text-white flex items-center overflow-hidden">
+            <div class="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=2200&q=90" alt="Elegant luxury event tablescape" class="w-full h-full object-cover animate-hero-zoom">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-[#0f0f0dbd] via-[#0f0f0d4d] to-[#0f0f0d14]"></div>
+            
+            <div class="relative z-10 w-[86%] md:w-[min(850px,85%)] ml-[7vw] md:ml-[10vw]">
+                <p class="text-eyebrow mb-6">Luxury Event Planning & Design</p>
+                <h1 class="font-serif text-huge font-light mb-8 md:mb-10">Moments,<br><em class="font-light italic">beautifully</em><br>remembered.</h1>
+                <p class="max-w-[330px] md:max-w-[410px] text-white/80 text-[13px] md:text-sm leading-relaxed mb-8 md:mb-10">
+                    Thoughtfully designed celebrations where every detail feels effortless, personal, and unforgettable.
+                </p>
+                <a href="#inquire" class="inline-flex items-center gap-6 md:gap-8 px-6 py-4 bg-offwhite text-charcoal text-nav hover:bg-white hover:-translate-y-1 transition-all duration-300 group">
+                    Begin Your Event <span class="text-[15px] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
+                </a>
+            </div>
+            
+            <div class="absolute bottom-8 left-[7vw] right-[7vw] md:left-[4vw] md:right-[4vw] flex justify-between text-[9px] tracking-[0.18em] uppercase opacity-75">
+                <span class="hidden md:block">South Florida & Beyond</span>
+                <span class="flex items-center gap-4 ml-auto">Scroll to explore <i class="block w-[50px] h-[1px] bg-current"></i></span>
+            </div>
+        </section>
+
+        <section class="bg-ivory px-[6vw] py-[90px] md:px-[7vw] md:py-[140px]" id="about">
+            <div class="flex justify-between pb-5 border-b border-line text-label text-muted mb-16 md:mb-24">
+                <span>01</span><span>Our Approach</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-[1.1fr_0.7fr] gap-14 md:gap-[13vw]">
+                <div class="reveal">
+                    <p class="text-eyebrow mb-6 text-muted">Olivia & Soleil</p>
+                    <h2 class="font-serif text-h2 font-light">Where your vision <br class="hidden md:block"><em class="font-light italic">becomes an experience.</em></h2>
+                </div>
+                <div class="reveal md:pt-4">
+                    <p class="font-serif text-[30px] md:text-[34px] leading-tight mb-8">We believe the most memorable celebrations are the ones that feel unmistakably yours.</p>
+                    <p class="max-w-[440px] text-muted text-[13px] leading-[1.8] mb-8">
+                        From the first conversation to the final candle being lit, Olivia & Soleil brings together intentional design, meticulous planning, and seamless execution to create celebrations that are as beautiful as they are meaningful.
+                    </p>
+                    <a href="#experience" class="inline-flex items-center gap-6 pb-2 border-b border-charcoal text-nav group">
+                        Discover the experience <span class="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="relative h-[60vh] md:h-[80vh] min-h-[450px] md:min-h-[600px] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=2200&q=90" alt="Elegant wedding reception" loading="lazy" class="parallax-img absolute inset-0 w-full h-[120%] object-cover -top-[10%]">
+            <div class="absolute bottom-8 left-[6vw] right-[6vw] md:left-[5vw] md:right-[5vw] flex justify-between text-white text-[9px] tracking-[0.18em] uppercase drop-shadow-md">
+                <span>Designed with intention</span>
+                <span class="hidden md:block">Celebrated with feeling</span>
+            </div>
+        </section>
+
+        <section class="bg-cream px-[6vw] py-[90px] md:px-[7vw] md:py-[140px]" id="services">
+            <div class="flex justify-between pb-5 border-b border-line text-label text-muted">
+                <span>02</span><span>What We Do</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-[1fr_0.45fr] gap-10 md:gap-[10vw] py-16 md:py-24">
+                <h2 class="reveal font-serif text-h2 font-light">An elevated approach<br><em class="font-light italic">to every occasion.</em></h2>
+                <p class="reveal max-w-[320px] pt-2 text-muted text-[13px] leading-[1.8]">
+                    Full-service planning and design for celebrations that deserve extraordinary attention to detail.
+                </p>
+            </div>
+            
+            <div class="border-t border-line">
+                <!-- Service 1 -->
+                <article class="reveal group grid grid-cols-[35px_1fr_25px] md:grid-cols-[90px_1fr_40px] items-center gap-4 md:gap-8 py-7 md:py-8 border-b border-line hover:pl-4 md:hover:pl-5 hover:pr-4 md:hover:pr-5 transition-all duration-400 ease-out cursor-pointer">
+                    <span class="text-label text-muted">01</span>
+                    <div>
+                        <h3 class="font-serif text-[26px] md:text-[35px]">Weddings</h3>
+                        <p class="max-w-[500px] mt-2 text-muted text-[11px] md:text-[12px] leading-relaxed">From intimate ceremonies to unforgettable celebrations, every element is thoughtfully curated.</p>
+                    </div>
+                    <span class="text-xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
+                </article>
+
+                <!-- Service 2 -->
+                <article class="reveal group grid grid-cols-[35px_1fr_25px] md:grid-cols-[90px_1fr_40px] items-center gap-4 md:gap-8 py-7 md:py-8 border-b border-line hover:pl-4 md:hover:pl-5 hover:pr-4 md:hover:pr-5 transition-all duration-400 ease-out cursor-pointer">
+                    <span class="text-label text-muted">02</span>
+                    <div>
+                        <h3 class="font-serif text-[26px] md:text-[35px]">Private Celebrations</h3>
+                        <p class="max-w-[500px] mt-2 text-muted text-[11px] md:text-[12px] leading-relaxed">Birthdays, anniversaries, milestones and once-in-a-lifetime moments designed around you.</p>
+                    </div>
+                    <span class="text-xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
+                </article>
+
+                <!-- Service 3 -->
+                <article class="reveal group grid grid-cols-[35px_1fr_25px] md:grid-cols-[90px_1fr_40px] items-center gap-4 md:gap-8 py-7 md:py-8 border-b border-line hover:pl-4 md:hover:pl-5 hover:pr-4 md:hover:pr-5 transition-all duration-400 ease-out cursor-pointer">
+                    <span class="text-label text-muted">03</span>
+                    <div>
+                        <h3 class="font-serif text-[26px] md:text-[35px]">Event Design</h3>
+                        <p class="max-w-[500px] mt-2 text-muted text-[11px] md:text-[12px] leading-relaxed">Distinctive visual concepts, tablescapes, florals, styling and details that bring a vision to life.</p>
+                    </div>
+                    <span class="text-xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
+                </article>
+
+                <!-- Service 4 -->
+                <article class="reveal group grid grid-cols-[35px_1fr_25px] md:grid-cols-[90px_1fr_40px] items-center gap-4 md:gap-8 py-7 md:py-8 border-b border-line hover:pl-4 md:hover:pl-5 hover:pr-4 md:hover:pr-5 transition-all duration-400 ease-out cursor-pointer">
+                    <span class="text-label text-muted">04</span>
+                    <div>
+                        <h3 class="font-serif text-[26px] md:text-[35px]">Corporate & Social</h3>
+                        <p class="max-w-[500px] mt-2 text-muted text-[11px] md:text-[12px] leading-relaxed">Sophisticated gatherings designed to leave a lasting impression on every guest.</p>
+                    </div>
+                    <span class="text-xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="bg-ivory px-[6vw] py-[90px] md:px-[7vw] md:py-[140px]" id="portfolio">
+            <div class="flex justify-between pb-5 border-b border-line text-label text-muted">
+                <span>03</span><span>Selected Work</span>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between md:items-end py-16 md:py-24">
+                <h2 class="reveal font-serif text-h2 font-light">A collection of<br><em class="font-light italic">beautiful moments.</em></h2>
+                <a href="#inquire" class="reveal mt-8 md:mt-0 inline-flex items-center gap-6 pb-2 border-b border-charcoal text-nav group w-max">
+                    Plan something extraordinary <span class="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-[1.25fr_0.75fr] gap-16 md:gap-x-[3vw] md:gap-y-[8vw]">
+                
+                <!-- Portfolio 1 -->
+                <article class="reveal group cursor-pointer">
+                    <div class="overflow-hidden bg-cream aspect-[1/1.08]">
+                        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1500&q=90" alt="Luxury wedding reception" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.045] transition-transform duration-[1s] ease-[cubic-bezier(0.2,0.6,0.3,1)]">
+                    </div>
+                    <div class="flex justify-between mt-5 text-muted text-[9px] tracking-[0.16em] uppercase">
+                        <span>Wedding</span><span>Miami, FL</span>
+                    </div>
+                    <h3 class="font-serif text-[30px] md:text-[34px] mt-2">An Evening in Ivory</h3>
+                </article>
+
+                <!-- Portfolio 2 -->
+                <article class="reveal group cursor-pointer">
+                    <div class="overflow-hidden bg-cream aspect-[1/1.18]">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=90" alt="Elegant wedding ceremony" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.045] transition-transform duration-[1s] ease-[cubic-bezier(0.2,0.6,0.3,1)]">
+                    </div>
+                    <div class="flex justify-between mt-5 text-muted text-[9px] tracking-[0.16em] uppercase">
+                        <span>Wedding</span><span>South Florida</span>
+                    </div>
+                    <h3 class="font-serif text-[30px] md:text-[34px] mt-2">The Garden Affair</h3>
+                </article>
+
+                <!-- Portfolio 3 -->
+                <article class="reveal group cursor-pointer md:col-start-2">
+                    <div class="overflow-hidden bg-cream aspect-[1/1.18]">
+                        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=90" alt="Elegant private event" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.045] transition-transform duration-[1s] ease-[cubic-bezier(0.2,0.6,0.3,1)]">
+                    </div>
+                    <div class="flex justify-between mt-5 text-muted text-[9px] tracking-[0.16em] uppercase">
+                        <span>Private Event</span><span>Fort Lauderdale, FL</span>
+                    </div>
+                    <h3 class="font-serif text-[30px] md:text-[34px] mt-2">After Dark</h3>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 bg-[#24231f] text-ivory" id="experience">
+            <div class="min-h-[500px] md:min-h-[850px] relative overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1478146896981-b80fe463b330?auto=format&fit=crop&w=1800&q=90" alt="Luxury dinner setting" loading="lazy" class="parallax-img absolute inset-0 w-full h-[120%] object-cover -top-[10%]">
+            </div>
+            
+            <div class="px-[7vw] py-[75px] md:px-[8vw] md:py-[90px] flex flex-col justify-center">
+                <div class="flex justify-between pb-5 border-b border-white/20 text-label text-white/50 mb-16 md:mb-24">
+                    <span>04</span><span>The Experience</span>
+                </div>
+                
+                <div class="reveal">
+                    <p class="text-eyebrow text-white/70">Beyond planning</p>
+                    <h2 class="font-serif text-h2 font-light my-6 md:my-10">Your only job<br>should be to <em class="font-light italic">enjoy it.</em></h2>
+                    <p class="max-w-[470px] text-white/60 text-[13px] leading-[1.8]">
+                        Your event should never feel like a project you have to manage. Our role is to take care of the details, anticipate the unexpected, and make the entire process feel beautifully effortless.
+                    </p>
+                </div>
+
+                <div class="mt-16 md:mt-20">
+                    <div class="grid grid-cols-1 sm:grid-cols-[25px_85px_1fr] md:grid-cols-[35px_100px_1fr] gap-2 sm:gap-4 py-5 border-t border-white/15 reveal delay-100">
+                        <span class="text-[#aaa69b] text-[9px] mt-1">01</span>
+                        <strong class="font-serif text-[22px] font-normal my-1 sm:my-0 text-white">Imagine</strong>
+                        <p class="text-[#aaa69b] text-[11px] leading-[1.5] sm:mt-2">We listen, discover and define your vision.</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-[25px_85px_1fr] md:grid-cols-[35px_100px_1fr] gap-2 sm:gap-4 py-5 border-t border-white/15 reveal delay-200">
+                        <span class="text-[#aaa69b] text-[9px] mt-1">02</span>
+                        <strong class="font-serif text-[22px] font-normal my-1 sm:my-0 text-white">Design</strong>
+                        <p class="text-[#aaa69b] text-[11px] leading-[1.5] sm:mt-2">We translate your vision into a distinctive experience.</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-[25px_85px_1fr] md:grid-cols-[35px_100px_1fr] gap-2 sm:gap-4 py-5 border-t border-white/15 reveal delay-300">
+                        <span class="text-[#aaa69b] text-[9px] mt-1">03</span>
+                        <strong class="font-serif text-[22px] font-normal my-1 sm:my-0 text-white">Execute</strong>
+                        <p class="text-[#aaa69b] text-[11px] leading-[1.5] sm:mt-2">We manage every detail so you can be present.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-cream text-center px-[6vw] py-[90px] md:px-[7vw] md:py-[140px]">
+            <p class="text-eyebrow text-muted">The Olivia & Soleil Philosophy</p>
+            <blockquote class="reveal max-w-[1100px] mx-auto mt-10 md:mt-16 font-serif text-quote font-light text-charcoal">
+                “The details are what transform an event into a <em class="font-light italic text-muted">memory.</em>”
+            </blockquote>
+        </section>
+
+        <section class="bg-ivory text-center px-[6vw] py-[110px] md:px-[7vw] md:py-[170px]" id="inquire">
+            <div class="max-w-[800px] mx-auto">
+                <p class="text-eyebrow text-muted">Let's create something unforgettable</p>
+                <h2 class="font-serif text-h2 font-light my-8 md:my-12">Your moment<br><em class="font-light italic">starts here.</em></h2>
+                <p class="max-w-[400px] mx-auto text-muted text-[13px] leading-[1.8] mb-12">
+                    Tell us a little about your celebration and we'll be in touch to begin the conversation.
+                </p>
+
+                <!-- High converting addition: an inline form rather than just a mailto link -->
+                <form action="#" class="reveal max-w-[500px] mx-auto text-left flex flex-col gap-6" onsubmit="event.preventDefault(); alert('Thank you for inquiring! We will be in touch shortly.');">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <input type="text" placeholder="First Name*" required class="form-input">
+                        <input type="text" placeholder="Last Name*" required class="form-input">
+                    </div>
+                    <input type="email" placeholder="Email Address*" required class="form-input">
+                    <select class="form-input text-muted cursor-pointer appearance-none bg-transparent" required>
+                        <option value="" disabled selected>Event Type*</option>
+                        <option value="wedding">Wedding</option>
+                        <option value="private">Private Celebration</option>
+                        <option value="corporate">Corporate / Social</option>
+                    </select>
+                    <input type="text" placeholder="Estimated Guest Count" class="form-input">
+                    <textarea placeholder="Tell us about your vision..." rows="3" class="form-input resize-none mt-4"></textarea>
+                    
+                    <button type="submit" class="mt-8 mx-auto w-full sm:w-auto inline-flex items-center justify-center gap-6 md:gap-8 px-8 py-5 bg-charcoal text-ivory text-nav hover:bg-black hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
+                        Submit Inquiry <span class="text-[15px] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
+                    </button>
+                </form>
+
+                <p class="mt-16 text-muted text-[9px] tracking-[0.16em] uppercase">
+                    Weddings · Private Events · Event Design · Social & Corporate
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#1e1e1b] text-ivory px-[5vw] pt-20 pb-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between pb-16">
+            <div>
+                <div class="font-serif text-[45px] md:text-[55px] leading-none mb-4">Olivia <span class="text-[30px] opacity-50">&</span> Soleil</div>
+                <p class="text-[#aaa69b] text-[9px] tracking-[0.18em] uppercase">Luxury Event Planning & Design</p>
+            </div>
+        </div>
+        
+        <div class="flex flex-col md:flex-row justify-start md:justify-end gap-[45px] md:gap-[100px] pt-10 border-t border-white/15">
+            <div class="flex flex-col gap-3">
+                <span class="mb-1 text-[#77736b] text-[9px] tracking-[0.18em] uppercase">Explore</span>
+                <a href="#about" class="text-[#d4d0c7] text-[11px] hover:text-white transition-colors">About</a>
+                <a href="#services" class="text-[#d4d0c7] text-[11px] hover:text-white transition-colors">Services</a>
+                <a href="#portfolio" class="text-[#d4d0c7] text-[11px] hover:text-white transition-colors">Portfolio</a>
+                <a href="#experience" class="text-[#d4d0c7] text-[11px] hover:text-white transition-colors">Experience</a>
+            </div>
+            <div class="flex flex-col gap-3">
+                <span class="mb-1 text-[#77736b] text-[9px] tracking-[0.18em] uppercase">Connect</span>
+                <a href="#" class="text-[#d4d0c7] text-[11px] hover:text-white transition-colors">Instagram</a>
+                <a href="#" class="text-[#d4d0c7] text-[11px] hover:text-white transition-colors">Pinterest</a>
+                <a href="mailto:hello@oliviaandsoleil.com" class="text-[#d4d0c7] text-[11px] hover:text-white transition-colors">Email</a>
+            </div>
+        </div>
+        
+        <div class="flex flex-col md:flex-row justify-between gap-3 mt-16 pt-5 border-t border-white/15 text-[#77736b] text-[8px] tracking-[0.14em] uppercase">
+            <span>© 2026 Olivia & Soleil</span>
+            <span>South Florida & Beyond</span>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Header Scroll Effect
+            const header = document.getElementById("siteHeader");
+            
+            function updateHeader() {
+                if (window.scrollY > 60) {
+                    header.classList.add("bg-[#f5f1e9f0]", "text-charcoal", "backdrop-blur-md", "h-[70px]");
+                    header.classList.remove("text-white");
+                } else {
+                    header.classList.remove("bg-[#f5f1e9f0]", "text-charcoal", "backdrop-blur-md", "h-[70px]");
+                    header.classList.add("text-white");
+                }
+            }
+            window.addEventListener("scroll", updateHeader, { passive: true });
+            updateHeader();
+
+            // Mobile Menu Toggle
+            const menuButton = document.getElementById("menuToggle");
+            const mobileMenu = document.getElementById("mobileMenu");
+            const mobileLinks = mobileMenu.querySelectorAll("a");
+
+            function closeMenu() {
+                mobileMenu.classList.remove("translate-y-0");
+                mobileMenu.classList.add("-translate-y-full");
+                document.body.classList.remove("menu-open");
+                menuButton.setAttribute("aria-expanded", "false");
+            }
+
+            menuButton.addEventListener("click", () => {
+                const isOpen = mobileMenu.classList.contains("translate-y-0");
+                if (isOpen) {
+                    closeMenu();
+                } else {
+                    mobileMenu.classList.remove("-translate-y-full");
+                    mobileMenu.classList.add("translate-y-0");
+                    document.body.classList.add("menu-open");
+                    menuButton.setAttribute("aria-expanded", "true");
+                }
+            });
+
+            mobileLinks.forEach(link => link.addEventListener("click", closeMenu));
+
+            // Scroll Reveal Animation (Intersection Observer)
+            const revealElements = document.querySelectorAll(".reveal");
+
+            if ("IntersectionObserver" in window) {
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (!entry.isIntersecting) return;
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target); // Run once
+                    });
+                }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+                revealElements.forEach(el => observer.observe(el));
+            } else {
+                revealElements.forEach(el => el.classList.add("visible")); // Fallback
+            }
+
+            // Smooth Scrolling for Anchor Links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener("click", function(e) {
+                    const id = this.getAttribute("href");
+                    if (!id || id === "#") return;
+                    const target = document.querySelector(id);
+                    if (!target) return;
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: "smooth", block: "start" });
+                });
+            });
+
+            // Parallax Image Effect
+            const parallaxImages = document.querySelectorAll(".parallax-img");
+
+            function updateParallax() {
+                // Skip parallax on small mobile screens to save battery/performance
+                if (window.innerWidth < 768) {
+                    parallaxImages.forEach(img => img.style.transform = `translateY(0px) scale(1)`);
+                    return; 
+                }
+                
+                const vh = window.innerHeight;
+                parallaxImages.forEach(image => {
+                    const parent = image.parentElement;
+                    const rect = parent.getBoundingClientRect();
+                    // Check if element is in viewport
+                    if (rect.bottom < 0 || rect.top > vh) return; 
+                    
+                    const progress = (vh - rect.top) / (vh + rect.height);
+                    // Move the image slightly contrary to scroll direction
+                    const movement = (progress - 0.5) * 45; 
+                    image.style.transform = `translateY(${movement}px) scale(1.05)`;
+                });
+            }
+
+            window.addEventListener("scroll", updateParallax, { passive: true });
+            window.addEventListener("resize", updateParallax, { passive: true });
+            updateParallax();
+        });
+    </script>
+</body>
+</html>
