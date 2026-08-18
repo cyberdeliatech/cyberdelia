@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olivia & Soleil | Luxury Event Planning</title>
+    <meta name="description" content="Bespoke event planning and visionary design for the world's most discerning hosts.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Upgraded to a more editorial pairing: Cormorant Garamond (Serif) & Montserrat (Sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pearl: '#F8F7F5',       /* Softer, cleaner white */
+                        onyx: '#0A0A0A',        /* True rich black */
+                        champagne: '#B4A696',   /* Sophisticated taupe/gold accent */
+                        stone: '#8B8982',       /* Muted text */
+                        fine: 'rgba(10, 10, 10, 0.15)', /* Delicate borders */
+                        finelight: 'rgba(248, 247, 245, 0.15)'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Montserrat"', 'Helvetica', 'sans-serif'],
+                    },
+                    fontSize: {
+                        'micro': ['9px', { letterSpacing: '0.3em', textTransform: 'uppercase', fontWeight: '400' }],
+                        'label': ['11px', { letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: '300' }],
+                        'body': ['13px', { lineHeight: '1.9', fontWeight: '300' }],
+                        'display': ['clamp(4rem, 10vw, 11rem)', { lineHeight: '0.85', letterSpacing: '-0.02em' }],
+                        'heading': ['clamp(3rem, 6vw, 6rem)', { lineHeight: '0.9', letterSpacing: '-0.02em' }],
+                    },
+                    transitionTimingFunction: {
+                        'chic': 'cubic-bezier(0.25, 1, 0.3, 1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: theme('colors.pearl');
+            color: theme('colors.onyx');
+        }
+        
+        ::selection {
+            background-color: theme('colors.champagne');
+            color: theme('colors.pearl');
+        }
+
+        /* Sophisticated Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s theme('transitionTimingFunction.chic'), transform 1.2s theme('transitionTimingFunction.chic');
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* Chic Form Inputs */
+        .chic-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid theme('colors.fine');
+            border-radius: 0;
+            padding: 16px 0;
+            width: 100%;
+            font-family: theme('fontFamily.sans');
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: theme('colors.onyx');
+            transition: all 0.5s ease;
+        }
+        .chic-input:focus {
+            outline: none;
+            border-bottom-color: theme('colors.champagne');
+            padding-left: 10px;
+        }
+        .chic-input::placeholder {
+            color: theme('colors.stone');
+        }
+
+        /* Editorial Image Hover */
+        .img-wrap {
+            overflow: hidden;
+            position: relative;
+        }
+        .img-wrap img {
+            transition: transform 1.5s theme('transitionTimingFunction.chic');
+            will-change: transform;
+        }
+        .img-wrap:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Custom Line Animations */
+        .hover-line {
+            position: relative;
+            display: inline-block;
+        }
+        .hover-line::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: currentColor;
+            transform-origin: bottom right;
+            transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+        .hover-line:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <header id="siteHeader" class="fixed top-0 left-0 w-full z-50 px-6 py-8 md:px-12 flex items-center justify-between text-pearl mix-blend-difference transition-all duration-700">
+        <a href="#" class="font-serif text-3xl tracking-widest z-50 font-light" aria-label="Home">
+            O<span class="mx-2 text-xl italic text-champagne">&</span>S
+        </a>
+        
+        <nav class="hidden md:flex gap-12" aria-label="Main navigation">
+            <a href="#about" class="text-micro hover-line">The House</a>
+            <a href="#services" class="text-micro hover-line">Services</a>
+            <a href="#portfolio" class="text-micro hover-line">Archives</a>
+        </nav>
+        
+        <a href="#inquire" class="hidden md:block text-micro pb-2 border-b border-champagne hover:text-champagne transition-colors z-50">Initiate</a>
+        
+        <button id="menuToggle" class="md:hidden z-50 flex flex-col gap-2 p-2 focus:outline-none" aria-label="Menu">
+            <span class="block w-6 h-[1px] bg-pearl transition-transform origin-center"></span>
+            <span class="block w-6 h-[1px] bg-pearl transition-transform origin-center"></span>
+        </button>
+    </header>
+
+    <div id="mobileMenu" class="fixed inset-0 z-40 bg-onyx flex items-center justify-center -translate-y-full transition-transform duration-700 ease-in-out">
+        <nav class="flex flex-col gap-10 text-center text-pearl" aria-label="Mobile navigation">
+            <a href="#about" class="font-serif text-5xl font-light italic mobile-link hover:text-champagne transition-colors">The House</a>
+            <a href="#services" class="font-serif text-5xl font-light italic mobile-link hover:text-champagne transition-colors">Services</a>
+            <a href="#portfolio" class="font-serif text-5xl font-light italic mobile-link hover:text-champagne transition-colors">Archives</a>
+            <a href="#experience" class="font-serif text-5xl font-light italic mobile-link hover:text-champagne transition-colors">Philosophy</a>
+            <a href="#inquire" class="text-micro mt-8 border-b border-champagne pb-2 inline-block mx-auto mobile-link text-champagne">Initiate an Event</a>
+        </nav>
+    </div>
+
+    <main>
+        <section class="relative h-[100svh] min-h-[700px] bg-onyx flex flex-col justify-end pb-12 px-6 md:px-12 overflow-hidden">
+            <div class="absolute inset-0 img-wrap">
+                <!-- Using a highly desaturated, editorial architectural/event image -->
+                <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=2200&q=90&sat=-50" alt="Chic luxury event space" class="w-full h-full object-cover opacity-60">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-onyx/90 via-onyx/20 to-transparent"></div>
+            
+            <div class="relative z-10 w-full flex flex-col md:flex-row md:items-end justify-between gap-10">
+                <div class="reveal">
+                    <p class="text-champagne text-micro mb-6 md:mb-10">Artisan Event Design</p>
+                    <h1 class="font-serif text-display font-light text-pearl">Bespoke<br><em class="italic text-champagne">Celebrations.</em></h1>
+                </div>
+                
+                <div class="reveal reveal-delay-1 md:pb-4 md:text-right max-w-[300px]">
+                    <p class="text-pearl/70 text-body mb-8">
+                        Curating profoundly beautiful, sensory experiences for the world's most discerning hosts.
+                    </p>
+                    <a href="#inquire" class="inline-flex items-center gap-4 text-micro text-pearl group">
+                        <span class="hover-line">Enter the experience</span> 
+                        <span class="group-hover:translate-x-2 transition-transform duration-500">⟶</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-pearl px-6 py-32 md:px-12 md:py-48" id="about">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-6">
+                
+                <div class="md:col-span-3 reveal">
+                    <span class="text-micro text-stone">I. The House</span>
+                </div>
+                
+                <div class="md:col-span-8 md:col-start-5">
+                    <h2 class="font-serif text-heading font-light text-onyx mb-12 leading-tight reveal">
+                        We approach event design as a <em class="italic text-champagne">fine art</em>—where every nuance is considered and every detail possesses intention.
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-stone text-body reveal reveal-delay-1">
+                        <p>
+                            Olivia & Soleil is a boutique planning and design atelier specializing in multi-day celebrations, destination weddings, and highly exclusive private events. We reject formulas in favor of bespoke creation.
+                        </p>
+                        <div class="flex flex-col items-start gap-8">
+                            <p>
+                                By accepting only a select number of commissions annually, we ensure our undivided focus is devoted to realizing your unique vision with unparalleled precision and grace.
+                            </p>
+                            <img src="https://images.unsplash.com/photo-1577579282862-23c28a8d1179?auto=format&fit=crop&w=800&q=80" alt="Detail shot of champagne glasses" class="w-full max-w-[200px] grayscale opacity-80 mt-4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-onyx text-pearl px-6 py-32 md:px-12 md:py-40" id="services">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-6 mb-24">
+                <div class="md:col-span-3 reveal">
+                    <span class="text-micro text-champagne">II. Our Metier</span>
+                </div>
+                <div class="md:col-span-9 reveal reveal-delay-1">
+                    <h2 class="font-serif text-[40px] md:text-[60px] font-light max-w-2xl">
+                        Disciplines of <em class="italic text-champagne">Elegance</em>
+                    </h2>
+                </div>
+            </div>
+            
+            <div class="md:col-span-12 border-t border-finelight">
+                <!-- Service I -->
+                <article class="reveal group grid grid-cols-1 md:grid-cols-[100px_1fr_300px] items-center gap-6 md:gap-12 py-10 md:py-16 border-b border-finelight cursor-pointer hover:bg-white/5 transition-colors duration-500 px-4 md:px-8 -mx-4 md:-mx-8">
+                    <span class="text-serif text-2xl text-champagne italic font-light">I.</span>
+                    <h3 class="font-serif text-4xl md:text-5xl font-light">Destination Weddings</h3>
+                    <p class="text-pearl/60 text-body md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">Immersive, multi-day celebrations in the world's most coveted locales.</p>
+                </article>
+
+                <!-- Service II -->
+                <article class="reveal group grid grid-cols-1 md:grid-cols-[100px_1fr_300px] items-center gap-6 md:gap-12 py-10 md:py-16 border-b border-finelight cursor-pointer hover:bg-white/5 transition-colors duration-500 px-4 md:px-8 -mx-4 md:-mx-8">
+                    <span class="text-serif text-2xl text-champagne italic font-light">II.</span>
+                    <h3 class="font-serif text-4xl md:text-5xl font-light">Private Galas</h3>
+                    <p class="text-pearl/60 text-body md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">Milestone birthdays and intimate soirees crafted with absolute discretion.</p>
+                </article>
+
+                <!-- Service III -->
+                <article class="reveal group grid grid-cols-1 md:grid-cols-[100px_1fr_300px] items-center gap-6 md:gap-12 py-10 md:py-16 border-b border-finelight cursor-pointer hover:bg-white/5 transition-colors duration-500 px-4 md:px-8 -mx-4 md:-mx-8">
+                    <span class="text-serif text-2xl text-champagne italic font-light">III.</span>
+                    <h3 class="font-serif text-4xl md:text-5xl font-light">Event Architecture</h3>
+                    <p class="text-pearl/60 text-body md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">Spatial design, custom fabrications, and sensory tablescape curation.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="bg-pearl px-6 py-32 md:px-12 md:py-48" id="portfolio">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-6 mb-20 md:mb-32">
+                <div class="md:col-span-3 reveal">
+                    <span class="text-micro text-stone">III. The Archives</span>
+                </div>
+                <div class="md:col-span-6 reveal reveal-delay-1">
+                    <h2 class="font-serif text-[40px] md:text-[60px] font-light leading-none">
+                        Visual <br><em class="italic text-champagne">Poetry.</em>
+                    </h2>
+                </div>
+                <div class="md:col-span-3 flex md:justify-end items-end reveal reveal-delay-2">
+                    <a href="#inquire" class="text-micro hover-line text-onyx">View Full Portfolio</a>
+                </div>
+            </div>
+
+            <!-- Asymmetrical Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-y-16 md:gap-x-8 md:gap-y-32">
+                
+                <!-- Portfolio 1 (Large, Left) -->
+                <article class="md:col-span-7 reveal cursor-pointer group">
+                    <div class="img-wrap aspect-[4/5] bg-fine">
+                        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1500&q=90" alt="Chic tablescape" loading="lazy" class="w-full h-full object-cover">
+                    </div>
+                    <div class="mt-8 flex justify-between items-baseline">
+                        <h3 class="font-serif text-3xl font-light">L'Opulence</h3>
+                        <span class="text-micro text-stone">Miami</span>
+                    </div>
+                </article>
+
+                <!-- Portfolio 2 (Smaller, Right, Pushed Down) -->
+                <article class="md:col-span-4 md:col-start-9 md:mt-48 reveal cursor-pointer group">
+                    <div class="img-wrap aspect-[3/4] bg-fine">
+                        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=90" alt="Ambient lighting event" loading="lazy" class="w-full h-full object-cover">
+                    </div>
+                    <div class="mt-8 flex justify-between items-baseline">
+                        <h3 class="font-serif text-2xl font-light">Nocturne</h3>
+                        <span class="text-micro text-stone">New York</span>
+                    </div>
+                </article>
+
+                <!-- Portfolio 3 (Wide, Center) -->
+                <article class="md:col-span-8 md:col-start-3 reveal cursor-pointer group">
+                    <div class="img-wrap aspect-[16/9] bg-fine">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=90" alt="Outdoor elegant setup" loading="lazy" class="w-full h-full object-cover">
+                    </div>
+                    <div class="mt-8 flex justify-between items-baseline">
+                        <h3 class="font-serif text-3xl font-light">Villa Sol</h3>
+                        <span class="text-micro text-stone">Amalfi Coast</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="relative h-[80vh] min-h-[600px] flex items-center justify-center text-center px-6 overflow-hidden" id="experience">
+            <!-- Fixed parallax background for chic depth -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=2200&q=90" alt="Luxury detail" class="w-full h-full object-cover opacity-90 fixed-bg" style="transform: translateZ(-1px) scale(2);">
+            </div>
+            <div class="absolute inset-0 bg-onyx/40 z-0 backdrop-blur-[2px]"></div>
+            
+            <div class="relative z-10 max-w-4xl mx-auto reveal bg-pearl/95 p-12 md:p-24 shadow-2xl backdrop-blur-sm">
+                <p class="text-micro text-champagne mb-8">The Philosophy</p>
+                <blockquote class="font-serif text-3xl md:text-5xl font-light leading-snug text-onyx">
+                    "True luxury is <em class="italic text-champagne">invisible</em>. It is felt in the flawless flow of an evening, the subtle warmth of the lighting, and the absolute peace of mind of the host."
+                </blockquote>
+            </div>
+        </section>
+
+        <section class="bg-pearl px-6 py-32 md:px-12 md:py-48" id="inquire">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-20 reveal">
+                    <span class="text-micro text-stone block mb-6">IV. Initiate</span>
+                    <h2 class="font-serif text-heading font-light text-onyx">
+                        Begin the <em class="italic text-champagne">Dialogue.</em>
+                    </h2>
+                </div>
+
+                <form action="#" class="reveal reveal-delay-1 flex flex-col gap-10" onsubmit="event.preventDefault(); alert('Your inquiry has been elegantly received. We shall be in touch.');">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <input type="text" placeholder="Given Name" required class="chic-input">
+                        <input type="text" placeholder="Surname" required class="chic-input">
+                    </div>
+                    
+                    <input type="email" placeholder="Email Address" required class="chic-input">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <input type="text" placeholder="Proposed Date" class="chic-input">
+                        <select class="chic-input cursor-pointer appearance-none bg-transparent" required>
+                            <option value="" disabled selected>Nature of Event</option>
+                            <option value="wedding">Destination Wedding</option>
+                            <option value="gala">Private Gala</option>
+                            <option value="corporate">Corporate Retreat</option>
+                        </select>
+                    </div>
+                    
+                    <textarea placeholder="Share details of your vision..." rows="1" class="chic-input resize-none mt-4 transition-all duration-300 focus:min-h-[100px]"></textarea>
+                    
+                    <button type="submit" class="mt-12 mx-auto inline-flex items-center gap-6 px-12 py-5 bg-onyx text-pearl text-label tracking-widest hover:bg-champagne hover:text-onyx transition-colors duration-500 group">
+                        Submit Commission <span class="group-hover:translate-x-2 transition-transform duration-500 font-serif italic text-lg leading-none">⟶</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-onyx text-pearl px-6 py-20 md:px-12 md:py-24 border-t border-finelight/20">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-6">
+            
+            <div class="md:col-span-5 flex flex-col justify-between">
+                <div>
+                    <div class="font-serif text-5xl font-light mb-4">Olivia <span class="italic text-champagne">&</span> Soleil</div>
+                    <p class="text-micro text-stone">Haute Couture Event Design</p>
+                </div>
+                <p class="text-[10px] tracking-widest text-stone uppercase mt-20 hidden md:block">
+                    © 2026 O&S. All Rights Reserved.
+                </p>
+            </div>
+            
+            <div class="md:col-span-3 md:col-start-7 flex flex-col gap-6">
+                <span class="text-micro text-champagne mb-2">Navigation</span>
+                <a href="#about" class="text-label text-pearl/70 hover:text-pearl transition-colors w-max hover-line">The House</a>
+                <a href="#services" class="text-label text-pearl/70 hover:text-pearl transition-colors w-max hover-line">Services</a>
+                <a href="#portfolio" class="text-label text-pearl/70 hover:text-pearl transition-colors w-max hover-line">Archives</a>
+                <a href="#inquire" class="text-label text-pearl/70 hover:text-pearl transition-colors w-max hover-line">Inquire</a>
+            </div>
+
+            <div class="md:col-span-3 flex flex-col gap-6">
+                <span class="text-micro text-champagne mb-2">Social</span>
+                <a href="#" class="text-label text-pearl/70 hover:text-pearl transition-colors w-max hover-line">Instagram</a>
+                <a href="#" class="text-label text-pearl/70 hover:text-pearl transition-colors w-max hover-line">Pinterest</a>
+                <a href="#" class="text-label text-pearl/70 hover:text-pearl transition-colors w-max hover-line">Vogue Registry</a>
+            </div>
+            
+            <!-- Mobile Copyright -->
+            <div class="md:hidden mt-8 pt-8 border-t border-finelight">
+                <p class="text-[10px] tracking-widest text-stone uppercase text-center">
+                    © 2026 O&S. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // Elegant Menu Toggle
+            const menuBtn = document.getElementById("menuToggle");
+            const mobileMenu = document.getElementById("mobileMenu");
+            const menuLinks = document.querySelectorAll(".mobile-link");
+            const lines = menuBtn.querySelectorAll("span");
+
+            menuBtn.addEventListener("click", () => {
+                const isOpen = mobileMenu.classList.contains("translate-y-0");
+                
+                if (isOpen) {
+                    mobileMenu.classList.remove("translate-y-0");
+                    mobileMenu.classList.add("-translate-y-full");
+                    lines[0].style.transform = "translateY(0) rotate(0)";
+                    lines[1].style.transform = "translateY(0) rotate(0)";
+                    document.body.style.overflow = "";
+                } else {
+                    mobileMenu.classList.remove("-translate-y-full");
+                    mobileMenu.classList.add("translate-y-0");
+                    // Create an 'X'
+                    lines[0].style.transform = "translateY(4.5px) rotate(45deg)";
+                    lines[1].style.transform = "translateY(-4.5px) rotate(-45deg)";
+                    document.body.style.overflow = "hidden";
+                }
+            });
+
+            menuLinks.forEach(link => {
+                link.addEventListener("click", () => {
+                    mobileMenu.classList.remove("translate-y-0");
+                    mobileMenu.classList.add("-translate-y-full");
+                    lines[0].style.transform = "translateY(0) rotate(0)";
+                    lines[1].style.transform = "translateY(0) rotate(0)";
+                    document.body.style.overflow = "";
+                });
+            });
+
+            // Sophisticated Intersection Observer Reveal
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            // Expanding Textarea
+            const tx = document.getElementsByTagName("textarea");
+            for (let i = 0; i < tx.length; i++) {
+                tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+                tx[i].addEventListener("input", OnInput, false);
+            }
+            function OnInput() {
+                this.style.height = "auto";
+                this.style.height = (this.scrollHeight) + "px";
+            }
+        });
+    </script>
+</body>
+</html>
