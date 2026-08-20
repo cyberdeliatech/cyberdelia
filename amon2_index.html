@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexandra Montoya | Light & Airy Fine Art Photography</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        linen: '#FAF8F5',
+                        sand: '#F2EDE4',
+                        surface: '#FFFFFF',
+                        charcoal: '#2C2A29',
+                        gold: '#C5A880',
+                        'gold-dark': '#A38760'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .light-glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+        }
+        .soft-shadow {
+            box-shadow: 0 20px 40px rgba(44, 42, 41, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-linen text-charcoal font-sans antialiased selection:bg-gold selection:text-white">
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 light-glass border-b border-sand/60">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="#" class="font-serif text-2xl tracking-[0.25em] text-charcoal uppercase">
+                Alexandra <span class="text-gold italic font-light">Montoya</span>
+            </a>
+            
+            <nav class="hidden md:flex items-center space-x-10 text-xs uppercase tracking-[0.2em] font-light text-charcoal/80">
+                <a href="#portfolio" class="hover:text-gold transition-colors duration-300">Portfolio</a>
+                <a href="#experience" class="hover:text-gold transition-colors duration-300">Experience</a>
+                <a href="#about" class="hover:text-gold transition-colors duration-300">About</a>
+                <a href="#investment" class="hover:text-gold transition-colors duration-300">Investment</a>
+            </nav>
+
+            <a href="#contact" class="hidden md:inline-flex items-center px-6 py-3 border border-gold text-gold text-xs uppercase tracking-[0.2em] hover:bg-gold hover:text-white transition-all duration-300">
+                Inquire
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-charcoal focus:outline-none">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden light-glass border-t border-sand px-6 py-6 space-y-4 text-center">
+            <a href="#portfolio" class="block text-sm uppercase tracking-widest hover:text-gold">Portfolio</a>
+            <a href="#experience" class="block text-sm uppercase tracking-widest hover:text-gold">Experience</a>
+            <a href="#about" class="block text-sm uppercase tracking-widest hover:text-gold">About</a>
+            <a href="#investment" class="block text-sm uppercase tracking-widest hover:text-gold">Investment</a>
+            <a href="#contact" class="block py-2 bg-gold text-white text-xs uppercase tracking-widest font-medium">Inquire</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
+        <!-- Background Ambient Glow -->
+        <div class="absolute w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl pointer-events-none top-10 left-1/2 -translate-x-1/2"></div>
+        
+        <div class="max-w-5xl mx-auto px-6 text-center z-10 py-20">
+            <span class="text-xs uppercase tracking-[0.4em] text-gold block mb-6 font-light">Light, Airy & Organic Imagery</span>
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl tracking-tight text-charcoal mb-8 font-light leading-[1.1]">
+                Preserving <span class="italic font-normal text-gold">Natural</span> Moments
+            </h1>
+            <p class="max-w-xl mx-auto text-charcoal/70 font-light text-sm md:text-base tracking-wide leading-relaxed mb-12">
+                Luminous, romantic visual storytelling crafted with natural light for weddings, motherhood, and editorial portraits.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 bg-gold text-white text-xs uppercase tracking-[0.25em] font-medium hover:bg-gold-dark transition-all duration-300 soft-shadow">
+                    View Portfolio
+                </a>
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 border border-charcoal/20 text-charcoal text-xs uppercase tracking-[0.25em] hover:border-gold hover:text-gold transition-all duration-300">
+                    Check Availability
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Gallery -->
+    <section id="portfolio" class="py-32 bg-sand/40 border-t border-sand">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.3em] text-gold block mb-3 font-light">Selected Works</span>
+                    <h2 class="font-serif text-4xl md:text-5xl text-charcoal font-light">The Gallery</h2>
+                </div>
+                <p class="text-charcoal/70 text-sm max-w-sm mt-4 md:mt-0 font-light">
+                    A collection of bright, organic compositions infused with warmth and authentic emotion.
+                </p>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Item 1 -->
+                <div class="group relative h-[480px] overflow-hidden bg-surface border border-sand soft-shadow">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" alt="Wedding Moments" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                        <span class="text-xs uppercase tracking-[0.2em] text-gold mb-1 font-light">Weddings</span>
+                        <h3 class="font-serif text-2xl text-white">The Coastal Estate</h3>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="group relative h-[480px] overflow-hidden bg-surface border border-sand soft-shadow md:-translate-y-8">
+                    <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=1000&q=80" alt="Motherhood Portrait" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                        <span class="text-xs uppercase tracking-[0.2em] text-gold mb-1 font-light">Motherhood</span>
+                        <h3 class="font-serif text-2xl text-white">Soft Horizon Series</h3>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="group relative h-[480px] overflow-hidden bg-surface border border-sand soft-shadow">
+                    <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1000&q=80" alt="Lifestyle Portrait" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                        <span class="text-xs uppercase tracking-[0.2em] text-gold mb-1 font-light">Lifestyle</span>
+                        <h3 class="font-serif text-2xl text-white">Golden Hour Curation</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience / Approach -->
+    <section id="experience" class="py-32 bg-linen">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.3em] text-gold block mb-3 font-light">The Philosophy</span>
+                    <h2 class="font-serif text-4xl md:text-5xl text-charcoal font-light mb-8">Pure Light, Genuine Connection</h2>
+                    <p class="text-charcoal/70 font-light text-sm leading-relaxed mb-6">
+                        My editing style focuses on clean whites, soft pastel undertones, and glowing highlights that evoke a sense of effortless grace and tranquility.
+                    </p>
+                    <p class="text-charcoal/70 font-light text-sm leading-relaxed mb-8">
+                        I guide you gently through natural poses, creating a comfortable space where genuine laughter and tender interactions unfold naturally.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 pt-4 border-t border-sand">
+                        <div>
+                            <span class="font-serif text-3xl text-gold font-light block mb-1">10+</span>
+                            <span class="text-xs uppercase tracking-wider text-charcoal/60 font-light">Years Experience</span>
+                        </div>
+                        <div>
+                            <span class="font-serif text-3xl text-gold font-light block mb-1">150+</span>
+                            <span class="text-xs uppercase tracking-wider text-charcoal/60 font-light">Stories Told</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative h-[550px] border border-sand p-4 bg-surface soft-shadow">
+                    <img src="https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?auto=format&fit=crop&w=1000&q=80" alt="Natural Light Aesthetic" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Overview -->
+    <section id="investment" class="py-32 bg-sand/40 border-t border-sand">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-20">
+                <span class="text-xs uppercase tracking-[0.3em] text-gold block mb-3 font-light">Commissions</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-charcoal font-light mb-4">Investment Tiers</h2>
+                <p class="text-charcoal/70 font-light text-sm">Transparent packages crafted to capture your milestone moments with clarity and care.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Tier 1 -->
+                <div class="bg-surface border border-sand p-10 flex flex-col justify-between soft-shadow">
+                    <div>
+                        <span class="text-xs uppercase tracking-[0.2em] text-gold block mb-2 font-light">Portrait & Family</span>
+                        <h3 class="font-serif text-3xl text-charcoal mb-4">Essential</h3>
+                        <div class="font-serif text-4xl text-charcoal mb-6 font-light">$950</div>
+                        <ul class="space-y-4 text-xs text-charcoal/80 font-light mb-10">
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-gold mr-3"></i> 90-Minute Outdoor Session</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-gold mr-3"></i> One Location of Choice</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-gold mr-3"></i> 30 Hand-Edited High-Res Files</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-gold mr-3"></i> Private Online Gallery</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="w-full py-3 border border-charcoal/20 text-center text-xs uppercase tracking-[0.2em] text-charcoal hover:bg-gold hover:text-white hover:border-gold transition-all duration-300">Select Tier</a>
+                </div>
+
+                <!-- Tier 2 (Featured) -->
+                <div class="bg-surface border border-gold p-10 flex flex-col justify-between relative soft-shadow">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold text-white text-[10px] uppercase tracking-widest px-4 py-1 font-medium">Most Loved</div>
+                    <div>
+                        <span class="text-xs uppercase tracking-[0.2em] text-gold block mb-2 font-light">Signature Story</span>
+                        <h3 class="font-serif text-3xl text-charcoal mb-4">Editorial Portrait</h3>
+                        <div class="font-serif text-4xl text-charcoal mb-6 font-light">$2,400</div>
+                        <ul class="space-y-4 text-xs text-charcoal/80 font-light mb-10">
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-gold mr-3"></i> Half-Day Session (4 Hours)</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-gold mr-3"></i> Up to Three Curated Looks</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-gold mr-3"></i> 80+ Retouched Digital Masterpieces</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-gold mr-3"></i> Fine Art Linen Print Box</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="w-full py-3 bg-gold text-white text-center text-xs uppercase tracking-[0.2em] font-medium hover:bg-gold-dark transition-all duration-300">Select Tier</a>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="bg-surface border border-sand p-10 flex flex-col justify-between soft-shadow">
+                    <div>
+                        <span class="text-xs uppercase tracking-[0.2em] text-gold block mb-2 font-light">Destination Couture</span>
+                        <h3 class="font-serif text-3xl text-charcoal mb-4">Weddings</h3>
+                        <div class="font-serif text-4xl text-charcoal mb-6 font-light">$5,200+</div>
+                        <ul class="space-y-4 text-xs text-charcoal/80 font-light mb-10">
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-gold mr-3"></i> Full-Day Wedding Coverage</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-gold mr-3"></i> Second Professional Shooter</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-gold mr-3"></i> Complimentary Engagement Session</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-gold mr-3"></i> Heirloom Leather Album</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="w-full py-3 border border-charcoal/20 text-center text-xs uppercase tracking-[0.2em] text-charcoal hover:bg-gold hover:text-white hover:border-gold transition-all duration-300">Inquire Custom</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- High-Converting Contact Form -->
+    <section id="contact" class="py-32 bg-linen relative">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-gold block mb-3 font-light">Inquiries</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-charcoal font-light mb-4">Let’s Create Together</h2>
+                <p class="text-charcoal/70 font-light text-sm">Please share a few details about your vision and desired timeframe.</p>
+            </div>
+
+            <form action="https://formspree.io/f/your-form-id" method="POST" class="bg-surface border border-sand p-8 md:p-14 space-y-8 soft-shadow">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-xs uppercase tracking-[0.2em] text-charcoal/70 font-light mb-3">Your Full Name</label>
+                        <input type="text" name="name" required class="w-full bg-linen/60 border border-sand px-4 py-4 text-sm text-charcoal focus:border-gold focus:outline-none transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-[0.2em] text-charcoal/70 font-light mb-3">Email Address</label>
+                        <input type="email" name="email" required class="w-full bg-linen/60 border border-sand px-4 py-4 text-sm text-charcoal focus:border-gold focus:outline-none transition-colors">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-xs uppercase tracking-[0.2em] text-charcoal/70 font-light mb-3">Project / Service Type</label>
+                        <select name="service" class="w-full bg-linen/60 border border-sand px-4 py-4 text-sm text-charcoal/80 focus:border-gold focus:outline-none transition-colors">
+                            <option>Essential Portrait / Family</option>
+                            <option>Editorial / Lifestyle Session</option>
+                            <option>Wedding / Destination</option>
+                            <option>Other Commission</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-[0.2em] text-charcoal/70 font-light mb-3">Target Date / Season</label>
+                        <input type="text" name="date" placeholder="e.g. Spring 2027" class="w-full bg-linen/60 border border-sand px-4 py-4 text-sm text-charcoal focus:border-gold focus:outline-none transition-colors">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-[0.2em] text-charcoal/70 font-light mb-3">Tell Me About Your Vision</label>
+                    <textarea name="message" rows="5" required class="w-full bg-linen/60 border border-sand p-4 text-sm text-charcoal focus:border-gold focus:outline-none transition-colors"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-5 bg-gold text-white text-xs uppercase tracking-[0.3em] font-medium hover:bg-gold-dark transition-all duration-300 soft-shadow">
+                    Submit Inquiry
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-sand/60 border-t border-sand text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="font-serif text-2xl tracking-[0.2em] text-charcoal uppercase mb-4">Alexandra Montoya</h2>
+            <div class="flex justify-center space-x-6 text-xs uppercase tracking-[0.2em] text-charcoal/70 mb-8">
+                <a href="https://instagram.com/alexandramontoya.photography" target="_blank" class="hover:text-gold transition-colors">Instagram</a>
+                <a href="#contact" class="hover:text-gold transition-colors">Email</a>
+                <a href="#" class="hover:text-gold transition-colors">Journal</a>
+            </div>
+            <p class="text-[11px] text-charcoal/50 tracking-wider uppercase font-light">
+                &copy; 2026 Alexandra Montoya Photography. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+        
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
