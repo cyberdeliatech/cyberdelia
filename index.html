@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberdelia | Premium IT Support & PC Repair</title>
+    
+    <!-- Google Fonts: Syne & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'arcade-dark': '#1A1A1A',
+                        'arcade-black': '#0f0f0f',
+                        'arcade-lavender': '#B19CD9',
+                        'arcade-cyan': '#00E5FF',
+                        'arcade-green': '#00FF88',
+                    },
+                    fontFamily: {
+                        display: ['Syne', 'sans-serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0f0f0f;
+            color: #E2E8F0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-display {
+            font-family: 'Syne', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f0f0f;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1A1A1A;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00E5FF;
+        }
+
+        /* Neon Glow Utilities */
+        .text-glow-cyan {
+            text-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+        }
+
+        .text-glow-lavender {
+            text-shadow: 0 0 15px rgba(177, 156, 217, 0.4);
+        }
+
+        .text-glow-green {
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+        }
+
+        /* High-End Glassmorphism */
+        .glass-panel {
+            background: rgba(26, 26, 26, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-panel:hover {
+            background: rgba(26, 26, 26, 0.6);
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-4px);
+        }
+
+        /* Minimalist Buttons */
+        .btn-chic-cyan {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-chic-cyan::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(0, 229, 255, 0.1),
+                transparent
+            );
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .btn-chic-cyan:hover::before {
+            transform: translateX(100%);
+        }
+
+        .btn-chic-cyan:hover {
+            border-color: #00E5FF;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+        }
+
+        /* Ambient Backgrounds */
+        .ambient-glow-cyan {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(
+                circle,
+                rgba(0, 229, 255, 0.08) 0%,
+                transparent 70%
+            );
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .ambient-glow-lavender {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(
+                circle,
+                rgba(177, 156, 217, 0.08) 0%,
+                transparent 70%
+            );
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Form Inputs */
+        .chic-input {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #E2E8F0;
+            transition: all 0.3s ease;
+        }
+
+        .chic-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 229, 255, 0.5);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.1);
+        }
+
+        /* FIX: Readable Select Dropdowns */
+        select.chic-input {
+            color-scheme: dark;
+            background-color: #1A1A1A;
+            color: #E2E8F0;
+        }
+
+        select.chic-input option {
+            background-color: #1A1A1A;
+            color: #E2E8F0;
+        }
+
+        select.chic-input option:checked {
+            background-color: #00E5FF;
+            color: #0f0f0f;
+        }
+
+        select.chic-input option:hover {
+            background-color: #00E5FF;
+            color: #0f0f0f;
+        }
+
+        /* Placeholder Text */
+        .chic-input::placeholder {
+            color: #4B5563;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-arcade-cyan selection:text-black relative">
+
+    <!-- Ambient Background Lighting -->
+    <div class="ambient-glow-cyan top-0 left-0"></div>
+
+    <div class="ambient-glow-lavender top-1/4 right-0"></div>
+
+    <div class="ambient-glow-green bottom-1/4 left-1/4 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(0,255,136,0.03)_0%,transparent_60%)] absolute pointer-events-none -z-10"></div>
+
+    <!-- Navigation -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-300 border-b border-white/5 bg-[#0f0f0f]/80 backdrop-blur-xl">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+
+            <!-- Logo -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center bg-white/5 group-hover:border-arcade-cyan/50 transition-colors">
+                    <i class="fa-solid fa-microchip text-arcade-cyan group-hover:text-glow-cyan"></i>
+                </div>
+
+                <div class="flex flex-col leading-none">
+                    <span class="text-2xl font-bold font-display tracking-wide text-white">
+                        Cyberdelia<span class="text-arcade-lavender">.</span>
+                    </span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-400">
+                <a href="#home" class="hover:text-white transition-colors">Home</a>
+                <a href="#pc-repair" class="hover:text-white transition-colors">PC Repair</a>
+                <a href="#web-design" class="hover:text-white transition-colors">Web Design</a>
+                <a href="#custom-pcs" class="hover:text-white transition-colors">Custom PCs</a>
+                <a href="#it-support" class="hover:text-white transition-colors">Small-Biz IT</a>
+                <a href="#about" class="hover:text-white transition-colors">About Naiff</a>
+            </nav>
+
+            <!-- CTA -->
+            <div class="hidden lg:flex items-center gap-6">
+                <a href="tel:7863001144" class="text-sm text-gray-400 hover:text-arcade-cyan transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-phone text-xs"></i>
+                    (786) 300-1144
+                </a>
+
+                <a href="#contact" class="btn-chic-cyan px-6 py-2.5 rounded-full text-sm font-medium tracking-wide">
+                    Request a Quote
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobileMenuBtn" class="lg:hidden text-gray-300 hover:text-white focus:outline-none">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-[#1A1A1A] border-b border-white/10 flex-col py-4 px-6 shadow-2xl">
+            <a href="#home" class="mobile-link py-3 border-b border-white/5 text-gray-300 hover:text-white">
+                Home
+            </a>
+
+            <a href="#pc-repair" class="mobile-link py-3 border-b border-white/5 text-gray-300 hover:text-white">
+                PC Repair & Tech Support
+            </a>
+
+            <a href="#web-design" class="mobile-link py-3 border-b border-white/5 text-gray-300 hover:text-white">
+                Web Design & Dev
+            </a>
+
+            <a href="#custom-pcs" class="mobile-link py-3 border-b border-white/5 text-gray-300 hover:text-white">
+                Custom PC Builds
+            </a>
+
+            <a href="#it-support" class="mobile-link py-3 border-b border-white/5 text-gray-300 hover:text-white">
+                Small-Business IT
+            </a>
+
+            <a href="#about" class="mobile-link py-3 border-b border-white/5 text-gray-300 hover:text-white">
+                About Naiff
+            </a>
+
+            <a href="#contact" class="mobile-link py-4 text-arcade-cyan font-medium">
+                Request a Quote
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="home" class="pt-40 pb-24 min-h-[90vh] flex items-center relative z-10">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center animate-fade-up">
+
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-arcade-lavender/30 bg-arcade-lavender/5 text-arcade-lavender text-xs font-medium tracking-widest uppercase mb-8">
+                    <span class="w-2 h-2 rounded-full bg-arcade-lavender animate-pulse"></span>
+                    IT Support • PC Repair • Custom PCs • Web Design
+                </div>
+
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white leading-[1.1] mb-8">
+                    Technology without <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-arcade-cyan via-white to-arcade-lavender">
+                        the frustration.
+                    </span>
+                </h1>
+
+                <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+                    Professional IT services, precision hardware repair, bespoke gaming rigs, and high-converting web design for homes and small businesses in South Florida.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#contact" class="btn-chic-cyan px-8 py-4 rounded-full text-sm font-semibold tracking-wide w-full sm:w-auto">
+                        Get Started
+                    </a>
+
+                    <a href="#pc-repair" class="px-8 py-4 rounded-full text-sm font-medium tracking-wide text-gray-300 border border-transparent hover:border-white/10 hover:bg-white/5 transition-all w-full sm:w-auto">
+                        Explore Services
+                    </a>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="mt-20 pt-10 border-t border-white/5 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm text-gray-500 font-medium">
+
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="fa-solid fa-hand-holding-dollar text-arcade-cyan text-xl"></i>
+                        <span>Flat-Rate Pricing</span>
+                    </div>
+
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="fa-solid fa-clock-rotate-left text-arcade-lavender text-xl"></i>
+                        <span>Same-Day Turnaround</span>
+                    </div>
+
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="fa-solid fa-headset text-arcade-green text-xl"></i>
+                        <span>Remote & On-Site</span>
+                    </div>
+
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-white text-xl"></i>
+                        <span>30-Day Labor Warranty</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PC REPAIR -->
+    <section id="pc-repair" class="py-24 relative z-10 bg-[#0a0a0a]">
+        <div class="container mx-auto px-6">
+
+            <div class="mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-cyan/30 bg-arcade-cyan/5 text-arcade-cyan text-xs font-medium uppercase mb-4">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    Pillar 01
+                </div>
+
+                <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">
+                    PC Repair & Technical Support
+                </h2>
+
+                <p class="text-gray-400 max-w-2xl">
+                    Reliable troubleshooting and hardware fixes for home users and small businesses experiencing performance bottlenecks or hardware failures.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <div class="glass-panel p-6 rounded-2xl flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-arcade-cyan/10 flex items-center justify-center shrink-0 text-arcade-cyan">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-1">
+                            Diagnostics & Hardware
+                        </h3>
+
+                        <p class="text-sm text-gray-400">
+                            Complete system diagnostics, motherboard checks, power supply testing, and hardware replacements.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-arcade-lavender/10 flex items-center justify-center shrink-0 text-arcade-lavender">
+                        <i class="fa-brands fa-windows"></i>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-1">
+                            Windows & OS Solutions
+                        </h3>
+
+                        <p class="text-sm text-gray-400">
+                            Blue screen troubleshooting, crash fixes, clean Windows installations, driver updates, and software troubleshooting.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-arcade-green/10 flex items-center justify-center shrink-0 text-arcade-green">
+                        <i class="fa-solid fa-gauge-high"></i>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-1">
+                            Speed & Upgrades
+                        </h3>
+
+                        <p class="text-sm text-gray-400">
+                            Slow computer optimization, SSD upgrades, RAM expansions, and secure data migration to new drives.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center shrink-0 text-red-400">
+                        <i class="fa-solid fa-virus-slash"></i>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-1">
+                            Virus & Malware Cleanup
+                        </h3>
+
+                        <p class="text-sm text-gray-400">
+                            Deep malware removal, pop-up elimination, security hardening, and safe browser resets.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0 text-blue-400">
+                        <i class="fa-solid fa-wifi"></i>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-1">
+                            Network & Peripheral Support
+                        </h3>
+
+                        <p class="text-sm text-gray-400">
+                            Wi-Fi dropouts, printer configuration, router setup, and peripheral troubleshooting.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center shrink-0 text-yellow-400">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-1">
+                            Remote & On-Site Help
+                        </h3>
+
+                        <p class="text-sm text-gray-400">
+                            Secure remote sessions for quick software fixes, or convenient on-site dispatch across Broward County.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- WEB DESIGN -->
+    <section id="web-design" class="py-24 relative z-10">
+        <div class="container mx-auto px-6">
+
+            <div class="glass-panel rounded-3xl p-8 md:p-16 border-t border-white/10 overflow-hidden relative">
+
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-arcade-cyan/20 blur-[100px] rounded-full"></div>
+
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-lavender/30 bg-arcade-lavender/5 text-arcade-lavender text-xs font-medium uppercase mb-4">
+                    <i class="fa-solid fa-code"></i>
+                    Pillar 02
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-12 items-center relative z-10">
+
+                    <div class="w-full lg:w-1/2">
+
+                        <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">
+                            Web Design & Development.
+                        </h2>
+
+                        <p class="text-gray-400 mb-8 leading-relaxed">
+                            Establish a striking online presence with custom web solutions tailored for local businesses, creators, and professionals. From clean responsive landing pages to full interactive web applications.
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-300 mb-8">
+
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-arcade-cyan"></i>
+                                Business Landing Pages
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-arcade-cyan"></i>
+                                Portfolio & Creator Sites
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-arcade-cyan"></i>
+                                Responsive HTML/CSS/JS
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-arcade-cyan"></i>
+                                Contact Forms & SEO Setup
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-arcade-cyan"></i>
+                                Domain & Hosting Setup
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-arcade-cyan"></i>
+                                Custom Web Apps & APIs
+                            </div>
+
+                        </div>
+
+                        <a href="#contact" class="btn-chic-cyan px-8 py-3 rounded-full text-sm font-semibold inline-block">
+                            Request Web Quote
+                        </a>
+                    </div>
+
+                    <div class="w-full lg:w-1/2">
+
+                        <div class="w-full aspect-video bg-[#0f0f0f] rounded-xl border border-white/10 p-4 shadow-2xl flex flex-col gap-3">
+
+                            <div class="flex gap-2 mb-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                            </div>
+
+                            <div class="w-full h-8 bg-white/5 rounded"></div>
+
+                            <div class="flex gap-3 h-full">
+
+                                <div class="w-1/3 h-full bg-white/5 rounded flex flex-col p-2 gap-2">
+                                    <div class="w-full h-4 bg-white/10 rounded"></div>
+                                    <div class="w-3/4 h-4 bg-white/10 rounded"></div>
+                                </div>
+
+                                <div class="w-2/3 flex flex-col gap-3">
+
+                                    <div class="w-full h-1/2 bg-arcade-cyan/10 rounded border border-arcade-cyan/20 flex items-center justify-center text-arcade-cyan text-xs font-mono">
+                                        High Converting UI
+                                    </div>
+
+                                    <div class="w-full h-1/2 bg-white/5 rounded"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CUSTOM PCS -->
+    <section id="custom-pcs" class="py-24 relative z-10 bg-[#0a0a0a]">
+        <div class="container mx-auto px-6">
+
+            <div class="text-center max-w-3xl mx-auto mb-16">
+
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-green/30 bg-arcade-green/5 text-arcade-green text-xs font-medium uppercase mb-4">
+                    <i class="fa-solid fa-gamepad"></i>
+                    Pillar 03
+                </div>
+
+                <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">
+                    Custom PC Builds
+                </h2>
+
+                <p class="text-gray-400">
+                    Hand-assembled gaming rigs and professional content creation workstations engineered for maximum thermal performance and aesthetics.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center max-w-6xl mx-auto">
+
+                <!-- Essential -->
+                <div class="glass-panel p-8 rounded-2xl border-white/5 hover:border-arcade-cyan/30">
+
+                    <h3 class="text-sm font-bold tracking-widest uppercase text-arcade-cyan mb-2">
+                        Gaming & Entry
+                    </h3>
+
+                    <h4 class="text-3xl font-display font-bold text-white mb-4">
+                        Essential
+                    </h4>
+
+                    <p class="text-sm text-gray-400 mb-8 h-12">
+                        Smooth 1080p/1440p gaming and dependable daily performance.
+                    </p>
+
+                    <ul class="space-y-3 text-sm text-gray-300 mb-8 border-t border-white/5 pt-6">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-arcade-cyan text-xs"></i>
+                            Entry/Mid-Range GPU
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-arcade-cyan text-xs"></i>
+                            16GB - 32GB RAM
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-arcade-cyan text-xs"></i>
+                            NVMe SSD Storage
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-arcade-cyan text-xs"></i>
+                            Clean Cable Management
+                        </li>
+                    </ul>
+
+                    <a href="#contact" class="block text-center w-full py-3 rounded-full border border-white/10 hover:bg-white/5 transition-colors text-sm font-medium">
+                        Inquire Build
+                    </a>
+                </div>
+
+                <!-- Performance -->
+                <div class="glass-panel p-8 rounded-2xl border-arcade-lavender/40 relative transform md:-translate-y-4 shadow-[0_0_40px_rgba(177,156,217,0.1)] bg-[#1A1A1A]/80">
+
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1 bg-arcade-lavender text-[#0f0f0f] text-xs font-bold uppercase rounded-full">
+                        Most Popular
+                    </div>
+
+                    <h3 class="text-sm font-bold tracking-widest uppercase text-arcade-lavender mb-2 mt-2">
+                        Competitive / Creator
+                    </h3>
+
+                    <h4 class="text-3xl font-display font-bold text-white mb-4">
+                        Performance
+                    </h4>
+
+                    <p class="text-sm text-gray-400 mb-8 h-12">
+                        High-refresh 1440p/4K gaming, live streaming, and video editing.
+                    </p>
+
+                    <ul class="space-y-3 text-sm text-gray-300 mb-8 border-t border-white/10 pt-6">
+
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-arcade-lavender text-xs"></i>
+                            Enthusiast Multi-Core CPU
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-arcade-lavender text-xs"></i>
+                            32GB - 64GB DDR5 RAM
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-arcade-lavender text-xs"></i>
+                            AIO Liquid Cooling
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-arcade-lavender text-xs"></i>
+                            Fully Tuned BIOS & Fan Curves
+                        </li>
+
+                    </ul>
+
+                    <a href="#contact" class="block text-center w-full py-3 rounded-full bg-arcade-lavender text-[#0f0f0f] hover:bg-white transition-colors text-sm font-bold">
+                        Inquire Build
+                    </a>
+                </div>
+
+                <!-- Signature -->
+                <div class="glass-panel p-8 rounded-2xl border-white/5 hover:border-arcade-green/30">
+
+                    <h3 class="text-sm font-bold tracking-widest uppercase text-arcade-green mb-2">
+                        Workstations
+                    </h3>
+
+                    <h4 class="text-3xl font-display font-bold text-white mb-4">
+                        Signature
+                    </h4>
+
+                    <p class="text-sm text-gray-400 mb-8 h-12">
+                        Zero-compromise rigs for 3D rendering, music production, and 4K/8K editing.
+                    </p>
+
+                    <ul class="space-y-3 text-sm text-gray-300 mb-8 border-t border-white/5 pt-6">
+
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-arcade-green text-xs"></i>
+                            Flagship Multi-Core Processors
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-arcade-green text-xs"></i>
+                            64GB+ High-Speed Memory
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-arcade-green text-xs"></i>
+                            Top-Tier Flagship GPU
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-arcade-green text-xs"></i>
+                            Extensive Stress Testing
+                        </li>
+
+                    </ul>
+
+                    <a href="#contact" class="block text-center w-full py-3 rounded-full border border-white/10 hover:bg-white/5 transition-colors text-sm font-medium">
+                        Inquire Build
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SMALL BUSINESS IT -->
+    <section id="it-support" class="py-24 relative z-10">
+        <div class="container mx-auto px-6">
+
+            <div class="mb-16 md:flex justify-between items-end">
+
+                <div>
+
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-cyan/30 bg-arcade-cyan/5 text-arcade-cyan text-xs font-medium uppercase mb-4">
+                        <i class="fa-solid fa-building"></i>
+                        Pillar 04
+                    </div>
+
+                    <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">
+                        Small-Business IT & Retainers
+                    </h2>
+
+                    <p class="text-gray-400 max-w-xl">
+                        Predictable Monthly Recurring Revenue (MRR) services designed to keep your business securely online and fully backed up.
+                    </p>
+                </div>
+
+                <div class="mt-6 md:mt-0">
+
+                    <a href="#contact" class="text-arcade-cyan hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
+                        Request Business Audit
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <div class="glass-panel p-8 rounded-2xl">
+
+                    <div class="w-12 h-12 rounded-full bg-arcade-cyan/10 flex items-center justify-center mb-6 text-arcade-cyan">
+                        <i class="fa-solid fa-network-wired text-xl"></i>
+                    </div>
+
+                    <h3 class="text-xl font-display font-bold text-white mb-3">
+                        Network & Wi-Fi
+                    </h3>
+
+                    <p class="text-sm text-gray-400">
+                        Secure office networking, mesh Wi-Fi routing, VLAN segregation, and firewall configuration.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-2xl">
+
+                    <div class="w-12 h-12 rounded-full bg-arcade-lavender/10 flex items-center justify-center mb-6 text-arcade-lavender">
+                        <i class="fa-brands fa-microsoft text-xl"></i>
+                    </div>
+
+                    <h3 class="text-xl font-display font-bold text-white mb-3">
+                        Cloud & Workspace
+                    </h3>
+
+                    <p class="text-sm text-gray-400">
+                        Microsoft 365 and Google Workspace administration, business email setup, and user account management.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-2xl">
+
+                    <div class="w-12 h-12 rounded-full bg-arcade-green/10 flex items-center justify-center mb-6 text-arcade-green">
+                        <i class="fa-solid fa-shield-halved text-xl"></i>
+                    </div>
+
+                    <h3 class="text-xl font-display font-bold text-white mb-3">
+                        Security & Backups
+                    </h3>
+
+                    <p class="text-sm text-gray-400">
+                        Automated cloud/local backups, disaster recovery plans, endpoint protection, and multi-factor authentication.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-2xl">
+
+                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-6 text-white">
+                        <i class="fa-solid fa-users-gear text-xl"></i>
+                    </div>
+
+                    <h3 class="text-xl font-display font-bold text-white mb-3">
+                        Managed Support
+                    </h3>
+
+                    <p class="text-sm text-gray-400">
+                        New employee hardware onboarding, ongoing device maintenance, remote helpdesk, and priority on-site support.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-24 relative z-10 bg-[#0a0a0a]">
+        <div class="container mx-auto px-6">
+
+            <div class="flex flex-col-reverse lg:flex-row gap-16 items-center">
+
+                <div class="w-full lg:w-1/2">
+
+                    <h2 class="text-sm font-bold tracking-widest uppercase text-arcade-lavender mb-2">
+                        The Founder
+                    </h2>
+
+                    <h3 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">
+                        Meet Naiff.
+                    </h3>
+
+                    <p class="text-gray-300 mb-6 text-lg leading-relaxed">
+                        Cyberdelia is an independent technology services business operated directly by me.
+                        <strong>No call centers, no subcontractors, no bouncing you between support agents.</strong>
+                    </p>
+
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        With over 20 years of technical expertise, I built Cyberdelia to provide honest, dependable IT support, custom hardware, and web design in plain English (or Spanish). Every repair and business audit is handled personally with meticulous attention to detail.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+
+                        <div class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm font-medium text-gray-300">
+                            <i class="fa-solid fa-clock mr-2 text-arcade-cyan"></i>
+                            20+ Years Experience
+                        </div>
+
+                        <div class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm font-medium text-gray-300">
+                            <i class="fa-solid fa-language mr-2 text-arcade-lavender"></i>
+                            Bilingual Support
+                        </div>
+
+                        <div class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm font-medium text-gray-300">
+                            <i class="fa-solid fa-certificate mr-2 text-arcade-green"></i>
+                            Certified IT Specialist
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
+
+                    <div class="relative w-full max-w-md aspect-square rounded-full border border-white/10 p-2 bg-[#1A1A1A]">
+
+                        <div class="w-full h-full rounded-full overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800"
+                                alt="Naiff - Cyberdelia Founder"
+                                class="w-full h-full object-cover"
+                            >
+
+                            <div class="absolute inset-0 bg-arcade-lavender/20 mix-blend-overlay"></div>
+
+                        </div>
+
+                        <div class="absolute bottom-4 right-4 bg-[#0f0f0f] border border-arcade-lavender/50 text-white p-4 rounded-full w-24 h-24 flex flex-col items-center justify-center text-center shadow-xl">
+
+                            <span class="text-xl font-bold font-display text-arcade-lavender">
+                                20+
+                            </span>
+
+                            <span class="text-[10px] uppercase tracking-wider">
+                                Years
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-24 relative z-10 border-t border-white/5">
+        <div class="container mx-auto px-6">
+
+            <div class="max-w-4xl mx-auto glass-panel p-8 md:p-12 rounded-3xl border border-arcade-cyan/20 relative overflow-hidden">
+
+                <div class="absolute -top-32 -left-32 w-64 h-64 bg-arcade-cyan/20 blur-[100px] rounded-full pointer-events-none"></div>
+
+                <div class="text-center mb-10 relative z-10">
+
+                    <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">
+                        Request a Quote
+                    </h2>
+
+                    <p class="text-gray-400">
+                        Describe your project or tech issue below. You are reaching Naiff directly, and I'll get back to you promptly.
+                    </p>
+
+                </div>
+
+                <form id="leadForm" class="space-y-6 relative z-10">
+
+                    <!-- Name / Phone -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <div>
+                            <label class="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                required
+                                placeholder="John Doe"
+                                class="w-full chic-input rounded-xl px-4 py-3 text-white placeholder-gray-700"
+                            >
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                required
+                                placeholder="(786) 000-0000"
+                                class="w-full chic-input rounded-xl px-4 py-3 text-white placeholder-gray-700"
+                            >
+                        </div>
+
+                    </div>
+
+                    <!-- Email / Client Type -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <div>
+                            <label class="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                required
+                                placeholder="john@example.com"
+                                class="w-full chic-input rounded-xl px-4 py-3 text-white placeholder-gray-700"
+                            >
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">
+                                Client Type
+                            </label>
+
+                            <!-- FIXED DROPDOWN -->
+                            <select
+                                required
+                                class="w-full chic-input rounded-xl px-4 py-3 appearance-none cursor-pointer"
+                            >
+                                <option value="" disabled selected>
+                                    Select...
+                                </option>
+
+                                <option value="Home">
+                                    Residential / Home User
+                                </option>
+
+                                <option value="Business">
+                                    Small Business
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <!-- Service / Contact Method -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <div>
+                            <label class="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">
+                                Service Area Needed
+                            </label>
+
+                            <!-- FIXED DROPDOWN -->
+                            <select
+                                required
+                                class="w-full chic-input rounded-xl px-4 py-3 appearance-none cursor-pointer"
+                            >
+                                <option value="" disabled selected>
+                                    Select category...
+                                </option>
+
+                                <option value="PC Repair">
+                                    1. PC Repair & Support
+                                </option>
+
+                                <option value="Web Design">
+                                    2. Web Design & Dev
+                                </option>
+
+                                <option value="Custom PC">
+                                    3. Custom PC Build
+                                </option>
+
+                                <option value="Small Business IT">
+                                    4. Small-Business IT Retainer
+                                </option>
+
+                                <option value="Other">
+                                    Other Inquiry
+                                </option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">
+                                Preferred Contact Method
+                            </label>
+
+                            <!-- FIXED DROPDOWN -->
+                            <select
+                                required
+                                class="w-full chic-input rounded-xl px-4 py-3 appearance-none cursor-pointer"
+                            >
+                                <option value="Phone">
+                                    Phone Call
+                                </option>
+
+                                <option value="Text">
+                                    Text Message
+                                </option>
+
+                                <option value="Email">
+                                    Email
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <!-- Description -->
+                    <div>
+
+                        <label class="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">
+                            Description of Problem / Project
+                        </label>
+
+                        <textarea
+                            required
+                            rows="4"
+                            placeholder="Share details about your system symptoms, build goals, or business IT requirements..."
+                            class="w-full chic-input rounded-xl px-4 py-3 text-white placeholder-gray-700 resize-none"
+                        ></textarea>
+
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="pt-2 flex flex-col md:flex-row items-center justify-between gap-6">
+
+                        <p class="text-xs text-gray-500">
+                            I respect your privacy. No spam ever.
+                        </p>
+
+                        <button
+                            type="submit"
+                            class="btn-chic-cyan px-10 py-4 rounded-full text-sm font-bold tracking-wide w-full md:w-auto"
+                        >
+                            Submit Request
+                            <i class="fa-solid fa-paper-plane ml-2"></i>
+                        </button>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#050505] border-t border-white/5 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+
+            <div class="flex flex-col md:flex-row justify-between items-start gap-10 mb-12">
+
+                <div class="md:w-1/3">
+
+                    <a href="#home" class="text-2xl font-bold font-display tracking-wide text-white mb-4 block">
+                        Cyberdelia<span class="text-arcade-cyan">.</span>
+                    </a>
+
+                    <p class="text-gray-500 text-sm mb-6 max-w-sm">
+                        IT Support • PC Repair • Custom PCs • Web Design. Serving Broward County and South Florida.
+                    </p>
+
+                    <div class="flex gap-4">
+
+                        <a
+                            href="#"
+                            class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-arcade-cyan hover:border-arcade-cyan transition-all"
+                        >
+                            <i class="fa-brands fa-linkedin-in text-sm"></i>
+                        </a>
+
+                        <a
+                            href="#"
+                            class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-arcade-lavender hover:border-arcade-lavender transition-all"
+                        >
+                            <i class="fa-brands fa-instagram text-sm"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="md:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-8">
+
+                    <div>
+
+                        <h4 class="font-display text-white font-bold mb-4">
+                            Services
+                        </h4>
+
+                        <ul class="space-y-2 text-sm text-gray-500">
+
+                            <li>
+                                <a href="#pc-repair" class="hover:text-white transition-colors">
+                                    PC Repair
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#web-design" class="hover:text-white transition-colors">
+                                    Web Design
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#custom-pcs" class="hover:text-white transition-colors">
+                                    Custom Builds
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#it-support" class="hover:text-white transition-colors">
+                                    Small-Biz IT
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div>
+
+                        <h4 class="font-display text-white font-bold mb-4">
+                            Company
+                        </h4>
+
+                        <ul class="space-y-2 text-sm text-gray-500">
+
+                            <li>
+                                <a href="#about" class="hover:text-white transition-colors">
+                                    Meet Naiff
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#contact" class="hover:text-white transition-colors">
+                                    Contact
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="hover:text-white transition-colors">
+                                    Privacy Policy
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div class="col-span-2 md:col-span-1">
+
+                        <h4 class="font-display text-white font-bold mb-4">
+                            Contact
+                        </h4>
+
+                        <ul class="space-y-3 text-sm text-gray-500">
+
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-phone text-arcade-cyan"></i>
+                                (786) 300-1144
+                            </li>
+
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-envelope text-arcade-lavender"></i>
+                                contact@cyberdelia.com
+                            </li>
+
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-location-dot mt-1 text-arcade-green"></i>
+                                Broward County, FL
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="border-t border-white/5 pt-8 text-center md:text-left text-xs text-gray-600 flex flex-col md:flex-row justify-between items-center gap-4">
+
+                <p>
+                    &copy; 2026 Cyberdelia IT Solutions. All Rights Reserved.
+                </p>
+
+                <p>
+                    Designed & Developed by Naiff.
+                </p>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- SUCCESS MODAL -->
+    <div
+        id="successModal"
+        class="fixed inset-0 z-[100] flex items-center justify-center hidden opacity-0 transition-opacity duration-300"
+    >
+
+        <div
+            class="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            id="modalBackdrop"
+        ></div>
+
+        <div
+            class="relative bg-[#1A1A1A] border border-arcade-cyan/30 rounded-2xl p-10 max-w-md w-full mx-4 shadow-2xl text-center transform scale-95 transition-transform duration-300"
+            id="modalContent"
+        >
+
+            <div class="w-16 h-16 mx-auto bg-arcade-cyan/10 border border-arcade-cyan/50 rounded-full flex items-center justify-center text-2xl mb-6 text-arcade-cyan">
+                <i class="fa-solid fa-check"></i>
+            </div>
+
+            <h3 class="text-2xl font-display font-bold mb-3 text-white">
+                Request Received.
+            </h3>
+
+            <p class="text-gray-400 mb-8 text-sm leading-relaxed">
+                Thank you for reaching out. Naiff has received your inquiry and will be in touch shortly.
+            </p>
+
+            <button
+                id="modalCloseBtn"
+                class="btn-chic-cyan px-8 py-3 rounded-full text-sm font-bold w-full"
+            >
+                Done
+            </button>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* ================================
+               MOBILE MENU
+            ================================= */
+
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                });
+            });
+
+
+            /* ================================
+               STICKY HEADER
+            ================================= */
+
+            const header = document.querySelector('header');
+
+            window.addEventListener('scroll', () => {
+
+                if (window.scrollY > 50) {
+
+                    header.classList.add('shadow-lg');
+
+                    header.style.backgroundColor =
+                        'rgba(15, 15, 15, 0.95)';
+
+                } else {
+
+                    header.classList.remove('shadow-lg');
+
+                    header.style.backgroundColor =
+                        'rgba(15, 15, 15, 0.8)';
+                }
+            });
+
+
+            /* ================================
+               FORM / SUCCESS MODAL
+            ================================= */
+
+            const leadForm = document.getElementById('leadForm');
+
+            const successModal =
+                document.getElementById('successModal');
+
+            const modalBackdrop =
+                document.getElementById('modalBackdrop');
+
+            const modalCloseBtn =
+                document.getElementById('modalCloseBtn');
+
+            const modalContent =
+                document.getElementById('modalContent');
+
+
+            function openModal() {
+
+                successModal.classList.remove('hidden');
+
+                setTimeout(() => {
+
+                    successModal.classList.remove('opacity-0');
+
+                    modalContent.classList.remove('scale-95');
+
+                    modalContent.classList.add('scale-100');
+
+                }, 10);
+            }
+
+
+            function closeModal() {
+
+                successModal.classList.add('opacity-0');
+
+                modalContent.classList.remove('scale-100');
+
+                modalContent.classList.add('scale-95');
+
+                setTimeout(() => {
+
+                    successModal.classList.add('hidden');
+
+                }, 300);
+            }
+
+
+            modalBackdrop.addEventListener(
+                'click',
+                closeModal
+            );
+
+            modalCloseBtn.addEventListener(
+                'click',
+                closeModal
+            );
+
+
+            /* ================================
+               FORM SUBMISSION
+            ================================= */
+
+            leadForm.addEventListener('submit', (e) => {
+
+                e.preventDefault();
+
+                const submitBtn =
+                    leadForm.querySelector(
+                        'button[type="submit"]'
+                    );
+
+                const originalText =
+                    submitBtn.innerHTML;
+
+                submitBtn.innerHTML =
+                    '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+                submitBtn.disabled = true;
+
+
+                /*
+                 * Currently simulates a submission.
+                 * Replace this section with Formspree,
+                 * EmailJS, or your backend API when ready.
+                 */
+
+                setTimeout(() => {
+
+                    submitBtn.innerHTML =
+                        originalText;
+
+                    submitBtn.disabled = false;
+
+                    leadForm.reset();
+
+                    openModal();
+
+                }, 1000);
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>
