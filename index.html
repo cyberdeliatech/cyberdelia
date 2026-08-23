@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#08090b">
+    <meta name="description" content="Cyberdelia — Premium IT Support, PC Repair, Custom PCs & Web Design in South Florida.">
     <title>Cyberdelia | Premium IT Support & PC Repair</title>
     
-    <!-- Google Fonts: Syne & Plus Jakarta Sans -->
+    <!-- Google Fonts: Syne, Plus Jakarta Sans, DM Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,7 +18,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Tailwind Configuration -->
+    <!-- Tailwind Configuration (Theme & Colors from HTML 2) -->
     <script>
         tailwind.config = {
             theme: {
@@ -30,7 +32,8 @@
                     },
                     fontFamily: {
                         display: ['Syne', 'sans-serif'],
-                        body: ['Plus Jakarta Sans', 'sans-serif']
+                        body: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['DM Mono', 'monospace']
                     }
                 }
             }
@@ -38,12 +41,14 @@
     </script>
 
     <style>
+        /* Base styles adapted for 3D/Transparency */
         body {
-            background-color: #0f0f0f;
+            background-color: transparent; 
             color: #E2E8F0;
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            margin: 0;
         }
 
         h1, h2, h3, h4, h5, h6, .font-display {
@@ -51,63 +56,62 @@
             letter-spacing: -0.02em;
         }
 
+        /* 3D Canvas Background Container */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -20;
+            background-color: #050505;
+        }
+
+        /* Noise Texture (From HTML 3) */
+        .noise {
+            position: fixed;
+            inset: 0;
+            z-index: -10;
+            pointer-events: none;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+        }
+
         /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #0f0f0f;
-        }
-
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
         ::-webkit-scrollbar-thumb {
             background: #1A1A1A;
             border-radius: 10px;
             border: 1px solid rgba(0, 229, 255, 0.2);
         }
+        ::-webkit-scrollbar-thumb:hover { background: #00E5FF; }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #00E5FF;
-        }
-
-        /* Neon Glow Utilities */
-        .text-glow-cyan {
-            text-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
-        }
-
-        .text-glow-lavender {
-            text-shadow: 0 0 15px rgba(177, 156, 217, 0.4);
-        }
-
-        .text-glow-green {
-            text-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
-        }
-
-        /* High-End Glassmorphism */
+        /* Transparent Glassmorphism (Combined HTML 2 & 3) */
         .glass-panel {
-            background: rgba(26, 26, 26, 0.4);
+            background: rgba(10, 12, 16, 0.4);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         .glass-panel:hover {
-            background: rgba(26, 26, 26, 0.6);
-            border-color: rgba(255, 255, 255, 0.1);
+            background: rgba(15, 18, 22, 0.55);
+            border-color: rgba(255, 255, 255, 0.15);
             transform: translateY(-4px);
         }
 
-        /* Minimalist Buttons */
+        /* Minimalist Chic Buttons (From HTML 2) */
         .btn-chic-cyan {
-            background: transparent;
+            background: rgba(0, 229, 255, 0.05);
+            backdrop-filter: blur(4px);
             color: #fff;
-            border: 1px solid rgba(0, 229, 255, 0.3);
+            border: 1px solid rgba(0, 229, 255, 0.4);
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
         }
-
         .btn-chic-cyan::before {
             content: '';
             position: absolute;
@@ -115,147 +119,80 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(0, 229, 255, 0.1),
-                transparent
-            );
+            background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.15), transparent);
             transform: translateX(-100%);
             transition: transform 0.5s ease;
         }
-
-        .btn-chic-cyan:hover::before {
-            transform: translateX(100%);
-        }
-
+        .btn-chic-cyan:hover::before { transform: translateX(100%); }
         .btn-chic-cyan:hover {
             border-color: #00E5FF;
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+            background: rgba(0, 229, 255, 0.1);
         }
 
-        /* Ambient Backgrounds */
-        .ambient-glow-cyan {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(
-                circle,
-                rgba(0, 229, 255, 0.08) 0%,
-                transparent 70%
-            );
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .ambient-glow-lavender {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(
-                circle,
-                rgba(177, 156, 217, 0.08) 0%,
-                transparent 70%
-            );
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* Form Inputs */
+        /* Glass Form Inputs */
         .chic-input {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: #E2E8F0;
             transition: all 0.3s ease;
         }
-
         .chic-input:focus {
             outline: none;
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(0, 229, 255, 0.5);
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 229, 255, 0.6);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
         }
-
-        /* FIX: Readable Select Dropdowns */
-        select.chic-input {
-            color-scheme: dark;
-            background-color: #1A1A1A;
-            color: #E2E8F0;
-        }
-
-        select.chic-input option {
-            background-color: #1A1A1A;
-            color: #E2E8F0;
-        }
-
-        select.chic-input option:checked {
-            background-color: #00E5FF;
-            color: #0f0f0f;
-        }
-
-        select.chic-input option:hover {
-            background-color: #00E5FF;
-            color: #0f0f0f;
-        }
-
-        /* Placeholder Text */
-        .chic-input::placeholder {
-            color: #4B5563;
-        }
+        select.chic-input { color-scheme: dark; background-color: rgba(26, 26, 26, 0.9); color: #E2E8F0; }
+        select.chic-input option { background-color: #1A1A1A; color: #E2E8F0; }
+        select.chic-input option:checked { background-color: #00E5FF; color: #0f0f0f; }
+        .chic-input::placeholder { color: #6B7280; }
 
         @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        .animate-fade-up {
-            animation: fadeUp 0.8s ease forwards;
-        }
+        .animate-fade-up { animation: fadeUp 0.8s ease forwards; }
     </style>
 </head>
 
 <body class="antialiased selection:bg-arcade-cyan selection:text-black relative">
 
-    <!-- Ambient Background Lighting -->
-    <div class="ambient-glow-cyan top-0 left-0"></div>
-    <div class="ambient-glow-lavender top-1/4 right-0"></div>
-    <div class="ambient-glow-green bottom-1/4 left-1/4 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(0,255,136,0.03)_0%,transparent_60%)] absolute pointer-events-none -z-10"></div>
+    <!-- 3D Cinematic Background -->
+    <div id="canvas-container"></div>
+    
+    <!-- Cinematic Noise Overlay for Depth -->
+    <div class="noise"></div>
 
-    <!-- Navigation -->
-    <header class="fixed w-full top-0 z-50 transition-all duration-300 border-b border-white/5 bg-[#0f0f0f]/80 backdrop-blur-xl">
+    <!-- Navigation (Transparent Glass) -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-300 border-b border-white/5 bg-[#0f0f0f]/40 backdrop-blur-xl">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
 
             <!-- Logo -->
             <a href="#home" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center bg-white/5 group-hover:border-arcade-cyan/50 transition-colors">
-                    <img src="./content/img/logo.png" alt="Logo" class="w-6 h-6 object-contain">
+                <div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center bg-white/5 group-hover:border-arcade-cyan/50 transition-colors shadow-[0_0_15px_rgba(0,229,255,0)] group-hover:shadow-[0_0_15px_rgba(0,229,255,0.2)]">
+                    <i class="fa-solid fa-microchip text-white text-sm group-hover:text-arcade-cyan transition-colors"></i>
                 </div>
                 <div class="flex flex-col leading-none">
-                    <span class="text-2xl font-bold font-display tracking-wide text-white">
-                        Cyberdelia<span class="text-arcade-lavender">.</span>
+                    <span class="text-2xl font-bold font-display tracking-wide text-white drop-shadow-md">
+                        Cyberdelia<span class="text-arcade-lavender drop-shadow-[0_0_8px_rgba(180,140,255,0.6)]">.</span>
                     </span>
                 </div>
             </a>
 
             <!-- Desktop Nav -->
-            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-400">
-                <a href="#pc-repair" class="hover:text-white transition-colors">PC Repair</a>
-                <a href="#web-design" class="hover:text-white transition-colors">Web Design</a>
-                <a href="#custom-pcs" class="hover:text-white transition-colors">Custom PCs</a>
-                <a href="#it-support" class="hover:text-white transition-colors">Small-Biz IT</a>
-                <a href="#about" class="hover:text-white transition-colors">About</a>
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#pc-repair" class="hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all">PC Repair</a>
+                <a href="#web-design" class="hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all">Web Design</a>
+                <a href="#custom-pcs" class="hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all">Custom PCs</a>
+                <a href="#it-support" class="hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all">Small-Biz IT</a>
+                <a href="#about" class="hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all">About</a>
             </nav>
 
             <!-- CTA -->
             <div class="hidden lg:flex items-center gap-6">
-                <a href="tel:7863001144" class="text-sm text-gray-400 hover:text-arcade-cyan transition-colors flex items-center gap-2">
+                <a href="tel:7863001144" class="text-sm font-mono text-gray-300 hover:text-arcade-cyan hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.5)] transition-all flex items-center gap-2">
                     <i class="fa-solid fa-phone text-xs"></i>
                     (786) 300-1144
                 </a>
@@ -270,64 +207,64 @@
             </button>
         </div>
 
-        <!-- Mobile Nav Menu -->
-        <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-[#1A1A1A] border-b border-white/10 flex-col py-4 px-6 shadow-2xl">
-            <a href="#pc-repair" class="mobile-link py-3 border-b border-white/5 text-gray-300 hover:text-white">PC Repair & Tech Support</a>
-            <a href="#web-design" class="mobile-link py-3 border-b border-white/5 text-gray-300 hover:text-white">Web Design & Dev</a>
-            <a href="#custom-pcs" class="mobile-link py-3 border-b border-white/5 text-gray-300 hover:text-white">Custom PC Builds</a>
-            <a href="#it-support" class="mobile-link py-3 border-b border-white/5 text-gray-300 hover:text-white">Small-Business IT</a>
-            <a href="#about" class="mobile-link py-3 border-b border-white/5 text-gray-300 hover:text-white">About</a>
-            <a href="#contact" class="mobile-link py-4 text-arcade-cyan font-medium">Request a Quote</a>
+        <!-- Mobile Nav Menu (Glassmorphism) -->
+        <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-[#08090b]/90 backdrop-blur-2xl border-b border-white/10 flex-col py-4 px-6 shadow-2xl">
+            <a href="#pc-repair" class="mobile-link py-3 border-b border-white/5 text-gray-300 hover:text-white font-display">PC Repair & Tech Support</a>
+            <a href="#web-design" class="mobile-link py-3 border-b border-white/5 text-gray-300 hover:text-white font-display">Web Design & Dev</a>
+            <a href="#custom-pcs" class="mobile-link py-3 border-b border-white/5 text-gray-300 hover:text-white font-display">Custom PC Builds</a>
+            <a href="#it-support" class="mobile-link py-3 border-b border-white/5 text-gray-300 hover:text-white font-display">Small-Business IT</a>
+            <a href="#about" class="mobile-link py-3 border-b border-white/5 text-gray-300 hover:text-white font-display">About</a>
+            <a href="#contact" class="mobile-link py-4 text-arcade-cyan font-bold font-display tracking-widest uppercase">Request a Quote</a>
         </div>
     </header>
 
-    <!-- HERO -->
-    <section id="home" class="pt-40 pb-24 min-h-[90vh] flex items-center relative z-10">
+    <!-- HERO (Content from HTML 1, Transparent Glass Styling) -->
+    <section id="home" class="pt-40 pb-24 min-h-[90vh] flex items-center relative z-10 transition-colors duration-500">
         <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto text-center animate-fade-up">
+            <div class="max-w-4xl mx-auto text-center animate-fade-up glass-panel p-8 md:p-12 rounded-[2rem] border-white/10 shadow-2xl">
 
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-arcade-lavender/30 bg-arcade-lavender/5 text-arcade-lavender text-xs font-medium tracking-widest uppercase mb-8">
-                    <span class="w-2 h-2 rounded-full bg-arcade-lavender animate-pulse"></span>
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-arcade-lavender/40 bg-arcade-lavender/10 text-arcade-lavender text-xs font-mono tracking-widest uppercase mb-8 backdrop-blur-md">
+                    <span class="w-2 h-2 rounded-full bg-arcade-lavender animate-pulse shadow-[0_0_10px_#B19CD9]"></span>
                     IT Support • PC Repair • Custom PCs • Web Design
                 </div>
 
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white leading-[1.1] mb-8">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white leading-[1.1] mb-8 drop-shadow-lg">
                     Technology without <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-arcade-cyan via-white to-arcade-lavender">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-arcade-cyan via-white to-arcade-lavender drop-shadow-[0_0_15px_rgba(0,229,255,0.4)]">
                         the frustration.
                     </span>
                 </h1>
 
-                <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-                    Professional IT services, precision hardware repair, bespoke gaming rigs, and high-converting web design for homes and small businesses in South Florida.[cite: 1]
+                <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+                    Professional IT services, precision hardware repair, bespoke gaming rigs, and high-converting web design for homes and small businesses in South Florida.
                 </p>
 
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="#contact" class="btn-chic-cyan px-8 py-4 rounded-full text-sm font-semibold tracking-wide w-full sm:w-auto">
+                    <a href="#contact" class="btn-chic-cyan px-8 py-4 rounded-full text-sm font-semibold tracking-wide w-full sm:w-auto backdrop-blur-md">
                         Get Started
                     </a>
-                    <a href="#pc-repair" class="px-8 py-4 rounded-full text-sm font-medium tracking-wide text-gray-300 border border-transparent hover:border-white/10 hover:bg-white/5 transition-all w-full sm:w-auto">
+                    <a href="#pc-repair" class="px-8 py-4 rounded-full text-sm font-medium tracking-wide text-gray-200 border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all w-full sm:w-auto backdrop-blur-md">
                         Explore Services
                     </a>
                 </div>
 
                 <!-- Trust Badges -->
-                <div class="mt-20 pt-10 border-t border-white/5 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm text-gray-500 font-medium">
+                <div class="mt-16 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm text-gray-400 font-mono">
                     <div class="flex flex-col items-center gap-2">
-                        <i class="fa-solid fa-hand-holding-dollar text-arcade-cyan text-xl"></i>
+                        <i class="fa-solid fa-hand-holding-dollar text-arcade-cyan text-xl drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]"></i>
                         <span>Flat-Rate Pricing</span>
                     </div>
                     <div class="flex flex-col items-center gap-2">
-                        <i class="fa-solid fa-clock-rotate-left text-arcade-lavender text-xl"></i>
-                        <span>Same-Day Turnaround</span>
+                        <i class="fa-solid fa-clock-rotate-left text-arcade-lavender text-xl drop-shadow-[0_0_8px_rgba(177,156,217,0.5)]"></i>
+                        <span>Same-Day Fixes</span>
                     </div>
                     <div class="flex flex-col items-center gap-2">
-                        <i class="fa-solid fa-headset text-arcade-green text-xl"></i>
+                        <i class="fa-solid fa-headset text-arcade-green text-xl drop-shadow-[0_0_8px_rgba(0,255,136,0.5)]"></i>
                         <span>Remote & On-Site</span>
                     </div>
                     <div class="flex flex-col items-center gap-2">
-                        <i class="fa-solid fa-shield-halved text-white text-xl"></i>
-                        <span>30-Day Labor Warranty</span>
+                        <i class="fa-solid fa-shield-halved text-white text-xl drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"></i>
+                        <span>30-Day Warranty</span>
                     </div>
                 </div>
 
@@ -335,81 +272,86 @@
         </div>
     </section>
 
-    <!-- PC REPAIR -->
-    <section id="pc-repair" class="py-24 relative z-10 bg-[#0a0a0a]">
+    <!-- PC REPAIR (Content HTML 1, 6 Items in Glass Panels) -->
+    <section id="pc-repair" class="py-24 relative z-10 bg-black/20 backdrop-blur-sm border-y border-white/5 transition-colors duration-500">
         <div class="container mx-auto px-6">
 
-            <div class="mb-16">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-cyan/30 bg-arcade-cyan/5 text-arcade-cyan text-xs font-medium uppercase mb-4">
-                    <i class="fa-solid fa-screwdriver-wrench"></i>
-                    Pillar 01
+            <div class="mb-16 glass-panel inline-block p-8 rounded-3xl max-w-3xl border-l-4 border-l-arcade-cyan">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-cyan/30 bg-arcade-cyan/10 text-arcade-cyan text-xs font-mono uppercase mb-4 backdrop-blur-md drop-shadow-[0_0_5px_rgba(0,229,255,0.3)]">
+                    <i class="fa-solid fa-screwdriver-wrench"></i> Pillar 01
                 </div>
                 <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">
                     PC Repair & Technical Support
                 </h2>
-                <p class="text-gray-400 max-w-2xl">
-                    Reliable troubleshooting and hardware fixes for home users and small businesses experiencing performance bottlenecks or hardware failures.[cite: 1]
+                <p class="text-gray-300 text-lg">
+                    Reliable troubleshooting and hardware fixes for home users and small businesses experiencing performance bottlenecks or hardware failures.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="glass-panel p-6 rounded-2xl flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-lg bg-arcade-cyan/10 flex items-center justify-center shrink-0 text-arcade-cyan">
+                <!-- Card 1 -->
+                <div class="glass-panel p-8 rounded-2xl flex items-start gap-5 hover:border-arcade-cyan/50 hover:shadow-[0_0_20px_rgba(0,229,255,0.15)]">
+                    <div class="w-12 h-12 rounded-xl bg-arcade-cyan/10 border border-arcade-cyan/20 flex items-center justify-center shrink-0 text-arcade-cyan text-lg shadow-[inset_0_0_10px_rgba(0,229,255,0.2)]">
                         <i class="fa-solid fa-microchip"></i>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-white mb-1">Diagnostics & Hardware</h3>
-                        <p class="text-sm text-gray-400">Complete system diagnostics, motherboard checks, power supply testing, and hardware replacements.</p>
+                        <h3 class="text-lg font-bold font-display text-white mb-2">Diagnostics & Hardware</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">Complete system diagnostics, motherboard checks, power supply testing, and hardware replacements.</p>
                     </div>
                 </div>
 
-                <div class="glass-panel p-6 rounded-2xl flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-lg bg-arcade-lavender/10 flex items-center justify-center shrink-0 text-arcade-lavender">
+                <!-- Card 2 -->
+                <div class="glass-panel p-8 rounded-2xl flex items-start gap-5 hover:border-arcade-lavender/50 hover:shadow-[0_0_20px_rgba(177,156,217,0.15)]">
+                    <div class="w-12 h-12 rounded-xl bg-arcade-lavender/10 border border-arcade-lavender/20 flex items-center justify-center shrink-0 text-arcade-lavender text-lg shadow-[inset_0_0_10px_rgba(177,156,217,0.2)]">
                         <i class="fa-brands fa-windows"></i>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-white mb-1">Windows & OS Solutions</h3>
-                        <p class="text-sm text-gray-400">Blue screen troubleshooting, crash fixes, clean Windows installations, driver updates, and software troubleshooting.</p>
+                        <h3 class="text-lg font-bold font-display text-white mb-2">Windows & OS Solutions</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">Blue screen troubleshooting, crash fixes, clean Windows installations, driver updates, and software help.</p>
                     </div>
                 </div>
 
-                <div class="glass-panel p-6 rounded-2xl flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-lg bg-arcade-green/10 flex items-center justify-center shrink-0 text-arcade-green">
+                <!-- Card 3 -->
+                <div class="glass-panel p-8 rounded-2xl flex items-start gap-5 hover:border-arcade-green/50 hover:shadow-[0_0_20px_rgba(0,255,136,0.15)]">
+                    <div class="w-12 h-12 rounded-xl bg-arcade-green/10 border border-arcade-green/20 flex items-center justify-center shrink-0 text-arcade-green text-lg shadow-[inset_0_0_10px_rgba(0,255,136,0.2)]">
                         <i class="fa-solid fa-gauge-high"></i>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-white mb-1">Speed & Upgrades</h3>
-                        <p class="text-sm text-gray-400">Slow computer optimization, SSD upgrades, RAM expansions, and secure data migration to new drives.</p>
+                        <h3 class="text-lg font-bold font-display text-white mb-2">Speed & Upgrades</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">Slow computer optimization, SSD upgrades, RAM expansions, and secure data migration to new drives.</p>
                     </div>
                 </div>
 
-                <div class="glass-panel p-6 rounded-2xl flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center shrink-0 text-red-400">
+                <!-- Card 4 -->
+                <div class="glass-panel p-8 rounded-2xl flex items-start gap-5 hover:border-red-500/50 hover:shadow-[0_0_20px_rgba(239,68,68,0.15)]">
+                    <div class="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center shrink-0 text-red-400 text-lg shadow-[inset_0_0_10px_rgba(239,68,68,0.2)]">
                         <i class="fa-solid fa-virus-slash"></i>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-white mb-1">Virus & Malware Cleanup</h3>
-                        <p class="text-sm text-gray-400">Deep malware removal, pop-up elimination, security hardening, and safe browser resets.</p>
+                        <h3 class="text-lg font-bold font-display text-white mb-2">Virus & Malware Cleanup</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">Deep malware removal, pop-up elimination, security hardening, and safe browser resets.</p>
                     </div>
                 </div>
 
-                <div class="glass-panel p-6 rounded-2xl flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0 text-blue-400">
+                <!-- Card 5 -->
+                <div class="glass-panel p-8 rounded-2xl flex items-start gap-5 hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)]">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 text-blue-400 text-lg shadow-[inset_0_0_10px_rgba(59,130,246,0.2)]">
                         <i class="fa-solid fa-wifi"></i>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-white mb-1">Network & Peripheral Support</h3>
-                        <p class="text-sm text-gray-400">Wi-Fi dropouts, printer configuration, router setup, and peripheral troubleshooting.</p>
+                        <h3 class="text-lg font-bold font-display text-white mb-2">Network & Peripheral</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">Wi-Fi dropouts, printer configuration, router setup, and peripheral device troubleshooting.</p>
                     </div>
                 </div>
 
-                <div class="glass-panel p-6 rounded-2xl flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center shrink-0 text-yellow-400">
+                <!-- Card 6 -->
+                <div class="glass-panel p-8 rounded-2xl flex items-start gap-5 hover:border-yellow-500/50 hover:shadow-[0_0_20px_rgba(234,179,8,0.15)]">
+                    <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center shrink-0 text-yellow-400 text-lg shadow-[inset_0_0_10px_rgba(234,179,8,0.2)]">
                         <i class="fa-solid fa-headset"></i>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-white mb-1">Remote & On-Site Help</h3>
-                        <p class="text-sm text-gray-400">Secure remote sessions for quick software fixes, or convenient on-site dispatch across Broward County.[cite: 1]</p>
+                        <h3 class="text-lg font-bold font-display text-white mb-2">Remote & On-Site Help</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">Secure remote sessions for quick software fixes, or convenient on-site dispatch across Broward County.</p>
                     </div>
                 </div>
             </div>
@@ -417,33 +359,31 @@
         </div>
     </section>
 
-    <!-- WEB DESIGN -->
-    <section id="web-design" class="py-24 relative z-10">
+    <!-- WEB DESIGN (Transparent Overlay + Glass Block) -->
+    <section id="web-design" class="py-24 relative z-10 transition-colors duration-500">
         <div class="container mx-auto px-6">
-            <div class="glass-panel rounded-3xl p-8 md:p-16 border-t border-white/10 overflow-hidden relative">
-                <div class="absolute -right-20 -top-20 w-64 h-64 bg-arcade-cyan/20 blur-[100px] rounded-full"></div>
-
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-lavender/30 bg-arcade-lavender/5 text-arcade-lavender text-xs font-medium uppercase mb-4">
-                    <i class="fa-solid fa-code"></i>
-                    Pillar 02
+            <div class="glass-panel rounded-[2.5rem] p-8 md:p-16 border-t border-white/10 overflow-hidden relative bg-black/40 backdrop-blur-xl shadow-2xl">
+                
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-lavender/40 bg-arcade-lavender/10 text-arcade-lavender text-xs font-mono tracking-wide uppercase mb-6 drop-shadow-[0_0_8px_rgba(177,156,217,0.4)]">
+                    <i class="fa-solid fa-code"></i> Pillar 02
                 </div>
 
-                <div class="flex flex-col lg:flex-row gap-12 items-center relative z-10">
+                <div class="flex flex-col lg:flex-row gap-16 items-center relative z-10">
                     <div class="w-full lg:w-1/2">
-                        <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">
+                        <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6 drop-shadow-md">
                             Web Design & Development.
                         </h2>
-                        <p class="text-gray-400 mb-8 leading-relaxed">
-                            Establish a striking online presence with custom web solutions tailored for local businesses, creators, and professionals. From clean responsive landing pages to full interactive web applications.[cite: 1]
+                        <p class="text-gray-300 mb-8 leading-relaxed text-lg">
+                            Establish a striking online presence with custom web solutions tailored for local businesses, creators, and professionals. From clean responsive landing pages to full interactive web applications.
                         </p>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-300 mb-8">
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-cyan"></i> Business Landing Pages</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-cyan"></i> Portfolio & Creator Sites</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-cyan"></i> Responsive HTML/CSS/JS</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-cyan"></i> Contact Forms & SEO Setup</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-cyan"></i> Domain & Hosting Setup</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-cyan"></i> Custom Web Apps & APIs</div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-300 mb-10 font-medium">
+                            <div class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-cyan drop-shadow-[0_0_5px_rgba(0,229,255,0.6)]"></i> Business Landing Pages</div>
+                            <div class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-cyan drop-shadow-[0_0_5px_rgba(0,229,255,0.6)]"></i> Portfolio & Creator Sites</div>
+                            <div class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-cyan drop-shadow-[0_0_5px_rgba(0,229,255,0.6)]"></i> Responsive HTML/CSS/JS</div>
+                            <div class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-cyan drop-shadow-[0_0_5px_rgba(0,229,255,0.6)]"></i> Forms & SEO Setup</div>
+                            <div class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-cyan drop-shadow-[0_0_5px_rgba(0,229,255,0.6)]"></i> Domain & Hosting Setup</div>
+                            <div class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-cyan drop-shadow-[0_0_5px_rgba(0,229,255,0.6)]"></i> Custom Web Apps & APIs</div>
                         </div>
 
                         <a href="#contact" class="btn-chic-cyan px-8 py-3 rounded-full text-sm font-semibold inline-block">
@@ -452,23 +392,25 @@
                     </div>
 
                     <div class="w-full lg:w-1/2">
-                        <div class="w-full aspect-video bg-[#0f0f0f] rounded-xl border border-white/10 p-4 shadow-2xl flex flex-col gap-3">
+                        <div class="w-full aspect-video bg-[#050607]/80 backdrop-blur-2xl rounded-2xl border border-white/20 p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col gap-4 transform hover:scale-[1.02] transition-transform duration-500">
+                            <!-- UI Mockup Content -->
                             <div class="flex gap-2 mb-2">
-                                <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
-                                <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-                                <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                                <div class="w-3.5 h-3.5 rounded-full bg-red-500/80 shadow-[0_0_8px_rgba(239,68,68,0.5)]"></div>
+                                <div class="w-3.5 h-3.5 rounded-full bg-yellow-500/80 shadow-[0_0_8px_rgba(234,179,8,0.5)]"></div>
+                                <div class="w-3.5 h-3.5 rounded-full bg-green-500/80 shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
                             </div>
-                            <div class="w-full h-8 bg-white/5 rounded"></div>
-                            <div class="flex gap-3 h-full">
-                                <div class="w-1/3 h-full bg-white/5 rounded flex flex-col p-2 gap-2">
-                                    <div class="w-full h-4 bg-white/10 rounded"></div>
-                                    <div class="w-3/4 h-4 bg-white/10 rounded"></div>
+                            <div class="w-full h-8 bg-white/10 rounded-lg"></div>
+                            <div class="flex gap-4 h-full">
+                                <div class="w-1/3 h-full bg-white/5 rounded-lg flex flex-col p-3 gap-3">
+                                    <div class="w-full h-4 bg-white/20 rounded"></div>
+                                    <div class="w-3/4 h-4 bg-white/20 rounded"></div>
+                                    <div class="w-5/6 h-4 bg-white/20 rounded"></div>
                                 </div>
-                                <div class="w-2/3 flex flex-col gap-3">
-                                    <div class="w-full h-1/2 bg-arcade-cyan/10 rounded border border-arcade-cyan/20 flex items-center justify-center text-arcade-cyan text-xs font-mono">
-                                        High Converting UI
+                                <div class="w-2/3 flex flex-col gap-4">
+                                    <div class="w-full h-1/2 bg-arcade-cyan/10 rounded-lg border border-arcade-cyan/40 flex items-center justify-center text-arcade-cyan text-sm font-bold font-mono tracking-widest shadow-[inset_0_0_20px_rgba(0,229,255,0.1)]">
+                                        HIGH CONVERTING UI
                                     </div>
-                                    <div class="w-full h-1/2 bg-white/5 rounded"></div>
+                                    <div class="w-full h-1/2 bg-white/5 rounded-lg border border-white/10"></div>
                                 </div>
                             </div>
                         </div>
@@ -478,210 +420,216 @@
         </div>
     </section>
 
-    <!-- CUSTOM PCS -->
-    <section id="custom-pcs" class="py-24 relative z-10 bg-[#0a0a0a]">
+    <!-- CUSTOM PCS (Transparent Glass Pricing Cards) -->
+    <section id="custom-pcs" class="py-24 relative z-10 bg-black/40 backdrop-blur-md border-y border-white/5 transition-colors duration-500">
         <div class="container mx-auto px-6">
 
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-green/30 bg-arcade-green/5 text-arcade-green text-xs font-medium uppercase mb-4">
-                    <i class="fa-solid fa-gamepad"></i>
-                    Pillar 03
+            <div class="text-center max-w-3xl mx-auto mb-16 glass-panel inline-block px-10 py-8 rounded-3xl w-full">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-green/40 bg-arcade-green/10 text-arcade-green text-xs font-mono uppercase mb-4 drop-shadow-[0_0_8px_rgba(0,255,136,0.4)]">
+                    <i class="fa-solid fa-gamepad"></i> Pillar 03
                 </div>
                 <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">
                     Custom PC Builds
                 </h2>
-                <p class="text-gray-400">
-                    Hand-assembled gaming rigs and professional content creation workstations engineered for maximum thermal performance and aesthetics.[cite: 1]
+                <p class="text-gray-300 text-lg">
+                    Hand-assembled gaming rigs and professional content creation workstations engineered for maximum thermal performance and aesthetics.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center max-w-6xl mx-auto">
                 <!-- Essential -->
-                <div class="glass-panel p-8 rounded-2xl border-white/5 hover:border-arcade-cyan/30">
-                    <h3 class="text-sm font-bold tracking-widest uppercase text-arcade-cyan mb-2">Gaming & Entry</h3>
+                <div class="glass-panel p-8 rounded-[2rem] border-white/10 hover:border-arcade-cyan/50 hover:shadow-[0_0_30px_rgba(0,229,255,0.15)] group transition-all">
+                    <h3 class="text-xs font-mono font-bold tracking-widest uppercase text-arcade-cyan mb-2 drop-shadow-[0_0_5px_rgba(0,229,255,0.5)]">Gaming & Entry</h3>
                     <h4 class="text-3xl font-display font-bold text-white mb-4">Essential</h4>
                     <p class="text-sm text-gray-400 mb-8 h-12">Smooth 1080p/1440p gaming and dependable daily performance.</p>
-                    <ul class="space-y-3 text-sm text-gray-300 mb-8 border-t border-white/5 pt-6">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-cyan text-xs"></i> Entry/Mid-Range GPU</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-cyan text-xs"></i> 16GB - 32GB RAM</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-cyan text-xs"></i> NVMe SSD Storage</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-cyan text-xs"></i> Clean Cable Management</li>
+                    <ul class="space-y-3 text-sm text-gray-300 mb-8 border-t border-white/10 pt-6">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-cyan text-xs"></i> Entry/Mid-Range GPU</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-cyan text-xs"></i> 16GB - 32GB RAM</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-cyan text-xs"></i> NVMe SSD Storage</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-cyan text-xs"></i> Clean Cable Management</li>
                     </ul>
-                    <a href="#contact" class="block text-center w-full py-3 rounded-full border border-white/10 hover:bg-white/5 transition-colors text-sm font-medium">Inquire Build</a>
+                    <a href="#contact" class="block text-center w-full py-3 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-sm font-semibold">Inquire Build</a>
                 </div>
 
                 <!-- Performance -->
-                <div class="glass-panel p-8 rounded-2xl border-arcade-lavender/40 relative transform md:-translate-y-4 shadow-[0_0_40px_rgba(177,156,217,0.1)] bg-[#1A1A1A]/80">
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1 bg-arcade-lavender text-[#0f0f0f] text-xs font-bold uppercase rounded-full">
+                <div class="glass-panel p-10 rounded-[2.5rem] border-arcade-lavender/50 relative transform md:-translate-y-4 shadow-[0_0_40px_rgba(177,156,217,0.15)] bg-black/60 hover:shadow-[0_0_50px_rgba(177,156,217,0.25)]">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-5 py-1.5 bg-arcade-lavender text-[#0f0f0f] text-xs font-mono font-bold uppercase rounded-full shadow-[0_0_15px_rgba(177,156,217,0.6)]">
                         Most Popular
                     </div>
-                    <h3 class="text-sm font-bold tracking-widest uppercase text-arcade-lavender mb-2 mt-2">Competitive / Creator</h3>
-                    <h4 class="text-3xl font-display font-bold text-white mb-4">Performance</h4>
-                    <p class="text-sm text-gray-400 mb-8 h-12">High-refresh 1440p/4K gaming, live streaming, and video editing.</p>
-                    <ul class="space-y-3 text-sm text-gray-300 mb-8 border-t border-white/10 pt-6">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-lavender text-xs"></i> Enthusiast Multi-Core CPU</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-lavender text-xs"></i> 32GB - 64GB DDR5 RAM</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-lavender text-xs"></i> AIO Liquid Cooling</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-lavender text-xs"></i> Fully Tuned BIOS & Fan Curves</li>
+                    <h3 class="text-xs font-mono font-bold tracking-widest uppercase text-arcade-lavender mb-2 mt-2 drop-shadow-[0_0_5px_rgba(177,156,217,0.5)]">Competitive / Creator</h3>
+                    <h4 class="text-4xl font-display font-bold text-white mb-4">Performance</h4>
+                    <p class="text-sm text-gray-300 mb-8 h-12 leading-relaxed">High-refresh 1440p/4K gaming, live streaming, and robust video editing.</p>
+                    <ul class="space-y-4 text-sm text-gray-200 mb-8 border-t border-white/10 pt-6">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-lavender text-sm drop-shadow-[0_0_5px_rgba(177,156,217,0.8)]"></i> Enthusiast Multi-Core CPU</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-lavender text-sm drop-shadow-[0_0_5px_rgba(177,156,217,0.8)]"></i> 32GB - 64GB DDR5 RAM</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-lavender text-sm drop-shadow-[0_0_5px_rgba(177,156,217,0.8)]"></i> AIO Liquid Cooling</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-lavender text-sm drop-shadow-[0_0_5px_rgba(177,156,217,0.8)]"></i> Fully Tuned BIOS & Fans</li>
                     </ul>
-                    <a href="#contact" class="block text-center w-full py-3 rounded-full bg-arcade-lavender text-[#0f0f0f] hover:bg-white transition-colors text-sm font-bold">Inquire Build</a>
+                    <a href="#contact" class="block text-center w-full py-3.5 rounded-full bg-arcade-lavender text-[#0f0f0f] hover:bg-white transition-colors text-sm font-bold shadow-[0_0_15px_rgba(177,156,217,0.4)]">Inquire Build</a>
                 </div>
 
                 <!-- Signature -->
-                <div class="glass-panel p-8 rounded-2xl border-white/5 hover:border-arcade-green/30">
-                    <h3 class="text-sm font-bold tracking-widest uppercase text-arcade-green mb-2">Workstations</h3>
+                <div class="glass-panel p-8 rounded-[2rem] border-white/10 hover:border-arcade-green/50 hover:shadow-[0_0_30px_rgba(0,255,136,0.15)] group transition-all">
+                    <h3 class="text-xs font-mono font-bold tracking-widest uppercase text-arcade-green mb-2 drop-shadow-[0_0_5px_rgba(0,255,136,0.5)]">Workstations</h3>
                     <h4 class="text-3xl font-display font-bold text-white mb-4">Signature</h4>
                     <p class="text-sm text-gray-400 mb-8 h-12">Zero-compromise rigs for 3D rendering, music production, and 4K/8K editing.</p>
-                    <ul class="space-y-3 text-sm text-gray-300 mb-8 border-t border-white/5 pt-6">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-green text-xs"></i> Flagship Multi-Core Processors</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-green text-xs"></i> 64GB+ High-Speed Memory</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-green text-xs"></i> Top-Tier Flagship GPU</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-arcade-green text-xs"></i> Extensive Stress Testing</li>
+                    <ul class="space-y-3 text-sm text-gray-300 mb-8 border-t border-white/10 pt-6">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-green text-xs"></i> Flagship Processors</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-green text-xs"></i> 64GB+ High-Speed Memory</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-green text-xs"></i> Top-Tier Flagship GPU</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-arcade-green text-xs"></i> Extensive Stress Testing</li>
                     </ul>
-                    <a href="#contact" class="block text-center w-full py-3 rounded-full border border-white/10 hover:bg-white/5 transition-colors text-sm font-medium">Inquire Build</a>
+                    <a href="#contact" class="block text-center w-full py-3 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-sm font-semibold">Inquire Build</a>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- SMALL BUSINESS IT -->
-    <section id="it-support" class="py-24 relative z-10">
+    <!-- SMALL BUSINESS IT (Transparent Glass blocks) -->
+    <section id="it-support" class="py-24 relative z-10 transition-colors duration-500">
         <div class="container mx-auto px-6">
-            <div class="mb-16 md:flex justify-between items-end">
+            <div class="md:flex justify-between items-end glass-panel p-10 rounded-3xl mb-12 border-l-4 border-l-arcade-cyan">
                 <div>
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-cyan/30 bg-arcade-cyan/5 text-arcade-cyan text-xs font-medium uppercase mb-4">
-                        <i class="fa-solid fa-building"></i>
-                        Pillar 04
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-cyan/40 bg-arcade-cyan/10 text-arcade-cyan text-xs font-mono uppercase mb-4 drop-shadow-[0_0_8px_rgba(0,229,255,0.4)]">
+                        <i class="fa-solid fa-building"></i> Pillar 04
                     </div>
                     <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">
                         Small-Business IT & Retainers
                     </h2>
-                    <p class="text-gray-400 max-w-xl">
-                        Predictable Monthly Recurring Revenue (MRR) services designed to keep your business securely online and fully backed up.[cite: 1]
+                    <p class="text-gray-300 max-w-2xl text-lg leading-relaxed">
+                        Predictable Monthly Recurring Revenue (MRR) services designed to keep your business securely online, fully backed up, and running without friction.
                     </p>
                 </div>
-                <div class="mt-6 md:mt-0">
-                    <a href="#contact" class="text-arcade-cyan hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
+                <div class="mt-8 md:mt-0">
+                    <a href="#contact" class="btn-chic-cyan px-6 py-3 rounded-full text-sm font-semibold inline-flex items-center gap-2">
                         Request Business Audit <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="glass-panel p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-full bg-arcade-cyan/10 flex items-center justify-center mb-6 text-arcade-cyan">
+                <!-- IT Card 1 -->
+                <div class="glass-panel p-8 rounded-2xl hover:bg-black/50 transition-colors border-t-2 border-t-arcade-cyan/30">
+                    <div class="w-14 h-14 rounded-full bg-arcade-cyan/10 flex items-center justify-center mb-6 text-arcade-cyan border border-arcade-cyan/20 shadow-[0_0_15px_rgba(0,229,255,0.15)]">
                         <i class="fa-solid fa-network-wired text-xl"></i>
                     </div>
                     <h3 class="text-xl font-display font-bold text-white mb-3">Network & Wi-Fi</h3>
-                    <p class="text-sm text-gray-400">Secure office networking, mesh Wi-Fi routing, VLAN segregation, and firewall configuration.</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">Secure office networking, mesh Wi-Fi routing, VLAN segregation, and robust firewall configuration.</p>
                 </div>
 
-                <div class="glass-panel p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-full bg-arcade-lavender/10 flex items-center justify-center mb-6 text-arcade-lavender">
+                <!-- IT Card 2 -->
+                <div class="glass-panel p-8 rounded-2xl hover:bg-black/50 transition-colors border-t-2 border-t-arcade-lavender/30">
+                    <div class="w-14 h-14 rounded-full bg-arcade-lavender/10 flex items-center justify-center mb-6 text-arcade-lavender border border-arcade-lavender/20 shadow-[0_0_15px_rgba(177,156,217,0.15)]">
                         <i class="fa-brands fa-microsoft text-xl"></i>
                     </div>
                     <h3 class="text-xl font-display font-bold text-white mb-3">Cloud & Workspace</h3>
-                    <p class="text-sm text-gray-400">Microsoft 365 and Google Workspace administration, business email setup, and user account management.</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">Microsoft 365 and Google Workspace administration, business email setup, and user account management.</p>
                 </div>
 
-                <div class="glass-panel p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-full bg-arcade-green/10 flex items-center justify-center mb-6 text-arcade-green">
+                <!-- IT Card 3 -->
+                <div class="glass-panel p-8 rounded-2xl hover:bg-black/50 transition-colors border-t-2 border-t-arcade-green/30">
+                    <div class="w-14 h-14 rounded-full bg-arcade-green/10 flex items-center justify-center mb-6 text-arcade-green border border-arcade-green/20 shadow-[0_0_15px_rgba(0,255,136,0.15)]">
                         <i class="fa-solid fa-shield-halved text-xl"></i>
                     </div>
                     <h3 class="text-xl font-display font-bold text-white mb-3">Security & Backups</h3>
-                    <p class="text-sm text-gray-400">Automated cloud/local backups, disaster recovery plans, endpoint protection, and multi-factor authentication.</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">Automated cloud/local backups, disaster recovery plans, endpoint protection, and MFA setup.</p>
                 </div>
 
-                <div class="glass-panel p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-6 text-white">
+                <!-- IT Card 4 -->
+                <div class="glass-panel p-8 rounded-2xl hover:bg-black/50 transition-colors border-t-2 border-t-white/20">
+                    <div class="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mb-6 text-white border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                         <i class="fa-solid fa-users-gear text-xl"></i>
                     </div>
                     <h3 class="text-xl font-display font-bold text-white mb-3">Managed Support</h3>
-                    <p class="text-sm text-gray-400">New employee hardware onboarding, ongoing device maintenance, remote helpdesk, and priority on-site support.</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">New employee hardware onboarding, ongoing device maintenance, remote helpdesk, and priority on-site support.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="py-24 relative z-10 bg-[#0a0a0a]">
+    <!-- ABOUT SECTION (Glass profile wrap) -->
+    <section id="about" class="py-24 relative z-10 bg-black/30 backdrop-blur-md border-t border-white/5 transition-colors duration-500">
         <div class="container mx-auto px-6">
-            <div class="flex flex-col-reverse lg:flex-row gap-16 items-center">
+            <div class="flex flex-col-reverse lg:flex-row gap-16 items-center glass-panel p-10 md:p-16 rounded-[3rem] border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                
                 <div class="w-full lg:w-1/2">
-                    <h2 class="text-sm font-bold tracking-widest uppercase text-arcade-lavender mb-2">The Founder</h2>
-                    <h3 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">Meet Naiff.</h3>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/20 bg-white/5 text-white text-xs font-mono uppercase mb-4 backdrop-blur-md">
+                        <i class="fa-solid fa-terminal text-arcade-lavender"></i> Lead Technician
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">Meet Naiff.</h2>
                     
                     <p class="text-gray-300 mb-6 text-lg leading-relaxed">
-                        Cyberdelia is an independent technology services business operated directly by me. <strong>No call centers, no subcontractors, no bouncing you between support agents.</strong>[cite: 1]
+                        Cyberdelia is an independent technology services business operated directly by me. <strong class="text-arcade-cyan font-semibold drop-shadow-[0_0_5px_rgba(0,229,255,0.4)]">No call centers, no subcontractors, no bouncing you between support agents.</strong>
                     </p>
-                    <p class="text-gray-400 mb-8 leading-relaxed">
-                        With over 20 years of technical expertise, I built Cyberdelia to provide honest, dependable IT support, custom hardware, and web design in plain English (or Spanish). Every repair and business audit is handled personally with meticulous attention to detail.[cite: 1]
+                    <p class="text-gray-400 mb-10 text-lg leading-relaxed">
+                        With over 20 years of technical expertise, I built Cyberdelia to provide honest, dependable IT support, custom hardware, and web design in plain English (or Spanish). Every repair and business audit is handled personally with meticulous attention to detail.
                     </p>
 
                     <div class="flex flex-wrap gap-4">
-                        <div class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm font-medium text-gray-300">
-                            <i class="fa-solid fa-clock mr-2 text-arcade-cyan"></i> 20+ Years Experience
+                        <div class="px-5 py-2.5 rounded-full border border-white/10 bg-black/40 backdrop-blur-md text-sm font-medium text-gray-300 flex items-center shadow-[inset_0_0_10px_rgba(255,255,255,0.05)]">
+                            <i class="fa-solid fa-clock mr-3 text-arcade-cyan"></i> 20+ Years Experience
                         </div>
-                        <div class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm font-medium text-gray-300">
-                            <i class="fa-solid fa-language mr-2 text-arcade-lavender"></i> Bilingual Support
+                        <div class="px-5 py-2.5 rounded-full border border-white/10 bg-black/40 backdrop-blur-md text-sm font-medium text-gray-300 flex items-center shadow-[inset_0_0_10px_rgba(255,255,255,0.05)]">
+                            <i class="fa-solid fa-language mr-3 text-arcade-lavender"></i> Bilingual Support
                         </div>
-                        <div class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm font-medium text-gray-300">
-                            <i class="fa-solid fa-certificate mr-2 text-arcade-green"></i> Certified IT Specialist
+                        <div class="px-5 py-2.5 rounded-full border border-white/10 bg-black/40 backdrop-blur-md text-sm font-medium text-gray-300 flex items-center shadow-[inset_0_0_10px_rgba(255,255,255,0.05)]">
+                            <i class="fa-solid fa-certificate mr-3 text-arcade-green"></i> Certified Specialist
                         </div>
                     </div>
                 </div>
 
                 <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
-                    <div class="relative w-full max-w-md aspect-square rounded-full border border-white/10 p-2 bg-[#1A1A1A]">
-                        <div class="w-full h-full rounded-full overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700">
-                            <img src="./content/img/profile.jpg?raw=true" alt="Naiff - Cyberdelia Founder" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-arcade-lavender/20 mix-blend-overlay"></div>
+                    <div class="relative w-full max-w-md aspect-square rounded-full border border-white/20 p-3 bg-black/40 backdrop-blur-xl shadow-[0_0_40px_rgba(177,156,217,0.15)]">
+                        <div class="w-full h-full rounded-full overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700 border border-white/10">
+                            <!-- Utilizing the requested profile image but applying transparent glass aesthetics to the wrapper -->
+                            <img src="./content/img/profile.jpg?raw=true" alt="Naiff - Cyberdelia Founder" class="w-full h-full object-cover mix-blend-luminosity hover:mix-blend-normal transition-all duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-arcade-lavender/30 to-arcade-cyan/10 mix-blend-overlay pointer-events-none"></div>
                         </div>
-                        <div class="absolute bottom-4 right-4 bg-[#0f0f0f] border border-arcade-lavender/50 text-white p-4 rounded-full w-24 h-24 flex flex-col items-center justify-center text-center shadow-xl">
-                            <span class="text-xl font-bold font-display text-arcade-lavender">20+</span>
-                            <span class="text-[10px] uppercase tracking-wider">Years</span>
+                        <div class="absolute bottom-6 right-6 bg-[#08090b]/90 backdrop-blur-md border border-arcade-lavender/50 text-white p-4 rounded-full w-28 h-28 flex flex-col items-center justify-center text-center shadow-[0_0_30px_rgba(177,156,217,0.4)] hover:scale-110 transition-transform">
+                            <span class="text-3xl font-bold font-display text-arcade-lavender drop-shadow-[0_0_8px_rgba(180,140,255,0.8)]">20+</span>
+                            <span class="text-xs font-mono uppercase tracking-wider mt-1 text-gray-300">Years</span>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="py-24 relative z-10 border-t border-white/5">
+    <!-- CONTACT FORM (Glass Inputs) -->
+    <section id="contact" class="py-24 relative z-10 border-t border-white/5 bg-[#050607]/70 backdrop-blur-xl">
         <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto glass-panel p-8 md:p-12 rounded-3xl border border-arcade-cyan/20 relative overflow-hidden">
-                <div class="absolute -top-32 -left-32 w-64 h-64 bg-arcade-cyan/20 blur-[100px] rounded-full pointer-events-none"></div>
-
-                <div class="text-center mb-10 relative z-10">
-                    <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">Request a Quote</h2>
-                    <p class="text-gray-400">Describe your project or tech issue below. You are reaching Naiff directly, and I'll get back to you promptly.</p>
+            <div class="max-w-4xl mx-auto glass-panel p-8 md:p-14 rounded-[3rem] border border-arcade-cyan/30 relative overflow-hidden shadow-[0_0_60px_rgba(0,229,255,0.15)]">
+                
+                <div class="text-center mb-12 relative z-10">
+                    <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4 drop-shadow-md">Request a Quote</h2>
+                    <p class="text-gray-300 text-lg">Describe your project or tech issue below. You are reaching Naiff directly, and I'll get back to you promptly.</p>
                 </div>
 
                 <form id="leadForm" class="space-y-6 relative z-10">
                     <!-- Name / Phone -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">Full Name</label>
-                            <input type="text" required placeholder="John Doe" class="w-full chic-input rounded-xl px-4 py-3 text-white placeholder-gray-700">
+                            <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Full Name</label>
+                            <input type="text" required placeholder="John Doe" class="w-full chic-input rounded-xl px-5 py-4 text-white placeholder-gray-600 shadow-[inset_0_0_10px_rgba(0,0,0,0.5)]">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">Phone Number</label>
-                            <input type="tel" required placeholder="(786) 000-0000" class="w-full chic-input rounded-xl px-4 py-3 text-white placeholder-gray-700">
+                            <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Phone Number</label>
+                            <input type="tel" required placeholder="(786) 000-0000" class="w-full chic-input rounded-xl px-5 py-4 text-white placeholder-gray-600 shadow-[inset_0_0_10px_rgba(0,0,0,0.5)]">
                         </div>
                     </div>
 
                     <!-- Email / Client Type -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">Email Address</label>
-                            <input type="email" required placeholder="john@example.com" class="w-full chic-input rounded-xl px-4 py-3 text-white placeholder-gray-700">
+                            <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Email Address</label>
+                            <input type="email" required placeholder="john@example.com" class="w-full chic-input rounded-xl px-5 py-4 text-white placeholder-gray-600 shadow-[inset_0_0_10px_rgba(0,0,0,0.5)]">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">Client Type</label>
-                            <select required class="w-full chic-input rounded-xl px-4 py-3 appearance-none cursor-pointer">
-                                <option value="" disabled selected>Select...</option>
+                            <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Client Type</label>
+                            <select required class="w-full chic-input rounded-xl px-5 py-4 appearance-none cursor-pointer shadow-[inset_0_0_10px_rgba(0,0,0,0.5)] font-medium">
+                                <option value="" disabled selected class="text-gray-500">Select...</option>
                                 <option value="Home">Residential / Home User</option>
                                 <option value="Business">Small Business</option>
                             </select>
@@ -691,9 +639,9 @@
                     <!-- Service / Contact Method -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">Service Area Needed</label>
-                            <select required class="w-full chic-input rounded-xl px-4 py-3 appearance-none cursor-pointer">
-                                <option value="" disabled selected>Select category...</option>
+                            <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Service Area Needed</label>
+                            <select required class="w-full chic-input rounded-xl px-5 py-4 appearance-none cursor-pointer shadow-[inset_0_0_10px_rgba(0,0,0,0.5)] font-medium">
+                                <option value="" disabled selected class="text-gray-500">Select category...</option>
                                 <option value="PC Repair">1. PC Repair & Support</option>
                                 <option value="Web Design">2. Web Design & Dev</option>
                                 <option value="Custom PC">3. Custom PC Build</option>
@@ -702,8 +650,8 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">Preferred Contact Method</label>
-                            <select required class="w-full chic-input rounded-xl px-4 py-3 appearance-none cursor-pointer">
+                            <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Preferred Contact Method</label>
+                            <select required class="w-full chic-input rounded-xl px-5 py-4 appearance-none cursor-pointer shadow-[inset_0_0_10px_rgba(0,0,0,0.5)] font-medium">
                                 <option value="Phone">Phone Call</option>
                                 <option value="Text">Text Message</option>
                                 <option value="Email">Email</option>
@@ -713,14 +661,14 @@
 
                     <!-- Description -->
                     <div>
-                        <label class="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">Description of Problem / Project</label>
-                        <textarea required rows="4" placeholder="Share details about your system symptoms, build goals, or business IT requirements..." class="w-full chic-input rounded-xl px-4 py-3 text-white placeholder-gray-700 resize-none"></textarea>
+                        <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Description of Problem / Project</label>
+                        <textarea required rows="5" placeholder="Share details about your system symptoms, build goals, or business IT requirements..." class="w-full chic-input rounded-xl px-5 py-4 text-white placeholder-gray-600 resize-none shadow-[inset_0_0_10px_rgba(0,0,0,0.5)] leading-relaxed"></textarea>
                     </div>
 
                     <!-- Submit -->
-                    <div class="pt-2 flex flex-col md:flex-row items-center justify-between gap-6">
-                        <p class="text-xs text-gray-500">I respect your privacy. No spam ever.[cite: 1]</p>
-                        <button type="submit" class="btn-chic-cyan px-10 py-4 rounded-full text-sm font-bold tracking-wide w-full md:w-auto">
+                    <div class="pt-4 flex flex-col md:flex-row items-center justify-between gap-6">
+                        <p class="text-xs text-gray-500 font-mono"><i class="fa-solid fa-lock text-arcade-cyan mr-1"></i> Respecting privacy. No spam ever.</p>
+                        <button type="submit" class="btn-chic-cyan px-10 py-4 rounded-full text-sm font-bold tracking-widest uppercase w-full md:w-auto shadow-[0_0_20px_rgba(0,229,255,0.2)]">
                             Submit Request <i class="fa-solid fa-paper-plane ml-2"></i>
                         </button>
                     </div>
@@ -729,22 +677,22 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-[#050505] border-t border-white/5 pt-16 pb-8">
+    <!-- FOOTER (Glass/Transparent base) -->
+    <footer class="bg-[#050607]/90 backdrop-blur-2xl border-t border-white/5 pt-16 pb-8 relative z-10">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-start gap-10 mb-12">
                 <div class="md:w-1/3">
-                    <a href="#home" class="text-2xl font-bold font-display tracking-wide text-white mb-4 block">
-                        Cyberdelia<span class="text-arcade-cyan">.</span>
+                    <a href="#home" class="text-2xl font-bold font-display tracking-wide text-white mb-4 block drop-shadow-md">
+                        Cyberdelia<span class="text-arcade-cyan drop-shadow-[0_0_8px_rgba(0,229,255,0.6)]">.</span>
                     </a>
-                    <p class="text-gray-500 text-sm mb-6 max-w-sm">
-                        IT Support • PC Repair • Custom PCs • Web Design. Serving Broward County and South Florida.[cite: 1]
+                    <p class="text-gray-400 text-sm mb-6 max-w-sm leading-relaxed">
+                        IT Support • PC Repair • Custom PCs • Web Design. Serving Broward County and South Florida.
                     </p>
                     <div class="flex gap-4">
-                        <a href="#" class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-arcade-cyan hover:border-arcade-cyan transition-all">
+                        <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:bg-arcade-cyan/10 hover:text-arcade-cyan hover:border-arcade-cyan/50 hover:shadow-[0_0_15px_rgba(0,229,255,0.3)] transition-all">
                             <i class="fa-brands fa-linkedin-in text-sm"></i>
                         </a>
-                        <a href="#" class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-arcade-lavender hover:border-arcade-lavender transition-all">
+                        <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:bg-arcade-lavender/10 hover:text-arcade-lavender hover:border-arcade-lavender/50 hover:shadow-[0_0_15px_rgba(177,156,217,0.3)] transition-all">
                             <i class="fa-brands fa-instagram text-sm"></i>
                         </a>
                     </div>
@@ -752,60 +700,317 @@
 
                 <div class="md:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-8">
                     <div>
-                        <h4 class="font-display text-white font-bold mb-4">Services</h4>
-                        <ul class="space-y-2 text-sm text-gray-500">
-                            <li><a href="#pc-repair" class="hover:text-white transition-colors">PC Repair</a></li>
-                            <li><a href="#web-design" class="hover:text-white transition-colors">Web Design</a></li>
-                            <li><a href="#custom-pcs" class="hover:text-white transition-colors">Custom Builds</a></li>
-                            <li><a href="#it-support" class="hover:text-white transition-colors">Small-Biz IT</a></li>
+                        <h4 class="font-display text-white font-bold mb-5 tracking-wide">Services</h4>
+                        <ul class="space-y-3 text-sm text-gray-400">
+                            <li><a href="#pc-repair" class="hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.5)] transition-colors">PC Repair</a></li>
+                            <li><a href="#web-design" class="hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.5)] transition-colors">Web Design</a></li>
+                            <li><a href="#custom-pcs" class="hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.5)] transition-colors">Custom Builds</a></li>
+                            <li><a href="#it-support" class="hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.5)] transition-colors">Small-Biz IT</a></li>
                         </ul>
                     </div>
 
                     <div>
-                        <h4 class="font-display text-white font-bold mb-4">Company</h4>
-                        <ul class="space-y-2 text-sm text-gray-500">
-                            <li><a href="#about" class="hover:text-white transition-colors">Meet Naiff</a></li>
-                            <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <h4 class="font-display text-white font-bold mb-5 tracking-wide">Company</h4>
+                        <ul class="space-y-3 text-sm text-gray-400">
+                            <li><a href="#about" class="hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.5)] transition-colors">Meet Naiff</a></li>
+                            <li><a href="#contact" class="hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.5)] transition-colors">Contact</a></li>
+                            <li><a href="#" class="hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.5)] transition-colors">Privacy Policy</a></li>
                         </ul>
                     </div>
 
                     <div class="col-span-2 md:col-span-1">
-                        <h4 class="font-display text-white font-bold mb-4">Contact</h4>
-                        <ul class="space-y-3 text-sm text-gray-500">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-arcade-cyan"></i> (786) 300-1144</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-arcade-lavender"></i> cyberdeliasupport@gmail.com</li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-location-dot mt-1 text-arcade-green"></i> Broward County, FL[cite: 1]</li>
+                        <h4 class="font-display text-white font-bold mb-5 tracking-wide">Contact</h4>
+                        <ul class="space-y-4 text-sm text-gray-400">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-phone text-arcade-cyan drop-shadow-[0_0_5px_rgba(0,229,255,0.5)]"></i> (786) 300-1144</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-envelope text-arcade-lavender drop-shadow-[0_0_5px_rgba(177,156,217,0.5)]"></i> cyberdeliasupport@gmail.com</li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-location-dot mt-1 text-arcade-green drop-shadow-[0_0_5px_rgba(0,255,136,0.5)]"></i> Broward County, FL</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <div class="border-t border-white/5 pt-8 text-center md:text-left text-xs text-gray-600 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="border-t border-white/5 pt-8 text-center md:text-left text-xs font-mono text-gray-500 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p>&copy; 2026 Cyberdelia IT Solutions. All Rights Reserved.</p>
-                <p>Designed & Developed by Naiff.[cite: 1]</p>
+                <p>Designed & Developed by Naiff.</p>
             </div>
         </div>
     </footer>
 
-    <!-- SUCCESS MODAL -->
+    <!-- SUCCESS MODAL (Glassmorphism) -->
     <div id="successModal" class="fixed inset-0 z-[100] flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" id="modalBackdrop"></div>
-        <div class="relative bg-[#1A1A1A] border border-arcade-cyan/30 rounded-2xl p-10 max-w-md w-full mx-4 shadow-2xl text-center transform scale-95 transition-transform duration-300" id="modalContent">
-            <div class="w-16 h-16 mx-auto bg-arcade-cyan/10 border border-arcade-cyan/50 rounded-full flex items-center justify-center text-2xl mb-6 text-arcade-cyan">
+        <div class="absolute inset-0 bg-[#050607]/80 backdrop-blur-md" id="modalBackdrop"></div>
+        <div class="relative glass-panel border border-arcade-cyan/50 rounded-3xl p-10 max-w-md w-full mx-4 shadow-[0_0_50px_rgba(0,229,255,0.2)] text-center transform scale-95 transition-transform duration-300" id="modalContent">
+            <div class="w-16 h-16 mx-auto bg-arcade-cyan/10 border border-arcade-cyan/50 rounded-full flex items-center justify-center text-2xl mb-6 text-arcade-cyan shadow-[0_0_20px_rgba(0,229,255,0.4)]">
                 <i class="fa-solid fa-check"></i>
             </div>
-            <h3 class="text-2xl font-display font-bold mb-3 text-white">Request Received.</h3>
-            <p class="text-gray-400 mb-8 text-sm leading-relaxed">
-                Thank you for reaching out. Naiff has received your inquiry and will be in touch shortly.[cite: 1]
+            <h3 class="text-2xl font-display font-bold mb-3 text-white drop-shadow-md">Request Received.</h3>
+            <p class="text-gray-300 mb-8 text-sm leading-relaxed">
+                Thank you for reaching out. Naiff has received your inquiry and will be in touch shortly.
             </p>
-            <button id="modalCloseBtn" class="btn-chic-cyan px-8 py-3 rounded-full text-sm font-bold w-full">Done</button>
+            <button id="modalCloseBtn" class="btn-chic-cyan px-8 py-3.5 rounded-full text-sm font-bold uppercase tracking-widest w-full">Done</button>
         </div>
     </div>
 
-    <!-- JAVASCRIPT -->
+    <!-- Three.js & Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
+
     <script>
+        // ----------------------------------------------------
+        // Three.js 3D Background System
+        // ----------------------------------------------------
+        const container = document.getElementById('canvas-container');
+        let scene, camera, renderer;
+        let cpuGroup, dieMaterial, dataParticles;
+        let keyLight, fillLight, rimLight, ambientLight;
+        
+        const cameraTarget = new THREE.Vector3(0, 0, 0);
+
+        function initThree() {
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x050505, 0.03);
+
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 5, 20);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+            renderer.setClearColor(0x050505, 1);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.2;
+            container.appendChild(renderer.domElement);
+
+            buildScene();
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        function buildScene() {
+            cpuGroup = new THREE.Group();
+            scene.add(cpuGroup);
+
+            // CPU Base Substrate
+            const baseGeo = new THREE.BoxGeometry(5, 0.2, 5);
+            const baseMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, metalness: 0.8, roughness: 0.5 });
+            const baseMesh = new THREE.Mesh(baseGeo, baseMat);
+            cpuGroup.add(baseMesh);
+
+            // CPU Die (The Glowing Core)
+            const dieGeo = new THREE.BoxGeometry(2.2, 0.3, 2.2);
+            dieMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0x000000, emissive: 0x00E5FF, emissiveIntensity: 2.5,
+                metalness: 1.0, roughness: 0.1 
+            });
+            const dieMesh = new THREE.Mesh(dieGeo, dieMaterial);
+            dieMesh.position.y = 0.15;
+            cpuGroup.add(dieMesh);
+
+            // Glass Heat Spreader
+            const spreaderGeo = new THREE.BoxGeometry(2.4, 0.4, 2.4);
+            const spreaderMat = new THREE.MeshPhysicalMaterial({
+                color: 0xffffff, metalness: 0.2, roughness: 0.1,
+                transmission: 0.9, ior: 1.5, transparent: true, opacity: 0.7
+            });
+            const spreaderMesh = new THREE.Mesh(spreaderGeo, spreaderMat);
+            spreaderMesh.position.y = 0.2;
+            cpuGroup.add(spreaderMesh);
+
+            // Gold Contact Pins
+            const pinMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 1, roughness: 0.2 });
+            const pinGeo = new THREE.BoxGeometry(0.1, 0.15, 0.5);
+            
+            for(let i=0; i<15; i++) {
+                let offset = -2.1 + (i * 0.3);
+                // Top & Bottom
+                let p1 = new THREE.Mesh(pinGeo, pinMat); p1.position.set(offset, 0, -2.6); cpuGroup.add(p1);
+                let p2 = new THREE.Mesh(pinGeo, pinMat); p2.position.set(offset, 0, 2.6); cpuGroup.add(p2);
+                // Left & Right
+                let p3 = new THREE.Mesh(pinGeo, pinMat); p3.rotation.y = Math.PI/2; p3.position.set(-2.6, 0, offset); cpuGroup.add(p3);
+                let p4 = new THREE.Mesh(pinGeo, pinMat); p4.rotation.y = Math.PI/2; p4.position.set(2.6, 0, offset); cpuGroup.add(p4);
+            }
+
+            // Floating Data Particles (Binary Stream effect)
+            const nodeGeo = new THREE.BoxGeometry(0.08, 0.08, 0.08);
+            const nodeMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 1 });
+            dataParticles = new THREE.Group();
+            
+            for(let i=0; i<300; i++) {
+                let node = new THREE.Mesh(nodeGeo, nodeMat);
+                node.position.set((Math.random() - 0.5) * 35, (Math.random() - 0.5) * 35, (Math.random() - 0.5) * 35);
+                node.userData = { speed: Math.random() * 0.03 + 0.01 };
+                dataParticles.add(node);
+            }
+            scene.add(dataParticles);
+
+            // Lighting
+            ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+            scene.add(ambientLight);
+
+            keyLight = new THREE.SpotLight(0xffffff, 5);
+            keyLight.position.set(10, 15, 10);
+            keyLight.angle = Math.PI / 5;
+            keyLight.penumbra = 0.5;
+            scene.add(keyLight);
+
+            fillLight = new THREE.PointLight(0x00E5FF, 6, 30);
+            fillLight.position.set(-10, 5, -10);
+            scene.add(fillLight);
+
+            rimLight = new THREE.PointLight(0xB19CD9, 6, 40);
+            rimLight.position.set(0, -10, 5);
+            scene.add(rimLight);
+        }
+
+        function setupAmbientAnimations() {
+            new TWEEN.Tween(cpuGroup.position)
+                .to({ y: 0.8 }, 4000).easing(TWEEN.Easing.Sinusoidal.InOut)
+                .yoyo(true).repeat(Infinity).start();
+        }
+
+        class CinematicMotionSystem {
+            constructor() {
+                this.currentShot = -1;
+                this.shots = [
+                    {   // 0: HERO (Slight Top Angle)
+                        camera: { pos: { x: 0, y: 8, z: 16 }, fov: 45 },
+                        target: { x: 0, y: 0, z: 0 },
+                        lights: { key: 6, fill: 6, rim: 6 },
+                        colors: { fill: 0x00E5FF, rim: 0xB19CD9, emissive: 0x00E5FF },
+                        duration: 2.5
+                    },
+                    {   // 1: PC REPAIR (Macro side profile of pins)
+                        camera: { pos: { x: -8, y: 1, z: 8 }, fov: 55 },
+                        target: { x: -2, y: 0, z: 2 },
+                        lights: { key: 3, fill: 8, rim: 2 },
+                        colors: { fill: 0x00E5FF, rim: 0x00E5FF, emissive: 0x00E5FF },
+                        duration: 2
+                    },
+                    {   // 2: WEB DESIGN (High dramatic angle)
+                        camera: { pos: { x: 12, y: 10, z: 4 }, fov: 40 },
+                        target: { x: 0, y: -2, z: 0 },
+                        lights: { key: 4, fill: 3, rim: 10 },
+                        colors: { fill: 0xB19CD9, rim: 0xB19CD9, emissive: 0xB19CD9 },
+                        duration: 2.5
+                    },
+                    {   // 3: CUSTOM PCS (Front Heroic)
+                        camera: { pos: { x: 0, y: 4, z: 12 }, fov: 50 },
+                        target: { x: 0, y: 0, z: 0 },
+                        lights: { key: 2, fill: 6, rim: 6 },
+                        colors: { fill: 0x00FF88, rim: 0x00E5FF, emissive: 0x00FF88 },
+                        duration: 2.5
+                    },
+                    {   // 4: SMALL BIZ IT (Distant Top Down)
+                        camera: { pos: { x: 0, y: 18, z: 2 }, fov: 60 },
+                        target: { x: 0, y: 0, z: 0 },
+                        lights: { key: 5, fill: 5, rim: 5 },
+                        colors: { fill: 0x00E5FF, rim: 0x00E5FF, emissive: 0x00E5FF },
+                        duration: 3
+                    },
+                    {   // 5: ABOUT NAIFF (Low Angle Profile)
+                        camera: { pos: { x: 8, y: -2, z: 10 }, fov: 45 },
+                        target: { x: 2, y: 2, z: -2 },
+                        lights: { key: 6, fill: 2, rim: 8 },
+                        colors: { fill: 0xB19CD9, rim: 0x00E5FF, emissive: 0xB19CD9 },
+                        duration: 2.5
+                    },
+                    {   // 6: CONTACT (Extreme Close Up on Core)
+                        camera: { pos: { x: 0, y: 3, z: 6 }, fov: 35 },
+                        target: { x: 0, y: 1, z: 0 },
+                        lights: { key: 2, fill: 8, rim: 2 },
+                        colors: { fill: 0x00E5FF, rim: 0x000000, emissive: 0x00E5FF },
+                        duration: 2.5
+                    }
+                ];
+            }
+
+            playShot(index) {
+                if (index === this.currentShot || !this.shots[index]) return;
+                const shot = this.shots[index];
+                this.currentShot = index;
+
+                // Color Transitions
+                gsap.to(fillLight.color, { r: new THREE.Color(shot.colors.fill).r, g: new THREE.Color(shot.colors.fill).g, b: new THREE.Color(shot.colors.fill).b, duration: shot.duration });
+                gsap.to(rimLight.color, { r: new THREE.Color(shot.colors.rim).r, g: new THREE.Color(shot.colors.rim).g, b: new THREE.Color(shot.colors.rim).b, duration: shot.duration });
+                gsap.to(dieMaterial.emissive, { r: new THREE.Color(shot.colors.emissive).r, g: new THREE.Color(shot.colors.emissive).g, b: new THREE.Color(shot.colors.emissive).b, duration: shot.duration });
+
+                // Camera & Light Transitions
+                const tl = gsap.timeline();
+                tl.to(camera.position, { ...shot.camera.pos, duration: shot.duration, ease: "power3.inOut" }, 0);
+                tl.to(cameraTarget, { ...shot.target, duration: shot.duration, ease: "power3.inOut" }, 0);
+                tl.to(camera, { fov: shot.camera.fov, duration: shot.duration, ease: "power3.inOut", onUpdate: () => camera.updateProjectionMatrix() }, 0);
+                
+                tl.to(keyLight, { intensity: shot.lights.key, duration: shot.duration }, 0);
+                tl.to(fillLight, { intensity: shot.lights.fill, duration: shot.duration }, 0);
+                tl.to(rimLight, { intensity: shot.lights.rim, duration: shot.duration }, 0);
+            }
+        }
+
+        let motionSystem;
+        let time = 0;
+
+        function animate(t) {
+            requestAnimationFrame(animate);
+            time += 0.01;
+            TWEEN.update(t);
+
+            if (cpuGroup) {
+                cpuGroup.rotation.y += 0.003;
+                cpuGroup.rotation.x = Math.sin(time * 0.5) * 0.05;
+                cpuGroup.rotation.z = Math.cos(time * 0.5) * 0.05;
+            }
+            
+            if (dataParticles) {
+                dataParticles.rotation.y = time * 0.05;
+                dataParticles.children.forEach(node => {
+                    node.position.y += node.userData.speed;
+                    if(node.position.y > 15) node.position.y = -15; // Loop particles like data streams
+                });
+            }
+
+            camera.lookAt(cameraTarget);
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // ----------------------------------------------------
+        // DOM & UI Interactions
+        // ----------------------------------------------------
         document.addEventListener('DOMContentLoaded', () => {
+            // Initialize 3D
+            initThree();
+            setupAmbientAnimations();
+            motionSystem = new CinematicMotionSystem();
+            animate();
+
+            setTimeout(() => motionSystem.playShot(0), 100);
+
+            // Scroll Observer maps sections to camera shots
+            const observerOptions = { root: null, rootMargin: '-20% 0px -20% 0px', threshold: 0.1 };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        if (id === 'home') motionSystem.playShot(0);
+                        else if (id === 'pc-repair') motionSystem.playShot(1);
+                        else if (id === 'web-design') motionSystem.playShot(2);
+                        else if (id === 'custom-pcs') motionSystem.playShot(3);
+                        else if (id === 'it-support') motionSystem.playShot(4);
+                        else if (id === 'about') motionSystem.playShot(5);
+                        else if (id === 'contact') motionSystem.playShot(6);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+
+            // Mobile Menu Logic
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mobileMenu = document.getElementById('mobileMenu');
             const mobileLinks = document.querySelectorAll('.mobile-link');
@@ -814,7 +1019,6 @@
                 mobileMenu.classList.toggle('hidden');
                 mobileMenu.classList.toggle('flex');
             });
-
             mobileLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     mobileMenu.classList.add('hidden');
@@ -822,23 +1026,11 @@
                 });
             });
 
-            const header = document.querySelector('header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('shadow-lg');
-                    header.style.backgroundColor = 'rgba(15, 15, 15, 0.95)';
-                } else {
-                    header.classList.remove('shadow-lg');
-                    header.style.backgroundColor = 'rgba(15, 15, 15, 0.8)';
-                }
-            });
-
+            // Form Submit & Modal
             const leadForm = document.getElementById('leadForm');
             const successModal = document.getElementById('successModal');
-            const modalBackdrop = document.getElementById('modalBackdrop');
-            const modalCloseBtn = document.getElementById('modalCloseBtn');
             const modalContent = document.getElementById('modalContent');
-
+            
             function openModal() {
                 successModal.classList.remove('hidden');
                 setTimeout(() => {
@@ -852,13 +1044,11 @@
                 successModal.classList.add('opacity-0');
                 modalContent.classList.remove('scale-100');
                 modalContent.classList.add('scale-95');
-                setTimeout(() => {
-                    successModal.classList.add('hidden');
-                }, 300);
+                setTimeout(() => { successModal.classList.add('hidden'); }, 300);
             }
 
-            modalBackdrop.addEventListener('click', closeModal);
-            modalCloseBtn.addEventListener('click', closeModal);
+            document.getElementById('modalBackdrop').addEventListener('click', closeModal);
+            document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
 
             leadForm.addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -868,6 +1058,7 @@
                 submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
                 submitBtn.disabled = true;
 
+                // Simulate form delay
                 setTimeout(() => {
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
