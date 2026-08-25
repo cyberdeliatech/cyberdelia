@@ -302,18 +302,17 @@ select.chic-input option{background:#1A1A1A;color:#E2E8F0}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
+ChatGPT said:
+Absolutely. The main fix is removing the condition that was treating your real EmailJS IDs as placeholders. I also tightened the EmailJS handling and kept the same compact formatting/comments.
+
+You do not need to change the rest of your HTML. Replace your current EMAILJS CONFIGURATION script section with this:
+
 <script>
 /* =========================================================
    EMAILJS CONFIGURATION
    =========================================================
-   1. Create/login to your EmailJS account.
-   2. Create an Email Service.
-   3. Create an Email Template.
-   4. Copy your Public Key, Service ID and Template ID below.
-   
-   IMPORTANT:
-   The PUBLIC KEY is safe to expose in frontend JavaScript.
-   Do NOT put private API keys/secrets in this file.
+   EmailJS sends the contact form directly from the browser.
+   Public Key is safe to expose in frontend JavaScript.
    ========================================================= */
 
 const EMAILJS_PUBLIC_KEY="UkgeRvIW4bf1of0e6";
@@ -331,26 +330,32 @@ const submitBtn=document.getElementById("submitBtn");
 leadForm.addEventListener("submit",async function(e){
  e.preventDefault();
 
- if(EMAILJS_PUBLIC_KEY==="UkgeRvIW4bf1of0e6"||EMAILJS_SERVICE_ID==="service_oxs8712"||EMAILJS_TEMPLATE_ID==="template_1ps63nr"){
-  formStatus.className="form-status error";
-  formStatus.textContent="Email service is not configured yet. Please call (786) 300-1144.";
-  return;
- }
-
  submitBtn.disabled=true;
  submitBtn.innerHTML='Sending... <i class="fa-solid fa-spinner fa-spin ml-2"></i>';
+
  formStatus.className="form-status";
  formStatus.textContent="";
 
  try{
-  await emailjs.sendForm(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ID,leadForm);
+  const response=await emailjs.sendForm(
+   EMAILJS_SERVICE_ID,
+   EMAILJS_TEMPLATE_ID,
+   leadForm
+  );
+
+  console.log("EmailJS success:",response);
+
   formStatus.className="form-status success";
-  formStatus.innerHTML='✓ Request sent successfully. Thank you! Naiff will get back to you shortly.';
+  formStatus.textContent="✓ Request sent successfully. Thank you! Naiff will get back to you shortly.";
+
   leadForm.reset();
+
  }catch(error){
   console.error("EmailJS Error:",error);
+
   formStatus.className="form-status error";
   formStatus.innerHTML='Unable to send the request right now. Please call <strong>(786) 300-1144</strong>.';
+
  }finally{
   submitBtn.disabled=false;
   submitBtn.innerHTML='Submit Request <i class="fa-solid fa-paper-plane ml-2"></i>';
@@ -423,7 +428,12 @@ particlesGeo.setAttribute("position",new THREE.BufferAttribute(posArray,3));
 
 const particlesMesh=new THREE.Points(
  particlesGeo,
- new THREE.PointsMaterial({size:.8,color:0x00E5FF,transparent:true,opacity:.7})
+ new THREE.PointsMaterial({
+  size:.8,
+  color:0x00E5FF,
+  transparent:true,
+  opacity:.7
+ })
 );
 
 scene.add(particlesMesh);
