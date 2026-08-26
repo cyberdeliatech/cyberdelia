@@ -3,112 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Primary SEO -->
-    <title>Mama Mia Pizza | Authentic Pizza in Davie, FL</title>
-    <meta name="description" content="Mama Mia Pizza serves fresh, authentic pizza in Davie, FL. Enjoy hand-tossed pizza, quality ingredients, pickup and delivery at 8600 West State Road 84.">
-    <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="author" content="Mama Mia Pizza FL">
-    <meta name="theme-color" content="#A72E1E">
-
-    <!-- Canonical URL
-         Replace with your actual website URL -->
-    <link rel="canonical" href="https://YOUR-DOMAIN.com/">
-
-    <!-- Local SEO -->
-    <meta name="geo.region" content="US-FL">
-    <meta name="geo.placename" content="Davie">
-    <meta name="geo.position" content="26.0765;-80.2521">
-    <meta name="ICBM" content="26.0765, -80.2521">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="restaurant">
-    <meta property="og:title" content="Mama Mia Pizza | Authentic Pizza in Davie, FL">
-    <meta property="og:description" content="Fresh, authentic pizza made daily in Davie, Florida. Order pickup or delivery from Mama Mia Pizza.">
-    <meta property="og:url" content="https://YOUR-DOMAIN.com/">
-    <meta property="og:site_name" content="Mama Mia Pizza">
-    <meta property="og:image" content="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4349.jpg">
-    <meta property="og:image:alt" content="Fresh pizza from Mama Mia Pizza in Davie, Florida">
-
-    <!-- Twitter / X -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Mama Mia Pizza | Authentic Pizza in Davie, FL">
-    <meta name="twitter:description" content="Fresh, authentic pizza made daily in Davie, FL. Order pickup or delivery from Mama Mia Pizza.">
-    <meta name="twitter:image" content="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4349.jpg">
-
-    <!-- Performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://img1.wsimg.com">
-
+    <title>Mama Mia Pizza FL | Best Pizza in Davie, FL</title>
+    <meta name="description" content="Mama Mia Pizza FL serves the best authentic pizza in Davie. View our menu, order online, or visit us at 8600 West State Road 84.">
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- FontAwesome -->
+    
+    <!-- FontAwesome for Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
-
-    <!-- Restaurant Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Restaurant",
-      "@id": "https://mamamiadavie.com/#restaurant",
-      "name": "Mama Mia Pizza",
-      "url": "https://mamamiadavie.com/",
-      "telephone": "+1-954-488-6262",
-      "image": [
-        "https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4349.jpg",
-        "https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4347.jpg",
-        "https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4353.jpg"
-      ],
-      "description": "Mama Mia Pizza serves authentic, fresh pizza in Davie, Florida, with pickup and delivery available.",
-      "servesCuisine": [
-        "Pizza",
-        "Italian"
-      ],
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "8600 West State Road 84",
-        "addressLocality": "Davie",
-        "addressRegion": "FL",
-        "addressCountry": "US"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 26.0765,
-        "longitude": -80.2521
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday"
-          ],
-          "opens": "11:00",
-          "closes": "21:00"
-        }
-      ],
-      "potentialAction": {
-        "@type": "OrderAction",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": "https://mama-mia-davie.cloveronline.com/menu/all",
-          "actionPlatform": [
-            "https://schema.org/DesktopWebPlatform",
-            "https://schema.org/MobileWebPlatform"
-          ]
-        }
-      }
-    }
-    </script>
 
     <script>
         tailwind.config = {
@@ -129,182 +34,102 @@
             }
         }
     </script>
-
     <style>
+        /* Custom Styles for extra polish */
         .food-card:hover .food-img {
             transform: scale(1.05);
         }
-
+        
+        /* Hide scrollbar for image scroll container */
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
         }
-
         .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
 
-        .carousel-track {
-            display: flex;
-            width: max-content;
-            animation: scroll-left 30s linear infinite;
-        }
+/* Infinite left-to-right carousel */
+.carousel-track {
+    display: flex;
+    width: max-content;
+    animation: scroll-left 30s linear infinite;
+}
 
-        .carousel-track:hover {
-            animation-play-state: paused;
-        }
+.carousel-track:hover {
+    animation-play-state: paused;
+}
 
-        @keyframes scroll-left {
-            from {
-                transform: translateX(0);
-            }
-            to {
-                transform: translateX(-50%);
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
-            .carousel-track {
-                animation: none;
-            }
-        }
+@keyframes scroll-left {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
     </style>
 </head>
-
 <body class="font-sans text-gray-800 antialiased bg-gray-50 flex flex-col min-h-screen">
 
-    <!-- Announcement -->
+    <!-- Top Announcement Bar -->
     <div class="bg-brand-dark text-white text-sm py-2 px-4 text-center">
-        <p>
-            Open Tuesday-Saturday 11:00 AM - 9:00 PM
-            <span aria-hidden="true">&nbsp;|&nbsp;</span>
-            <span>Call us:</span>
-            <a
-                href="tel:+19544886262"
-                class="font-bold hover:text-brand-red transition"
-                aria-label="Call Mama Mia Pizza at 954-488-6262">
-                954-488-MAMA (6262)
-            </a>
-        </p>
+        <p>Open Tuesday-Saturday 11:00 AM - 9:00 PM &nbsp;|&nbsp; Call us: <a href="tel:9544886262" class="font-bold hover:text-brand-red transition">954-488-MAMA (6262)</a></p>
     </div>
 
-    <!-- Header -->
+    <!-- Main Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+<div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+    <img 
+        src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/blob-f582726.png/:/rs=w:207,h:200,cg:true,m/cr=w:207,h:200/qt=q:95" 
+        alt="Mama Mia Pizza"
+        class="h-20 w-auto object-contain"
+    >
+</div>
 
-                <a
-                    href="/"
-                    class="flex-shrink-0 flex items-center"
-                    aria-label="Mama Mia Pizza home">
-
-                    <img
-                        src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/blob-f582726.png/:/rs=w:207,h:200,cg:true,m/cr=w:207,h:200/qt=q:95"
-                        alt="Mama Mia Pizza logo"
-                        width="207"
-                        height="200"
-                        class="h-20 w-auto object-contain"
-                        fetchpriority="high">
-                </a>
-
-                <nav
-                    class="hidden md:flex space-x-8 items-center"
-                    aria-label="Main navigation">
-
-                    <a href="./mama_mia_menu.html"
-                       class="text-gray-600 hover:text-brand-red font-medium transition">
-                        Menu
-                    </a>
-
-                    <a href="#location"
-                       class="text-gray-600 hover:text-brand-red font-medium transition">
-                        Location &amp; Hours
-                    </a>
-
-                    <a href="#merch"
-                       class="text-gray-600 hover:text-brand-red font-medium transition">
-                        Merch
-                    </a>
-
-                    <a
-                        href="https://mama-mia-davie.cloveronline.com/menu/all"
-                        class="bg-brand-red text-white px-6 py-2.5 rounded-full font-bold shadow-lg hover:bg-red-700 transition">
-
-                        <i class="fa-solid fa-pizza-slice mr-2" aria-hidden="true"></i>
-                        Order Pizza Online
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#menu" class="text-gray-600 hover:text-brand-red font-medium transition duration-200">Menu</a>
+                    <a href="#location" class="text-gray-600 hover:text-brand-red font-medium transition duration-200">Location & Hours</a>
+                    <a href="#merch" class="text-gray-600 hover:text-brand-red font-medium transition duration-200">Merch</a>
+                    <a href="https://mama-mia-davie.cloveronline.com/menu/all" class="bg-brand-red text-white px-6 py-2.5 rounded-full font-bold shadow-lg hover:bg-red-700 hover:shadow-xl transition duration-200 transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-pizza-slice mr-2"></i>Order Now
                     </a>
                 </nav>
 
+                <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
-                    <button
-                        id="mobile-menu-btn"
-                        type="button"
-                        class="text-gray-600 hover:text-gray-900 focus:outline-none p-2"
-                        aria-label="Open navigation menu"
-                        aria-expanded="false"
-                        aria-controls="mobile-menu">
-
-                        <i class="fa-solid fa-bars text-2xl" aria-hidden="true"></i>
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900 focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <div
-            id="mobile-menu"
-            class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
-
-            <nav
-                class="px-4 pt-2 pb-6 space-y-2 text-center"
-                aria-label="Mobile navigation">
-
-                <a href="./mama_mia_menu.html" class="block px-3 py-3 font-medium text-gray-700 mobile-link">
-                    Menu
+        <!-- Mobile Menu Panel (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2 text-center">
+                <a href="#menu" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-red hover:bg-gray-50 rounded-md mobile-link">Menu</a>
+                <a href="#location" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-red hover:bg-gray-50 rounded-md mobile-link">Location & Hours</a>
+                <a href="#merch" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-red hover:bg-gray-50 rounded-md mobile-link">Merch</a>
+                <a href="#order" class="block w-full text-center bg-brand-red text-white px-5 py-3 rounded-md font-bold mt-4 shadow hover:bg-red-700 mobile-link">
+                    Order Now
                 </a>
-
-                <a href="#location" class="block px-3 py-3 font-medium text-gray-700 mobile-link">
-                    Location &amp; Hours
-                </a>
-
-                <a href="#merch" class="block px-3 py-3 font-medium text-gray-700 mobile-link">
-                    Merch
-                </a>
-
-                <a
-                    href="https://mama-mia-davie.cloveronline.com/menu/all"
-                    class="block w-full text-center bg-brand-red text-white px-5 py-3 rounded-md font-bold mt-4 mobile-link">
-                    Order Pizza Online
-                </a>
-            </nav>
+            </div>
         </div>
     </header>
 
-    <main>
-
-        <!-- Hero -->
-        <section
-            class="bg-gray-900 h-[80vh] min-h-[600px] flex items-center relative overflow-hidden"
-            aria-labelledby="hero-heading">
-
-            <video
-                autoplay
-                loop
-                muted
-                playsinline
-                preload="metadata"
-                class="absolute inset-0 w-full h-full object-cover"
-                aria-hidden="true">
-
-                <source
-                    src="https://img1.wsimg.com/blobby/go/48ac6487-9874-4edd-94b4-d3e76c016902/video/MOV_000.mp4"
-                    type="video/mp4">
-            </video>
-
-   <div class="absolute inset-0 bg-black/40"></div>
+    <!-- Hero Section -->
+    <section class="bg-gray-900 h-[80vh] min-h-[600px] flex items-center relative overflow-hidden">
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
+            <source src="https://img1.wsimg.com/blobby/go/48ac6487-9874-4edd-94b4-d3e76c016902/video/MOV_000.mp4" type="video/mp4">
+        </video>
+        
+        <!-- Overlays for readability -->
+        <div class="absolute inset-0 bg-black/40"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent"></div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
@@ -329,379 +154,265 @@
         </div>
     </section>
 
-        <!-- Features -->
-        <section class="py-12 bg-white border-b border-gray-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-
-                    <article class="p-4">
-                        <div class="w-16 h-16 mx-auto bg-red-50 text-brand-red rounded-full flex items-center justify-center mb-4">
-                            <i class="fa-solid fa-fire-burner text-2xl" aria-hidden="true"></i>
-                        </div>
-
-                        <h2 class="font-heading font-bold text-xl mb-2">
-                            Fresh Pizza Baked Daily
-                        </h2>
-
-                        <p class="text-gray-500">
-                            Freshly baked pizza made with traditional methods and a perfectly crispy crust.
-                        </p>
-                    </article>
-
-                    <article class="p-4">
-                        <div class="w-16 h-16 mx-auto bg-red-50 text-brand-red rounded-full flex items-center justify-center mb-4">
-                            <i class="fa-solid fa-leaf text-2xl" aria-hidden="true"></i>
-                        </div>
-
-                        <h2 class="font-heading font-bold text-xl mb-2">
-                            Quality Ingredients
-                        </h2>
-
-                        <p class="text-gray-500">
-                            Delicious pizzas made with carefully selected ingredients and fresh mozzarella.
-                        </p>
-                    </article>
-
-                    <article class="p-4">
-                        <div class="w-16 h-16 mx-auto bg-red-50 text-brand-red rounded-full flex items-center justify-center mb-4">
-                            <i class="fa-solid fa-motorcycle text-2xl" aria-hidden="true"></i>
-                        </div>
-
-                        <h2 class="font-heading font-bold text-xl mb-2">
-                            Pickup &amp; Delivery
-                        </h2>
-
-                        <p class="text-gray-500">
-                            Convenient pizza pickup and delivery in Davie, Florida.
-                        </p>
-                    </article>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Menu -->
-        <section
-            id="menu"
-            class="py-20 bg-gray-50 overflow-hidden"
-            aria-labelledby="menu-heading">
-
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                <div class="text-center mb-12">
-
-                    <h2
-                        id="menu-heading"
-                        class="font-heading text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                        Pizza &amp; Local Favorites
-                    </h2>
-
-                    <p class="text-gray-600 max-w-2xl mx-auto text-lg">
-                        Explore some of Mama Mia Pizza's favorite dishes.
-                        Order authentic pizza and Italian favorites in Davie, FL.
-                    </p>
-                </div>
-            </div>
-
-            <div class="overflow-hidden w-full">
-                <div class="carousel-track gap-6 px-4 sm:px-6 lg:px-8 pb-10">
-
-                    <!-- Images -->
-                    <div class="shrink-0 w-72 md:w-80 lg:w-96 h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg relative group border-4 border-white">
-                        <img
-                            src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4349.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1207"
-                            alt="Freshly baked pizza from Mama Mia Pizza in Davie FL"
-                            width="1160"
-                            height="1207"
-                            loading="lazy"
-                            decoding="async"
-                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
-                    </div>
-
-                    <div class="shrink-0 w-72 md:w-80 lg:w-96 h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg relative group border-4 border-white">
-                        <img
-                            src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4347.jpg/:/rs=w:1160,h:1382"
-                            alt="Mama Mia Pizza specialty pizza in Davie Florida"
-                            width="1160"
-                            height="1382"
-                            loading="lazy"
-                            decoding="async"
-                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
-                    </div>
-
-                    <div class="shrink-0 w-72 md:w-80 lg:w-96 h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg relative group border-4 border-white">
-                        <img
-                            src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4353.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1251"
-                            alt="Pizza and Italian food at Mama Mia Pizza Davie"
-                            width="1160"
-                            height="1251"
-                            loading="lazy"
-                            decoding="async"
-                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
-                    </div>
-
-                    <div class="shrink-0 w-72 md:w-80 lg:w-96 h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg relative group border-4 border-white">
-                        <img
-                            src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4348.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1319"
-                            alt="Fresh pizza served at Mama Mia Pizza in Davie FL"
-                            width="1160"
-                            height="1319"
-                            loading="lazy"
-                            decoding="async"
-                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
-                    </div>
-
-                    <div class="shrink-0 w-72 md:w-80 lg:w-96 h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg relative group border-4 border-white">
-                        <img
-                            src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4352.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1280"
-                            alt="Mama Mia Pizza favorite pizza in Davie Florida"
-                            width="1160"
-                            height="1280"
-                            loading="lazy"
-                            decoding="async"
-                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="text-center mt-8">
-                <a
-                    href="./mama_mia_menu.html"
-                    class="inline-flex items-center text-gray-700 font-bold text-lg bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200">
-
-                    View Full Menu
-                    <i class="fa-solid fa-arrow-right ml-2" aria-hidden="true"></i>
-                </a>
-            </div>
-        </section>
-
-        <!-- Merch -->
-        <section id="merch" class="bg-brand-red text-white py-16">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
-
-                <div class="mb-8 md:mb-0 md:mr-8 max-w-xl text-center md:text-left">
-
-                    <h2 class="font-heading text-3xl md:text-4xl font-bold mb-4">
-                        Mama Mia Pizza Merch
-                    </h2>
-
-                    <p class="text-red-100 text-lg">
-                        Show your love for Mama Mia Pizza with our exclusive shirts and hoodies.
-                    </p>
-                </div>
-
-                <a
-                    href="#"
-                    class="inline-block bg-white text-brand-red px-8 py-4 rounded-full font-bold text-lg">
-                    <i class="fa-solid fa-shirt mr-2" aria-hidden="true"></i>
-                    Shop Mama Mia Merch
-                </a>
-            </div>
-        </section>
-
-        <!-- Location -->
-        <section
-            id="location"
-            class="py-20 bg-white"
-            aria-labelledby="location-heading">
-
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                <div class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-
-                    <div class="lg:w-1/2 bg-gray-200 min-h-[400px]">
-
-                        <iframe
-                            src="https://maps.google.com/maps?q=8600+West+State+Road+84,+Davie,+FL,+USA&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                            title="Map showing Mama Mia Pizza in Davie, Florida"
-                            class="w-full h-full min-h-[400px] border-0"
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
-
-                    </div>
-
-                    <div class="lg:w-1/2 p-10 md:p-14 flex flex-col justify-center">
-
-                        <h2
-                            id="location-heading"
-                            class="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-8 border-b-2 border-brand-red pb-4 inline-block self-start">
-                            Mama Mia Pizza in Davie, FL
-                        </h2>
-
-                        <div class="space-y-6">
-
-                            <div class="flex items-start">
-
-                                <div class="bg-red-50 p-3 rounded-lg text-brand-red mr-4">
-                                    <i class="fa-solid fa-map-pin text-xl" aria-hidden="true"></i>
-                                </div>
-
-                                <div>
-                                    <h3 class="font-bold text-gray-900 text-lg mb-1">
-                                        Pizza Restaurant Location
-                                    </h3>
-
-                                    <address class="text-gray-600 not-italic">
-                                        8600 West State Road 84<br>
-                                        Davie, FL, USA
-                                    </address>
-
-                                    <a
-                                        href="https://maps.google.com/?q=8600+West+State+Road+84+Davie+FL"
-                                        target="_blank"
-                                        rel="noopener"
-                                        class="text-brand-red font-medium text-sm mt-1 hover:underline inline-block">
-                                        Get Directions to Mama Mia Pizza
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start">
-
-                                <div class="bg-red-50 p-3 rounded-lg text-brand-red mr-4">
-                                    <i class="fa-solid fa-clock text-xl" aria-hidden="true"></i>
-                                </div>
-
-                                <div>
-                                    <h3 class="font-bold text-gray-900 text-lg mb-1">
-                                        Hours
-                                    </h3>
-
-                                    <ul class="text-gray-600 space-y-1">
-                                        <li>
-                                            Tuesday - Saturday:
-                                            <strong class="text-gray-900">
-                                                11:00 AM - 9:00 PM
-                                            </strong>
-                                        </li>
-
-                                        <li class="text-brand-red">
-                                            Sunday - Monday:
-                                            <strong>Closed</strong>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start">
-
-                                <div class="bg-red-50 p-3 rounded-lg text-brand-red mr-4">
-                                    <i class="fa-solid fa-phone text-xl" aria-hidden="true"></i>
-                                </div>
-
-                                <div>
-                                    <h3 class="font-bold text-gray-900 text-lg mb-1">
-                                        Call Mama Mia Pizza
-                                    </h3>
-
-                                    <a
-                                        href="tel:+19544886262"
-                                        class="text-gray-600 hover:text-brand-red text-lg">
-                                        954-488-MAMA (6262)
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-brand-dark text-gray-300 py-12 mt-auto border-t-[6px] border-brand-red">
-
+    <!-- Value Proposition / Features -->
+    <section class="py-12 bg-white border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-                <div class="text-center md:text-left">
-
-                    <div class="mb-4">
-                        <a
-                            href="/"
-                            class="font-heading font-bold text-3xl tracking-tight text-white">
-                            MAMA MIA <span class="text-brand-red">PIZZA</span>
-                        </a>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-4">
+                    <div class="w-16 h-16 mx-auto bg-red-50 text-brand-red rounded-full flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-fire-burner text-2xl"></i>
                     </div>
+                    <h3 class="font-heading font-bold text-xl mb-2">Fresh Out The Oven</h3>
+                    <p class="text-gray-500">Baked fresh daily using traditional methods for that perfect crispy crust.</p>
+                </div>
+                <div class="p-4">
+                    <div class="w-16 h-16 mx-auto bg-red-50 text-brand-red rounded-full flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-leaf text-2xl"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-xl mb-2">Quality Ingredients</h3>
+                    <p class="text-gray-500">We source only the finest local and imported ingredients for our pies.</p>
+                </div>
+                <div class="p-4">
+                    <div class="w-16 h-16 mx-auto bg-red-50 text-brand-red rounded-full flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-motorcycle text-2xl"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-xl mb-2">Fast Service</h3>
+                    <p class="text-gray-500">Quick pickup and reliable delivery so your food always arrives hot.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <p class="text-sm text-gray-400 mb-4 max-w-xs mx-auto md:mx-0">
-                        Authentic pizza, hand-tossed and baked fresh daily in Davie, Florida.
-                    </p>
+    <!-- Popular Menu Highlights -->
+    <section id="menu" class="py-20 bg-gray-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-heading text-4xl md:text-5xl font-bold text-gray-900 mb-4">Local Favorites</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">A sneak peek at what Davie is craving. Discover our top-rated classics.</p>
+            </div>
+        </div>
+
+        <!-- Image Scroll Carousel -->
+        <div class="overflow-hidden w-full">
+    <div class="carousel-track gap-6 px-4 sm:px-6 lg:px-8 pb-10">
+            <!-- Spacer for initial padding offset in scroll -->
+            <div class="shrink-0 w-1 sm:w-4 lg:w-8"></div>
+            
+            <!-- Image 1 -->
+            <div class=" shrink-0 w-72 md:w-80 lg:w-96 h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg relative group border-4 border-white">
+                <img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4349.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1207" alt="Mama Mia Pizza Special" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-300"></div>
+            </div>
+
+            <!-- Image 2 -->
+            <div class=" shrink-0 w-72 md:w-80 lg:w-96 h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg relative group border-4 border-white">
+                <img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4347.jpg/:/rs=w:1160,h:1382" alt="Mama Mia Pizza Special" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-300"></div>
+            </div>
+
+            <!-- Image 3 -->
+            <div class=" shrink-0 w-72 md:w-80 lg:w-96 h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg relative group border-4 border-white">
+                <img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4353.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1251" alt="Mama Mia Pizza Special" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-300"></div>
+            </div>
+
+            <!-- Image 4 -->
+            <div class=" shrink-0 w-72 md:w-80 lg:w-96 h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg relative group border-4 border-white">
+                <img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4348.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1319" alt="Mama Mia Pizza Special" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-300"></div>
+            </div>
+
+            <!-- Image 5 -->
+            <div class=" shrink-0 w-72 md:w-80 lg:w-96 h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg relative group border-4 border-white">
+                <img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4352.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1280" alt="Mama Mia Pizza Special" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-300"></div>
+            </div>
+            
+<!-- DUPLICATE SET FOR LOOP -->
+
+            <!-- Image 1 -->
+            <div class=" shrink-0 w-72 md:w-80 lg:w-96 h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg relative group border-4 border-white">
+                <img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4349.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1207" alt="Mama Mia Pizza Special" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-300"></div>
+            </div>
+
+            <!-- Image 2 -->
+            <div class=" shrink-0 w-72 md:w-80 lg:w-96 h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg relative group border-4 border-white">
+                <img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4347.jpg/:/rs=w:1160,h:1382" alt="Mama Mia Pizza Special" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-300"></div>
+            </div>
+
+            <!-- Image 3 -->
+            <div class=" shrink-0 w-72 md:w-80 lg:w-96 h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg relative group border-4 border-white">
+                <img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4353.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1251" alt="Mama Mia Pizza Special" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-300"></div>
+            </div>
+
+            <!-- Image 4 -->
+            <div class=" shrink-0 w-72 md:w-80 lg:w-96 h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg relative group border-4 border-white">
+                <img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4348.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1319" alt="Mama Mia Pizza Special" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-300"></div>
+            </div>
+
+            <!-- Image 5 -->
+            <div class=" shrink-0 w-72 md:w-80 lg:w-96 h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg relative group border-4 border-white">
+                <img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4352.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1280" alt="Mama Mia Pizza Special" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-300"></div>
+            </div>
+
+            <!-- Spacer for end padding offset -->
+            <div class="shrink-0 w-1 sm:w-4 lg:w-8"></div>
+        </div>
+            
+        <div class="text-center mt-8">
+            <a href="menu.html" class="inline-flex items-center text-gray-700 font-bold hover:text-brand-red transition text-lg bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200 hover:shadow-md">
+                View Full Menu <i class="fa-solid fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+</div>
+    </section>
+
+    <!-- CTA & Merch Banner -->
+    <section id="merch" class="bg-brand-red text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
+            <div class="mb-8 md:mb-0 md:mr-8 max-w-xl text-center md:text-left">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold mb-4">Rep Mama Mia Pizza!</h2>
+                <p class="text-red-100 text-lg mb-0">Check out our exclusive merch shop. Grab a t-shirt or hoodie and show your love for the best slice in town.</p>
+            </div>
+            <div>
+                <a href="#" class="inline-block bg-white text-brand-red px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:bg-gray-100 transition duration-300">
+                    <i class="fa-solid fa-shirt mr-2"></i> Shop Merch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Hours Section -->
+    <section id="location" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+                
+                <!-- Map -->
+                <div class="lg:w-1/2 bg-gray-200 min-h-[400px] relative">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=8600+West+State+Road+84,+Davie,+FL,+USA&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                        class="absolute inset-0 w-full h-full border-0" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
 
-                <div class="text-center md:text-left">
+                <!-- Info -->
+                <div class="lg:w-1/2 p-10 md:p-14 flex flex-col justify-center">
+                    <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-8 border-b-2 border-brand-red pb-4 inline-block self-start">Visit Us</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-red-50 p-3 rounded-lg text-brand-red mr-4">
+                                <i class="fa-solid fa-map-pin text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-lg mb-1">Location</h4>
+                                <p class="text-gray-600">8600 West State Road 84<br>Davie, FL, USA</p>
+                                <a href="https://maps.google.com/?q=8600+West+State+Road+84+Davie+FL" target="_blank" class="text-brand-red font-medium text-sm mt-1 hover:underline inline-block">Get Directions</a>
+                            </div>
+                        </div>
 
-                    <h2 class="text-white font-bold text-lg mb-4 font-heading tracking-wide uppercase">
-                        Quick Links
-                    </h2>
+                        <div class="flex items-start">
+                            <div class="bg-red-50 p-3 rounded-lg text-brand-red mr-4">
+                                <i class="fa-solid fa-clock text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-lg mb-1">Hours of Operation</h4>
+                                <ul class="text-gray-600 space-y-1">
+    <li class="flex items-center gap-4 whitespace-nowrap">
+        <span>Tue - Sat:</span>
+        <span class="font-medium text-gray-900">11:00AM - 9:00PM</span>
+    </li>
+    <li class="flex items-center gap-4 whitespace-nowrap text-brand-red">
+        <span>Sun - Mon:</span>
+        <span class="font-bold">Closed</span>
+    </li>
+</ul>
+                            </div>
+                        </div>
 
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-white transition">Home</a></li>
-                        <li><a href="#menu" class="hover:text-white transition">Pizza Menu</a></li>
-                        <li>
-                            <a
-                                href="https://mama-mia-davie.cloveronline.com/menu/all"
-                                class="hover:text-white transition">
-                                Order Pizza Online
-                            </a>
-                        </li>
-                        <li><a href="#location" class="hover:text-white transition">Location &amp; Hours</a></li>
-                        <li><a href="#merch" class="hover:text-white transition">Merch Shop</a></li>
-                    </ul>
-                </div>
-
-                <div class="text-center md:text-left">
-
-                    <h2 class="text-white font-bold text-lg mb-4 font-heading tracking-wide uppercase">
-                        Mama Mia Pizza
-                    </h2>
-
-                    <p class="text-sm text-gray-400">
-                        8600 West State Road 84<br>
-                        Davie, FL
-                    </p>
-
-                    <p class="mt-3">
-                        <a
-                            href="tel:+19544886262"
-                            class="text-gray-300 hover:text-white">
-                            954-488-6262
-                        </a>
-                    </p>
-
-                    <p class="text-sm text-gray-400 mt-4">
-                        © 2026 Mama Mia Pizza FL.<br>
-                        All Rights Reserved.
-                    </p>
+                        <div class="flex items-start">
+                            <div class="bg-red-50 p-3 rounded-lg text-brand-red mr-4">
+                                <i class="fa-solid fa-phone text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-lg mb-1">Contact</h4>
+                                <a href="tel:9544886262" class="text-gray-600 hover:text-brand-red text-lg">954-488-MAMA (6262)</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
         </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-gray-300 py-12 mt-auto border-t-[6px] border-brand-red">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Brand -->
+                <div class="text-center md:text-left">
+                    <div class="mb-4">
+                        <span class="font-heading font-bold text-3xl tracking-tight text-white">MAMA MIA <span class="text-brand-red">PIZZA</span></span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4 max-w-xs mx-auto md:mx-0">
+                        Authentic pizza, hand-tossed and baked fresh daily in Davie, FL. 
+                    </p>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-red text-white transition">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-red text-white transition">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="text-center md:text-left">
+                    <h4 class="text-white font-bold text-lg mb-4 font-heading tracking-wide uppercase">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Home</a></li>
+                        <li><a href="#menu" class="hover:text-white transition">Full Menu</a></li>
+                        <li><a href="https://mama-mia-davie.cloveronline.com/menu/all" class="hover:text-white transition">Order Online</a></li>
+                        <li><a href="#merch" class="hover:text-white transition">Merch Shop</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal / Copyright -->
+                <div class="text-center md:text-left">
+                    <h4 class="text-white font-bold text-lg mb-4 font-heading tracking-wide uppercase">Information</h4>
+                    <p class="text-sm text-gray-400 mb-2">© 2026 Mama Mia Pizza FL.<br>All Rights Reserved.</p>
+                   <!-- <div class="text-sm text-gray-500 mt-4">
+                        <p class="mb-1">This website uses cookies.</p>
+                        <a href="#" class="underline hover:text-gray-300">Privacy Policy</a> &nbsp;|&nbsp; 
+                        <a href="#" class="underline hover:text-gray-300">Terms of Service</a>
+                    </div> -->
+                </div>
+            </div>
+        </div>
     </footer>
 
+    <!-- Interactive Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileLinks = document.querySelectorAll('.mobile-link');
             const icon = mobileBtn.querySelector('i');
 
+            // Toggle Mobile Menu
             const toggleMenu = () => {
-                const isHidden = mobileMenu.classList.toggle('hidden');
-
-                mobileBtn.setAttribute(
-                    'aria-expanded',
-                    String(!isHidden)
-                );
-
-                if (isHidden) {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
                     icon.classList.remove('fa-xmark');
                     icon.classList.add('fa-bars');
                 } else {
@@ -712,6 +423,7 @@
 
             mobileBtn.addEventListener('click', toggleMenu);
 
+            // Close menu when a link is clicked
             mobileLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     if (!mobileMenu.classList.contains('hidden')) {
@@ -720,38 +432,27 @@
                 });
             });
 
+            // Smooth scrolling for anchor links (fallback/override for consistency)
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
                 anchor.addEventListener('click', function (e) {
-
                     const targetId = this.getAttribute('href');
-
-                    if (targetId === '#') return;
-
+                    if(targetId === '#') return;
+                    
                     const targetElement = document.querySelector(targetId);
-
-                    if (targetElement) {
-
+                    if(targetElement) {
                         e.preventDefault();
-
                         const headerOffset = 80;
-                        const elementPosition =
-                            targetElement.getBoundingClientRect().top;
-
-                        const offsetPosition =
-                            elementPosition +
-                            window.pageYOffset -
-                            headerOffset;
-
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
                         window.scrollTo({
-                            top: offsetPosition,
-                            behavior: "smooth"
+                             top: offsetPosition,
+                             behavior: "smooth"
                         });
                     }
                 });
             });
         });
     </script>
-
 </body>
 </html>
