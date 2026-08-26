@@ -14,14 +14,23 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <!-- EMAILJS SDK -->
-<!-- EmailJS lets this contact form send email directly from the browser. -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
 tailwind.config={
  theme:{extend:{
-  colors:{'arcade-dark':'#1A1A1A','arcade-black':'#0f0f0f','arcade-lavender':'#B19CD9','arcade-cyan':'#00E5FF','arcade-green':'#00FF88'},
-  fontFamily:{display:['Syne','sans-serif'],body:['Plus Jakarta Sans','sans-serif'],mono:['DM Mono','monospace']}
+  colors:{
+   'arcade-dark':'#1A1A1A',
+   'arcade-black':'#0f0f0f',
+   'arcade-lavender':'#B19CD9',
+   'arcade-cyan':'#00E5FF',
+   'arcade-green':'#00FF88'
+  },
+  fontFamily:{
+   display:['Syne','sans-serif'],
+   body:['Plus Jakarta Sans','sans-serif'],
+   mono:['DM Mono','monospace']
+  }
  }}
 };
 </script>
@@ -29,31 +38,129 @@ tailwind.config={
 <style>
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:#050505;color:#E2E8F0;font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;margin:0}
-h1,h2,h3,h4,h5,h6,.font-display{font-family:'Syne',sans-serif;letter-spacing:-.02em}
-#canvas-container{position:fixed;inset:0;width:100vw;height:100vh;z-index:-20;background:#050505}
+body{
+ background:#050505;
+ color:#E2E8F0;
+ font-family:'Plus Jakarta Sans',sans-serif;
+ overflow-x:hidden;
+ -webkit-font-smoothing:antialiased;
+ margin:0
+}
+h1,h2,h3,h4,h5,h6,.font-display{
+ font-family:'Syne',sans-serif;
+ letter-spacing:-.02em
+}
+#canvas-container{
+ position:fixed;
+ inset:0;
+ width:100vw;
+ height:100vh;
+ z-index:-20;
+ background:#050505
+}
 #canvas-container canvas{display:block}
-.noise{position:fixed;inset:0;z-index:-10;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}
+.noise{
+ position:fixed;
+ inset:0;
+ z-index:-10;
+ pointer-events:none;
+ opacity:.035;
+ background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")
+}
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:#050505}
-::-webkit-scrollbar-thumb{background:#1A1A1A;border-radius:10px;border:1px solid rgba(0,229,255,.2)}
+::-webkit-scrollbar-thumb{
+ background:#1A1A1A;
+ border-radius:10px;
+ border:1px solid rgba(0,229,255,.2)
+}
 ::-webkit-scrollbar-thumb:hover{background:#00E5FF}
-.glass-panel{background:rgba(10,12,16,.4);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 32px rgba(0,0,0,.3);transition:all .4s cubic-bezier(.4,0,.2,1)}
-.glass-panel:hover{background:rgba(15,18,22,.55);border-color:rgba(255,255,255,.15);transform:translateY(-4px)}
-.btn-chic-cyan{background:rgba(0,229,255,.05);backdrop-filter:blur(4px);color:#fff;border:1px solid rgba(0,229,255,.4);position:relative;overflow:hidden;transition:all .3s ease}
-.btn-chic-cyan:before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,229,255,.15),transparent);transform:translateX(-100%);transition:transform .5s ease}
+.glass-panel{
+ background:rgba(10,12,16,.4);
+ backdrop-filter:blur(16px);
+ -webkit-backdrop-filter:blur(16px);
+ border:1px solid rgba(255,255,255,.08);
+ box-shadow:0 8px 32px rgba(0,0,0,.3);
+ transition:all .4s cubic-bezier(.4,0,.2,1)
+}
+.glass-panel:hover{
+ background:rgba(15,18,22,.55);
+ border-color:rgba(255,255,255,.15);
+ transform:translateY(-4px)
+}
+.btn-chic-cyan{
+ background:rgba(0,229,255,.05);
+ backdrop-filter:blur(4px);
+ color:#fff;
+ border:1px solid rgba(0,229,255,.4);
+ position:relative;
+ overflow:hidden;
+ transition:all .3s ease
+}
+.btn-chic-cyan:before{
+ content:'';
+ position:absolute;
+ top:0;
+ left:0;
+ width:100%;
+ height:100%;
+ background:linear-gradient(90deg,transparent,rgba(0,229,255,.15),transparent);
+ transform:translateX(-100%);
+ transition:transform .5s ease
+}
 .btn-chic-cyan:hover:before{transform:translateX(100%)}
-.btn-chic-cyan:hover{border-color:#00E5FF;box-shadow:0 0 20px rgba(0,229,255,.2);background:rgba(0,229,255,.1)}
-.chic-input{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);color:#E2E8F0;transition:all .3s ease}
-.chic-input:focus{outline:none;background:rgba(255,255,255,.08);border-color:rgba(0,229,255,.6);box-shadow:0 0 20px rgba(0,229,255,.15)}
-select.chic-input{color-scheme:dark;background-color:rgba(26,26,26,.9);color:#E2E8F0}
-select.chic-input option{background:#1A1A1A;color:#E2E8F0}
+.btn-chic-cyan:hover{
+ border-color:#00E5FF;
+ box-shadow:0 0 20px rgba(0,229,255,.2);
+ background:rgba(0,229,255,.1)
+}
+.chic-input{
+ background:rgba(255,255,255,.03);
+ backdrop-filter:blur(8px);
+ border:1px solid rgba(255,255,255,.1);
+ color:#E2E8F0;
+ transition:all .3s ease
+}
+.chic-input:focus{
+ outline:none;
+ background:rgba(255,255,255,.08);
+ border-color:rgba(0,229,255,.6);
+ box-shadow:0 0 20px rgba(0,229,255,.15)
+}
+select.chic-input{
+ color-scheme:dark;
+ background-color:rgba(26,26,26,.9);
+ color:#E2E8F0
+}
+select.chic-input option{
+ background:#1A1A1A;
+ color:#E2E8F0
+}
 .chic-input::placeholder{color:#6B7280}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{
+ from{opacity:0;transform:translateY(20px)}
+ to{opacity:1;transform:translateY(0)}
+}
 .animate-fade-up{animation:fadeUp .8s ease forwards}
-.form-status{display:none;padding:14px 18px;border-radius:12px;font-size:14px;font-family:'DM Mono',monospace}
-.form-status.success{display:block;color:#00FF88;background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.3)}
-.form-status.error{display:block;color:#ff7777;background:rgba(255,50,50,.08);border:1px solid rgba(255,50,50,.3)}
+.form-status{
+ display:none;
+ padding:14px 18px;
+ border-radius:12px;
+ font-size:14px;
+ font-family:'DM Mono',monospace
+}
+.form-status.success{
+ display:block;
+ color:#00FF88;
+ background:rgba(0,255,136,.08);
+ border:1px solid rgba(0,255,136,.3)
+}
+.form-status.error{
+ display:block;
+ color:#ff7777;
+ background:rgba(255,50,50,.08);
+ border:1px solid rgba(255,50,50,.3)
+}
 </style>
 </head>
 
@@ -62,15 +169,22 @@ select.chic-input option{background:#1A1A1A;color:#E2E8F0}
 <div id="canvas-container"></div>
 <div class="noise"></div>
 
-<!-- NAVIGATION -->
+<!-- =========================================================
+     NAVIGATION
+     ========================================================= -->
+
 <header class="fixed w-full top-0 z-50 border-b border-white/5 bg-[#0f0f0f]/40 backdrop-blur-xl">
 <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+
 <a href="#home" class="flex items-center gap-3 group">
 <img src="./content/img/ct_logo.png" alt="Cyberdelia" class="h-12 w-auto">
 <div class="flex flex-col leading-none">
 <span class="text-2xl font-bold font-display tracking-wide">
-<span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white">Cyberdelia</span></span>
-<span class="mt-1 text-[9px] font-mono tracking-[0.3em] uppercase text-arcade-green">Technologies</span></div></a>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white">Cyberdelia</span>
+</span>
+<span class="mt-1 text-[9px] font-mono tracking-[0.3em] uppercase text-arcade-green">Technologies</span>
+</div>
+</a>
 
 <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
 <a href="#pc-repair" class="hover:text-white transition-all">PC Repair</a>
@@ -81,11 +195,16 @@ select.chic-input option{background:#1A1A1A;color:#E2E8F0}
 </nav>
 
 <div class="hidden lg:flex items-center gap-6">
-<a href="tel:7863001144" class="text-sm font-mono text-gray-300 hover:text-arcade-cyan transition-all"><i class="fa-solid fa-phone text-xs mr-2"></i>(786) 300-1144</a>
+<a href="tel:7863001144" class="text-sm font-mono text-gray-300 hover:text-arcade-cyan transition-all">
+<i class="fa-solid fa-phone text-xs mr-2"></i>(786) 300-1144
+</a>
 <a href="#contact" class="btn-chic-cyan px-6 py-2.5 rounded-full text-sm font-medium">Request a Quote</a>
 </div>
 
-<button id="mobileMenuBtn" class="lg:hidden text-gray-300 hover:text-white"><i class="fa-solid fa-bars text-2xl"></i></button>
+<button id="mobileMenuBtn" class="lg:hidden text-gray-300 hover:text-white">
+<i class="fa-solid fa-bars text-2xl"></i>
+</button>
+
 </div>
 
 <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-[#08090b]/90 backdrop-blur-2xl border-b border-white/15 flex-col py-4 px-6 shadow-2xl">
@@ -98,68 +217,221 @@ select.chic-input option{background:#1A1A1A;color:#E2E8F0}
 </div>
 </header>
 
-<!-- HERO -->
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
 <section id="home" class="pt-40 pb-24 min-h-[90vh] flex items-center relative z-10">
 <div class="container mx-auto px-6">
+
 <div class="max-w-4xl mx-auto text-center animate-fade-up glass-panel p-8 md:p-12 rounded-[2rem]">
+
 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-arcade-lavender/40 bg-arcade-lavender/10 text-arcade-lavender text-xs font-mono tracking-widest uppercase mb-8">
-<span class="w-2 h-2 rounded-full bg-arcade-lavender animate-pulse"></span>IT Support • PC Repair • Custom PCs • Web Design
+<span class="w-2 h-2 rounded-full bg-arcade-lavender animate-pulse"></span>
+IT Support • PC Repair • Custom PCs • Web Design
 </div>
-<h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white leading-[1.1] mb-8">Technology without<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-arcade-cyan via-arcade-lavender to-arcade-green">the frustration.</span></h1>
-<p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed">Professional IT services, precision hardware repair, bespoke gaming rigs, and high-converting web design for homes and small businesses in South Florida.</p>
+
+<h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white leading-[1.1] mb-8">
+Technology without<br>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-arcade-cyan via-arcade-lavender to-arcade-green">
+the frustration.
+</span>
+</h1>
+
+<p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+Professional IT services, precision hardware repair, bespoke gaming rigs, and high-converting web design for homes and small businesses in South Florida.
+</p>
+
 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
 <a href="#contact" class="btn-chic-cyan px-8 py-4 rounded-full text-sm font-semibold w-full sm:w-auto">Get Started</a>
 <a href="#pc-repair" class="px-8 py-4 rounded-full text-sm font-medium text-gray-200 border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all w-full sm:w-auto">Explore Services</a>
 </div>
+
 <div class="mt-16 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm text-gray-400 font-mono">
-<div class="flex flex-col items-center gap-2"><i class="fa-solid fa-hand-holding-dollar text-arcade-cyan text-xl"></i><span>Flat-Rate Pricing</span></div>
-<div class="flex flex-col items-center gap-2"><i class="fa-solid fa-clock-rotate-left text-arcade-lavender text-xl"></i><span>Same-Day Fixes</span></div>
-<div class="flex flex-col items-center gap-2"><i class="fa-solid fa-headset text-arcade-green text-xl"></i><span>Remote & On-Site</span></div>
-<div class="flex flex-col items-center gap-2"><i class="fa-solid fa-shield-halved text-white text-xl"></i><span>30-Day Warranty</span></div>
+
+<div class="flex flex-col items-center gap-2">
+<i class="fa-solid fa-hand-holding-dollar text-arcade-cyan text-xl"></i>
+<span>Flat-Rate Pricing</span>
+</div>
+
+<div class="flex flex-col items-center gap-2">
+<i class="fa-solid fa-clock-rotate-left text-arcade-lavender text-xl"></i>
+<span>Same-Day Fixes</span>
+</div>
+
+<div class="flex flex-col items-center gap-2">
+<i class="fa-solid fa-headset text-arcade-green text-xl"></i>
+<span>Remote & On-Site</span>
+</div>
+
+<div class="flex flex-col items-center gap-2">
+<i class="fa-solid fa-shield-halved text-white text-xl"></i>
+<span>30-Day Warranty</span>
+</div>
+
 </div>
 </div>
 </div>
 </section>
 
-<!-- PC REPAIR -->
+<!-- =========================================================
+     PC REPAIR
+     ========================================================= -->
+
 <section id="pc-repair" class="py-24 relative z-10 bg-black/20 backdrop-blur-sm border-y border-white/5">
 <div class="container mx-auto px-6">
+
 <div class="mb-16 glass-panel inline-block p-8 rounded-3xl max-w-3xl border-l-4 border-l-arcade-cyan">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-cyan/30 bg-arcade-cyan/10 text-arcade-cyan text-xs font-mono uppercase mb-4"><i class="fa-solid fa-screwdriver-wrench"></i>Pillar 01</div>
-<h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">PC Repair & Technical Support</h2>
-<p class="text-gray-300 text-lg">Reliable troubleshooting and hardware fixes for home users and small businesses experiencing performance bottlenecks or hardware failures.</p>
+
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-cyan/30 bg-arcade-cyan/10 text-arcade-cyan text-xs font-mono uppercase mb-4">
+<i class="fa-solid fa-screwdriver-wrench"></i>Pillar 01
+</div>
+
+<h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">
+PC Repair & Technical Support
+</h2>
+
+<p class="text-gray-300 text-lg">
+Reliable troubleshooting and hardware fixes for home users and small businesses experiencing performance bottlenecks or hardware failures.
+</p>
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-<div class="glass-panel p-8 rounded-2xl flex items-start gap-5"><div class="w-12 h-12 rounded-xl bg-arcade-cyan/10 border border-arcade-cyan/20 flex items-center justify-center shrink-0 text-arcade-cyan"><i class="fa-solid fa-microchip"></i></div><div><h3 class="text-lg font-bold text-white mb-2">Diagnostics & Hardware</h3><p class="text-sm text-gray-400 leading-relaxed">Complete system diagnostics, motherboard checks, power supply testing, and hardware replacements.</p></div></div>
-<div class="glass-panel p-8 rounded-2xl flex items-start gap-5"><div class="w-12 h-12 rounded-xl bg-arcade-lavender/10 border border-arcade-lavender/20 flex items-center justify-center shrink-0 text-arcade-lavender"><i class="fa-brands fa-windows"></i></div><div><h3 class="text-lg font-bold text-white mb-2">Windows & OS Solutions</h3><p class="text-sm text-gray-400 leading-relaxed">Blue screen troubleshooting, crash fixes, clean Windows installations, driver updates, and software help.</p></div></div>
-<div class="glass-panel p-8 rounded-2xl flex items-start gap-5"><div class="w-12 h-12 rounded-xl bg-arcade-green/10 border border-arcade-green/20 flex items-center justify-center shrink-0 text-arcade-green"><i class="fa-solid fa-gauge-high"></i></div><div><h3 class="text-lg font-bold text-white mb-2">Speed & Upgrades</h3><p class="text-sm text-gray-400 leading-relaxed">Slow computer optimization, SSD upgrades, RAM expansions, and secure data migration to new drives.</p></div></div>
-<div class="glass-panel p-8 rounded-2xl flex items-start gap-5"><div class="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center shrink-0 text-red-400"><i class="fa-solid fa-virus-slash"></i></div><div><h3 class="text-lg font-bold text-white mb-2">Virus & Malware Cleanup</h3><p class="text-sm text-gray-400 leading-relaxed">Deep malware removal, pop-up elimination, security hardening, and safe browser resets.</p></div></div>
-<div class="glass-panel p-8 rounded-2xl flex items-start gap-5"><div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 text-blue-400"><i class="fa-solid fa-wifi"></i></div><div><h3 class="text-lg font-bold text-white mb-2">Network & Peripheral</h3><p class="text-sm text-gray-400 leading-relaxed">Wi-Fi dropouts, printer configuration, router setup, and peripheral device troubleshooting.</p></div></div>
-<div class="glass-panel p-8 rounded-2xl flex items-start gap-5"><div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center shrink-0 text-yellow-400"><i class="fa-solid fa-headset"></i></div><div><h3 class="text-lg font-bold text-white mb-2">Remote & On-Site Help</h3><p class="text-sm text-gray-400 leading-relaxed">Secure remote sessions for quick software fixes, or convenient on-site dispatch across South Florida.</p></div></div>
+
+<div class="glass-panel p-8 rounded-2xl flex items-start gap-5">
+<div class="w-12 h-12 rounded-xl bg-arcade-cyan/10 border border-arcade-cyan/20 flex items-center justify-center shrink-0 text-arcade-cyan">
+<i class="fa-solid fa-microchip"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-white mb-2">Diagnostics & Hardware</h3>
+<p class="text-sm text-gray-400 leading-relaxed">Complete system diagnostics, motherboard checks, power supply testing, and hardware replacements.</p>
+</div>
+</div>
+
+<div class="glass-panel p-8 rounded-2xl flex items-start gap-5">
+<div class="w-12 h-12 rounded-xl bg-arcade-lavender/10 border border-arcade-lavender/20 flex items-center justify-center shrink-0 text-arcade-lavender">
+<i class="fa-brands fa-windows"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-white mb-2">Windows & OS Solutions</h3>
+<p class="text-sm text-gray-400 leading-relaxed">Blue screen troubleshooting, crash fixes, clean Windows installations, driver updates, and software help.</p>
+</div>
+</div>
+
+<div class="glass-panel p-8 rounded-2xl flex items-start gap-5">
+<div class="w-12 h-12 rounded-xl bg-arcade-green/10 border border-arcade-green/20 flex items-center justify-center shrink-0 text-arcade-green">
+<i class="fa-solid fa-gauge-high"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-white mb-2">Speed & Upgrades</h3>
+<p class="text-sm text-gray-400 leading-relaxed">Slow computer optimization, SSD upgrades, RAM expansions, and secure data migration to new drives.</p>
+</div>
+</div>
+
+<div class="glass-panel p-8 rounded-2xl flex items-start gap-5">
+<div class="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center shrink-0 text-red-400">
+<i class="fa-solid fa-virus-slash"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-white mb-2">Virus & Malware Cleanup</h3>
+<p class="text-sm text-gray-400 leading-relaxed">Deep malware removal, pop-up elimination, security hardening, and safe browser resets.</p>
+</div>
+</div>
+
+<div class="glass-panel p-8 rounded-2xl flex items-start gap-5">
+<div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 text-blue-400">
+<i class="fa-solid fa-wifi"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-white mb-2">Network & Peripheral</h3>
+<p class="text-sm text-gray-400 leading-relaxed">Wi-Fi dropouts, printer configuration, router setup, and peripheral device troubleshooting.</p>
+</div>
+</div>
+
+<div class="glass-panel p-8 rounded-2xl flex items-start gap-5">
+<div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center shrink-0 text-yellow-400">
+<i class="fa-solid fa-headset"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-white mb-2">Remote & On-Site Help</h3>
+<p class="text-sm text-gray-400 leading-relaxed">Secure remote sessions for quick software fixes, or convenient on-site dispatch across South Florida.</p>
+</div>
+</div>
+
 </div>
 </div>
 </section>
 
-<!-- WEB DESIGN -->
+<!-- =========================================================
+     WEB DESIGN
+     ========================================================= -->
+
 <section id="web-design" class="py-24 relative z-10">
 <div class="container mx-auto px-6">
+
 <div class="glass-panel rounded-[2.5rem] p-8 md:p-16 overflow-hidden bg-black/40">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-lavender/40 bg-arcade-lavender/10 text-arcade-lavender text-xs font-mono uppercase mb-6"><i class="fa-solid fa-code"></i>Pillar 02</div>
+
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-lavender/40 bg-arcade-lavender/10 text-arcade-lavender text-xs font-mono uppercase mb-6">
+<i class="fa-solid fa-code"></i>Pillar 02
+</div>
+
 <div class="flex flex-col lg:flex-row gap-16 items-center">
+
 <div class="w-full lg:w-1/2">
-<h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">Web Design & Development.</h2>
-<p class="text-gray-300 mb-8 leading-relaxed text-lg">Establish a striking online presence with custom web solutions tailored for local businesses, creators, and professionals. From clean responsive landing pages to full interactive web applications.</p>
+
+<h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">
+Web Design & Development.
+</h2>
+
+<p class="text-gray-300 mb-8 leading-relaxed text-lg">
+Establish a striking online presence with custom web solutions tailored for local businesses, creators, and professionals. From clean responsive landing pages to full interactive web applications.
+</p>
+
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-300 mb-10 font-medium">
-<div>✓ Business Landing Pages</div><div>✓ Portfolio & Creator Sites</div><div>✓ Responsive HTML/CSS/JS</div><div>✓ Forms & SEO Setup</div><div>✓ Domain & Hosting Setup</div><div>✓ Custom Web Apps & APIs</div>
+<div>✓ Business Landing Pages</div>
+<div>✓ Portfolio & Creator Sites</div>
+<div>✓ Responsive HTML/CSS/JS</div>
+<div>✓ Forms & SEO Setup</div>
+<div>✓ Domain & Hosting Setup</div>
+<div>✓ Custom Web Apps & APIs</div>
 </div>
-<a href="#contact" class="btn-chic-cyan px-8 py-3 rounded-full text-sm font-semibold inline-block">Request Web Quote</a>
+
+<a href="#contact" class="btn-chic-cyan px-8 py-3 rounded-full text-sm font-semibold inline-block">
+Request Web Quote
+</a>
+
 </div>
+
 <div class="w-full lg:w-1/2">
+
 <div class="w-full aspect-video bg-[#050607]/80 rounded-2xl border border-white/20 p-5 shadow-2xl flex flex-col gap-4">
-<div class="flex gap-2"><div class="w-3.5 h-3.5 rounded-full bg-red-500/80"></div><div class="w-3.5 h-3.5 rounded-full bg-yellow-500/80"></div><div class="w-3.5 h-3.5 rounded-full bg-green-500/80"></div></div>
+
+<div class="flex gap-2">
+<div class="w-3.5 h-3.5 rounded-full bg-red-500/80"></div>
+<div class="w-3.5 h-3.5 rounded-full bg-yellow-500/80"></div>
+<div class="w-3.5 h-3.5 rounded-full bg-green-500/80"></div>
+</div>
+
 <div class="w-full h-8 bg-white/10 rounded-lg"></div>
-<div class="flex gap-4 h-full"><div class="w-1/3 h-full bg-white/5 rounded-lg p-3"><div class="w-full h-4 bg-white/20 rounded mb-3"></div><div class="w-3/4 h-4 bg-white/20 rounded mb-3"></div><div class="w-5/6 h-4 bg-white/20 rounded"></div></div><div class="w-2/3 flex flex-col gap-4"><div class="w-full h-1/2 bg-arcade-cyan/10 rounded-lg border border-arcade-cyan/40 flex items-center justify-center text-arcade-cyan text-sm font-bold font-mono">HIGH CONVERTING UI</div><div class="w-full h-1/2 bg-white/5 rounded-lg border border-white/10"></div></div></div>
+
+<div class="flex gap-4 h-full">
+
+<div class="w-1/3 h-full bg-white/5 rounded-lg p-3">
+<div class="w-full h-4 bg-white/20 rounded mb-3"></div>
+<div class="w-3/4 h-4 bg-white/20 rounded mb-3"></div>
+<div class="w-5/6 h-4 bg-white/20 rounded"></div>
+</div>
+
+<div class="w-2/3 flex flex-col gap-4">
+
+<div class="w-full h-1/2 bg-arcade-cyan/10 rounded-lg border border-arcade-cyan/40 flex items-center justify-center text-arcade-cyan text-sm font-bold font-mono">
+HIGH CONVERTING UI
+</div>
+
+<div class="w-full h-1/2 bg-white/5 rounded-lg border border-white/10"></div>
+
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -167,163 +439,426 @@ select.chic-input option{background:#1A1A1A;color:#E2E8F0}
 </div>
 </section>
 
-<!-- CUSTOM PCS -->
+<!-- =========================================================
+     CUSTOM PCS
+     ========================================================= -->
+
 <section id="custom-pcs" class="py-24 relative z-10 bg-black/40 backdrop-blur-md border-y border-white/5">
 <div class="container mx-auto px-6">
+
 <div class="text-center max-w-3xl mx-auto mb-16 glass-panel px-10 py-8 rounded-3xl">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-green/40 bg-arcade-green/10 text-arcade-green text-xs font-mono uppercase mb-4"><i class="fa-solid fa-gamepad"></i>Pillar 03</div>
-<h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">Custom PC Builds</h2>
-<p class="text-gray-300 text-lg">Hand-assembled gaming rigs and professional content creation workstations engineered for maximum thermal performance and aesthetics.</p>
+
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-green/40 bg-arcade-green/10 text-arcade-green text-xs font-mono uppercase mb-4">
+<i class="fa-solid fa-gamepad"></i>Pillar 03
+</div>
+
+<h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">
+Custom PC Builds
+</h2>
+
+<p class="text-gray-300 text-lg">
+Hand-assembled gaming rigs and professional content creation workstations engineered for maximum thermal performance and aesthetics.
+</p>
+
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
 <div class="glass-panel p-8 rounded-[2rem]">
-<h3 class="text-xs font-mono font-bold tracking-widest uppercase text-arcade-cyan mb-2">Gaming & Entry</h3><h4 class="text-3xl font-display font-bold text-white mb-4">Essential</h4><p class="text-sm text-gray-400 mb-8">Smooth 1080p/1440p gaming and dependable daily performance.</p>
-<ul class="space-y-3 text-sm text-gray-300 mb-8 border-t border-white/10 pt-6"><li>✓ Entry/Mid-Range GPU</li><li>✓ 16GB - 32GB RAM</li><li>✓ NVMe SSD Storage</li><li>✓ Clean Cable Management</li></ul>
+<h3 class="text-xs font-mono font-bold tracking-widest uppercase text-arcade-cyan mb-2">Gaming & Entry</h3>
+<h4 class="text-3xl font-display font-bold text-white mb-4">Essential</h4>
+<p class="text-sm text-gray-400 mb-8">Smooth 1080p/1440p gaming and dependable daily performance.</p>
+<ul class="space-y-3 text-sm text-gray-300 mb-8 border-t border-white/10 pt-6">
+<li>✓ Entry/Mid-Range GPU</li>
+<li>✓ 16GB - 32GB RAM</li>
+<li>✓ NVMe SSD Storage</li>
+<li>✓ Clean Cable Management</li>
+</ul>
 <a href="#contact" class="block text-center w-full py-3 rounded-full border border-white/20 hover:bg-white/10 text-sm font-semibold">Inquire Build</a>
 </div>
 
 <div class="glass-panel p-10 rounded-[2.5rem] border-arcade-lavender/50 relative md:-translate-y-4 shadow-[0_0_40px_rgba(177,156,217,.15)]">
-<div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-5 py-1.5 bg-arcade-lavender text-[#0f0f0f] text-xs font-mono font-bold uppercase rounded-full">Most Popular</div>
-<h3 class="text-xs font-mono font-bold tracking-widest uppercase text-arcade-lavender mb-2 mt-2">Competitive / Creator</h3><h4 class="text-4xl font-display font-bold text-white mb-4">Performance</h4><p class="text-sm text-gray-300 mb-8">High-refresh 1440p/4K gaming, live streaming, and robust video editing.</p>
-<ul class="space-y-4 text-sm text-gray-200 mb-8 border-t border-white/10 pt-6"><li>✓ Enthusiast Multi-Core CPU</li><li>✓ 32GB - 64GB DDR5 RAM</li><li>✓ AIO Liquid Cooling</li><li>✓ Fully Tuned BIOS & Fans</li></ul>
-<a href="#contact" class="block text-center w-full py-3.5 rounded-full bg-arcade-lavender text-[#0f0f0f] text-sm font-bold">Inquire Build</a>
+
+<div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-5 py-1.5 bg-arcade-lavender text-[#0f0f0f] text-xs font-mono font-bold uppercase rounded-full">
+Most Popular
+</div>
+
+<h3 class="text-xs font-mono font-bold tracking-widest uppercase text-arcade-lavender mb-2 mt-2">Competitive / Creator</h3>
+<h4 class="text-4xl font-display font-bold text-white mb-4">Performance</h4>
+<p class="text-sm text-gray-300 mb-8">High-refresh 1440p/4K gaming, live streaming, and robust video editing.</p>
+
+<ul class="space-y-4 text-sm text-gray-200 mb-8 border-t border-white/10 pt-6">
+<li>✓ Enthusiast Multi-Core CPU</li>
+<li>✓ 32GB - 64GB DDR5 RAM</li>
+<li>✓ AIO Liquid Cooling</li>
+<li>✓ Fully Tuned BIOS & Fans</li>
+</ul>
+
+<a href="#contact" class="block text-center w-full py-3.5 rounded-full bg-arcade-lavender text-[#0f0f0f] text-sm font-bold">
+Inquire Build
+</a>
 </div>
 
 <div class="glass-panel p-8 rounded-[2rem]">
-<h3 class="text-xs font-mono font-bold tracking-widest uppercase text-arcade-green mb-2">Workstations</h3><h4 class="text-3xl font-display font-bold text-white mb-4">Signature</h4><p class="text-sm text-gray-400 mb-8">Zero-compromise rigs for 3D rendering, music production, and 4K/8K editing.</p>
-<ul class="space-y-3 text-sm text-gray-300 mb-8 border-t border-white/10 pt-6"><li>✓ Flagship Processors</li><li>✓ 64GB+ High-Speed Memory</li><li>✓ Top-Tier Flagship GPU</li><li>✓ Extensive Stress Testing</li></ul>
-<a href="#contact" class="block text-center w-full py-3 rounded-full border border-white/20 hover:bg-white/10 text-sm font-semibold">Inquire Build</a>
+<h3 class="text-xs font-mono font-bold tracking-widest uppercase text-arcade-green mb-2">Workstations</h3>
+<h4 class="text-3xl font-display font-bold text-white mb-4">Signature</h4>
+<p class="text-sm text-gray-400 mb-8">Zero-compromise rigs for 3D rendering, music production, and 4K/8K editing.</p>
+
+<ul class="space-y-3 text-sm text-gray-300 mb-8 border-t border-white/10 pt-6">
+<li>✓ Flagship Processors</li>
+<li>✓ 64GB+ High-Speed Memory</li>
+<li>✓ Top-Tier Flagship GPU</li>
+<li>✓ Extensive Stress Testing</li>
+</ul>
+
+<a href="#contact" class="block text-center w-full py-3 rounded-full border border-white/20 hover:bg-white/10 text-sm font-semibold">
+Inquire Build
+</a>
 </div>
+
 </div>
 </div>
 </section>
 
-<!-- SMALL BUSINESS IT -->
+<!-- =========================================================
+     SMALL BUSINESS IT
+     ========================================================= -->
+
 <section id="it-support" class="py-24 relative z-10">
 <div class="container mx-auto px-6">
+
 <div class="md:flex justify-between items-end glass-panel p-10 rounded-3xl mb-12 border-l-4 border-l-arcade-cyan">
-<div><div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-cyan/40 bg-arcade-cyan/10 text-arcade-cyan text-xs font-mono uppercase mb-4"><i class="fa-solid fa-building"></i>Pillar 04</div><h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">Small-Business IT & Retainers</h2><p class="text-gray-300 max-w-2xl text-lg">Predictable Monthly Recurring Revenue (MRR) services designed to keep your business securely online, fully backed up, and running without friction.</p></div>
-<a href="#contact" class="btn-chic-cyan px-6 py-3 rounded-full text-sm font-semibold inline-flex items-center gap-2 mt-8 md:mt-0">Request Business Audit <i class="fa-solid fa-arrow-right"></i></a>
+
+<div>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-cyan/40 bg-arcade-cyan/10 text-arcade-cyan text-xs font-mono uppercase mb-4">
+<i class="fa-solid fa-building"></i>Pillar 04
+</div>
+
+<h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">
+Small-Business IT & Retainers
+</h2>
+
+<p class="text-gray-300 max-w-2xl text-lg">
+Predictable Monthly Recurring Revenue (MRR) services designed to keep your business securely online, fully backed up, and running without friction.
+</p>
+</div>
+
+<a href="#contact" class="btn-chic-cyan px-6 py-3 rounded-full text-sm font-semibold inline-flex items-center gap-2 mt-8 md:mt-0">
+Request Business Audit <i class="fa-solid fa-arrow-right"></i>
+</a>
+
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-<div class="glass-panel p-8 rounded-2xl"><div class="w-14 h-14 rounded-full bg-arcade-cyan/10 flex items-center justify-center mb-6 text-arcade-cyan"><i class="fa-solid fa-network-wired text-xl"></i></div><h3 class="text-xl font-display font-bold text-white mb-3">Network & Wi-Fi</h3><p class="text-sm text-gray-400 leading-relaxed">Secure office networking, mesh Wi-Fi routing, VLAN segregation, and robust firewall configuration.</p></div>
-<div class="glass-panel p-8 rounded-2xl"><div class="w-14 h-14 rounded-full bg-arcade-lavender/10 flex items-center justify-center mb-6 text-arcade-lavender"><i class="fa-brands fa-microsoft text-xl"></i></div><h3 class="text-xl font-display font-bold text-white mb-3">Cloud & Workspace</h3><p class="text-sm text-gray-400 leading-relaxed">Microsoft 365 and Google Workspace administration, business email setup, and user account management.</p></div>
-<div class="glass-panel p-8 rounded-2xl"><div class="w-14 h-14 rounded-full bg-arcade-green/10 flex items-center justify-center mb-6 text-arcade-green"><i class="fa-solid fa-shield-halved text-xl"></i></div><h3 class="text-xl font-display font-bold text-white mb-3">Security & Backups</h3><p class="text-sm text-gray-400 leading-relaxed">Automated cloud/local backups, disaster recovery plans, endpoint protection, and MFA setup.</p></div>
-<div class="glass-panel p-8 rounded-2xl"><div class="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mb-6 text-white"><i class="fa-solid fa-users-gear text-xl"></i></div><h3 class="text-xl font-display font-bold text-white mb-3">Managed Support</h3><p class="text-sm text-gray-400 leading-relaxed">New employee hardware onboarding, ongoing device maintenance, remote helpdesk, and priority on-site support.</p></div>
+
+<div class="glass-panel p-8 rounded-2xl">
+<div class="w-14 h-14 rounded-full bg-arcade-cyan/10 flex items-center justify-center mb-6 text-arcade-cyan">
+<i class="fa-solid fa-network-wired text-xl"></i>
+</div>
+<h3 class="text-xl font-display font-bold text-white mb-3">Network & Wi-Fi</h3>
+<p class="text-sm text-gray-400 leading-relaxed">Secure office networking, mesh Wi-Fi routing, VLAN segregation, and robust firewall configuration.</p>
+</div>
+
+<div class="glass-panel p-8 rounded-2xl">
+<div class="w-14 h-14 rounded-full bg-arcade-lavender/10 flex items-center justify-center mb-6 text-arcade-lavender">
+<i class="fa-brands fa-microsoft text-xl"></i>
+</div>
+<h3 class="text-xl font-display font-bold text-white mb-3">Cloud & Workspace</h3>
+<p class="text-sm text-gray-400 leading-relaxed">Microsoft 365 and Google Workspace administration, business email setup, and user account management.</p>
+</div>
+
+<div class="glass-panel p-8 rounded-2xl">
+<div class="w-14 h-14 rounded-full bg-arcade-green/10 flex items-center justify-center mb-6 text-arcade-green">
+<i class="fa-solid fa-shield-halved text-xl"></i>
+</div>
+<h3 class="text-xl font-display font-bold text-white mb-3">Security & Backups</h3>
+<p class="text-sm text-gray-400 leading-relaxed">Automated cloud/local backups, disaster recovery plans, endpoint protection, and MFA setup.</p>
+</div>
+
+<div class="glass-panel p-8 rounded-2xl">
+<div class="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mb-6 text-white">
+<i class="fa-solid fa-users-gear text-xl"></i>
+</div>
+<h3 class="text-xl font-display font-bold text-white mb-3">Managed Support</h3>
+<p class="text-sm text-gray-400 leading-relaxed">New employee hardware onboarding, ongoing device maintenance, remote helpdesk, and priority on-site support.</p>
+</div>
+
 </div>
 </div>
 </section>
 
-<!-- ABOUT -->
+<!-- =========================================================
+     ABOUT
+     ========================================================= -->
+
 <section id="about" class="py-24 relative z-10 bg-black/30 backdrop-blur-md border-t border-white/5">
 <div class="container mx-auto px-6">
+
 <div class="flex flex-col-reverse lg:flex-row gap-16 items-center glass-panel p-10 md:p-16 rounded-[3rem]">
+
 <div class="w-full lg:w-1/2">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/20 bg-white/5 text-white text-xs font-mono uppercase mb-4"><i class="fa-solid fa-terminal text-arcade-lavender"></i>Lead Technician</div>
-<h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">Meet Naiff.</h2>
-<p class="text-gray-300 mb-6 text-lg leading-relaxed">Cyberdelia is an independent technology services business operated directly by me. <strong class="text-arcade-green">No call centers, no subcontractors, no bouncing you between support agents.</strong></p>
-<p class="text-gray-400 mb-10 text-lg leading-relaxed">With over 20 years of technical expertise, I built Cyberdelia to provide honest, dependable IT support, custom hardware, and web design in plain English (or Spanish). Every repair and business audit is handled personally with meticulous attention to detail.</p>
-<div class="flex flex-wrap gap-4"><div class="px-5 py-2.5 rounded-full border border-white/10 bg-black/40 text-sm text-gray-300"><i class="fa-solid fa-clock mr-3 text-arcade-cyan"></i>20+ Years Experience</div><div class="px-5 py-2.5 rounded-full border border-white/10 bg-black/40 text-sm text-gray-300"><i class="fa-solid fa-language mr-3 text-arcade-lavender"></i>Bilingual Support</div><div class="px-5 py-2.5 rounded-full border border-white/10 bg-black/40 text-sm text-gray-300"><i class="fa-solid fa-certificate mr-3 text-arcade-green"></i>Certified Specialist</div></div>
+
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/20 bg-white/5 text-white text-xs font-mono uppercase mb-4">
+<i class="fa-solid fa-terminal text-arcade-lavender"></i>Lead Technician
 </div>
+
+<h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">
+Meet Naiff.
+</h2>
+
+<p class="text-gray-300 mb-6 text-lg leading-relaxed">
+Cyberdelia is an independent technology services business operated directly by me.
+<strong class="text-arcade-green">No call centers, no subcontractors, no bouncing you between support agents.</strong>
+</p>
+
+<p class="text-gray-400 mb-10 text-lg leading-relaxed">
+With over 20 years of technical expertise, I built Cyberdelia to provide honest, dependable IT support, custom hardware, and web design in plain English (or Spanish). Every repair and business audit is handled personally with meticulous attention to detail.
+</p>
+
+<div class="flex flex-wrap gap-4">
+
+<div class="px-5 py-2.5 rounded-full border border-white/10 bg-black/40 text-sm text-gray-300">
+<i class="fa-solid fa-clock mr-3 text-arcade-cyan"></i>20+ Years Experience
+</div>
+
+<div class="px-5 py-2.5 rounded-full border border-white/10 bg-black/40 text-sm text-gray-300">
+<i class="fa-solid fa-language mr-3 text-arcade-lavender"></i>Bilingual Support
+</div>
+
+<div class="px-5 py-2.5 rounded-full border border-white/10 bg-black/40 text-sm text-gray-300">
+<i class="fa-solid fa-certificate mr-3 text-arcade-green"></i>Certified Specialist
+</div>
+
+</div>
+</div>
+
 <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
+
 <div class="relative w-full max-w-md aspect-square rounded-full border border-white/20 p-3 bg-black/40 shadow-[0_0_40px_rgba(177,156,217,.15)]">
-<div class="w-full h-full rounded-full overflow-hidden border border-white/10"><img src="./content/img/profile.jpg?raw=true" alt="Naiff - Cyberdelia Founder" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"></div>
-<div class="absolute bottom-6 right-6 bg-[#08090b]/90 border border-arcade-lavender/50 text-white p-4 rounded-full w-28 h-28 flex flex-col items-center justify-center text-center"><span class="text-3xl font-bold font-display text-arcade-lavender">20+</span><span class="text-xs font-mono uppercase tracking-wider mt-1 text-gray-300">Years</span></div>
+
+<div class="w-full h-full rounded-full overflow-hidden border border-white/10">
+<img src="./content/img/profile.jpg?raw=true" alt="Naiff - Cyberdelia Founder" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+</div>
+
+<div class="absolute bottom-6 right-6 bg-[#08090b]/90 border border-arcade-lavender/50 text-white p-4 rounded-full w-28 h-28 flex flex-col items-center justify-center text-center">
+<span class="text-3xl font-bold font-display text-arcade-lavender">20+</span>
+<span class="text-xs font-mono uppercase tracking-wider mt-1 text-gray-300">Years</span>
+</div>
+
 </div>
 </div>
+
 </div>
 </div>
 </section>
 
-<!-- CONTACT -->
+<!-- =========================================================
+     CONTACT
+     ========================================================= -->
+
 <section id="contact" class="py-24 relative z-10 border-t border-white/5 bg-[#050607]/70 backdrop-blur-xl">
 <div class="container mx-auto px-6">
+
 <div class="max-w-4xl mx-auto glass-panel p-8 md:p-14 rounded-[3rem] border border-arcade-cyan/30">
+
 <div class="text-center mb-12">
 <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">Request a Quote</h2>
-<p class="text-gray-300 text-lg">Describe your project or tech issue below. You are reaching Naiff directly, and I'll get back to you promptly.</p>
+<p class="text-gray-300 text-lg">
+Describe your project or tech issue below. You are reaching Naiff directly, and I'll get back to you promptly.
+</p>
 </div>
 
 <!-- EMAILJS CONTACT FORM -->
+
 <form id="leadForm" class="space-y-6">
+
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div><label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Full Name</label><input type="text" name="full_name" required placeholder="John Doe" class="w-full chic-input rounded-xl px-5 py-4"></div>
-<div><label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Phone Number</label><input type="tel" name="phone" required placeholder="(786) 000-0000" class="w-full chic-input rounded-xl px-5 py-4"></div>
+
+<div>
+<label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Full Name</label>
+<input type="text" name="full_name" required placeholder="John Doe" class="w-full chic-input rounded-xl px-5 py-4">
+</div>
+
+<div>
+<label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Phone Number</label>
+<input type="tel" name="phone" required placeholder="(786) 000-0000" class="w-full chic-input rounded-xl px-5 py-4">
+</div>
+
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div><label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Email Address</label><input type="email" name="email" required placeholder="john@example.com" class="w-full chic-input rounded-xl px-5 py-4"></div>
-<div><label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Client Type</label><select name="client_type" required class="w-full chic-input rounded-xl px-5 py-4"><option value="" disabled selected>Select...</option><option value="Residential / Home User">Residential / Home User</option><option value="Small Business">Small Business</option></select></div>
+
+<div>
+<label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Email Address</label>
+<input type="email" name="email" required placeholder="john@example.com" class="w-full chic-input rounded-xl px-5 py-4">
+</div>
+
+<div>
+<label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Client Type</label>
+<select name="client_type" required class="w-full chic-input rounded-xl px-5 py-4">
+<option value="" disabled selected>Select...</option>
+<option value="Residential / Home User">Residential / Home User</option>
+<option value="Small Business">Small Business</option>
+</select>
+</div>
+
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div><label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Service Area Needed</label><select name="service" required class="w-full chic-input rounded-xl px-5 py-4"><option value="" disabled selected>Select category...</option><option value="PC Repair">1. PC Repair & Support</option><option value="Web Design">2. Web Design & Dev</option><option value="Custom PC Build">3. Custom PC Build</option><option value="Small Business IT">4. Small-Business IT Retainer</option><option value="Other">Other Inquiry</option></select></div>
-<div><label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Preferred Contact Method</label><select name="contact_method" required class="w-full chic-input rounded-xl px-5 py-4"><option value="Phone Call">Phone Call</option><option value="Text Message">Text Message</option><option value="Email">Email</option></select></div>
+
+<div>
+<label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Service Area Needed</label>
+<select name="service" required class="w-full chic-input rounded-xl px-5 py-4">
+<option value="" disabled selected>Select category...</option>
+<option value="PC Repair">1. PC Repair & Support</option>
+<option value="Web Design">2. Web Design & Dev</option>
+<option value="Custom PC Build">3. Custom PC Build</option>
+<option value="Small Business IT">4. Small-Business IT Retainer</option>
+<option value="Other">Other Inquiry</option>
+</select>
 </div>
 
-<div><label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Description of Problem / Project</label><textarea name="message" required rows="5" placeholder="Share details about your system symptoms, build goals, or business IT requirements..." class="w-full chic-input rounded-xl px-5 py-4 resize-none"></textarea></div>
+<div>
+<label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Preferred Contact Method</label>
+<select name="contact_method" required class="w-full chic-input rounded-xl px-5 py-4">
+<option value="Phone Call">Phone Call</option>
+<option value="Text Message">Text Message</option>
+<option value="Email">Email</option>
+</select>
+</div>
+
+</div>
+
+<div>
+<label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Description of Problem / Project</label>
+<textarea name="message" required rows="5" placeholder="Share details about your system symptoms, build goals, or business IT requirements..." class="w-full chic-input rounded-xl px-5 py-4 resize-none"></textarea>
+</div>
 
 <div id="formStatus" class="form-status" role="status"></div>
 
 <div class="pt-4 flex flex-col md:flex-row items-center justify-between gap-6">
-<p class="text-xs text-gray-500 font-mono"><i class="fa-solid fa-lock text-arcade-cyan mr-1"></i>Respecting privacy. No spam ever.</p>
-<button id="submitBtn" type="submit" class="btn-chic-cyan px-10 py-4 rounded-full text-sm font-bold tracking-widest uppercase w-full md:w-auto">Submit Request <i class="fa-solid fa-paper-plane ml-2"></i></button>
+
+<p class="text-xs text-gray-500 font-mono">
+<i class="fa-solid fa-lock text-arcade-cyan mr-1"></i>
+Respecting privacy. No spam ever.
+</p>
+
+<button id="submitBtn" type="submit" class="btn-chic-cyan px-10 py-4 rounded-full text-sm font-bold tracking-widest uppercase w-full md:w-auto">
+Submit Request <i class="fa-solid fa-paper-plane ml-2"></i>
+</button>
+
 </div>
 </form>
 </div>
 </div>
 </section>
 
-<!-- FOOTER -->
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
 <footer class="bg-[#050607]/90 backdrop-blur-2xl border-t border-white/5 pt-16 pb-8 relative z-10">
 <div class="container mx-auto px-6">
+
 <div class="flex flex-col md:flex-row justify-between items-start gap-10 mb-12">
+
 <div class="md:w-1/3">
-<!-- <a href="#home" class="text-2xl font-bold font-display tracking-wide text-white mb-4 block">Cyberdelia<span class="text-arcade-cyan">.</span></a> -->
-<a href="#home" class="mb-4 block"><img src="./content/img/cdt_logo.png" alt="Cyberdelia" class="h-40 w-42"></a>
-<!-- <a href="#home" class="mb-4 block"><img src="./content/img/ct_logo.png" alt="Cyberdelia" class="h-auto w-32"><div class="mt-1"><span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white font-display text-lg leading-none">Cyberdelia</span><div class="mt-1 text-[9px] font-mono tracking-[0.3em] uppercase text-arcade-green">Technologies</div></div></a> -->
 
+<a href="#home" class="mb-4 block">
+<img src="./content/img/cdt_logo.png" alt="Cyberdelia" class="h-40 w-42">
+</a>
 
- <p class="text-gray-400 text-sm mb-6 max-w-sm leading-relaxed">IT Support • PC Repair • Custom PCs • Web Design. Serving Broward County and South Florida.</p>
+<p class="text-gray-400 text-sm mb-6 max-w-sm leading-relaxed">
+IT Support • PC Repair • Custom PCs • Web Design. Serving Broward County and South Florida.
+</p>
+
 <div class="flex gap-4">
-<a href="https://www.linkedin.com/in/naiffasilis/details/experience/" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-arcade-cyan"><i class="fa-brands fa-linkedin-in text-sm"></i></a>
-<a href="https://www.instagram.com/cyberdeliatech/" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-arcade-lavender"><i class="fa-brands fa-instagram text-sm"></i></a>
+
+<a href="https://www.linkedin.com/in/naiffasilis/details/experience/" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-arcade-cyan">
+<i class="fa-brands fa-linkedin-in text-sm"></i>
+</a>
+
+<a href="https://www.instagram.com/cyberdeliatech/" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-arcade-lavender">
+<i class="fa-brands fa-instagram text-sm"></i>
+</a>
+
 </div>
 </div>
 
 <div class="md:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-8">
-<div><h4 class="font-display text-white font-bold mb-5">Services</h4><ul class="space-y-3 text-sm text-gray-400"><li><a href="#pc-repair">PC Repair</a></li><li><a href="#web-design">Web Design</a></li><li><a href="#custom-pcs">Custom Builds</a></li><li><a href="#it-support">Small-Biz IT</a></li></ul></div>
-<div><h4 class="font-display text-white font-bold mb-5">Company</h4><ul class="space-y-3 text-sm text-gray-400"><li><a href="#about">Meet Naiff</a></li><li><a href="#contact">Contact</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
-<div class="col-span-2 md:col-span-1"><h4 class="font-display text-white font-bold mb-5">Contact</h4><ul class="space-y-4 text-sm text-gray-400"><li><i class="fa-solid fa-phone text-arcade-cyan mr-3"></i><a href="tel:+17863001144">(786) 300-1144</a></li><li><i class="fa-solid fa-envelope text-arcade-lavender mr-3"></i><a href="mailto:cyberdeliatech@gmail.com">cyberdeliatech@gmail.com</a></li><li><i class="fa-solid fa-location-dot text-arcade-green mr-3"></i>Broward County, FL</li></ul></div>
+
+<div>
+<h4 class="font-display text-white font-bold mb-5">Services</h4>
+<ul class="space-y-3 text-sm text-gray-400">
+<li><a href="#pc-repair">PC Repair</a></li>
+<li><a href="#web-design">Web Design</a></li>
+<li><a href="#custom-pcs">Custom Builds</a></li>
+<li><a href="#it-support">Small-Biz IT</a></li>
+</ul>
+</div>
+
+<div>
+<h4 class="font-display text-white font-bold mb-5">Company</h4>
+<ul class="space-y-3 text-sm text-gray-400">
+<li><a href="#about">Meet Naiff</a></li>
+<li><a href="#contact">Contact</a></li>
+<li><a href="#">Privacy Policy</a></li>
+</ul>
+</div>
+
+<div class="col-span-2 md:col-span-1">
+
+<h4 class="font-display text-white font-bold mb-5">Contact</h4>
+
+<ul class="space-y-4 text-sm text-gray-400">
+
+<li>
+<i class="fa-solid fa-phone text-arcade-cyan mr-3"></i>
+<a href="tel:+17863001144">(786) 300-1144</a>
+</li>
+
+<li>
+<i class="fa-solid fa-envelope text-arcade-lavender mr-3"></i>
+<a href="mailto:cyberdeliatech@gmail.com">cyberdeliatech@gmail.com</a>
+</li>
+
+<li>
+<i class="fa-solid fa-location-dot text-arcade-green mr-3"></i>
+Broward County, FL
+</li>
+
+</ul>
+</div>
 </div>
 </div>
 
 <div class="border-t border-white/5 pt-8 text-center md:text-left text-xs font-mono text-gray-500 flex flex-col md:flex-row justify-between gap-4">
-<p>&copy; 2026 Cyberdelia IT Solutions. All Rights Reserved.</p><p>Designed & Developed by Naiff.</p>
+
+<p>&copy; 2026 Cyberdelia IT Solutions. All Rights Reserved.</p>
+<p>Designed & Developed by Naiff.</p>
+
 </div>
 </div>
 </footer>
 
+<!-- THREE.JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <script>
 /* =========================================================
    EMAILJS CONFIGURATION
-   =========================================================
-   EmailJS sends the contact form directly from the browser.
-   Public Key is safe to expose in frontend JavaScript.
    ========================================================= */
 
 const EMAILJS_PUBLIC_KEY="UkgeRvIW4bf1of0e6";
 const EMAILJS_SERVICE_ID="service_oxs8712";
 const EMAILJS_TEMPLATE_ID="template_1ps63nr";
 
-/* Initialize EmailJS */
 emailjs.init({publicKey:EMAILJS_PUBLIC_KEY});
 
-/* Contact Form */
+/* =========================================================
+   CONTACT FORM
+   ========================================================= */
+
 const leadForm=document.getElementById("leadForm");
 const formStatus=document.getElementById("formStatus");
 const submitBtn=document.getElementById("submitBtn");
@@ -338,6 +873,7 @@ leadForm.addEventListener("submit",async function(e){
  formStatus.textContent="";
 
  try{
+
   const response=await emailjs.sendForm(
    EMAILJS_SERVICE_ID,
    EMAILJS_TEMPLATE_ID,
@@ -352,18 +888,24 @@ leadForm.addEventListener("submit",async function(e){
   leadForm.reset();
 
  }catch(error){
+
   console.error("EmailJS Error:",error);
 
   formStatus.className="form-status error";
   formStatus.innerHTML='Unable to send the request right now. Please call <strong>(786) 300-1144</strong>.';
 
  }finally{
+
   submitBtn.disabled=false;
   submitBtn.innerHTML='Submit Request <i class="fa-solid fa-paper-plane ml-2"></i>';
+
  }
 });
 
-/* Mobile Menu */
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
 const mobileMenuBtn=document.getElementById("mobileMenuBtn");
 const mobileMenu=document.getElementById("mobileMenu");
 
@@ -384,111 +926,506 @@ document.querySelectorAll(".mobile-link").forEach(link=>{
    ========================================================= */
 
 const container=document.getElementById("canvas-container");
+
 const scene=new THREE.Scene();
 scene.fog=new THREE.FogExp2(0x050508,.015);
 
-const camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,.1,1000);
+const camera=new THREE.PerspectiveCamera(
+ 60,
+ window.innerWidth/window.innerHeight,
+ .1,
+ 1000
+);
+
 camera.position.set(0,15,50);
 
-const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});
+const renderer=new THREE.WebGLRenderer({
+ antialias:true,
+ alpha:false
+});
+
 renderer.setSize(window.innerWidth,window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
 container.appendChild(renderer.domElement);
 
-const neonColors=[0x00E5FF,0xB19CD9,0x00FF88];
+/* =========================================================
+   CYBERDELIA COLOR PALETTE
+   =========================================================
+   Cyan      = 0x00E5FF
+   Lavender  = 0xB19CD9
+   Green     = 0x00FF88
+   ========================================================= */
 
-/* Grid */
-const gridHelper=new THREE.GridHelper(300,60,0x00E5FF,0x1A1A2E);
-gridHelper.position.y=-5;
-scene.add(gridHelper);
+const neonColors=[
+ 0x00E5FF, /* arcade-cyan */
+ 0xB19CD9, /* arcade-lavender */
+ 0x00FF88  /* arcade-green */
+];
 
-/* Towers */
+/* =========================================================
+   MULTI-COLOR FLOOR GRID
+   =========================================================
+   THREE.GridHelper normally uses only two colors.
+   We create our own grid so EVERY line can independently
+   use cyan, lavender, or green.
+   ========================================================= */
+
+const gridGroup=new THREE.Group();
+
+const gridSize=300;
+const gridDivisions=60;
+const gridStep=gridSize/gridDivisions;
+
+const gridMaterials=neonColors.map(color=>new THREE.LineBasicMaterial({
+ color:color,
+ transparent:true,
+ opacity:.28
+}));
+
+/* Vertical grid lines */
+
+for(let i=0;i<=gridDivisions;i++){
+
+ const x=-gridSize/2+(i*gridStep);
+
+ const geometry=new THREE.BufferGeometry();
+
+ geometry.setAttribute(
+  "position",
+  new THREE.Float32BufferAttribute([
+   x,-5,-gridSize/2,
+   x,-5, gridSize/2
+  ],3)
+ );
+
+ const colorIndex=Math.floor(Math.random()*neonColors.length);
+
+ const line=new THREE.Line(
+  geometry,
+  gridMaterials[colorIndex]
+ );
+
+ gridGroup.add(line);
+}
+
+/* Horizontal grid lines */
+
+for(let i=0;i<=gridDivisions;i++){
+
+ const z=-gridSize/2+(i*gridStep);
+
+ const geometry=new THREE.BufferGeometry();
+
+ geometry.setAttribute(
+  "position",
+  new THREE.Float32BufferAttribute([
+   -gridSize/2,-5,z,
+    gridSize/2,-5,z
+  ],3)
+ );
+
+ const colorIndex=Math.floor(Math.random()*neonColors.length);
+
+ const line=new THREE.Line(
+  geometry,
+  gridMaterials[colorIndex]
+ );
+
+ gridGroup.add(line);
+}
+
+gridGroup.position.y=0;
+scene.add(gridGroup);
+
+/* =========================================================
+   OPTIONAL GRID GLOW LAYER
+   =========================================================
+   Adds subtle colored lines behind the main grid.
+   ========================================================= */
+
+const glowGridGroup=new THREE.Group();
+
+const glowMaterials=neonColors.map(color=>new THREE.LineBasicMaterial({
+ color:color,
+ transparent:true,
+ opacity:.06
+}));
+
+for(let i=0;i<=gridDivisions;i++){
+
+ const x=-gridSize/2+(i*gridStep);
+
+ const geometry=new THREE.BufferGeometry();
+
+ geometry.setAttribute(
+  "position",
+  new THREE.Float32BufferAttribute([
+   x,-4.98,-gridSize/2,
+   x,-4.98, gridSize/2
+  ],3)
+ );
+
+ const colorIndex=Math.floor(Math.random()*neonColors.length);
+
+ glowGridGroup.add(
+  new THREE.Line(
+   geometry,
+   glowMaterials[colorIndex]
+  )
+ );
+}
+
+for(let i=0;i<=gridDivisions;i++){
+
+ const z=-gridSize/2+(i*gridStep);
+
+ const geometry=new THREE.BufferGeometry();
+
+ geometry.setAttribute(
+  "position",
+  new THREE.Float32BufferAttribute([
+   -gridSize/2,-4.98,z,
+    gridSize/2,-4.98,z
+  ],3)
+ );
+
+ const colorIndex=Math.floor(Math.random()*neonColors.length);
+
+ glowGridGroup.add(
+  new THREE.Line(
+   geometry,
+   glowMaterials[colorIndex]
+  )
+ );
+}
+
+scene.add(glowGridGroup);
+
+/* =========================================================
+   TOWERS
+   ========================================================= */
+
 const towersGroup=new THREE.Group();
+
 const towerGeo=new THREE.BoxGeometry(4,25,4);
 
 for(let i=0;i<80;i++){
- const colorHex=neonColors[Math.floor(Math.random()*neonColors.length)];
- const tower=new THREE.Mesh(towerGeo,new THREE.MeshBasicMaterial({color:colorHex,wireframe:true}));
+
+ const colorHex=
+  neonColors[Math.floor(Math.random()*neonColors.length)];
+
+ const tower=new THREE.Mesh(
+  towerGeo,
+  new THREE.MeshBasicMaterial({
+   color:colorHex,
+   wireframe:true,
+   transparent:true,
+   opacity:.65
+  })
+ );
+
  const x=(Math.random()-.5)*200;
  const z=(Math.random()-.5)*300-50;
  const h=Math.random()*35+10;
+
  tower.scale.set(1,h/25,1);
  tower.position.set(x,h/2-5,z);
+
  towersGroup.add(tower);
 }
+
 scene.add(towersGroup);
 
-/* Particles */
-const particlesGeo=new THREE.BufferGeometry();
-const particleCount=400;
-const posArray=new Float32Array(particleCount*3);
+/* =========================================================
+   MULTI-COLOR PARTICLES / DOTS
+   =========================================================
+   Instead of one PointsMaterial, each color gets its own
+   particle system. This allows the dots to actually mix
+   cyan, lavender, and green.
+   ========================================================= */
 
-for(let i=0;i<particleCount*3;i++)posArray[i]=(Math.random()-.5)*250;
+const particleCount=140;
 
-particlesGeo.setAttribute("position",new THREE.BufferAttribute(posArray,3));
+const particleGroups=[];
 
-const particlesMesh=new THREE.Points(
- particlesGeo,
- new THREE.PointsMaterial({
-  size:.8,
-  color:0x00E5FF,
-  transparent:true,
-  opacity:.7
- })
-);
+neonColors.forEach((color,colorIndex)=>{
 
-scene.add(particlesMesh);
+ const particlesGeo=new THREE.BufferGeometry();
 
-/* Mouse */
-let mouseX=0,mouseY=0;
+ const posArray=new Float32Array(particleCount*3);
 
-window.addEventListener("mousemove",e=>{
- mouseX=e.clientX/window.innerWidth*2-1;
- mouseY=-(e.clientY/window.innerHeight)*2+1;
+ for(let i=0;i<particleCount*3;i++){
+  posArray[i]=(Math.random()-.5)*250;
+ }
+
+ particlesGeo.setAttribute(
+  "position",
+  new THREE.BufferAttribute(posArray,3)
+ );
+
+ const particlesMesh=new THREE.Points(
+  particlesGeo,
+  new THREE.PointsMaterial({
+   size:.8,
+   color:color,
+   transparent:true,
+   opacity:.65,
+   depthWrite:false
+  })
+ );
+
+ particlesMesh.userData.colorIndex=colorIndex;
+
+ scene.add(particlesMesh);
+ particleGroups.push(particlesMesh);
+
 });
 
-/* Scroll */
+/* =========================================================
+   MOUSE / POINTER INTERACTION
+   ========================================================= */
+
+let mouseX=0;
+let mouseY=0;
+
+window.addEventListener("mousemove",e=>{
+
+ mouseX=e.clientX/window.innerWidth*2-1;
+ mouseY=-(e.clientY/window.innerHeight)*2+1;
+
+});
+
+/* Touch / pointing fallback */
+
+window.addEventListener("touchmove",e=>{
+
+ if(!e.touches.length)return;
+
+ const touch=e.touches[0];
+
+ mouseX=touch.clientX/window.innerWidth*2-1;
+ mouseY=-(touch.clientY/window.innerHeight)*2+1;
+
+},{passive:true});
+
+/* =========================================================
+   MOBILE GYROSCOPE
+   =========================================================
+   Uses DeviceOrientation when available.
+   ========================================================= */
+
+let gyroX=0;
+let gyroY=0;
+let gyroEnabled=false;
+
+function handleOrientation(event){
+
+ if(event.gamma==null||event.beta==null)return;
+
+ /* gamma = left/right tilt */
+ /* beta  = front/back tilt */
+
+ gyroX=Math.max(-1,Math.min(1,event.gamma/35));
+ gyroY=Math.max(-1,Math.min(1,(event.beta-45)/35));
+
+ gyroEnabled=true;
+}
+
+/* iOS requires permission */
+
+async function enableGyro(){
+
+ if(
+  typeof DeviceOrientationEvent!=="undefined" &&
+  typeof DeviceOrientationEvent.requestPermission==="function"
+ ){
+
+  try{
+
+   const permission=
+    await DeviceOrientationEvent.requestPermission();
+
+   if(permission==="granted"){
+
+    window.addEventListener(
+     "deviceorientation",
+     handleOrientation,
+     true
+    );
+
+   }
+
+  }catch(error){
+
+   console.log("Gyro permission unavailable:",error);
+
+  }
+
+ }else{
+
+  window.addEventListener(
+   "deviceorientation",
+   handleOrientation,
+   true
+  );
+
+ }
+
+}
+
+/* Start gyro after user interaction */
+
+window.addEventListener(
+ "click",
+ enableGyro,
+ {once:true}
+);
+
+window.addEventListener(
+ "touchstart",
+ enableGyro,
+ {once:true,passive:true}
+);
+
+/* =========================================================
+   SCROLL
+   ========================================================= */
+
 let scrollProgress=0;
 
 window.addEventListener("scroll",()=>{
- const maxScroll=document.documentElement.scrollHeight-window.innerHeight;
- scrollProgress=maxScroll>0?window.scrollY/maxScroll:0;
+
+ const maxScroll=
+  document.documentElement.scrollHeight-window.innerHeight;
+
+ scrollProgress=
+  maxScroll>0
+   ?window.scrollY/maxScroll
+   :0;
+
 },{passive:true});
 
-/* Resize */
+/* =========================================================
+   RESIZE
+   ========================================================= */
+
 window.addEventListener("resize",()=>{
- camera.aspect=window.innerWidth/window.innerHeight;
+
+ camera.aspect=
+  window.innerWidth/window.innerHeight;
+
  camera.updateProjectionMatrix();
- renderer.setSize(window.innerWidth,window.innerHeight);
+
+ renderer.setSize(
+  window.innerWidth,
+  window.innerHeight
+ );
+
 });
 
-/* Animation */
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
 const clock=new THREE.Clock();
 
 function animate(){
+
  requestAnimationFrame(animate);
 
  const elapsedTime=clock.getElapsedTime();
 
- const targetCamX=mouseX*8;
- const targetCamY=15-scrollProgress*25+mouseY*4;
- const targetCamZ=50-scrollProgress*80;
- const targetLookX=mouseX*12;
- const targetLookY=-2+scrollProgress*15-mouseY*3;
+ /* -----------------------------------------------
+    Choose interaction source
+    Mouse on desktop
+    Gyro on supported mobile devices
+    ----------------------------------------------- */
 
- camera.position.x+=(targetCamX-camera.position.x)*.05;
- camera.position.y+=(targetCamY-camera.position.y)*.05;
- camera.position.z+=(targetCamZ-camera.position.z)*.05;
+ let inputX=mouseX;
+ let inputY=mouseY;
 
- camera.lookAt(targetLookX,targetLookY,camera.position.z-40);
+ if(gyroEnabled){
 
- gridHelper.position.z=elapsedTime*10%10;
- particlesMesh.rotation.y=elapsedTime*.05+mouseX*.1;
+  inputX=gyroX;
+  inputY=-gyroY;
+
+ }
+
+ /* -----------------------------------------------
+    Camera movement
+    ----------------------------------------------- */
+
+ const targetCamX=inputX*8;
+
+ const targetCamY=
+  15-
+  scrollProgress*25+
+  inputY*4;
+
+ const targetCamZ=
+  50-
+  scrollProgress*80;
+
+ const targetLookX=inputX*12;
+
+ const targetLookY=
+  -2+
+  scrollProgress*15-
+  inputY*3;
+
+ camera.position.x+=
+  (targetCamX-camera.position.x)*.05;
+
+ camera.position.y+=
+  (targetCamY-camera.position.y)*.05;
+
+ camera.position.z+=
+  (targetCamZ-camera.position.z)*.05;
+
+ camera.lookAt(
+  targetLookX,
+  targetLookY,
+  camera.position.z-40
+ );
+
+ /* -----------------------------------------------
+    Floor grid movement
+    ----------------------------------------------- */
+
+ gridGroup.position.z=
+  (elapsedTime*10)%10;
+
+ glowGridGroup.position.z=
+  (elapsedTime*10)%10;
+
+ /* -----------------------------------------------
+    Tower movement
+    ----------------------------------------------- */
+
+ towersGroup.rotation.y=
+  Math.sin(elapsedTime*.08)*.015;
+
+ /* -----------------------------------------------
+    Multi-color particle movement
+    ----------------------------------------------- */
+
+ particleGroups.forEach((particles,index)=>{
+
+  particles.rotation.y=
+   elapsedTime*.05+
+   inputX*.1+
+   index*.15;
+
+  particles.rotation.x=
+   Math.sin(elapsedTime*.1+index)*.02;
+
+ });
 
  renderer.render(scene,camera);
 }
 
 animate();
+
 </script>
 
 </body>
