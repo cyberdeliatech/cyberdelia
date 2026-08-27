@@ -13,8 +13,8 @@
 
 <!-- Canonical / Favicon -->
 <link rel="canonical" href="https://s-hard.com/">
-<link rel="icon" type="image/png" href="/content/img/s-hard_logo.png">
-<link rel="apple-touch-icon" href="/content/img/s-hard_logo.png">
+<link rel="icon" type="image/png" href="/assets/img/logo.png">
+<link rel="apple-touch-icon" href="/assets/img/logo.png">
 
 <!-- Geo SEO -->
 <meta name="geo.region" content="UY-CA">
@@ -27,14 +27,14 @@
 <meta property="og:site_name" content="S-HARD">
 <meta property="og:title" content="S-HARD | Servicio Técnico PC y Armado Gamer">
 <meta property="og:description" content="Servicio técnico, mantenimiento, reparación, upgrades y armado de PC Gamer a medida en Ciudad de la Costa, Lagomar y Canelones, Uruguay.">
-<meta property="og:image" content="https://s-hard.com/content/img/s-hard_logo.png">
+<meta property="og:image" content="https://s-hard.com/assets/img/logo.png">
 <meta property="og:image:alt" content="S-HARD - Hardware y PC Gamer">
 
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="S-HARD | Hardware y PC Gamer en Ciudad de la Costa">
 <meta name="twitter:description" content="Servicio técnico, mantenimiento, upgrades y armado de PC Gamer en Ciudad de la Costa, Canelones.">
-<meta name="twitter:image" content="https://s-hard.com/content/img/s-hard_logo.png">
+<meta name="twitter:image" content="https://s-hard.com/assets/img/logo.png">
 
 <!-- Structured Data: Local Business -->
 <script type="application/ld+json">
@@ -44,8 +44,8 @@
   "@id":"https://s-hard.com/#business",
   "name":"S-HARD",
   "url":"https://s-hard.com/",
-  "logo":"https://s-hard.com/content/img/s-hard_logo.png",
-  "image":"https://s-hard.com/content/img/s-hard_logo.png",
+  "logo":"https://s-hard.com/assets/img/logo.png",
+  "image":"https://s-hard.com/assets/img/logo.png",
   "description":"Servicio técnico de PC, mantenimiento, optimización, upgrades, hardware y armado de PC Gamer a medida en Ciudad de la Costa, Canelones, Uruguay.",
   "telephone":"+59892725376",
   "priceRange":"$$",
@@ -411,7 +411,7 @@ Contactar por WhatsApp
 <div class="relative order-1 lg:order-2 gamer-image-container">
 <div class="absolute inset-0 bg-brand-accent/10 blur-3xl rounded-full"></div>
 <div class="relative rounded-2xl overflow-hidden glass-panel aspect-square md:aspect-[4/3] lg:aspect-square">
-<img src="https://media.licdn.com/dms/image/v2/D4D22AQEu1K5jMituAg/feedshare-shrink_480/B4DaA.ph67HcAg-/0/1787757469800?e=1789603200&v=beta&t=43Jrz2mv4tYxBCSiOEa-V_xol8YKeaee5eBOMWwGKj0" alt="PC Gamer armado a medida por S-HARD en Ciudad de la Costa, Uruguay" width="800" height="800" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-80 mix-blend-lighten transition-transform duration-700 hover:scale-105">
+<img src="/assets/img/pc.jpg" alt="PC Gamer armado a medida por S-HARD en Ciudad de la Costa, Uruguay" width="800" height="800" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-80 mix-blend-lighten transition-transform duration-700 hover:scale-105">
 
 <!-- Specs -->
 <div class="absolute bottom-6 left-6 right-6 flex justify-between gap-4">
@@ -420,7 +420,7 @@ Contactar por WhatsApp
 </div>
 </div>
 </div>
-
+ 
 </div>
 </div>
 </section>
@@ -653,7 +653,7 @@ class="w-full px-8 py-4 bg-brand-accent text-brand-dark font-bold rounded-xl hov
 <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
 
 <!-- Logo -->
-<img src="/content/img/s-hard_logo.png" alt="Servicio técnico y armado de PC Gamer en Ciudad de la Costa" class="h-12 w-auto" loading="lazy">
+<img src="/assets/img/logo.png" alt="Servicio técnico y armado de PC Gamer en Ciudad de la Costa" class="h-12 w-auto" loading="lazy">
 
 <!-- Local SEO -->
 <div class="text-center md:text-left">
@@ -1048,7 +1048,7 @@ const formStatus=document.getElementById("form-status");
 
 if(
   EMAILJS_CONFIG.PUBLIC_KEY &&
-  EMAILJS_CONFIG.PUBLIC_KEY!=="YOUR_EMAILJS_PUBLIC_KEY"
+  EMAILJS_CONFIG.PUBLIC_KEY!=="mopGX_PKuDH-vuP1_"
 ){
   emailjs.init({publicKey:EMAILJS_CONFIG.PUBLIC_KEY});
 }
@@ -1057,9 +1057,9 @@ contactForm.addEventListener("submit",async event=>{
   event.preventDefault();
 
   if(
-    EMAILJS_CONFIG.PUBLIC_KEY==="YOUR_EMAILJS_PUBLIC_KEY" ||
-    EMAILJS_CONFIG.SERVICE_ID==="YOUR_EMAILJS_SERVICE_ID" ||
-    EMAILJS_CONFIG.TEMPLATE_ID==="YOUR_EMAILJS_TEMPLATE_ID"
+    EMAILJS_CONFIG.PUBLIC_KEY==="mopGX_PKuDH-vuP1_" ||
+    EMAILJS_CONFIG.SERVICE_ID==="service_n632qxs" ||
+    EMAILJS_CONFIG.TEMPLATE_ID==="template_oq3lhc6"
   ){
     showFormStatus(
       "error",
