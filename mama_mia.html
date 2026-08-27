@@ -37,7 +37,7 @@
 
 <!-- Custom CSS -->
 <style>
-html{scroll-behavior:smooth}body{overflow-x:hidden}.carousel-window{width:100%;overflow:hidden;position:relative}.carousel-track{display:flex;width:max-content;transform:translate3d(0,0,0);will-change:transform}.carousel-set{display:flex;gap:24px;padding:0 12px;flex-shrink:0}.carousel-card{width:288px;height:400px;flex:0 0 288px;position:relative;overflow:hidden;background:#eee;border:4px solid #fff;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.12)}.carousel-card img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s ease}.carousel-card:hover img{transform:scale(1.05)}address{font-style:normal}@media(min-width:640px){.carousel-set{padding:0 16px}.carousel-card{width:320px;height:430px;flex-basis:320px}}@media(min-width:1024px){.carousel-set{padding:0 20px}.carousel-card{width:384px;height:450px;flex-basis:384px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html{scroll-behavior:smooth}body{overflow-x:hidden}address{font-style:normal}.carousel-window{width:100%;overflow:hidden;position:relative}.carousel-track{display:flex;width:max-content;transform:translate3d(0,0,0);will-change:transform}.carousel-set{display:flex;gap:24px;padding:0 12px;flex-shrink:0}.carousel-card{width:288px;height:400px;flex:0 0 288px;position:relative;overflow:hidden;background:#eee;border:4px solid #fff;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.12)}.carousel-card img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s ease}.carousel-card:hover img{transform:scale(1.05)}#merch-modal{transition:opacity .25s ease}#merch-modal.hidden{opacity:0;pointer-events:none}#merch-modal:not(.hidden){opacity:1}#merch-modal>div{animation:merchPopup .25s ease-out}@keyframes merchPopup{from{opacity:0;transform:scale(.92) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}@media(min-width:640px){.carousel-set{padding:0 16px}.carousel-card{width:320px;height:430px;flex-basis:320px}}@media(min-width:1024px){.carousel-set{padding:0 20px}.carousel-card{width:384px;height:450px;flex-basis:384px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}#merch-modal>div{animation:none}}
 </style>
 </head>
 
@@ -52,7 +52,7 @@ html{scroll-behavior:smooth}body{overflow-x:hidden}.carousel-window{width:100%;o
 <div class="flex justify-between items-center min-h-20">
 <a href="#top" aria-label="Mama Mia Pizza home"><img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/blob-f582726.png/:/rs=w:207,h:200,cg:true,m/cr=w:207,h:200/qt=q:95" alt="Mama Mia Pizza logo" width="207" height="200" class="h-16 sm:h-20 w-auto object-contain"></a>
 <nav class="hidden md:flex items-center gap-8">
-<a href="mama_mia_menu.html" class="text-gray-600 hover:text-brand-red font-medium">Menu</a>
+<a href="#menu" class="text-gray-600 hover:text-brand-red font-medium">Menu</a>
 <a href="#location" class="text-gray-600 hover:text-brand-red font-medium">Location & Hours</a>
 <a href="#merch" class="text-gray-600 hover:text-brand-red font-medium">Merch</a>
 <a href="https://mama-mia-davie.cloveronline.com/menu/all" target="_blank" rel="noopener" class="bg-brand-red text-white px-6 py-2.5 rounded-full font-bold shadow-lg hover:bg-red-700 transition"><i class="fa-solid fa-pizza-slice mr-2"></i>Order Now</a>
@@ -64,7 +64,7 @@ html{scroll-behavior:smooth}body{overflow-x:hidden}.carousel-window{width:100%;o
 <!-- Mobile Navigation -->
 <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute left-0 w-full shadow-lg">
 <div class="px-4 pt-2 pb-6 space-y-2 text-center">
-<a href="mama_mia_menu.html" class="block px-3 py-3 mobile-link">Menu</a>
+<a href="#menu" class="block px-3 py-3 mobile-link">Menu</a>
 <a href="#location" class="block px-3 py-3 mobile-link">Location & Hours</a>
 <a href="#merch" class="block px-3 py-3 mobile-link">Merch</a>
 <a href="https://mama-mia-davie.cloveronline.com/menu/all" target="_blank" rel="noopener" class="block bg-brand-red text-white px-5 py-3 rounded-md font-bold mt-4">Order Now</a>
@@ -86,7 +86,7 @@ html{scroll-behavior:smooth}body{overflow-x:hidden}.carousel-window{width:100%;o
 <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-lg font-light leading-relaxed">Hand-tossed dough, rich tomato sauce, fresh mozzarella and quality ingredients. Enjoy authentic pizza and Italian favorites made fresh in Davie, Florida.</p>
 <div class="flex flex-col sm:flex-row gap-4">
 <a href="https://mama-mia-davie.cloveronline.com/menu/all" target="_blank" rel="noopener" class="text-center bg-brand-red text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:bg-red-700 transition">Order Pickup / Delivery</a>
-<a href="mama_mia_menu.html" class="text-center bg-white/10 backdrop-blur-sm border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-brand-dark transition">View Menu</a>
+<a href="#menu" class="text-center bg-white/10 backdrop-blur-sm border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-brand-dark transition">View Menu</a>
 </div>
 </div>
 </div>
@@ -118,33 +118,22 @@ html{scroll-behavior:smooth}body{overflow-x:hidden}.carousel-window{width:100%;o
 <div class="carousel-track" id="carousel-track">
 
 <div class="carousel-set" id="carousel-set-1">
-
 <div class="carousel-card"><img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4349.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1207" alt="Fresh pizza at Mama Mia Pizza in Davie Florida" width="1160" height="1207" fetchpriority="high" decoding="async"></div>
-
 <div class="carousel-card"><img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4347.jpg/:/rs=w:1160,h:1382" alt="Italian pizza served at Mama Mia Pizza in Davie Florida" width="1160" height="1382" loading="lazy" decoding="async"></div>
-
 <div class="carousel-card"><img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4353.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1251" alt="Freshly baked pizza from Mama Mia Pizza in Davie" width="1160" height="1251" loading="lazy" decoding="async"></div>
-
 <div class="carousel-card"><img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4348.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1319" alt="Mama Mia Pizza Italian food in Davie Florida" width="1160" height="1319" loading="lazy" decoding="async"></div>
-
 <div class="carousel-card"><img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4352.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1280" alt="Pizza made fresh at Mama Mia Pizza in Davie Florida" width="1160" height="1280" loading="lazy" decoding="async"></div>
-
 </div>
 
 <!-- Duplicate Set For Infinite Loop -->
 <div class="carousel-set" aria-hidden="true">
-
 <div class="carousel-card"><img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4349.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1207" alt="" width="1160" height="1207" loading="lazy" decoding="async"></div>
-
 <div class="carousel-card"><img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4347.jpg/:/rs=w:1160,h:1382" alt="" width="1160" height="1382" loading="lazy" decoding="async"></div>
-
 <div class="carousel-card"><img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4353.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1251" alt="" width="1160" height="1251" loading="lazy" decoding="async"></div>
-
 <div class="carousel-card"><img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4348.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1319" alt="" width="1160" height="1319" loading="lazy" decoding="async"></div>
-
 <div class="carousel-card"><img src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/IMG_4352.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1160,h:1280" alt="" width="1160" height="1280" loading="lazy" decoding="async"></div>
-
 </div>
+
 </div>
 </div>
 
@@ -167,7 +156,9 @@ html{scroll-behavior:smooth}body{overflow-x:hidden}.carousel-window{width:100%;o
 <h2 class="font-heading text-3xl md:text-4xl font-bold mb-4">Rep Mama Mia Pizza!</h2>
 <p class="text-red-100 text-lg">Check out our exclusive merch shop. Grab a t-shirt or hoodie and show your love for Mama Mia Pizza.</p>
 </div>
-<div><a href="#" class="inline-block bg-white text-brand-red px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:bg-gray-100 transition"><i class="fa-solid fa-shirt mr-2"></i>Shop Merch</a></div>
+<div>
+<button id="merch-btn" type="button" class="inline-block bg-white text-brand-red px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:bg-gray-100 transition"><i class="fa-solid fa-shirt mr-2"></i>Shop Merch</button>
+</div>
 </div>
 </section>
 
@@ -184,7 +175,6 @@ html{scroll-behavior:smooth}body{overflow-x:hidden}.carousel-window{width:100%;o
 <!-- Location Information -->
 <div class="lg:w-1/2 p-8 sm:p-10 md:p-14 flex flex-col justify-center">
 <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-8 border-b-2 border-brand-red pb-4 inline-block self-start">Visit Us</h2>
-
 <div class="space-y-6">
 
 <!-- Address -->
@@ -246,7 +236,7 @@ html{scroll-behavior:smooth}body{overflow-x:hidden}.carousel-window{width:100%;o
 <h3 class="text-white font-bold text-lg mb-4 font-heading tracking-wide uppercase">Quick Links</h3>
 <ul class="space-y-2">
 <li><a href="#top" class="hover:text-white">Home</a></li>
-<li><a href="mama_mia_menu.html" class="hover:text-white">Full Menu</a></li>
+<li><a href="menu.html" class="hover:text-white">Full Menu</a></li>
 <li><a href="https://mama-mia-davie.cloveronline.com/menu/all" target="_blank" rel="noopener" class="hover:text-white">Order Online</a></li>
 <li><a href="#merch" class="hover:text-white">Merch Shop</a></li>
 </ul>
@@ -262,19 +252,38 @@ html{scroll-behavior:smooth}body{overflow-x:hidden}.carousel-window{width:100%;o
 </div>
 </footer>
 
+<!-- Merch Coming Soon Popup -->
+<div id="merch-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4" role="dialog" aria-modal="true" aria-labelledby="merch-modal-title">
+<div class="relative w-full max-w-md bg-brand-red text-white rounded-2xl shadow-2xl p-8 text-center">
+
+<!-- Close Button -->
+<button id="merch-close" type="button" aria-label="Close notification" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-xl transition"><i class="fa-solid fa-xmark"></i></button>
+
+<!-- Shirt Icon -->
+<div class="w-20 h-20 mx-auto mb-6 rounded-full bg-white text-brand-red flex items-center justify-center"><i class="fa-solid fa-shirt text-3xl"></i></div>
+
+<h2 id="merch-modal-title" class="font-heading text-4xl font-bold mb-3">Coming Soon...</h2>
+
+<p class="text-red-100 text-lg mb-7">Our Mama Mia Pizza merch shop is on the way! Check back soon for shirts, hoodies, and more.</p>
+
+<!-- Close Popup -->
+<button id="merch-close-btn" type="button" class="bg-white text-brand-red px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition">Got It!</button>
+
+</div>
+</div>
+
 <!-- JavaScript -->
 <script>
 document.addEventListener('DOMContentLoaded',function(){
-const btn=document.getElementById('mobile-menu-btn'),menu=document.getElementById('mobile-menu'),icon=btn.querySelector('i');
 
-<!-- Mobile Menu -->
+// Mobile Menu
+const btn=document.getElementById('mobile-menu-btn'),menu=document.getElementById('mobile-menu'),icon=btn.querySelector('i');
 btn.addEventListener('click',function(){
 const hidden=menu.classList.toggle('hidden');
 btn.setAttribute('aria-expanded',String(!hidden));
 icon.classList.toggle('fa-bars',hidden);
 icon.classList.toggle('fa-xmark',!hidden);
 });
-
 document.querySelectorAll('.mobile-link').forEach(function(link){
 link.addEventListener('click',function(){
 menu.classList.add('hidden');
@@ -284,7 +293,7 @@ icon.classList.add('fa-bars');
 });
 });
 
-<!-- Smooth Scrolling -->
+// Smooth Scrolling
 document.querySelectorAll('a[href^="#"]').forEach(function(link){
 link.addEventListener('click',function(e){
 const id=this.getAttribute('href');
@@ -298,26 +307,22 @@ window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-offset,be
 });
 });
 
-<!-- Pizza Carousel -->
+// Pizza Carousel
 const carousel=document.getElementById('pizza-carousel');
 const track=document.getElementById('carousel-track');
 const firstSet=document.getElementById('carousel-set-1');
 let position=0,setWidth=0,lastTime=0,paused=false,speed=45;
-
 function measure(){setWidth=firstSet.getBoundingClientRect().width}
 measure();
-
 window.addEventListener('load',measure);
 window.addEventListener('resize',function(){
 clearTimeout(window.carouselResize);
 window.carouselResize=setTimeout(measure,150);
 });
-
 carousel.addEventListener('mouseenter',function(){paused=true});
 carousel.addEventListener('mouseleave',function(){paused=false;lastTime=performance.now()});
 carousel.addEventListener('touchstart',function(){paused=true},{passive:true});
 carousel.addEventListener('touchend',function(){paused=false;lastTime=performance.now()},{passive:true});
-
 function animate(time){
 if(!lastTime)lastTime=time;
 const delta=(time-lastTime)/1000;
@@ -330,6 +335,37 @@ track.style.transform='translate3d('+(-position)+'px,0,0)';
 requestAnimationFrame(animate);
 }
 requestAnimationFrame(animate);
+
+// Merch Coming Soon Popup
+const merchBtn=document.getElementById('merch-btn');
+const merchModal=document.getElementById('merch-modal');
+const merchClose=document.getElementById('merch-close');
+const merchCloseBtn=document.getElementById('merch-close-btn');
+
+function openMerchModal(){
+merchModal.classList.remove('hidden');
+document.body.classList.add('overflow-hidden');
+merchCloseBtn.focus();
+}
+
+function closeMerchModal(){
+merchModal.classList.add('hidden');
+document.body.classList.remove('overflow-hidden');
+merchBtn.focus();
+}
+
+merchBtn.addEventListener('click',openMerchModal);
+merchClose.addEventListener('click',closeMerchModal);
+merchCloseBtn.addEventListener('click',closeMerchModal);
+
+merchModal.addEventListener('click',function(e){
+if(e.target===merchModal)closeMerchModal();
+});
+
+document.addEventListener('keydown',function(e){
+if(e.key==='Escape'&&!merchModal.classList.contains('hidden'))closeMerchModal();
+});
+
 });
 </script>
 
