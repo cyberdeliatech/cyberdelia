@@ -1,2 +1,2 @@
-# cyberdelia
-demo sites
+# Cyberdelia Technologies 
+web sites
