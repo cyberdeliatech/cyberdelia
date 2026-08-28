@@ -1,1 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Giraldita | Montevideo's Premier Cuban-Spanish Lounge</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Experience authentic Cuban cuisine, late-night cocktails, and live entertainment at La Giraldita. Book your table tonight.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0a0a0a',
+                            darker: '#050505',
+                            gold: '#C41E3A',
+                            goldHover: '#A71930',
+                            red: '#E11D48',
+                        }
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80')",
+                    }
+                }
+            }
+        }
+    </script>
 
+    <style>
+        /* Custom Styles for Glassmorphism and Animations */
+        body {
+            background-color: #050505;
+            color: #ffffff;
+        }
+        
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.3); /* Gold tint on hover */
+            box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.15);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-glow {
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-glow:hover {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+            transform: scale(1.02);
+        }
+
+        /* Image hover zoom effect */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom {
+            transition: transform 0.7s ease;
+        }
+        .img-zoom-container:hover .img-zoom {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="antialiased font-sans text-gray-200">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="font-serif text-2xl md:text-3xl font-bold text-white tracking-wider flex items-center gap-3">
+                        <img src="https://github.com/naiff25/cyberdelia/blob/main/content/img/lg_logo.png?raw=true" alt="La Giraldita Logo" class="h-16 md:h-20 w-auto object-contain drop-shadow-lg">
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#experience" class="text-sm font-medium text-gray-300 hover:text-brand-gold transition-colors uppercase tracking-widest">The Vibe</a>
+                    <a href="./demo_menu.html" class="text-sm font-medium text-gray-300 hover:text-brand-gold transition-colors uppercase tracking-widest">Menu</a>
+                    <a href="#location" class="text-sm font-medium text-gray-300 hover:text-brand-gold transition-colors uppercase tracking-widest">Location</a>
+                    <!-- Direct link to Meitre reservation -->
+                    <a href="https://lagiraldita.meitre.com/select-diners" target="_blank" rel="noopener noreferrer" class="bg-brand-gold text-brand-darker px-6 py-2.5 rounded-sm font-semibold uppercase tracking-wide text-sm btn-glow hover:bg-brand-goldHover">
+                        Secure Your Table
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark border-b border-gray-800">
+            <div class="px-4 pt-2 pb-6 space-y-2 text-center">
+                <a href="#experience" class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-brand-gold hover:bg-gray-900 rounded-md">The Vibe</a>
+                <a href="./demo_menu.html" class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-brand-gold hover:bg-gray-900 rounded-md">Menu</a>
+                <a href="#location" class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-brand-gold hover:bg-gray-900 rounded-md">Location</a>
+                <a href="https://lagiraldita.meitre.com/select-diners" target="_blank" rel="noopener noreferrer" class="block w-full mt-4 bg-brand-gold text-brand-darker px-6 py-3 rounded-sm font-semibold uppercase tracking-wide text-sm">
+                    Secure Your Table
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative h-screen min-h-[600px] flex items-center justify-center">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-hero-pattern bg-cover bg-center bg-no-repeat transform scale-105"></div>
+            <!-- Gradient Overlays for readability and mood -->
+            <div class="absolute inset-0 bg-black/60"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-darker via-black/40 to-transparent"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 w-full max-w-4xl mx-auto mt-16">
+            <span class="block text-brand-gold font-medium tracking-[0.2em] uppercase text-sm md:text-base mb-4 drop-shadow-lg">
+                Montevideo's Authentic Spanish-Cuban Lounge
+            </span>
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight text-glow">
+                Taste the Tradition.<br>Feel the Rhythm.
+            </h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+                From the perfect morning cafecito at our Ventanita to late-night mojitos and live weekend music. You need to be here tonight.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://lagiraldita.meitre.com/select-diners" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-brand-gold text-brand-darker px-8 py-4 rounded-sm font-bold uppercase tracking-widest text-sm btn-glow hover:bg-brand-goldHover text-center transition-colors">
+                    Join Us Tonight
+                </a>
+                <a href="#experience" class="w-full sm:w-auto bg-transparent border border-white text-white px-8 py-4 rounded-sm font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-brand-darker text-center transition-all">
+                    Explore the Vibe
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+            <a href="#experience" class="text-white/50 hover:text-brand-gold transition-colors">
+                <i class="fa-solid fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Experience Section (The 3 Pillars) -->
+    <section id="experience" class="py-24 bg-brand-darker relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="font-serif text-3xl md:text-5xl font-bold text-white mb-4">More Than A Menu</h2>
+                <p class="text-gray-400 text-lg">We are a neighborhood staple that transforms from a morning coffee ritual into an electrifying nighttime destination.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Pillar 1: The Ventanita -->
+                <div class="glass-card rounded-lg overflow-hidden group">
+                    <div class="h-64 img-zoom-container relative">
+                        <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=800&q=80" alt="Cuban Coffee" class="w-full h-full object-cover img-zoom">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-darker to-transparent opacity-80"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="font-serif text-2xl text-white font-bold">La Ventanita</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-400 mb-4 leading-relaxed">The neighborhood morning hook. Start your day with Montevideo's best freshly pulled cafecito and warm, flaky pastelitos right at our window.</p>
+                        <span class="text-brand-gold text-sm font-semibold uppercase tracking-wider group-hover:text-white transition-colors">Morning Ritual <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                    </div>
+                </div>
+
+                <!-- Pillar 2: The Dining Room -->
+                <div class="glass-card rounded-lg overflow-hidden group">
+                    <div class="h-64 img-zoom-container relative">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" alt="Tapas and Dining" class="w-full h-full object-cover img-zoom">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-darker to-transparent opacity-80"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="font-serif text-2xl text-white font-bold">The Dining Room</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-400 mb-4 leading-relaxed">Transition into the evening with our authentic tapas and premium cuts. Perfect for intimate dinners or sharing bold flavors with a vibrant group.</p>
+                        <span class="text-brand-gold text-sm font-semibold uppercase tracking-wider group-hover:text-white transition-colors">Taste the Tradition <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                    </div>
+                </div>
+
+                <!-- Pillar 3: Late Night Rhythm -->
+                <div class="glass-card rounded-lg overflow-hidden group">
+                    <div class="h-64 img-zoom-container relative">
+                        <img src="https://images.unsplash.com/photo-1516997121675-4c2d1684aa3e?auto=format&fit=crop&w=800&q=80" alt="Late Night Cocktails" class="w-full h-full object-cover img-zoom">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-darker to-transparent opacity-80"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="font-serif text-2xl text-white font-bold">Late Night Rhythm</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-400 mb-4 leading-relaxed">When the lights dim, the lounge comes alive. Enjoy expertly crafted mojitos, premium rums, and live weekend entertainment that keeps the energy high.</p>
+                        <span class="text-brand-gold text-sm font-semibold uppercase tracking-wider group-hover:text-white transition-colors">Feel the Vibe <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Highlight / Call to Action -->
+    <section id="menu" class="py-24 relative overflow-hidden">
+        <!-- Background element for depth -->
+        <div class="absolute top-0 right-0 -mr-40 -mt-40 w-96 h-96 rounded-full bg-brand-gold opacity-5 blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 -ml-40 -mb-40 w-96 h-96 rounded-full bg-brand-red opacity-5 blur-[100px] pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2">
+                    <div class="relative rounded-lg overflow-hidden shadow-2xl border border-gray-800">
+                        <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format&fit=crop&w=1000&q=80" alt="Cuban Dish" class="w-full h-auto object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-darker/80 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6">
+                            <p class="font-serif italic text-xl text-white">"The flavors of Havana, the energy of Montevideo."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 space-y-8">
+                    <div>
+                        <span class="text-brand-gold tracking-[0.15em] uppercase text-sm font-bold">Culinary Experience</span>
+                        <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mt-2 mb-6">Authentic Flavors. Modern Delivery.</h2>
+                        <p class="text-gray-400 text-lg leading-relaxed">
+                            Our kitchen blends traditional Spanish and Cuban heritage with premium ingredients. From golden, melt-in-your-mouth croquetas to perfectly seared meats and vibrant seafood dishes, every plate is designed to be shared, photographed, and devoured.
+                        </p>
+                    </div>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-center text-gray-300">
+                            <i class="fa-solid fa-check text-brand-gold mr-4"></i> Signature Tapas & Shareables
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fa-solid fa-check text-brand-gold mr-4"></i> Premium Steaks & Seafood
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fa-solid fa-check text-brand-gold mr-4"></i> Decadent House-made Desserts
+                        </li>
+                    </ul>
+                    
+                    <div class="pt-4">
+                        <a href="https://lagiraldita.meitre.com/select-diners" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-transparent border border-brand-gold text-brand-gold px-8 py-3 rounded-sm font-bold uppercase tracking-wider hover:bg-brand-gold hover:text-brand-darker transition-all">
+                            View Menu & Reserve <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof / Instagram Grid -->
+    <section class="py-2 bg-brand-darker">
+        <div class="max-w-full mx-auto">
+            <div class="text-center mb-10 px-4">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-2">Follow The Vibe</h2>
+                <a href="https://www.instagram.com/lagiralditabar" target="_blank" class="text-brand-gold hover:text-white transition-colors">@lagiralditabar</a>
+            </div>
+            
+            <!-- Seamless Image Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-2 px-1 md:px-2">
+                <a href="https://www.instagram.com/lagiralditabar" target="_blank" class="block relative group aspect-[4/5] overflow-hidden bg-gray-900">
+                    <img src="https://images.unsplash.com/photo-1574096079513-d8259312b785?auto=format&fit=crop&w=500&q=80" alt="Social Post" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 group-hover:opacity-50">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <i class="fa-brands fa-instagram text-3xl text-white"></i>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/lagiralditabar" target="_blank" class="block relative group aspect-[4/5] overflow-hidden bg-gray-900">
+                    <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=500&q=80" alt="Social Post" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 group-hover:opacity-50">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <i class="fa-brands fa-instagram text-3xl text-white"></i>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/lagiralditabar" target="_blank" class="block relative group aspect-[4/5] overflow-hidden bg-gray-900">
+                    <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=500&q=80" alt="Social Post" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 group-hover:opacity-50">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <i class="fa-brands fa-instagram text-3xl text-white"></i>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/lagiralditabar" target="_blank" class="block relative group aspect-[4/5] overflow-hidden bg-gray-900">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=80" alt="Social Post" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 group-hover:opacity-50">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <i class="fa-brands fa-instagram text-3xl text-white"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+<!-- Footer / Location -->
+<footer id="location" class="bg-black pt-20 pb-10 border-t border-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+
+            <!-- Brand Column -->
+            <div class="md:col-span-4">
+                <a href="#" class="flex items-center mb-6">
+                    <img
+                        src="https://github.com/naiff25/cyberdelia/blob/main/content/img/lg_logo.png?raw=true"
+                        alt="La Giraldita Logo"
+                        class="h-16 md:h-20 w-auto max-w-full object-contain object-left drop-shadow-lg"
+                    >
+                </a>
+
+                <p class="text-gray-400 mb-6 max-w-sm">
+                    Montevideo's authentic Spanish-Cuban lounge. Join us for morning cafecitos, late-night cocktails, and weekend live entertainment.
+                </p>
+
+                <div class="flex space-x-4">
+                    <a href="https://www.instagram.com/lagiralditabar"
+                       target="_blank"
+                       class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-gray-400 hover:bg-brand-gold hover:text-black transition-all">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                    </a>
+
+                    <a href="#"
+                       class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-gray-400 hover:bg-brand-gold hover:text-black transition-all">
+                        <i class="fa-brands fa-facebook-f text-lg"></i>
+                    </a>
+                </div>
+            
+                </div>
+
+                <!-- Contact & Hours -->
+                <div class="md:col-span-4">
+                    <h4 class="font-serif text-xl font-bold text-white mb-6">Visit Us</h4>
+                    <ul class="space-y-4 mb-6">
+                        <li class="flex items-start text-gray-400">
+                            <i class="fa-solid fa-location-dot mt-1 mr-3 text-brand-gold"></i>
+                            <span>José Benito Lamas 2745<br>11300 Montevideo, Uruguay</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-solid fa-phone mr-3 text-brand-gold"></i>
+                            <a href="tel:+59899688155" class="hover:text-brand-gold transition-colors">+598 99 688 155</a>
+                        </li>
+                    </ul>
+                    <h4 class="font-serif text-lg font-bold text-white mb-3">Hours</h4>
+                    <ul class="space-y-1 text-sm text-gray-400">
+                        <li class="flex justify-between"><span>Wed - Fri:</span> <span>7:00 PM – 2:00 AM</span></li>
+                        <li class="flex justify-between"><span>Sat - Sun:</span> <span>12:00 PM – 2:00 AM</span></li>
+                        <li class="flex justify-between text-gray-600"><span>Mon - Tue:</span> <span>Closed</span></li>
+                    </ul>
+                </div>
+
+                <!-- Action Column -->
+                <div class="md:col-span-4">
+                    <h4 class="font-serif text-xl font-bold text-white mb-6">Reservations</h4>
+                    <p class="text-gray-400 mb-6">We highly recommend booking in advance for weekend dinners and live music nights.</p>
+                    <a href="https://lagiraldita.meitre.com/select-diners" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-brand-gold text-brand-darker px-6 py-3 rounded-sm font-bold uppercase tracking-wide text-sm btn-glow hover:bg-brand-goldHover transition-colors">
+                        Book on Meitre
+                    </a>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
+                <p>&copy; 2026 La Giraldita Bar. All rights reserved.</p>
+                <div class="mt-4 md:mt-0 space-x-4">
+                    <a href="#" class="hover:text-gray-300">Privacy Policy</a>
+                    <a href="#" class="hover:text-gray-300">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = mobileMenuBtn.querySelector('i');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            }
+        });
+
+        // Close mobile menu on link click
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+                navbar.style.background = 'rgba(5, 5, 5, 0.9)';
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.style.background = 'rgba(10, 10, 10, 0.7)';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | La Giraldita Montevideo</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Explore the authentic Spanish-Cuban menu at La Giraldita in Montevideo. Tapas, classic dishes, craft cocktails, and premium spirits.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0a0a0a',
+                            darker: '#050505',
+                            gold: '#C41E3A', // Keeping variable name gold for consistency but using the deep red/gold tone
+                            goldHover: '#A71930',
+                            red: '#E11D48',
+                            trueGold: '#D4AF37'
+                        }
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for Glassmorphism and Animations */
+        body {
+            background-color: #050505;
+            color: #ffffff;
+        }
+        
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.15);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-glow {
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-glow:hover {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+            transform: scale(1.02);
+        }
+
+        /* Menu Leader Dots */
+        .menu-leader {
+            border-bottom: 2px dotted rgba(255, 255, 255, 0.2);
+            flex-grow: 1;
+            margin: 0 10px;
+            position: relative;
+            top: -6px;
+        }
+
+        /* Tab Active State */
+        .tab-btn.active {
+            background-color: #C41E3A;
+            color: #050505;
+            border-color: #C41E3A;
+        }
+    </style>
+</head>
+<body class="antialiased font-sans text-gray-200">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300 shadow-lg" id="navbar" style="background: rgba(5, 5, 5, 0.9);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="font-serif text-2xl md:text-3xl font-bold text-white tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-martini-glass-citrus text-brand-gold"></i>
+                        La Giraldita
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#experience" class="text-sm font-medium text-gray-300 hover:text-brand-gold transition-colors uppercase tracking-widest">The Vibe</a>
+                    <a href="#" class="text-sm font-medium text-brand-gold uppercase tracking-widest">Menu</a>
+                    <a href="#location" class="text-sm font-medium text-gray-300 hover:text-brand-gold transition-colors uppercase tracking-widest">Location</a>
+                    <a href="https://lagiraldita.meitre.com/select-diners" target="_blank" rel="noopener noreferrer" class="bg-brand-gold text-brand-darker px-6 py-2.5 rounded-sm font-semibold uppercase tracking-wide text-sm btn-glow hover:bg-brand-goldHover">
+                        Secure Your Table
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark border-b border-gray-800">
+            <div class="px-4 pt-2 pb-6 space-y-2 text-center">
+                <a href="index.html#experience" class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-brand-gold hover:bg-gray-900 rounded-md">The Vibe</a>
+                <a href="#" class="block px-3 py-3 text-base font-medium text-brand-gold hover:bg-gray-900 rounded-md">Menu</a>
+                <a href="#location" class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-brand-gold hover:bg-gray-900 rounded-md">Location</a>
+                <a href="https://lagiraldita.meitre.com/select-diners" target="_blank" rel="noopener noreferrer" class="block w-full mt-4 bg-brand-gold text-brand-darker px-6 py-3 rounded-sm font-semibold uppercase tracking-wide text-sm">
+                    Secure Your Table
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="pt-32 pb-12 bg-brand-darker relative border-b border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h1 class="font-serif text-5xl md:text-6xl font-bold text-white mb-4 text-glow">
+                Our Offerings
+            </h1>
+            <p class="text-lg text-gray-400 font-light max-w-2xl mx-auto">
+                Discover our authentic Spanish-Cuban flavors. Perfect for sharing.
+            </p>
+        </div>
+    </div>
+
+    <!-- Menu Section -->
+    <section class="py-12 bg-brand-darker min-h-screen">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Tabs -->
+            <div class="flex justify-center mb-12 space-x-4">
+                <button onclick="switchTab('food')" id="tab-food" class="tab-btn active px-8 py-3 rounded-sm border border-brand-gold text-brand-gold font-bold uppercase tracking-wider transition-all hover:bg-brand-gold hover:text-brand-darker">
+                    <i class="fa-solid fa-utensils mr-2"></i> Comida
+                </button>
+                <button onclick="switchTab('drinks')" id="tab-drinks" class="tab-btn px-8 py-3 rounded-sm border border-brand-gold text-brand-gold font-bold uppercase tracking-wider transition-all hover:bg-brand-gold hover:text-brand-darker">
+                    <i class="fa-solid fa-martini-glass mr-2"></i> Bebidas
+                </button>
+            </div>
+
+            <!-- FOOD MENU -->
+            <div id="menu-food" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 animate-[fadeIn_0.5s_ease-out]">
+                
+                <!-- Left Column (Food) -->
+                <div class="space-y-10">
+                    
+                    <!-- PICADAS -->
+                    <div class="glass-card p-6 rounded-lg">
+                        <h2 class="font-serif text-2xl text-brand-gold border-b border-gray-800 pb-2 mb-6 uppercase tracking-wider font-bold">Picadas</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Panera</div><div class="menu-leader"></div><div class="text-brand-trueGold">$180</div></div>
+                            <div>
+                                <div class="flex items-end justify-between"><div class="text-white font-medium">Tabla Giraldita</div><div class="menu-leader"></div><div class="text-brand-trueGold">$1100</div></div>
+                                <div class="text-sm text-gray-400 mt-1">Panera, Pickles, Olivas, Frutos secos, 2 Quesos, 2 Fiambres, 2 Curadas</div>
+                            </div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Queso / Dulce / Frutos secos</div><div class="menu-leader"></div><div class="text-brand-trueGold">$250</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Frutos Secos</div><div class="menu-leader"></div><div class="text-brand-trueGold">$150</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Olivas</div><div class="menu-leader"></div><div class="text-brand-trueGold">$150</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Hummus / Pickles</div><div class="menu-leader"></div><div class="text-brand-trueGold">$200</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Vitel Toné</div><div class="menu-leader"></div><div class="text-brand-trueGold">$240</div></div>
+                            <div>
+                                <div class="flex items-end justify-between"><div class="text-white font-medium">Ensaladilla</div><div class="menu-leader"></div><div class="text-brand-trueGold">$250</div></div>
+                                <div class="text-sm text-gray-400 mt-1">Papa, huevo y mayo casera</div>
+                            </div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Lengua a la vinagreta</div><div class="menu-leader"></div><div class="text-brand-trueGold">$250</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Salpicón de pollo</div><div class="menu-leader"></div><div class="text-brand-trueGold">$250</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Croquetón</div><div class="menu-leader"></div><div class="text-brand-trueGold">$140</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Empanada</div><div class="menu-leader"></div><div class="text-brand-trueGold">$140</div></div>
+                        </div>
+                    </div>
+
+                    <!-- GUARNICIÓN -->
+                    <div class="glass-card p-6 rounded-lg">
+                        <h2 class="font-serif text-2xl text-brand-gold border-b border-gray-800 pb-2 mb-6 uppercase tracking-wider font-bold">Guarnición</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Fritas</div><div class="menu-leader"></div><div class="text-brand-trueGold">$300</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Fritas 1/2 porción</div><div class="menu-leader"></div><div class="text-brand-trueGold">$200</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Fritas a caballo</div><div class="menu-leader"></div><div class="text-brand-trueGold">$360</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Ensalada Mixta</div><div class="menu-leader"></div><div class="text-brand-trueGold">$220</div></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column (Food) -->
+                <div class="space-y-10">
+                    
+                    <!-- PLATOS -->
+                    <div class="glass-card p-6 rounded-lg">
+                        <h2 class="font-serif text-2xl text-brand-gold border-b border-gray-800 pb-2 mb-6 uppercase tracking-wider font-bold">Platos</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex items-end justify-between"><div class="text-white font-medium">Chivito Canadiense</div><div class="menu-leader"></div><div class="text-brand-trueGold">$680</div></div>
+                                <div class="text-sm text-gray-400 mt-1">Lomo, jamón, queso, panceta, tomate, lechuga, huevo duro y mayo casera con aceitunas</div>
+                            </div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Milanesa</div><div class="menu-leader"></div><div class="text-brand-trueGold">$440</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Napolitana</div><div class="menu-leader"></div><div class="text-brand-trueGold">$590</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Milanesa vegetariana</div><div class="menu-leader"></div><div class="text-brand-trueGold">$440</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Milanesa vege napolitana</div><div class="menu-leader"></div><div class="text-brand-trueGold">$590</div></div>
+                            <div>
+                                <div class="flex items-end justify-between"><div class="text-white font-medium">Hungara</div><div class="menu-leader"></div><div class="text-brand-trueGold">$220</div></div>
+                                <div class="text-sm text-gray-400 mt-1">(Del Campo)</div>
+                            </div>
+                            <div>
+                                <div class="flex items-end justify-between"><div class="text-white font-medium">Pancho</div><div class="menu-leader"></div><div class="text-brand-trueGold">$180</div></div>
+                                <div class="text-sm text-gray-400 mt-1">Con mostaza casera</div>
+                            </div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Pancho / Queso / Panceta</div><div class="menu-leader"></div><div class="text-brand-trueGold">$220</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Lehmeyun <span class="text-xs text-gray-400 font-normal ml-1">2 unidades</span></div><div class="menu-leader"></div><div class="text-brand-trueGold">$340</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Lehmeyun con muzza <span class="text-xs text-gray-400 font-normal ml-1">2 unidades</span></div><div class="menu-leader"></div><div class="text-brand-trueGold">$440</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Lehmeyun vegetariano</div><div class="menu-leader"></div><div class="text-brand-trueGold">$340</div></div>
+                        </div>
+                    </div>
+
+                    <!-- PIZZERIA -->
+                    <div class="glass-card p-6 rounded-lg">
+                        <h2 class="font-serif text-2xl text-brand-gold border-b border-gray-800 pb-2 mb-6 uppercase tracking-wider font-bold">Pizzeria</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Pizza</div><div class="menu-leader"></div><div class="text-brand-trueGold">$300</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Muzza</div><div class="menu-leader"></div><div class="text-brand-trueGold">$390</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Fugazza</div><div class="menu-leader"></div><div class="text-brand-trueGold">$360</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Faina de queso</div><div class="menu-leader"></div><div class="text-brand-trueGold">$220</div></div>
+                        </div>
+                    </div>
+
+                    <!-- POSTRES -->
+                    <div class="glass-card p-6 rounded-lg">
+                        <h2 class="font-serif text-2xl text-brand-gold border-b border-gray-800 pb-2 mb-6 uppercase tracking-wider font-bold">Postres</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Flan con ddl y crema</div><div class="menu-leader"></div><div class="text-brand-trueGold">$250</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Chaja</div><div class="menu-leader"></div><div class="text-brand-trueGold">$250</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Torta vasca</div><div class="menu-leader"></div><div class="text-brand-trueGold">$300</div></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- DRINKS MENU (Hidden by default) -->
+            <div id="menu-drinks" class="hidden grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 animate-[fadeIn_0.5s_ease-out]">
+                
+                <!-- Left Column (Drinks) -->
+                <div class="space-y-10">
+                    
+                    <!-- BEBIDAS -->
+                    <div class="glass-card p-6 rounded-lg">
+                        <h2 class="font-serif text-2xl text-brand-gold border-b border-gray-800 pb-2 mb-6 uppercase tracking-wider font-bold">Bebidas</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Agua Salus <span class="text-xs text-gray-400 font-normal ml-1">500 ml</span></div><div class="menu-leader"></div><div class="text-brand-trueGold">$150</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Limonada Vaso</div><div class="menu-leader"></div><div class="text-brand-trueGold">$150</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Limonada Jarra</div><div class="menu-leader"></div><div class="text-brand-trueGold">$400</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Refresco <span class="text-xs text-gray-400 font-normal ml-1">Linea Coca</span></div><div class="menu-leader"></div><div class="text-brand-trueGold">$160</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Coca Cola <span class="text-xs text-gray-400 font-normal ml-1">1L</span></div><div class="menu-leader"></div><div class="text-brand-trueGold">$320</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Tónica San Pellegrino</div><div class="menu-leader"></div><div class="text-brand-trueGold">$200</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Kombucha Del Mar</div><div class="menu-leader"></div><div class="text-brand-trueGold">$250</div></div>
+                        </div>
+                    </div>
+
+                    <!-- CERVEZAS -->
+                    <div class="glass-card p-6 rounded-lg">
+                        <h2 class="font-serif text-2xl text-brand-gold border-b border-gray-800 pb-2 mb-6 uppercase tracking-wider font-bold">Cervezas</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Liso Zillertal</div><div class="menu-leader"></div><div class="text-brand-trueGold">$180</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Chop Zillertal</div><div class="menu-leader"></div><div class="text-brand-trueGold">$260</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Norteña <span class="text-xs text-gray-400 font-normal ml-1">1L</span></div><div class="menu-leader"></div><div class="text-brand-trueGold">$240</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Stella Artois <span class="text-xs text-gray-400 font-normal ml-1">1L</span></div><div class="menu-leader"></div><div class="text-brand-trueGold">$410</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Corona <span class="text-xs text-gray-400 font-normal ml-1">330 ml</span></div><div class="menu-leader"></div><div class="text-brand-trueGold">$200</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Stella Artois <span class="text-xs text-gray-400 font-normal ml-1">Sin alcohol</span></div><div class="menu-leader"></div><div class="text-brand-trueGold">$200</div></div>
+                        </div>
+                    </div>
+
+                    <!-- VERMÚ -->
+                    <div class="glass-card p-6 rounded-lg">
+                        <h2 class="font-serif text-2xl text-brand-gold border-b border-gray-800 pb-2 mb-6 uppercase tracking-wider font-bold">Vermú</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex items-end justify-between"><div class="text-white font-medium">Oyama</div><div class="menu-leader"></div><div class="text-brand-trueGold">$180</div></div>
+                                <div class="text-xs text-gray-400 mt-1">Rosso o bianco</div>
+                            </div>
+                            <div>
+                                <div class="flex items-end justify-between"><div class="text-white font-medium">Rooster</div><div class="menu-leader"></div><div class="text-brand-trueGold">$250</div></div>
+                                <div class="text-xs text-gray-400 mt-1">Rosso, bianco, rosado o tinto</div>
+                            </div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Carpano Rosso</div><div class="menu-leader"></div><div class="text-brand-trueGold">$230</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Martini Rubino</div><div class="menu-leader"></div><div class="text-brand-trueGold">$300</div></div>
+                        </div>
+                    </div>
+
+                    <!-- GIN TONICS -->
+                    <div class="glass-card p-6 rounded-lg">
+                        <h2 class="font-serif text-2xl text-brand-gold border-b border-gray-800 pb-2 mb-6 uppercase tracking-wider font-bold">Gin Tonics</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Gordons</div><div class="menu-leader"></div><div class="text-brand-trueGold">$220</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">MG</div><div class="menu-leader"></div><div class="text-brand-trueGold">$270</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Bombay</div><div class="menu-leader"></div><div class="text-brand-trueGold">$320</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Tanqueray</div><div class="menu-leader"></div><div class="text-brand-trueGold">$340</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Nordés</div><div class="menu-leader"></div><div class="text-brand-trueGold">$400</div></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column (Drinks) -->
+                <div class="space-y-10">
+                    
+                    <!-- COMBINADOS CLÁSICOS -->
+                    <div class="glass-card p-6 rounded-lg">
+                        <h2 class="font-serif text-2xl text-brand-gold border-b border-gray-800 pb-2 mb-6 uppercase tracking-wider font-bold">Combinados Clásicos</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Fernet 1882</div><div class="menu-leader"></div><div class="text-brand-trueGold">$160</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Fernet Branca</div><div class="menu-leader"></div><div class="text-brand-trueGold">$240</div></div>
+                            <div>
+                                <div class="flex items-end justify-between"><div class="text-white font-medium">Mesa Fernet / Coca</div><div class="menu-leader"></div><div class="text-brand-trueGold">$1900</div></div>
+                                <div class="text-xs text-gray-400 mt-1">1 Branca / 1lt coca / 1 balde hielo</div>
+                            </div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Balde de hielo</div><div class="menu-leader"></div><div class="text-brand-trueGold">$100</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Ron cola Bacardí</div><div class="menu-leader"></div><div class="text-brand-trueGold">$280</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Whiskola</div><div class="menu-leader"></div><div class="text-brand-trueGold">$250</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Vodka naranja / tónica</div><div class="menu-leader"></div><div class="text-brand-trueGold">$250</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Campari naranja / tónica</div><div class="menu-leader"></div><div class="text-brand-trueGold">$310</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Livenza spritz</div><div class="menu-leader"></div><div class="text-brand-trueGold">$270</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Istra spritz</div><div class="menu-leader"></div><div class="text-brand-trueGold">$315</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Americano</div><div class="menu-leader"></div><div class="text-brand-trueGold">$290</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Old fashioned</div><div class="menu-leader"></div><div class="text-brand-trueGold">$350</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Negroni</div><div class="menu-leader"></div><div class="text-brand-trueGold">$350</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Boulevardier</div><div class="menu-leader"></div><div class="text-brand-trueGold">$350</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Mojito</div><div class="menu-leader"></div><div class="text-brand-trueGold">$350</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Tom Collins</div><div class="menu-leader"></div><div class="text-brand-trueGold">$280</div></div>
+                        </div>
+                    </div>
+
+                    <!-- ESPIRITUOSAS -->
+                    <div class="glass-card p-6 rounded-lg">
+                        <h2 class="font-serif text-2xl text-brand-gold border-b border-gray-800 pb-2 mb-6 uppercase tracking-wider font-bold">Espirituosas</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Jagermeister</div><div class="menu-leader"></div><div class="text-brand-trueGold">$300</div></div>
+                            <div>
+                                <div class="flex items-end justify-between"><div class="text-white font-medium">Tequila Sierra</div><div class="menu-leader"></div><div class="text-brand-trueGold">$180</div></div>
+                                <div class="text-xs text-gray-400 mt-1">Blanco o dorado</div>
+                            </div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Tequila Luna Azul</div><div class="menu-leader"></div><div class="text-brand-trueGold">$300</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Mezcal Le Tribute</div><div class="menu-leader"></div><div class="text-brand-trueGold">$450</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Grapa miel Maldón</div><div class="menu-leader"></div><div class="text-brand-trueGold">$200</div></div>
+                            <div class="text-xs text-gray-500 italic mt-2 mb-1">Clásica o especiada</div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Ron miel</div><div class="menu-leader"></div><div class="text-brand-trueGold">$250</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Grappa Valleviejo</div><div class="menu-leader"></div><div class="text-brand-trueGold">$180</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Brandy Centenario</div><div class="menu-leader"></div><div class="text-brand-trueGold">$450</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Ron Bacardí Añejo</div><div class="menu-leader"></div><div class="text-brand-trueGold">$350</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Ron Diplomático Mantuano</div><div class="menu-leader"></div><div class="text-brand-trueGold">$390</div></div>
+                            <div class="flex items-end justify-between"><div class="text-white font-medium">Etxeko pacharan</div><div class="menu-leader"></div><div class="text-brand-trueGold">$390</div></div>
+                        </div>
+                    </div>
+
+                    <!-- WHISKYS -->
+                    <div class="glass-card p-6 rounded-lg">
+                        <h2 class="font-serif text-2xl text-brand-gold border-b border-gray-800 pb-2 mb-6 uppercase tracking-wider font-bold">Whiskys</h2>
+                        
+                        <h3 class="text-md text-white font-semibold mb-3">Blended</h3>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-end justify-between"><div class="text-gray-300">Cattos</div><div class="menu-leader"></div><div class="text-brand-trueGold">$170</div></div>
+                            <div class="flex items-end justify-between"><div class="text-gray-300">Jameson</div><div class="menu-leader"></div><div class="text-brand-trueGold">$220</div></div>
+                            <div class="flex items-end justify-between"><div class="text-gray-300">J.W. Black 12</div><div class="menu-leader"></div><div class="text-brand-trueGold">$290</div></div>
+                            <div class="flex items-end justify-between"><div class="text-gray-300">Buchanans Deluxe 12</div><div class="menu-leader"></div><div class="text-brand-trueGold">$300</div></div>
+                            <div class="flex items-end justify-between"><div class="text-gray-300">Hankey Bannister 12</div><div class="menu-leader"></div><div class="text-brand-trueGold">$320</div></div>
+                            <div class="flex items-end justify-between"><div class="text-gray-300">Akashi Blue Label</div><div class="menu-leader"></div><div class="text-brand-trueGold">$430</div></div>
+                            <div class="flex items-end justify-between"><div class="text-gray-300">West cork</div><div class="menu-leader"></div><div class="text-brand-trueGold">$450</div></div>
+                        </div>
+
+                        <h3 class="text-md text-white font-semibold mb-3">Single Malt</h3>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-end justify-between"><div class="text-gray-300">Tomatin Legacy</div><div class="menu-leader"></div><div class="text-brand-trueGold">$450</div></div>
+                            <div class="flex items-end justify-between"><div class="text-gray-300">Old Pulteney 12</div><div class="menu-leader"></div><div class="text-brand-trueGold">$450</div></div>
+                            <div class="flex items-end justify-between"><div class="text-gray-300">Ancnoc 12</div><div class="menu-leader"></div><div class="text-brand-trueGold">$500</div></div>
+                            <div class="flex items-end justify-between"><div class="text-gray-300">Jura 10</div><div class="menu-leader"></div><div class="text-brand-trueGold">$560</div></div>
+                        </div>
+
+                        <h3 class="text-md text-white font-semibold mb-3">Bourbon</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-end justify-between"><div class="text-gray-300">Evan williams</div><div class="menu-leader"></div><div class="text-brand-trueGold">$280</div></div>
+                            <div class="flex items-end justify-between"><div class="text-gray-300">Buffalo Trace</div><div class="menu-leader"></div><div class="text-brand-trueGold">$470</div></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Important Note Banner -->
+            <div class="mt-12 text-center border border-brand-gold bg-brand-gold/10 py-4 px-6 rounded-sm max-w-2xl mx-auto">
+                <p class="text-brand-gold font-bold tracking-wider uppercase text-sm md:text-base">
+                    No trabajamos con tarjeta de crédito
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer / Location -->
+    <footer id="location" class="bg-black pt-20 pb-10 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                
+                <!-- Brand Column -->
+                <div class="md:col-span-4">
+                    <a href="index.html" class="font-serif text-3xl font-bold text-white tracking-wider flex items-center gap-2 mb-6">
+                        <i class="fa-solid fa-martini-glass-citrus text-brand-gold"></i>
+                        La Giraldita
+                    </a>
+                    <p class="text-gray-400 mb-6 max-w-sm">
+                        Montevideo's authentic Spanish-Cuban lounge. Join us for morning cafecitos, late-night cocktails, and weekend live entertainment.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/lagiralditabar" target="_blank" class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-gray-400 hover:bg-brand-gold hover:text-black transition-all">
+                            <i class="fa-brands fa-instagram text-lg"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-gray-400 hover:bg-brand-gold hover:text-black transition-all">
+                            <i class="fa-brands fa-facebook-f text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact & Hours -->
+                <div class="md:col-span-4">
+                    <h4 class="font-serif text-xl font-bold text-white mb-6">Visit Us</h4>
+                    <ul class="space-y-4 mb-6">
+                        <li class="flex items-start text-gray-400">
+                            <i class="fa-solid fa-location-dot mt-1 mr-3 text-brand-gold"></i>
+                            <span>José Benito Lamas 2745<br>11300 Montevideo, Uruguay</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-solid fa-phone mr-3 text-brand-gold"></i>
+                            <a href="tel:+59899688155" class="hover:text-brand-gold transition-colors">+598 99 688 155</a>
+                        </li>
+                    </ul>
+                    <h4 class="font-serif text-lg font-bold text-white mb-3">Hours</h4>
+                    <ul class="space-y-1 text-sm text-gray-400">
+                        <li class="flex justify-between"><span>Wed - Fri:</span> <span>7:00 PM – 2:00 AM</span></li>
+                        <li class="flex justify-between"><span>Sat - Sun:</span> <span>12:00 PM – 2:00 AM</span></li>
+                        <li class="flex justify-between text-gray-600"><span>Mon - Tue:</span> <span>Closed</span></li>
+                    </ul>
+                </div>
+
+                <!-- Action Column -->
+                <div class="md:col-span-4">
+                    <h4 class="font-serif text-xl font-bold text-white mb-6">Reservations</h4>
+                    <p class="text-gray-400 mb-6">We highly recommend booking in advance for weekend dinners and live music nights.</p>
+                    <a href="https://lagiraldita.meitre.com/select-diners" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-brand-gold text-brand-darker px-6 py-3 rounded-sm font-bold uppercase tracking-wide text-sm btn-glow hover:bg-brand-goldHover transition-colors">
+                        Book on Meitre
+                    </a>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
+                <p>&copy; 2026 La Giraldita Bar. All rights reserved.</p>
+                <div class="mt-4 md:mt-0 space-x-4">
+                    <a href="#" class="hover:text-gray-300">Privacy Policy</a>
+                    <a href="#" class="hover:text-gray-300">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Menu Tab Switching Logic
+        function switchTab(tabName) {
+            const foodMenu = document.getElementById('menu-food');
+            const drinksMenu = document.getElementById('menu-drinks');
+            const foodTab = document.getElementById('tab-food');
+            const drinksTab = document.getElementById('tab-drinks');
+
+            if (tabName === 'food') {
+                foodMenu.classList.remove('hidden');
+                foodMenu.classList.add('grid');
+                drinksMenu.classList.add('hidden');
+                drinksMenu.classList.remove('grid');
+                
+                foodTab.classList.add('active', 'bg-brand-gold', 'text-brand-darker');
+                foodTab.classList.remove('text-brand-gold');
+                
+                drinksTab.classList.remove('active', 'bg-brand-gold', 'text-brand-darker');
+                drinksTab.classList.add('text-brand-gold');
+            } else {
+                drinksMenu.classList.remove('hidden');
+                drinksMenu.classList.add('grid');
+                foodMenu.classList.add('hidden');
+                foodMenu.classList.remove('grid');
+                
+                drinksTab.classList.add('active', 'bg-brand-gold', 'text-brand-darker');
+                drinksTab.classList.remove('text-brand-gold');
+                
+                foodTab.classList.remove('active', 'bg-brand-gold', 'text-brand-darker');
+                foodTab.classList.add('text-brand-gold');
+            }
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = mobileMenuBtn.querySelector('i');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            }
+        });
+
+        // Close mobile menu on link click
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+    </script>
+</body>
+</html>

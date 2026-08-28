@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | Mama Mia Pizza FL</title>
+    <meta name="description" content="View the full menu for Mama Mia Pizza FL in Davie. Authentic New York style pizza, hot and cold subs, fresh salads, and delicious appetizers.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Oswald', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            red: '#A72E1E',
+                            dark: '#1A4A28',
+                            light: '#F1FAEE',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Hide scrollbar for category nav but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        .menu-item-card:hover .item-price {
+            background-color: #A72E1E;
+            color: white;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased bg-gray-50 flex flex-col min-h-screen">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-brand-dark text-white text-sm py-2 px-4 text-center">
+        <p>Open Tuesday-Saturday 11:00 AM - 9:00 PM &nbsp;|&nbsp; Call us: <a href="tel:9544886262" class="font-bold hover:text-brand-red transition">954-488-MAMA (6262)</a></p>
+    </div>
+
+    <!-- Main Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+<div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='mama_mia.html'">
+    <img 
+        src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/blob-f582726.png/:/rs=w:207,h:200,cg:true,m/cr=w:207,h:200/qt=q:95" 
+        alt="Mama Mia Pizza"
+        class="h-20 w-auto object-contain"
+    >
+</div>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="text-gray-600 hover:text-brand-red font-medium transition duration-200">Home</a>
+                    <a href="mama_mia_menu.html" class="text-brand-red font-bold transition duration-200">Menu</a>
+                    <a href="mama_mia.html#location" class="text-gray-600 hover:text-brand-red font-medium transition duration-200">Location & Hours</a>
+                    <a href="mama_mia.html#merch" class="text-gray-600 hover:text-brand-red font-medium">Merch</a>
+                    <a href="https://mama-mia-davie.cloveronline.com/menu/all" class="bg-brand-red text-white px-6 py-2.5 rounded-full font-bold shadow-lg hover:bg-red-700 hover:shadow-xl transition duration-200 transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-pizza-slice mr-2"></i>Order Now
+                    </a>
+                </nav>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900 focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2 text-center">
+                <a href="index.html" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-red hover:bg-gray-50 rounded-md">Home</a>
+                <a href="mama_mia_menu.html" class="block px-3 py-3 text-base font-bold text-brand-red bg-gray-50 rounded-md">Menu</a>
+                <a href="mama_mia.html#location" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-red hover:bg-gray-50 rounded-md">Location & Hours</a>
+                <a href="mama_mia.html#merch" class="block px-3 py-3 mobile-link">Merch</a>
+                <a href="https://mama-mia-davie.cloveronline.com/menu/all" class="block w-full text-center bg-brand-red text-white px-5 py-3 rounded-md font-bold mt-4 shadow hover:bg-red-700">
+                    Order Now
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-gray-900 py-16 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Pizza background" class="w-full h-full object-cover">
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h1 class="font-heading text-5xl md:text-6xl font-bold text-white mb-4 tracking-wide">OUR MENU</h1>
+            <p class="text-gray-300 text-lg max-w-2xl mx-auto">Authentic recipes. Quality ingredients. Made fresh to order.</p>
+        </div>
+    </section>
+
+    <div class="bg-white border-b border-gray-200 sticky top-20 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ul class="flex space-x-6 overflow-x-auto py-4 no-scrollbar items-center">
+                <li><a href="#appetizers" class="whitespace-nowrap text-gray-600 font-bold hover:text-brand-red px-3 py-2 rounded-full hover:bg-red-50 transition">Appetizers</a></li>
+                <li><a href="#salads" class="whitespace-nowrap text-gray-600 font-bold hover:text-brand-red px-3 py-2 rounded-full hover:bg-red-50 transition">Salads</a></li>
+                <li><a href="#pizza-large" class="whitespace-nowrap text-gray-600 font-bold hover:text-brand-red px-3 py-2 rounded-full hover:bg-red-50 transition">Large Pizza</a></li>
+                <li><a href="#pizza-small" class="whitespace-nowrap text-gray-600 font-bold hover:text-brand-red px-3 py-2 rounded-full hover:bg-red-50 transition">Small Pizza</a></li>
+                <li><a href="#slices" class="whitespace-nowrap text-gray-600 font-bold hover:text-brand-red px-3 py-2 rounded-full hover:bg-red-50 transition">Slices & Calzones</a></li>
+                <li><a href="#subs" class="whitespace-nowrap text-gray-600 font-bold hover:text-brand-red px-3 py-2 rounded-full hover:bg-red-50 transition">Subs</a></li>
+                <li><a href="#wings" class="whitespace-nowrap text-gray-600 font-bold hover:text-brand-red px-3 py-2 rounded-full hover:bg-red-50 transition">Wings</a></li>
+                <li><a href="#desserts" class="whitespace-nowrap text-gray-600 font-bold hover:text-brand-red px-3 py-2 rounded-full hover:bg-red-50 transition">Desserts</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <main class="flex-grow py-12 bg-gray-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+
+            <section id="appetizers" class="scroll-mt-36">
+                <div class="flex items-center mb-8">
+                    <h2 class="font-heading text-4xl font-bold text-gray-900">Appetizers</h2>
+                    <div class="h-px bg-gray-300 flex-grow ml-6"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Item -->
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Fried Mozzarella</h3>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$9</div>
+                    </div>
+                    <!-- Item -->
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Meatballs</h3>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$9</div>
+                    </div>
+                    <!-- Item -->
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Breaded Chicken Tenders</h3>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$8</div>
+                    </div>
+                    <!-- Item -->
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Shoestring Fries</h3>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$4</div>
+                    </div>
+                    <!-- Item -->
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Plain Knots</h3>
+                            <p class="font-bold text-sm text-gray-500 mt-1">1/2 Dozen ($4) | Dozen ($8)</p>
+                        </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Garlic Knots</h3>
+                            <p class="font-bold text-sm text-gray-500 mt-1">1/2 Dozen ($4) | Dozen ($8)</p>
+                        </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Mozzarella Caprese</h3>
+                            <p class="text-sm text-gray-500 mt-1">Fresh Mozzarella, Sliced Tomatoes, Balsamic Glaze, Extra Virgin Olive Oil & Fresh Basil</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$12</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="salads" class="scroll-mt-36">
+                <div class="flex items-center mb-4">
+                    <h2 class="font-heading text-4xl font-bold text-gray-900">Salads</h2>
+                    <div class="h-px bg-gray-300 flex-grow ml-6"></div>
+                </div>
+                <div class="bg-red-50 text-brand-red text-sm font-medium py-2 px-4 rounded-lg mb-6 inline-block">
+                    <i class="fa-solid fa-circle-info mr-2"></i>Dressing Options: Creamy Italian, Bleu Cheese, Caesar, Greek, Ranch & Vinaigrette.<span class="font-bold"> Add Breaded or Grilled Chicken +$4</span>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Item -->
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">House Salad</h3>
+                            <p class="text-sm text-gray-500 mt-1">Lettuce, Tomatoes, Cucumbers, Red Onions, Carrots & Black Olives</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$10</div>
+                    </div>
+                    <!-- Item -->
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Caesar Salad</h3>
+                            <p class="text-sm text-gray-500 mt-1">Romaine Lettuce, Homemade Croutons & Pecorino Romano Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$11</div>
+                    </div>
+                    <!-- Item -->
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Gorgonzola Salad</h3>
+                            <p class="text-sm text-gray-500 mt-1">Lettuce, Tomatoes, Cucumbers, Red Onions, Carrots, Black Olives, Roasted Peppers & Gorgonzola Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$12</div>
+                    </div>
+                    <!-- Item -->
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Greek Salad</h3>
+                            <p class="text-sm text-gray-500 mt-1">Lettuce, Tomatoes, Red Onions, Cucumbers, Black Olives, Roasted Peppers & Feta Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$12</div>
+                    </div>
+                    <!-- Item -->
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">The Sicilian Salad</h3>
+                            <p class="text-sm text-gray-500 mt-1">Lettuce, Tomatoes, Cucumbers, Red Onions, Carrots, Green Olives, Roasted Peppers, Walnuts & Pecorino Romano Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$13</div>
+                    </div>
+                    <!-- Item -->
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Antipasto Salad</h3>
+                            <p class="text-sm text-gray-500 mt-1">Lettuce, Tomatoes, Cucumbers, Red Onions, Carrots, Black Olives, Ham, Salami, Soppressata & Provolone</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$13</div>
+                    </div>
+                    <!-- Item -->
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md border-brand-red/30">
+                        <div>
+                            <h3 class="font-bold text-lg text-brand-red">Mama's House Salad</h3>
+                            <p class="text-sm text-gray-500 mt-1">Lettuce, Tomatoes, Cucumbers, Red Onions, Carrots, Black Olives, Roasted Peppers, Fresh Mozzarella & Chicken (Breaded or Grilled)</p>
+                        </div>
+                        <div class="item-price bg-brand-red text-white font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$15</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pizza-large" class="scroll-mt-36">
+                <div class="flex items-center mb-4">
+                    <h2 class="font-heading text-4xl font-bold text-gray-900">Large Pizzas</h2>
+                    <div class="h-px bg-gray-300 flex-grow ml-6"></div>
+                </div>
+                <div class="bg-gray-200 text-gray-700 text-sm font-medium py-2 px-4 rounded-lg mb-6">
+                    <span class="font-bold">+$4 per Topping:</span> Chicken, Pepperoni, Sausage, Salami, Meatballs, Ham, Bacon, Anchovies, Extra Cheese, Tomatoes, Mushrooms, Peppers, Onions, Black Olives, Green Olives, Cherry Peppers, Pineapple, Fresh Mozzarella, Ricotta Cheese, Feta Cheese, Gorgonzola Cheese, Fresh Basil, Fresh Garlic, Mike's Hot Honey.
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Cheese</h3>
+                            <p class="text-sm text-gray-500 mt-1">Italian Plum Tomato Sauce & Grande Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$15</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">The Joey</h3>
+                            <p class="text-sm text-gray-500 mt-1">Italian Plum Tomato Sauce, Grande Cheese, Pepperoni, Sausage, Meatball & Ham</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$25</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md border-brand-red/30">
+                        <div>
+                            <h3 class="font-bold text-lg text-brand-red">Mama's House</h3>
+                            <p class="text-sm text-gray-500 mt-1">Italian Plum Tomato Sauce, Grande Cheese, Pepperoni, Sausage, Meatball, Mushrooms, Olives, Onions & Peppers</p>
+                        </div>
+                        <div class="item-price bg-brand-red text-white font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$28</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">The Aloha</h3>
+                            <p class="text-sm text-gray-500 mt-1">Italian Plum Tomato Sauce, Grande Cheese, Ham & Pineapple</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$21</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Primavera</h3>
+                            <p class="text-sm text-gray-500 mt-1">Italian Plum Tomato Sauce, Grande Cheese, Mushrooms, Olives, Onions, Peppers & Tomatoes</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$28</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">The Whiteout</h3>
+                            <p class="text-sm text-gray-500 mt-1">Fresh Ricotta Mix, Pecorino Romano Cheese & Grande Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$22</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Margherita</h3>
+                            <p class="text-sm text-gray-500 mt-1">Italian Plum Tomato Sauce, Grande Cheese, Pecorino Romano Cheese, Extra Virgin Olive Oil & Fresh Basil</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$26</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">The Bella</h3>
+                            <p class="text-sm text-gray-500 mt-1">Homemade Pesto, Provolone, Pecorino Romano Cheese & Extra Virgin Olive Oil</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$23</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Gio's Blazing Pepperoni</h3>
+                            <p class="text-sm text-gray-500 mt-1">Italian Plum Tomato Sauce, Grande Cheese, Pepperoni & Mike's Hot Honey</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$21</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">The Buffalo</h3>
+                            <p class="text-sm text-gray-500 mt-1">Breaded Chicken Tossed in Frank's Hot Sauce & Grande Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$26</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Nick's Chicken Parmigiana</h3>
+                            <p class="text-sm text-gray-500 mt-1">Breaded Chicken, Italian Plum Tomato Sauce, Grande Cheese & Pecorino Romano Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$25</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">The Salad Pizza</h3>
+                            <p class="text-sm text-gray-500 mt-1">Pizza Crust topped with a Chopped House Salad & Finished with Mama's Vinaigrette</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$22</div>
+                    </div>
+                    <div class="menu-item-card md:col-span-2 bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">The Nana</h3>
+                            <p class="text-sm text-gray-500 mt-1">Thin Square topped Italian Plum Tomatoes, Fresh Mozzarella, Pecorino Romano Cheese, Sauce, Extra Virgin Olive Oil & Fresh Basil</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$29</div>
+                    </div>
+                    <div class="menu-item-card md:col-span-2 bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Mama Mia Classic</h3>
+                            <p class="text-sm text-gray-500 mt-1">Only Mama Knows… We promise It's Worth The Wait! <em>*Please Allow 30 Minutes*</em></p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$25</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pizza-small" class="scroll-mt-36">
+                <div class="flex items-center mb-4">
+                    <h2 class="font-heading text-4xl font-bold text-gray-900">Small Pizzas</h2>
+                    <div class="h-px bg-gray-300 flex-grow ml-6"></div>
+                </div>
+                <div class="bg-gray-200 text-gray-700 text-sm font-medium py-2 px-4 rounded-lg mb-6">
+                    <span class="font-bold">+$2 per Topping:</span> Chicken, Pepperoni, Sausage, Salami, Meatballs, Ham, Bacon, Anchovies, Extra Cheese, Tomatoes, Mushrooms, Peppers, Onions, Black Olives, Green Olives, Cherry Peppers, Pineapple, Fresh Mozzarella, Ricotta Cheese, Feta Cheese, Gorgonzola Cheese, Fresh Basil, Fresh Garlic, Mike's Hot Honey.
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Cheese</h3>
+                            <p class="text-sm text-gray-500 mt-1">Italian Plum Tomato Sauce & Grande Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$12</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Meatball Parmigiana</h3>
+                            <p class="text-sm text-gray-500 mt-1">Italian Plum Tomato Sauce & Grande Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$12</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">The Joey</h3>
+                            <p class="text-sm text-gray-500 mt-1">Italian Plum Tomato Sauce, Grande Cheese, Pepperoni, Sausage, Meatball & Ham</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$18</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md border-brand-red/30">
+                        <div>
+                            <h3 class="font-bold text-lg text-brand-red">Mama's House</h3>
+                            <p class="text-sm text-gray-500 mt-1">Italian Plum Tomato Sauce, Grande Cheese, Pepperoni, Sausage, Meatball, Mushrooms, Olives, Onions & Peppers</p>
+                        </div>
+                        <div class="item-price bg-brand-red text-white font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$19</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">The Aloha</h3>
+                            <p class="text-sm text-gray-500 mt-1">Italian Plum Tomato Sauce, Grande Cheese, Ham & Pineapple</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$14</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Primavera</h3>
+                            <p class="text-sm text-gray-500 mt-1">Italian Plum Tomato Sauce, Grande Cheese, Mushrooms, Olives, Onions, Peppers & Tomatoes</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$19</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">The Whiteout</h3>
+                            <p class="text-sm text-gray-500 mt-1">Fresh Ricotta Mix, Pecorino Romano Cheese & Grande Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$15</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Margherita</h3>
+                            <p class="text-sm text-gray-500 mt-1">Italian Plum Tomato Sauce, Grande Cheese, Pecorino Romano Cheese, Extra Virgin Olive Oil & Fresh Basil</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$20</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">The Bella</h3>
+                            <p class="text-sm text-gray-500 mt-1">Homemade Pesto, Provolone, Pecorino Romano Cheese & Extra Virgin Olive Oil</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$16</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Gio's Blazing Pepperoni</h3>
+                            <p class="text-sm text-gray-500 mt-1">Italian Plum Tomato Sauce, Grande Cheese, Pepperoni & Mike's Hot Honey</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$15</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">The Buffalo</h3>
+                            <p class="text-sm text-gray-500 mt-1">Breaded Chicken Tossed in Frank's Hot Sauce & Grande Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$20</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Nick's Chicken Parmigiana</h3>
+                            <p class="text-sm text-gray-500 mt-1">Breaded Chicken, Italian Plum Tomato Sauce, Grande Cheese & Pecorino Romano Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$18</div>
+                    </div>
+                    <div class="menu-item-card md:col-span-2 bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">The Salad Pizza</h3>
+                            <p class="text-sm text-gray-500 mt-1">Pizza Crust topped with a Chopped House Salad & Finished with Mama's Vinaigrette</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$15</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="slices" class="scroll-mt-36">
+                <div class="flex items-center mb-8">
+                    <h2 class="font-heading text-4xl font-bold text-gray-900">Slices & Calzones</h2>
+                    <div class="h-px bg-gray-300 flex-grow ml-6"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Giant Slice</h3>
+                            <p class="text-sm text-gray-500 mt-1">Sauce & Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$3</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Pepperoni Slice</h3>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$4</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Specialty Slices</h3>
+                            <p class="text-sm text-gray-500 mt-1">Variety of Options Daily</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$6</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Calzone</h3>
+                            <p class="text-sm text-gray-500 mt-1">Ricotta, Mozzarella, Pecorino Romano & Side of Sauce. Serves 1-2.</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$10</div>
+                    </div>
+                    <div class="menu-item-card md:col-span-2 bg-white p-5 rounded-xl border border-brand-red/30 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-brand-red">Papu's Stromboli</h3>
+                            <p class="text-sm text-gray-500 mt-1">Ham, Salami, Pepperoni, Provolone, Mozzarella, Pecorino Romano Cheese & Side of Italian Plum Tomato Sauce. Serves 1-2 People</p>
+                        </div>
+                        <div class="item-price bg-brand-red text-white font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$14</div>
+                    </div>
+                </div>
+            </section>
+
+             <section id="subs" class="scroll-mt-36">
+                <div class="flex items-center mb-4">
+                    <h2 class="font-heading text-4xl font-bold text-gray-900">Round Cold Subs</h2>
+                    <div class="h-px bg-gray-300 flex-grow ml-6"></div>
+                </div>
+                <div class="bg-gray-200 text-gray-700 text-sm font-medium py-2 px-4 rounded-lg mb-6">
+                    Cold Subs Include: Mayo, Lettuce, Tomatoes & Banana Peppers. Cheese Options: American or Provolone
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">The Mama</h3>
+                            <p class="text-sm text-gray-500 mt-1">Boar's Head Ham, Turkey, Roast Beef & Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$10</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Italian</h3>
+                            <p class="text-sm text-gray-500 mt-1">Boar's Head Ham, Salami, Soppressata & Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$10</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Ham</h3>
+                            <p class="text-sm text-gray-500 mt-1">Boar's Head Ham & Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$8</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Turkey</h3>
+                            <p class="text-sm text-gray-500 mt-1">Boar's Head Turkey & Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$8</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Roast Beef</h3>
+                            <p class="text-sm text-gray-500 mt-1">Boar's Head Roast Beef & Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$8</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center mb-4">
+                    <h2 class="font-heading text-4xl font-bold text-gray-900">10" Cold Subs</h2>
+                    <div class="h-px bg-gray-300 flex-grow ml-6"></div>
+                </div>
+                <div class="bg-gray-200 text-gray-700 text-sm font-medium py-2 px-4 rounded-lg mb-6">
+                    Cold Subs Include: Mayo, Lettuce, Tomatoes & Banana Peppers. Cheese Options: American or Provolone
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">The Mama</h3>
+                            <p class="text-sm text-gray-500 mt-1">Boar's Head Ham, Turkey, Roast Beef & Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$12</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Italian</h3>
+                            <p class="text-sm text-gray-500 mt-1">Boar's Head Ham, Salami, Soppressata & Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$12</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Ham</h3>
+                            <p class="text-sm text-gray-500 mt-1">Boar's Head Ham & Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$10</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Turkey</h3>
+                            <p class="text-sm text-gray-500 mt-1">Boar's Head Turkey & Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$10</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Roast Beef</h3>
+                            <p class="text-sm text-gray-500 mt-1">Boar's Head Roast Beef & Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$10</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center mb-4">
+                    <h2 class="font-heading text-4xl font-bold text-gray-900">Hot Subs</h2>
+                    <div class="h-px bg-gray-300 flex-grow ml-6"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Meatball Parmigiana</h3>
+                            <p class="text-sm text-gray-500 mt-1">Fresh Marinara Sauce & Melted Provolone</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$12</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Chicken Philly</h3>
+                            <p class="text-sm text-gray-500 mt-1">Chicken with Mushrooms, Peppers, Onions & Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$12</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Chicken Parmigiana</h3>
+                            <p class="text-sm text-gray-500 mt-1">Breaded Chicken, Fresh Marinara Sauce & Melted Provolone</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$13</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Steak Deluxe</h3>
+                            <p class="text-sm text-gray-500 mt-1">Steak with Mushrooms, Peppers, Onions & Cheese</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$13</div>
+                    </div>
+                    <div class="menu-item-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-start transition duration-300 hover:shadow-md">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900">Buffalo Chicken</h3>
+                            <p class="text-sm text-gray-500 mt-1">Breaded Chicken, FRANK'S Hot Sauce, Provolone, Lettuce, Tomatoes</p>
+                        </div>
+                        <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg ml-4 transition duration-300">$13</div>
+                    </div>
+                </div>
+            </section>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <section id="wings" class="scroll-mt-36">
+                    <div class="flex items-center mb-6">
+                        <h2 class="font-heading text-3xl font-bold text-gray-900">Wings</h2>
+                        <div class="h-px bg-gray-300 flex-grow ml-4"></div>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Served with Celery & Choice of Bleu Cheese or Ranch. Mild, Hot or BBQ.</p>
+                    <div class="space-y-4">
+                        <div class="menu-item-card bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex justify-between items-center transition duration-300 hover:shadow-md">
+                            <h3 class="font-bold text-gray-900">10 Wings</h3>
+                            <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg">$12</div>
+                        </div>
+                        <div class="menu-item-card bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex justify-between items-center transition duration-300 hover:shadow-md">
+                            <h3 class="font-bold text-gray-900">25 Wings</h3>
+                            <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg">$25</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="desserts" class="scroll-mt-36">
+                    <div class="flex items-center mb-6">
+                        <h2 class="font-heading text-3xl font-bold text-gray-900">Desserts</h2>
+                        <div class="h-px bg-gray-300 flex-grow ml-4"></div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="menu-item-card bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex justify-between items-center transition duration-300 hover:shadow-md">
+                            <div>
+                                <h3 class="font-bold text-gray-900">Cannoli</h3>
+                                <p class="text-sm text-gray-500">Chocolate Chips or Pistachios</p>
+                            </div>
+                            <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg">$4</div>
+                        </div>
+                        <div class="menu-item-card bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex justify-between items-center transition duration-300 hover:shadow-md">
+                            <h3 class="font-bold text-gray-900">Tiramisu</h3>
+                            <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg">$6</div>
+                        </div>
+                        <div class="menu-item-card bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex justify-between items-center transition duration-300 hover:shadow-md">
+                            <div>
+                                <h3 class="font-bold text-gray-900">Nutella Pizza (10")</h3>
+                                <p class="text-sm text-gray-500">Topped with Powdered Sugar</p>
+                            </div>
+                            <div class="item-price bg-gray-100 text-gray-900 font-bold px-3 py-1 rounded-lg">$10</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <section class="bg-brand-red py-12 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="font-heading text-3xl md:text-4xl font-bold text-white mb-6">Ready to Taste the Best?</h2>
+            <p class="text-red-100 mb-8 text-lg">Order ahead for quick pickup or get it delivered straight to your door.</p>
+            <a href="https://mama-mia-davie.cloveronline.com/menu/all" class="inline-block bg-white text-brand-red px-10 py-4 rounded-full font-bold text-xl shadow-lg hover:bg-gray-100 hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                Order Online Now
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-brand-dark text-gray-300 py-12 border-t-[6px] border-brand-red mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Brand -->
+                <div class="text-center md:text-left">
+                    <div class="mb-4 flex justify-center md:justify-start items-center">
+                        <span class="font-heading font-bold text-3xl tracking-tight text-white">MAMA MIA <span class="text-brand-red">PIZZA</span></span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4 max-w-xs mx-auto md:mx-0">
+                        Authentic pizza, hand-tossed and baked fresh daily in Davie, FL. 
+                    </p>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-red text-white transition">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-red text-white transition">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="text-center md:text-left">
+                    <h4 class="text-white font-bold text-lg mb-4 font-heading tracking-wide uppercase">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-white transition">Home</a></li>
+                        <li><a href="menu.html" class="hover:text-white transition">Full Menu</a></li>
+                        <li><a href="https://mama-mia-davie.cloveronline.com/menu/all" class="hover:text-white transition">Order Online</a></li>
+                        <li><a href="index.html#merch" class="hover:text-white transition">Merch Shop</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal / Copyright -->
+                <div class="text-center md:text-left">
+                    <h4 class="text-white font-bold text-lg mb-4 font-heading tracking-wide uppercase">Information</h4>
+                    <p class="text-sm text-gray-400 mb-2">8600 West State Road 84<br>Davie, FL, USA</p>
+                    <p class="text-sm text-gray-400 mb-4">954-488-MAMA (6262)</p>
+                    <p class="text-xs text-gray-500">© 2026 Mama Mia Pizza FL.<br>All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icon = mobileBtn.querySelector('i');
+
+            // Toggle Mobile Menu
+            const toggleMenu = () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                }
+            };
+
+            mobileBtn.addEventListener('click', toggleMenu);
+
+            // Smooth scrolling offset for fixed header and sticky category nav
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        e.preventDefault();
+                        // 80px main header + 60px sticky category nav + some padding
+                        const headerOffset = 150; 
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+                        window.scrollTo({
+                             top: offsetPosition,
+                             behavior: "smooth"
+                        });
+                        
+                        // Active state styling for sticky nav
+                        document.querySelectorAll('.sticky ul a').forEach(a => {
+                            a.classList.remove('bg-red-50', 'text-brand-red');
+                            a.classList.add('text-gray-600');
+                        });
+                        this.classList.remove('text-gray-600');
+                        this.classList.add('bg-red-50', 'text-brand-red');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
