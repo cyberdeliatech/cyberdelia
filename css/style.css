@@ -66,18 +66,18 @@ background:#00E5FF;
 }
 
 .glass-panel {
-
-  background:#0f1014;
+  background:rgba(10,12,16,.48);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
   border:1px solid rgba(255,255,255,.08);
   box-shadow:
-  0 8px 32px rgba(0,0,0,.4);
+  0 8px 32px rgba(0,0,0,.3);
   transition:
   all .4s cubic-bezier(.4,0,.2,1);
-
 }
 
 .glass-panel:hover {
-  background:#14161c;
+  background:rgba(15,18,22,.6);
   border-color:
   rgba(255,255,255,.15);
   transform:
