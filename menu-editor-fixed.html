@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Editor</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #0f0f0f; color: #fff; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #1A1A1A; }
+        ::-webkit-scrollbar-thumb { background: #4B5563; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #B19CD9; }
+
+        .btn-glow-cyan {
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-glow-cyan:hover {
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.8);
+        }
+
+        .toolbar-btn {
+            transition: all 0.2s ease;
+        }
+        .toolbar-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        .status-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #B19CD9;
+            box-shadow: 0 0 8px rgba(177, 156, 217, 0.8);
+            animation: pulse-dot 1.6s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.35; }
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col font-sans overflow-hidden">
+
+    <header class="bg-[#1a1a1a] border-b border-gray-800 p-4 shrink-0 shadow-lg z-10">
+        <div class="max-w-screen-2xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <i class="text-3xl text-[#00E5FF]"></i>
+                <div>
+                    <h1 class="text-xl font-black tracking-widest uppercase flex items-center gap-2">
+                        Menu <span class="text-[#B19CD9]">Editor</span>
+                        <span id="unsaved-indicator" class="hidden items-center gap-1 text-[10px] font-mono normal-case tracking-normal text-gray-400">
+                            <span class="status-dot"></span> Unsaved changes
+                        </span>
+                    </h1>
+                    <p class="text-xs text-gray-400 font-mono">Universal Granular HTML Modifier</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-4">
+                <!-- File Input (Hidden) -->
+                <input type="file" id="file-input" accept=".html" class="hidden">
+
+                <!-- Undo / Redo -->
+                <div class="flex items-center gap-1 border border-gray-700 rounded-lg p-1">
+                    <button id="undo-btn" disabled title="Undo (Ctrl+Z)" class="toolbar-btn bg-gray-800 hover:bg-gray-700 text-white w-9 h-9 rounded-md flex items-center justify-center">
+                        <i class="fas fa-rotate-left"></i>
+                    </button>
+                    <button id="redo-btn" disabled title="Redo (Ctrl+Shift+Z)" class="toolbar-btn bg-gray-800 hover:bg-gray-700 text-white w-9 h-9 rounded-md flex items-center justify-center">
+                        <i class="fas fa-rotate-right"></i>
+                    </button>
+                </div>
+
+                <button onclick="document.getElementById('file-input').click()" class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-lg font-bold uppercase text-sm border border-gray-600 transition-colors flex items-center gap-2">
+                    <i class="fas fa-folder-open"></i> Open HTML File
+                </button>
+
+                <button id="export-btn" disabled class="bg-[#00E5FF] hover:bg-[#00cce6] text-black px-6 py-2 rounded-lg font-black uppercase text-sm disabled:opacity-50 disabled:cursor-not-allowed btn-glow-cyan flex items-center gap-2">
+                    <i class="fas fa-download"></i> Save & Export
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 flex bg-[#0a0a0a] relative overflow-hidden">
+        <!-- Initial Blank State -->
+        <div id="blank-state" class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-10">
+            <div class="w-24 h-24 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center mb-6">
+                <i class="fas fa-file-code text-4xl text-gray-600"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-white mb-2">No File Loaded</h2>
+            <p class="text-gray-400 max-w-md mb-6 leading-relaxed">
+                Click <strong>"Open HTML File"</strong> to load your menu. Every single line, title, description, and item can now be edited, added, or removed individually.
+            </p>
+            <button onclick="document.getElementById('file-input').click()" class="text-[#B19CD9] hover:text-white underline font-medium">Browse Files</button>
+        </div>
+
+        <!-- Live Preview / Editor Frame -->
+        <div id="editor-workspace" class="w-full h-full hidden p-2 sm:p-6 pb-0">
+            <div class="w-full h-full bg-white rounded-t-xl overflow-hidden shadow-2xl relative">
+                <!-- Overlay to show while loading -->
+                <div id="loading-overlay" class="absolute inset-0 bg-gray-900 z-50 hidden flex-col items-center justify-center">
+                    <i class="fas fa-spinner fa-spin text-[#00E5FF] text-4xl mb-4"></i>
+                    <p class="text-white font-mono animate-pulse">Injecting Universal Line Editor...</p>
+                </div>
+                
+                <iframe id="preview-frame" class="w-full h-full border-none bg-black"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const exportBtn = document.getElementById('export-btn');
+        const undoBtn = document.getElementById('undo-btn');
+        const redoBtn = document.getElementById('redo-btn');
+        const unsavedIndicator = document.getElementById('unsaved-indicator');
+        const blankState = document.getElementById('blank-state');
+        const editorWorkspace = document.getElementById('editor-workspace');
+        const previewFrame = document.getElementById('preview-frame');
+        const loadingOverlay = document.getElementById('loading-overlay');
+        
+        let originalFileName = "updated_menu.html";
+        let isEditorReady = false;
+
+        // ---------------------------------------------------------------
+        // Undo / Redo history
+        // ---------------------------------------------------------------
+        const MAX_HISTORY = 50;
+        let undoStack = [];
+        let redoStack = [];
+
+        function updateHistoryButtons() {
+            undoBtn.disabled = undoStack.length === 0;
+            redoBtn.disabled = redoStack.length === 0;
+            if (undoStack.length > 0) {
+                unsavedIndicator.classList.remove('hidden');
+                unsavedIndicator.classList.add('flex');
+            } else {
+                unsavedIndicator.classList.add('hidden');
+                unsavedIndicator.classList.remove('flex');
+            }
+        }
+
+        // Captures the current iframe content as clean, exportable HTML
+        // (tools/classes/contenteditable attributes stripped out).
+        function captureSnapshot() {
+            if (!isEditorReady) return null;
+            return getCleanHTML();
+        }
+
+        // Call BEFORE any mutation so we can restore the pre-edit state.
+        function pushHistory() {
+            const snap = captureSnapshot();
+            if (snap === null) return;
+            undoStack.push(snap);
+            if (undoStack.length > MAX_HISTORY) undoStack.shift();
+            redoStack = [];
+            updateHistoryButtons();
+        }
+
+        function restoreSnapshot(html) {
+            return new Promise((resolve) => {
+                const onLoad = () => {
+                    previewFrame.removeEventListener('load', onLoad);
+                    injectEditorTools(previewFrame.contentWindow);
+                    resolve();
+                };
+                previewFrame.addEventListener('load', onLoad);
+                const doc = previewFrame.contentWindow.document;
+                doc.open();
+                doc.write(html);
+                doc.close();
+            });
+        }
+
+        async function undo() {
+            if (undoStack.length === 0 || !isEditorReady) return;
+            const current = captureSnapshot();
+            const prev = undoStack.pop();
+            redoStack.push(current);
+            await restoreSnapshot(prev);
+            updateHistoryButtons();
+        }
+
+        async function redo() {
+            if (redoStack.length === 0 || !isEditorReady) return;
+            const current = captureSnapshot();
+            const next = redoStack.pop();
+            undoStack.push(current);
+            await restoreSnapshot(next);
+            updateHistoryButtons();
+        }
+
+        undoBtn.addEventListener('click', undo);
+        redoBtn.addEventListener('click', redo);
+
+        function isUndoRedoShortcut(e) {
+            const mod = e.ctrlKey || e.metaKey;
+            if (!mod || e.key.toLowerCase() !== 'z') return null;
+            return e.shiftKey ? 'redo' : 'undo';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            const action = isUndoRedoShortcut(e);
+            if (action === 'undo') { e.preventDefault(); undo(); }
+            else if (action === 'redo') { e.preventDefault(); redo(); }
+            else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y') { e.preventDefault(); redo(); }
+        });
+
+        window.addEventListener('beforeunload', (e) => {
+            if (isEditorReady && undoStack.length > 0) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+
+        // ---------------------------------------------------------------
+        // File loading
+        // ---------------------------------------------------------------
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            originalFileName = file.name;
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const htmlContent = e.target.result;
+                loadHtmlIntoEditor(htmlContent);
+            };
+            
+            reader.readAsText(file);
+        });
+
+        function loadHtmlIntoEditor(html) {
+            blankState.classList.add('hidden');
+            editorWorkspace.classList.remove('hidden');
+            loadingOverlay.classList.remove('hidden');
+            loadingOverlay.classList.add('flex');
+            exportBtn.disabled = true;
+            isEditorReady = false;
+            undoStack = [];
+            redoStack = [];
+            updateHistoryButtons();
+
+            const onLoad = () => {
+                previewFrame.removeEventListener('load', onLoad);
+                injectEditorTools(previewFrame.contentWindow);
+                loadingOverlay.classList.add('hidden');
+                loadingOverlay.classList.remove('flex');
+                exportBtn.disabled = false;
+                isEditorReady = true;
+            };
+            previewFrame.addEventListener('load', onLoad);
+
+            const doc = previewFrame.contentWindow.document;
+            doc.open();
+            doc.write(html);
+            doc.close();
+        }
+
+        // ---------------------------------------------------------------
+        // Editor injection
+        // ---------------------------------------------------------------
+        function injectEditorTools(iframeWindow) {
+            const doc = iframeWindow.document;
+
+            // 1. Inject Editor Styles
+            let style = doc.getElementById('gna-editor-styles');
+            if (!style) {
+                style = doc.createElement('style');
+                style.id = 'gna-editor-styles';
+                doc.head.appendChild(style);
+            }
+            style.textContent = `
+                .fade-in { opacity: 1 !important; transform: none !important; transition: none !important; }
+                
+                /* Line / Element Hover & Selection Styles */
+                .gna-line-root { position: relative; transition: outline 0.2s; }
+                .gna-line-root:hover { outline: 2px dashed #00E5FF; border-radius: 4px; z-index: 50; }
+                .gna-line-tools-anchor { position: relative; }
+
+                /* Line Editor Button Group */
+                .gna-line-tools {
+                    position: absolute; top: -12px; right: -10px; display: none; gap: 4px; z-index: 9999;
+                }
+                .gna-line-root:hover > .gna-line-tools,
+                .gna-line-root:hover .gna-line-tools-anchor > .gna-line-tools { display: flex; }
+                
+                .gna-btn {
+                    height: 26px; padding: 0 8px; border-radius: 13px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 11px; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.5); font-family: sans-serif; font-weight: bold; white-space: nowrap;
+                }
+                .gna-btn-add { background: #10B981; color: white; }
+                .gna-btn-add:hover { background: #059669; }
+                .gna-btn-clone { background: #00E5FF; color: black; }
+                .gna-btn-clone:hover { background: #00b3cc; }
+                .gna-btn-delete { background: #ff4444; width: 26px; padding: 0; border-radius: 50%; font-size: 13px; }
+                .gna-btn-delete:hover { background: #cc0000; }
+
+                /* Text Editing Styles */
+                [contenteditable="true"] { 
+                    outline: 1px dashed rgba(255,255,255,0.3); 
+                    border-radius: 2px;
+                    transition: all 0.2s;
+                    cursor: text;
+                }
+                [contenteditable="true"]:hover {
+                    outline: 1px solid #00E5FF;
+                    background: rgba(0, 229, 255, 0.05);
+                }
+                [contenteditable="true"]:focus { 
+                    outline: 2px solid #00E5FF; 
+                    background: rgba(0, 229, 255, 0.1); 
+                }
+                
+                a[contenteditable="true"] { pointer-events: auto; }
+
+                /* Section Editor Styles */
+                .gna-section-root { position: relative; transition: outline 0.2s; }
+                .gna-section-root:hover { outline: 3px dashed rgba(177, 156, 217, 0.6); z-index: 30; }
+                
+                .gna-section-tools {
+                    position: absolute; top: 0; left: 0; display: none; gap: 6px; z-index: 9999;
+                    background: rgba(0, 0, 0, 0.75); padding: 6px; border-bottom-right-radius: 8px; backdrop-filter: blur(4px);
+                }
+                .gna-section-root:hover > .gna-section-tools { display: flex; }
+                
+                .gna-btn-section {
+                    padding: 4px 10px; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; color: white; font-weight: bold; font-family: sans-serif;
+                }
+                .gna-btn-section-clone { background: #B19CD9; color: black; }
+                .gna-btn-section-clone:hover { background: #9a80cc; }
+                .gna-btn-section-title { background: #00E5FF; color: black; }
+                .gna-btn-section-title:hover { background: #00b3cc; }
+                .gna-btn-section-delete { background: #ff4444; }
+                .gna-btn-section-delete:hover { background: #cc0000; }
+            `;
+
+            // Disable link clicking in preview mode
+            if (!doc.body.dataset.gnaClickGuard) {
+                doc.body.dataset.gnaClickGuard = "true";
+                doc.body.addEventListener('click', (e) => {
+                    if (e.target.closest('a')) e.preventDefault();
+                });
+            }
+
+            // 2. Initialize sections, make all text editable, and initialize line tools
+            initSections(doc);
+            initAllTextAndLines(doc);
+        }
+
+        // ---------------------------------------------------------------
+        // Class-token matching helper
+        // Fixes the old `[class*="item"]` / `[class*="row"]` selectors,
+        // which falsely matched Tailwind utilities like "items-center",
+        // "items-start", "flex-row", "row-span-2", etc.
+        // ---------------------------------------------------------------
+        const TAILWIND_FALSE_POSITIVES = /^(items?-(center|start|end|baseline|stretch)|self-|place-items-|justify-items-|align-items-|row-(span|start|end|auto)|auto-rows-|grid-rows-|flex-row)/i;
+
+        function classIndicatesMenuElement(el) {
+            if (!el.className || typeof el.className !== 'string') return false;
+            return el.className.split(/\s+/).some((c) => {
+                if (!c || TAILWIND_FALSE_POSITIVES.test(c)) return false;
+                return /(^|[-_])(item|row)($|[-_])/i.test(c);
+            });
+        }
+
+        function getLineCandidates(doc) {
+            const base = Array.from(doc.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, tr, .menu-item, article'));
+            const extra = Array.from(doc.querySelectorAll('div, span')).filter(classIndicatesMenuElement);
+            return Array.from(new Set([...base, ...extra]));
+        }
+
+        function initSections(doc) {
+            const sections = doc.querySelectorAll('section, .menu-section');
+            
+            sections.forEach(section => {
+                if (section.dataset.gnaSectionInit) return;
+                
+                section.dataset.gnaSectionInit = "true";
+                section.classList.add('gna-section-root');
+                
+                const tools = doc.createElement('div');
+                tools.className = 'gna-section-tools';
+                tools.innerHTML = `
+                    <button class="gna-btn-section gna-btn-section-clone" title="Duplicate Section">⧉ Duplicate</button>
+                    <button class="gna-btn-section gna-btn-section-title" title="Add/Remove Section Title">± Title</button>
+                    <button class="gna-btn-section gna-btn-section-delete" title="Delete Section">× Delete</button>
+                `;
+                section.prepend(tools);
+
+                // Duplicate Section Handler
+                tools.querySelector('.gna-btn-section-clone').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    pushHistory();
+                    const clone = section.cloneNode(true);
+                    cleanUpElementForClone(clone);
+                    section.parentNode.insertBefore(clone, section.nextSibling);
+                    
+                    initSections(doc);
+                    initAllTextAndLines(doc);
+                });
+
+                // Toggle / Add / Remove Section Title Handler
+                tools.querySelector('.gna-btn-section-title').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    let titleEl = section.querySelector('h2, h3, h1');
+                    if (titleEl) {
+                        if (confirm("Remove this section title?")) {
+                            pushHistory();
+                            titleEl.remove();
+                        }
+                    } else {
+                        pushHistory();
+                        const newTitle = doc.createElement('h2');
+                        newTitle.className = "text-3xl font-black text-white uppercase tracking-wider mb-6 text-center";
+                        newTitle.textContent = "New Section Title";
+                        section.prepend(newTitle);
+                        initAllTextAndLines(doc);
+                    }
+                });
+
+                // Delete Section Handler
+                tools.querySelector('.gna-btn-section-delete').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if(confirm("Are you sure you want to delete this ENTIRE section?")) {
+                        pushHistory();
+                        section.remove();
+                    }
+                });
+            });
+        }
+
+        function initAllTextAndLines(doc) {
+            const candidates = getLineCandidates(doc);
+
+            candidates.forEach(el => {
+                if (el.closest('.gna-section-tools') || el.dataset.gnaLineInit) return;
+                
+                // Avoid wrapping containers that just hold other containers unless they are terminal items/lines
+                if (['SECTION', 'UL', 'TBODY', 'TABLE'].includes(el.tagName)) return;
+
+                el.dataset.gnaLineInit = "true";
+                el.classList.add('gna-line-root');
+
+                const tools = doc.createElement('div');
+                tools.className = 'gna-line-tools';
+                tools.innerHTML = `
+                    <button class="gna-btn gna-btn-add" title="Add Line Below">+ Add</button>
+                    <button class="gna-btn gna-btn-clone" title="Duplicate Line">⧉ Clone</button>
+                    <button class="gna-btn gna-btn-delete" title="Delete Line">×</button>
+                `;
+
+                // <tr> can only contain <td>/<th> — appending tools directly
+                // into a row is invalid and gets silently reparented by the
+                // browser, breaking button placement. Anchor into the last
+                // cell instead.
+                if (el.tagName === 'TR') {
+                    const anchorCell = el.querySelector('td:last-child, th:last-child');
+                    if (anchorCell) {
+                        anchorCell.classList.add('gna-line-tools-anchor');
+                        anchorCell.appendChild(tools);
+                    } else {
+                        el.appendChild(tools);
+                    }
+                } else {
+                    el.appendChild(tools);
+                }
+
+                // Add Line Below Handler
+                tools.querySelector('.gna-btn-add').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    pushHistory();
+                    const clone = el.cloneNode(true);
+                    cleanUpElementForClone(clone);
+                    resetPlaceholderText(clone);
+                    el.parentNode.insertBefore(clone, el.nextSibling);
+                    initAllTextAndLines(doc);
+                });
+
+                // Duplicate Line Handler
+                tools.querySelector('.gna-btn-clone').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    pushHistory();
+                    const clone = el.cloneNode(true);
+                    cleanUpElementForClone(clone);
+                    el.parentNode.insertBefore(clone, el.nextSibling);
+                    initAllTextAndLines(doc);
+                });
+
+                // Delete Line Handler
+                tools.querySelector('.gna-btn-delete').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if(confirm("Are you sure you want to delete this line/item?")) {
+                        pushHistory();
+                        el.remove();
+                    }
+                });
+
+                // Make text inside this element editable
+                makeTextEditable(el, doc);
+            });
+        }
+
+        function cleanUpElementForClone(element) {
+            delete element.dataset.gnaLineInit;
+            delete element.dataset.gnaSectionInit;
+            element.classList.remove('gna-line-root', 'gna-section-root', 'gna-line-tools-anchor');
+            
+            element.querySelectorAll('.gna-line-tools, .gna-section-tools').forEach(t => t.remove());
+            
+            element.querySelectorAll('[data-gna-line-init], [data-gna-section-init]').forEach(el => {
+                delete el.dataset.gnaLineInit;
+                delete el.dataset.gnaSectionInit;
+                el.classList.remove('gna-line-root', 'gna-section-root', 'gna-line-tools-anchor');
+            });
+        }
+
+        // Resets only genuine text leaves inside a cloned element to a
+        // placeholder, instead of nuking the whole subtree with
+        // `textContent = "..."` (which used to delete nested images,
+        // prices, badges, etc. on any non-heading/paragraph item).
+        function resetPlaceholderText(clone) {
+            const editableTags = ['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'A', 'LI', 'TD', 'TH', 'STRONG', 'EM'];
+            const candidates = editableTags.includes(clone.tagName) ? [clone] : [];
+            editableTags.forEach(tag => candidates.push(...clone.querySelectorAll(tag.toLowerCase())));
+
+            // Only reset "leaf" editable elements (no editable-tag descendants)
+            // so we don't stomp on the same text at multiple nesting levels.
+            const leaves = candidates.filter(el => {
+                return !editableTags.some(tag => el.querySelector(tag.toLowerCase()));
+            });
+
+            let resetAny = false;
+            leaves.forEach(el => {
+                if (el.textContent.trim().length > 0) {
+                    el.textContent = "New item text...";
+                    resetAny = true;
+                }
+            });
+
+            if (!resetAny && clone.textContent.trim().length === 0) {
+                clone.textContent = "New item text...";
+            }
+        }
+
+        function insertLineBreakAtCursor(doc) {
+            const win = doc.defaultView || doc.parentWindow;
+            const sel = win.getSelection();
+            if (!sel || sel.rangeCount === 0) return;
+            const range = sel.getRangeAt(0);
+            range.deleteContents();
+            const br = doc.createElement('br');
+            range.insertNode(br);
+            range.setStartAfter(br);
+            range.setEndAfter(br);
+            range.collapse(true);
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
+
+        function wireEditableElement(el, doc) {
+            el.setAttribute('contenteditable', 'true');
+
+            let preEditSnapshot = null;
+            el.addEventListener('focus', () => {
+                preEditSnapshot = el.textContent;
+                pushHistory();
+            });
+            el.addEventListener('blur', () => {
+                preEditSnapshot = null;
+            });
+
+            el.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    insertLineBreakAtCursor(doc);
+                }
+            });
+        }
+
+        function makeTextEditable(element, doc) {
+            if (element.classList.contains('gna-line-tools') || element.classList.contains('gna-btn') || element.classList.contains('gna-section-tools')) return;
+
+            const children = Array.from(element.childNodes);
+            const hasDirectText = children.some(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim().length > 0);
+            
+            if (hasDirectText && !element.isContentEditable) {
+                wireEditableElement(element, doc);
+            }
+
+            // Also ensure all child text elements are editable
+            element.querySelectorAll('p, span, h1, h2, h3, h4, h5, h6, a, strong, em, li, td, th').forEach(child => {
+                if (!child.isContentEditable && !child.closest('.gna-line-tools') && !child.closest('.gna-section-tools')) {
+                    wireEditableElement(child, doc);
+                }
+            });
+        }
+
+        // ---------------------------------------------------------------
+        // Export
+        // ---------------------------------------------------------------
+        function getCleanHTML() {
+            const doc = previewFrame.contentWindow.document;
+            const exportDoc = doc.cloneNode(true);
+
+            const injectedStyles = exportDoc.getElementById('gna-editor-styles');
+            if (injectedStyles) injectedStyles.remove();
+
+            exportDoc.querySelectorAll('.gna-line-tools, .gna-section-tools').forEach(el => el.remove());
+
+            exportDoc.querySelectorAll('.gna-line-root, .gna-section-root, .gna-line-tools-anchor').forEach(el => {
+                el.classList.remove('gna-line-root', 'gna-section-root', 'gna-line-tools-anchor');
+                delete el.dataset.gnaLineInit;
+                delete el.dataset.gnaSectionInit;
+            });
+
+            exportDoc.querySelectorAll('[contenteditable]').forEach(el => {
+                el.removeAttribute('contenteditable');
+            });
+
+            if (exportDoc.body) delete exportDoc.body.dataset.gnaClickGuard;
+
+            return "<!DOCTYPE html>\n" + exportDoc.documentElement.outerHTML;
+        }
+
+        exportBtn.addEventListener('click', () => {
+            if (!isEditorReady) return;
+
+            const finalHTML = getCleanHTML();
+            const blob = new Blob([finalHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+
+            const dotIndex = originalFileName.lastIndexOf('.');
+            const base = dotIndex > 0 ? originalFileName.slice(0, dotIndex) : originalFileName;
+            const ext = dotIndex > 0 ? originalFileName.slice(dotIndex + 1) : 'html';
+            a.download = base + "_updated." + ext;
+            
+            document.body.appendChild(a);
+            a.click();
+            
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+        });
+    </script>
+</body>
+</html>
