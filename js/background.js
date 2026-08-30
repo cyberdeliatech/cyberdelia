@@ -9,6 +9,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 );
+
 camera.position.set(0, 15, 50);
 
 const renderer = new THREE.WebGLRenderer({
@@ -22,28 +23,18 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 container.appendChild(renderer.domElement);
 
-const neonColors = [0x00E5FF, 0xB19CD9, 0x00FF88];
-
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.28);
-scene.add(ambientLight);
-
-const cyanLight = new THREE.PointLight(0x00E5FF, 4, 90);
-cyanLight.position.set(-30, 18, 25);
-scene.add(cyanLight);
-
-const greenLight = new THREE.PointLight(0x00FF88, 3.5, 90);
-greenLight.position.set(30, 12, -20);
-scene.add(greenLight);
-
-const lavenderLight = new THREE.PointLight(0xB19CD9, 3, 100);
-lavenderLight.position.set(0, 28, -55);
-scene.add(lavenderLight);
+const neonColors = [
+  0x00e5ff,
+  0xb19cd9,
+  0x00ff88
+];
 
 const backgroundWorld = new THREE.Group();
 scene.add(backgroundWorld);
 
-// Neon grid
 const gridGroup = new THREE.Group();
+const glowGridGroup = new THREE.Group();
+
 const gridSize = 300;
 const gridDivisions = 60;
 const gridStep = gridSize / gridDivisions;
@@ -56,10 +47,18 @@ const gridMaterials = neonColors.map(color =>
   })
 );
 
+const glowMaterials = neonColors.map(color =>
+  new THREE.LineBasicMaterial({
+    color,
+    transparent: true,
+    opacity: 0.065
+  })
+);
+
 for (let i = 0; i <= gridDivisions; i++) {
   const x = -gridSize / 2 + i * gridStep;
-  const geometry = new THREE.BufferGeometry();
 
+  const geometry = new THREE.BufferGeometry();
   geometry.setAttribute(
     "position",
     new THREE.Float32BufferAttribute([
@@ -73,12 +72,25 @@ for (let i = 0; i <= gridDivisions; i++) {
   gridGroup.add(
     new THREE.Line(geometry, gridMaterials[colorIndex])
   );
+
+  const glowGeometry = new THREE.BufferGeometry();
+  glowGeometry.setAttribute(
+    "position",
+    new THREE.Float32BufferAttribute([
+      x, -4.98, -gridSize / 2,
+      x, -4.98, gridSize / 2
+    ], 3)
+  );
+
+  glowGridGroup.add(
+    new THREE.Line(glowGeometry, glowMaterials[colorIndex])
+  );
 }
 
 for (let i = 0; i <= gridDivisions; i++) {
   const z = -gridSize / 2 + i * gridStep;
-  const geometry = new THREE.BufferGeometry();
 
+  const geometry = new THREE.BufferGeometry();
   geometry.setAttribute(
     "position",
     new THREE.Float32BufferAttribute([
@@ -92,45 +104,9 @@ for (let i = 0; i <= gridDivisions; i++) {
   gridGroup.add(
     new THREE.Line(geometry, gridMaterials[colorIndex])
   );
-}
 
-backgroundWorld.add(gridGroup);
-
-// Grid glow
-const glowGridGroup = new THREE.Group();
-
-const glowMaterials = neonColors.map(color =>
-  new THREE.LineBasicMaterial({
-    color,
-    transparent: true,
-    opacity: 0.065
-  })
-);
-
-for (let i = 0; i <= gridDivisions; i++) {
-  const x = -gridSize / 2 + i * gridStep;
-  const geometry = new THREE.BufferGeometry();
-
-  geometry.setAttribute(
-    "position",
-    new THREE.Float32BufferAttribute([
-      x, -4.98, -gridSize / 2,
-      x, -4.98, gridSize / 2
-    ], 3)
-  );
-
-  const colorIndex = Math.floor(Math.random() * neonColors.length);
-
-  glowGridGroup.add(
-    new THREE.Line(geometry, glowMaterials[colorIndex])
-  );
-}
-
-for (let i = 0; i <= gridDivisions; i++) {
-  const z = -gridSize / 2 + i * gridStep;
-  const geometry = new THREE.BufferGeometry();
-
-  geometry.setAttribute(
+  const glowGeometry = new THREE.BufferGeometry();
+  glowGeometry.setAttribute(
     "position",
     new THREE.Float32BufferAttribute([
       -gridSize / 2, -4.98, z,
@@ -138,16 +114,13 @@ for (let i = 0; i <= gridDivisions; i++) {
     ], 3)
   );
 
-  const colorIndex = Math.floor(Math.random() * neonColors.length);
-
   glowGridGroup.add(
-    new THREE.Line(geometry, glowMaterials[colorIndex])
+    new THREE.Line(glowGeometry, glowMaterials[colorIndex])
   );
 }
 
-backgroundWorld.add(glowGridGroup);
+backgroundWorld.add(gridGroup, glowGridGroup);
 
-// Server racks
 const towersGroup = new THREE.Group();
 backgroundWorld.add(towersGroup);
 
@@ -161,144 +134,228 @@ function createServerRack() {
   const rackHeight = 14 + Math.random() * 28;
   const rackDepth = 3 + Math.random() * 1.5;
 
+  // Main translucent rack enclosure
+  const enclosureGeometry = new THREE.BoxGeometry(
+    rackWidth,
+    rackHeight,
+    rackDepth
+  );
+
+  const enclosureMaterial = new THREE.MeshBasicMaterial({
+    color: 0x101820,
+    transparent: true,
+    opacity: 0.20,
+    depthWrite: false,
+    side: THREE.DoubleSide
+  });
+
+  const enclosure = new THREE.Mesh(
+    enclosureGeometry,
+    enclosureMaterial
+  );
+
+  rack.add(enclosure);
+
+  // Subtle inner glass tint
+  const innerGeometry = new THREE.BoxGeometry(
+    rackWidth * 0.92,
+    rackHeight * 0.92,
+    rackDepth * 0.90
+  );
+
+  const innerMaterial = new THREE.MeshBasicMaterial({
+    color: colorHex,
+    transparent: true,
+    opacity: 0.025,
+    depthWrite: false,
+    side: THREE.DoubleSide
+  });
+
+  const innerGlow = new THREE.Mesh(
+    innerGeometry,
+    innerMaterial
+  );
+
+  rack.add(innerGlow);
+
+  // Rack frame
   const frameGeometry = new THREE.BoxGeometry(
     rackWidth,
     rackHeight,
     rackDepth
   );
 
-  const frameMaterial = new THREE.MeshStandardMaterial({
-    color: 0x10151a,
-    metalness: 0.88,
-    roughness: 0.27,
+  const frameMaterial = new THREE.MeshBasicMaterial({
+    color: colorHex,
+    wireframe: true,
     transparent: true,
-    opacity: 0.96
+    opacity: 0.28
   });
 
-  rack.add(
-    new THREE.Mesh(frameGeometry, frameMaterial)
+  const frame = new THREE.Mesh(
+    frameGeometry,
+    frameMaterial
   );
 
-  const frontPanelGeometry = new THREE.BoxGeometry(
-    rackWidth * 0.86,
-    rackHeight * 0.94,
-    0.10
+  rack.add(frame);
+
+  // Server units
+  const unitCount = Math.max(
+    6,
+    Math.floor(rackHeight / 2.2)
   );
 
-  const frontPanelMaterial = new THREE.MeshStandardMaterial({
-    color: 0x080b0e,
-    metalness: 0.75,
-    roughness: 0.30
-  });
-
-  const frontPanel = new THREE.Mesh(
-    frontPanelGeometry,
-    frontPanelMaterial
-  );
-
-  frontPanel.position.z = rackDepth * 0.51;
-  rack.add(frontPanel);
-
-  const unitCount = Math.max(6, Math.floor(rackHeight / 2.2));
   const unitHeight = rackHeight / (unitCount + 2);
 
   for (let j = 0; j < unitCount; j++) {
+    const serverColor =
+      neonColors[
+        (j + Math.floor(Math.random() * 3)) % 3
+      ];
+
+    // Server chassis
     const unitGeometry = new THREE.BoxGeometry(
-      rackWidth * 0.80,
-      unitHeight * 0.56,
+      rackWidth * 0.82,
+      unitHeight * 0.68,
       rackDepth * 0.76
     );
 
-    const unitMaterial = new THREE.MeshStandardMaterial({
-      color: 0x151b21,
-      metalness: 0.78,
-      roughness: 0.30
+    const unitMaterial = new THREE.MeshBasicMaterial({
+      color: 0x171b21,
+      transparent: true,
+      opacity: 0.72
     });
 
-    const unit = new THREE.Mesh(unitGeometry, unitMaterial);
+    const unit = new THREE.Mesh(
+      unitGeometry,
+      unitMaterial
+    );
 
     unit.position.set(
       0,
-      -rackHeight / 2 + unitHeight * (j + 1.25),
-      rackDepth * 0.015
+      -rackHeight / 2 +
+        unitHeight * (j + 1.25),
+      0
     );
 
     rack.add(unit);
 
-    const faceGeometry = new THREE.BoxGeometry(
-      rackWidth * 0.74,
-      unitHeight * 0.40,
-      0.075
+    // Server front panel
+    const frontGeometry = new THREE.BoxGeometry(
+      rackWidth * 0.78,
+      unitHeight * 0.56,
+      0.035
     );
 
-    const faceMaterial = new THREE.MeshStandardMaterial({
-      color: 0x0b0f13,
-      metalness: 0.85,
-      roughness: 0.25
+    const frontMaterial = new THREE.MeshBasicMaterial({
+      color: 0x090c10,
+      transparent: true,
+      opacity: 0.88
     });
 
-    const face = new THREE.Mesh(faceGeometry, faceMaterial);
+    const frontPanel = new THREE.Mesh(
+      frontGeometry,
+      frontMaterial
+    );
 
-    face.position.set(
+    frontPanel.position.set(
       0,
       unit.position.y,
-      rackDepth * 0.405
+      rackDepth * 0.39
     );
 
-    rack.add(face);
+    rack.add(frontPanel);
 
-    const ventMaterial = new THREE.MeshBasicMaterial({
-      color: 0x26313a,
+    // Server panel accent
+    const accentGeometry = new THREE.BoxGeometry(
+      rackWidth * 0.48,
+      0.025,
+      0.04
+    );
+
+    const accentMaterial = new THREE.MeshBasicMaterial({
+      color: serverColor,
       transparent: true,
-      opacity: 0.75
+      opacity: 0.28
     });
 
-    for (let v = 0; v < 5; v++) {
+    const accent = new THREE.Mesh(
+      accentGeometry,
+      accentMaterial
+    );
+
+    accent.position.set(
+      -rackWidth * 0.08,
+      unit.position.y,
+      rackDepth * 0.415
+    );
+
+    rack.add(accent);
+
+    // Server ventilation lines
+    for (let vent = 0; vent < 5; vent++) {
       const ventGeometry = new THREE.BoxGeometry(
-        rackWidth * 0.075,
-        unitHeight * 0.12,
-        0.025
+        0.025,
+        unitHeight * 0.30,
+        0.045
       );
 
-      const vent = new THREE.Mesh(
+      const ventMaterial = new THREE.MeshBasicMaterial({
+        color: 0x3b4652,
+        transparent: true,
+        opacity: 0.45
+      });
+
+      const ventLine = new THREE.Mesh(
         ventGeometry,
         ventMaterial
       );
 
-      vent.position.set(
-        -rackWidth * 0.19 + v * rackWidth * 0.095,
+      ventLine.position.set(
+        -rackWidth * 0.25 + vent * 0.09,
         unit.position.y,
-        rackDepth * 0.445
+        rackDepth * 0.425
       );
 
-      rack.add(vent);
+      rack.add(ventLine);
     }
 
-    const ledGeometry = new THREE.SphereGeometry(0.045, 8, 8);
-
-    const ledMaterial = new THREE.MeshBasicMaterial({
-      color:
-        neonColors[
-          Math.floor(Math.random() * neonColors.length)
-        ],
-      transparent: true,
-      opacity: 1
-    });
-
-    const led = new THREE.Mesh(ledGeometry, ledMaterial);
-
-    led.position.set(
-      rackWidth * 0.30,
-      unit.position.y,
-      rackDepth * 0.46
+    // Primary LED
+    const ledGeometry = new THREE.SphereGeometry(
+      0.055,
+      8,
+      8
     );
 
-    led.userData.blinkOffset = Math.random() * Math.PI * 2;
-    led.userData.blinkSpeed = 0.8 + Math.random() * 2;
+    const led = new THREE.Mesh(
+      ledGeometry,
+      new THREE.MeshBasicMaterial({
+        color:
+          neonColors[
+            Math.floor(Math.random() * neonColors.length)
+          ],
+        transparent: true,
+        opacity: 1
+      })
+    );
+
+    led.position.set(
+      rackWidth * 0.31,
+      unit.position.y,
+      rackDepth * 0.43
+    );
+
+    led.userData.blinkOffset =
+      Math.random() * Math.PI * 2;
+
+    led.userData.blinkSpeed =
+      0.8 + Math.random() * 2;
+
     led.userData.isServerLed = true;
 
     rack.add(led);
 
+    // Secondary LED
     const led2 = new THREE.Mesh(
       ledGeometry,
       new THREE.MeshBasicMaterial({
@@ -312,28 +369,33 @@ function createServerRack() {
     );
 
     led2.position.set(
-      rackWidth * 0.26,
+      rackWidth * 0.27,
       unit.position.y,
-      rackDepth * 0.46
+      rackDepth * 0.43
     );
 
-    led2.userData.blinkOffset = Math.random() * Math.PI * 2;
-    led2.userData.blinkSpeed = 0.8 + Math.random() * 2;
+    led2.userData.blinkOffset =
+      Math.random() * Math.PI * 2;
+
+    led2.userData.blinkSpeed =
+      0.8 + Math.random() * 2;
+
     led2.userData.isServerLed = true;
 
     rack.add(led2);
   }
 
+  // Front vertical rails
   const railGeometry = new THREE.BoxGeometry(
-    0.07,
+    0.065,
     rackHeight,
-    0.07
+    0.065
   );
 
   const railMaterial = new THREE.MeshBasicMaterial({
     color: colorHex,
     transparent: true,
-    opacity: 0.95
+    opacity: 0.9
   });
 
   const leftRail = new THREE.Mesh(
@@ -344,24 +406,39 @@ function createServerRack() {
   leftRail.position.set(
     -rackWidth * 0.45,
     0,
-    rackDepth * 0.52
+    rackDepth * 0.43
   );
 
   const rightRail = leftRail.clone();
-  rightRail.position.x = rackWidth * 0.45;
+
+  rightRail.position.x =
+    rackWidth * 0.45;
 
   rack.add(leftRail, rightRail);
 
-  const topCapGeometry = new THREE.BoxGeometry(
-    rackWidth * 0.84,
-    0.14,
-    rackDepth * 0.82
+  // Rear vertical rails
+  const rearLeftRail = leftRail.clone();
+  rearLeftRail.position.z = -rackDepth * 0.43;
+
+  const rearRightRail = rightRail.clone();
+  rearRightRail.position.z = -rackDepth * 0.43;
+
+  rack.add(
+    rearLeftRail,
+    rearRightRail
   );
 
-  const topCapMaterial = new THREE.MeshStandardMaterial({
-    color: 0x1b2229,
-    metalness: 0.85,
-    roughness: 0.25
+  // Top cap
+  const topCapGeometry = new THREE.BoxGeometry(
+    rackWidth * 0.84,
+    0.10,
+    rackDepth * 0.80
+  );
+
+  const topCapMaterial = new THREE.MeshBasicMaterial({
+    color: colorHex,
+    transparent: true,
+    opacity: 0.38
   });
 
   const topCap = new THREE.Mesh(
@@ -377,55 +454,97 @@ function createServerRack() {
 
   rack.add(topCap);
 
+  // Bottom cap
   const bottomCap = topCap.clone();
-  bottomCap.position.y = -rackHeight / 2 + 0.35;
+
+  bottomCap.position.y =
+    -rackHeight / 2 + 0.35;
+
   rack.add(bottomCap);
 
-  const neonTopGeometry = new THREE.BoxGeometry(
-    rackWidth * 0.80,
-    0.045,
-    0.045
-  );
-
-  const neonTop = new THREE.Mesh(
-    neonTopGeometry,
+  // Horizontal rack edges
+  const horizontalEdgeMaterial =
     new THREE.MeshBasicMaterial({
       color: colorHex,
       transparent: true,
-      opacity: 0.85
-    })
-  );
+      opacity: 0.42
+    });
 
-  neonTop.position.set(
-    0,
-    rackHeight / 2,
-    rackDepth * 0.50
-  );
+  const edgePositions = [
+    rackHeight / 2 - 0.65,
+    -rackHeight / 2 + 0.65
+  ];
 
-  rack.add(neonTop);
+  edgePositions.forEach(y => {
+    const edgeGeometry = new THREE.BoxGeometry(
+      rackWidth * 0.90,
+      0.035,
+      0.035
+    );
 
-  const neonBottom = neonTop.clone();
-  neonBottom.position.y = -rackHeight / 2;
-  rack.add(neonBottom);
+    const edge = new THREE.Mesh(
+      edgeGeometry,
+      horizontalEdgeMaterial
+    );
 
+    edge.position.set(
+      0,
+      y,
+      rackDepth * 0.44
+    );
+
+    rack.add(edge);
+  });
+
+  // Subtle rack glow
   const glowGeometry = new THREE.BoxGeometry(
-    rackWidth * 0.96,
-    rackHeight * 0.96,
-    rackDepth * 0.96
+    rackWidth * 0.94,
+    rackHeight * 0.94,
+    rackDepth * 0.94
   );
 
   const glowMaterial = new THREE.MeshBasicMaterial({
     color: colorHex,
     wireframe: true,
     transparent: true,
-    opacity: 0.045
+    opacity: 0.035
   });
 
-  rack.add(
-    new THREE.Mesh(glowGeometry, glowMaterial)
+  const glow = new THREE.Mesh(
+    glowGeometry,
+    glowMaterial
   );
 
-  rack.position.y = rackHeight / 2 - 5;
+  rack.add(glow);
+
+  // Interior light
+  const interiorGeometry = new THREE.BoxGeometry(
+    rackWidth * 0.70,
+    rackHeight * 0.88,
+    0.025
+  );
+
+  const interiorMaterial = new THREE.MeshBasicMaterial({
+    color: colorHex,
+    transparent: true,
+    opacity: 0.055
+  });
+
+  const interiorLight = new THREE.Mesh(
+    interiorGeometry,
+    interiorMaterial
+  );
+
+  interiorLight.position.set(
+    0,
+    0,
+    -rackDepth * 0.40
+  );
+
+  rack.add(interiorLight);
+
+  rack.position.y =
+    rackHeight / 2 - 5;
 
   rack.userData.rackHeight = rackHeight;
   rack.userData.rackWidth = rackWidth;
@@ -458,16 +577,19 @@ for (let i = 0; i < 65; i++) {
   towersGroup.add(rack);
 }
 
-// Floating particles
 const particleCount = 180;
 const particleGroups = [];
 
 neonColors.forEach((color, colorIndex) => {
-  const particlesGeo = new THREE.BufferGeometry();
-  const posArray = new Float32Array(particleCount * 3);
+  const particlesGeo =
+    new THREE.BufferGeometry();
+
+  const posArray =
+    new Float32Array(particleCount * 3);
 
   for (let i = 0; i < particleCount * 3; i++) {
-    posArray[i] = (Math.random() - 0.5) * 280;
+    posArray[i] =
+      (Math.random() - 0.5) * 280;
   }
 
   particlesGeo.setAttribute(
@@ -486,12 +608,13 @@ neonColors.forEach((color, colorIndex) => {
     })
   );
 
-  particlesMesh.userData.colorIndex = colorIndex;
+  particlesMesh.userData.colorIndex =
+    colorIndex;
+
   backgroundWorld.add(particlesMesh);
   particleGroups.push(particlesMesh);
 });
 
-// Mouse / touch
 let mouseX = 0;
 let mouseY = 0;
 let targetMouseX = 0;
@@ -501,10 +624,14 @@ window.addEventListener(
   "mousemove",
   e => {
     targetMouseX =
-      (e.clientX / window.innerWidth) * 2 - 1;
+      e.clientX /
+      window.innerWidth *
+      2 - 1;
 
     targetMouseY =
-      -(e.clientY / window.innerHeight) * 2 + 1;
+      -(e.clientY /
+      window.innerHeight) *
+      2 + 1;
   },
   { passive: true }
 );
@@ -517,15 +644,18 @@ window.addEventListener(
     const touch = e.touches[0];
 
     targetMouseX =
-      (touch.clientX / window.innerWidth) * 2 - 1;
+      touch.clientX /
+      window.innerWidth *
+      2 - 1;
 
     targetMouseY =
-      -(touch.clientY / window.innerHeight) * 2 + 1;
+      -(touch.clientY /
+      window.innerHeight) *
+      2 + 1;
   },
   { passive: true }
 );
 
-// Phone gyroscope
 let gyroX = 0;
 let gyroY = 0;
 let gyroEnabled = false;
@@ -553,8 +683,10 @@ function handleOrientation(event) {
 
 async function enableGyro() {
   if (
-    typeof DeviceOrientationEvent !== "undefined" &&
-    typeof DeviceOrientationEvent.requestPermission === "function"
+    typeof DeviceOrientationEvent !==
+      "undefined" &&
+    typeof DeviceOrientationEvent.requestPermission ===
+      "function"
   ) {
     try {
       const permission =
@@ -597,7 +729,6 @@ window.addEventListener(
   }
 );
 
-// Scroll
 let scrollProgress = 0;
 
 window.addEventListener(
@@ -615,7 +746,6 @@ window.addEventListener(
   { passive: true }
 );
 
-// Resize
 window.addEventListener(
   "resize",
   () => {
@@ -633,7 +763,6 @@ window.addEventListener(
   { passive: true }
 );
 
-// Animation
 const clock = new THREE.Clock();
 
 function animate() {
@@ -648,10 +777,12 @@ function animate() {
   }
 
   mouseX +=
-    (targetMouseX - mouseX) * 0.08;
+    (targetMouseX - mouseX) *
+    0.08;
 
   mouseY +=
-    (targetMouseY - mouseY) * 0.08;
+    (targetMouseY - mouseY) *
+    0.08;
 
   const targetCamX =
     mouseX * 18;
@@ -666,13 +797,19 @@ function animate() {
     scrollProgress * 80;
 
   camera.position.x +=
-    (targetCamX - camera.position.x) * 0.055;
+    (targetCamX -
+      camera.position.x) *
+    0.055;
 
   camera.position.y +=
-    (targetCamY - camera.position.y) * 0.055;
+    (targetCamY -
+      camera.position.y) *
+    0.055;
 
   camera.position.z +=
-    (targetCamZ - camera.position.z) * 0.055;
+    (targetCamZ -
+      camera.position.z) *
+    0.055;
 
   const targetLookX =
     mouseX * 25;
@@ -725,13 +862,15 @@ function animate() {
     -mouseY * 0.018;
 
   towersGroup.rotation.y =
-    Math.sin(elapsedTime * 0.08) *
-    0.025 +
+    Math.sin(
+      elapsedTime * 0.08
+    ) * 0.025 +
     mouseX * 0.08;
 
   towersGroup.rotation.x =
-    Math.cos(elapsedTime * 0.07) *
-    0.012 -
+    Math.cos(
+      elapsedTime * 0.07
+    ) * 0.012 -
     mouseY * 0.035;
 
   towersGroup.children.forEach(
@@ -740,7 +879,7 @@ function animate() {
         rack.userData.baseRotationY +
         Math.sin(
           elapsedTime *
-          rack.userData.speed +
+            rack.userData.speed +
           index
         ) * 0.012 +
         mouseX * 0.045;
@@ -749,31 +888,35 @@ function animate() {
         rack.userData.baseRotationX +
         mouseY * 0.025;
 
-      rack.children.forEach(child => {
-        if (
-          child.userData &&
-          child.userData.isServerLed
-        ) {
-          const blink =
-            0.5 +
-            0.5 *
-            Math.sin(
-              elapsedTime *
-              child.userData.blinkSpeed +
-              child.userData.blinkOffset
+      rack.children.forEach(
+        child => {
+          if (
+            child.userData &&
+            child.userData.isServerLed
+          ) {
+            const blink =
+              0.5 +
+              0.5 *
+              Math.sin(
+                elapsedTime *
+                  child.userData.blinkSpeed +
+                child.userData.blinkOffset
+              );
+
+            const ledScale =
+              0.72 +
+              blink * 0.55;
+
+            child.scale.setScalar(
+              ledScale
             );
 
-          const ledScale =
-            0.72 + blink * 0.55;
-
-          child.scale.setScalar(
-            ledScale
-          );
-
-          child.material.opacity =
-            0.25 + blink * 0.75;
+            child.material.opacity =
+              0.25 +
+              blink * 0.75;
+          }
         }
-      });
+      );
     }
   );
 
@@ -792,26 +935,6 @@ function animate() {
         mouseY * 0.08;
     }
   );
-
-  cyanLight.position.x =
-    -30 +
-    Math.sin(elapsedTime * 0.25) * 10;
-
-  cyanLight.position.z =
-    25 +
-    Math.cos(elapsedTime * 0.20) * 15;
-
-  greenLight.position.x =
-    30 +
-    Math.cos(elapsedTime * 0.22) * 12;
-
-  greenLight.position.z =
-    -20 +
-    Math.sin(elapsedTime * 0.18) * 18;
-
-  lavenderLight.position.y =
-    28 +
-    Math.sin(elapsedTime * 0.15) * 8;
 
   renderer.render(
     scene,
