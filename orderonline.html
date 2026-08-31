@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#08090b">
+<meta name="description" content="Cyberdelia Technologies — Technology recommendations, PC hardware, networking gear, accessories, tools, and buying guides.">
+<meta name="robots" content="index, follow">
+<title>Cyberdelia Technologies | Tech Picks & Buying Guides</title>
+
+<link rel="icon" type="image/png" href="./content/img/logo.png">
+<link rel="apple-touch-icon" href="./content/img/logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="./css/pg_web.css">
+</head>
+
+<body class="antialiased selection:bg-arcade-cyan selection:text-black">
+<div id="canvas-container"></div>
+<div class="noise"></div>
+
+<header class="fixed w-full top-0 z-50 border-b border-white/5 bg-[#0f0f0f]/60 backdrop-blur-xl">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#home" class="flex items-center gap-3 group">
+      <img src="./content/img/logo.png" alt="Cyberdelia Technologies" class="h-12 w-auto">
+      <div class="flex flex-col leading-none">
+        <span class="text-2xl font-bold font-display tracking-wide text-white">Cyberdelia</span>
+        <span class="mt-1 text-[9px] font-mono tracking-[0.3em] uppercase text-arcade-green">Technologies</span>
+      </div>
+    </a>
+
+```
+<nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
+  <a href="#featured" class="hover:text-white transition-all">Featured</a>
+  <a href="#pc" class="hover:text-white transition-all">PC & Gaming</a>
+  <a href="#networking" class="hover:text-white transition-all">Networking</a>
+  <a href="#workspace" class="hover:text-white transition-all">Workspace</a>
+  <a href="#tools" class="hover:text-white transition-all">Tech Tools</a>
+  <a href="#guides" class="hover:text-white transition-all">Guides</a>
+</nav>
+
+<div class="hidden lg:flex items-center gap-5">
+  <a href="#featured" class="btn-chic-cyan px-6 py-2.5 rounded-full text-sm font-medium">Explore Tech</a>
+</div>
+
+<button id="mobileMenuBtn" class="lg:hidden text-gray-300 hover:text-white" aria-label="Open menu">
+  <i class="fa-solid fa-bars text-2xl"></i>
+</button>
+```
+
+  </div>
+
+  <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-[#08090b]/95 backdrop-blur-2xl border-b border-white/15 flex-col py-4 px-6 shadow-2xl">
+    <a href="#featured" class="mobile-link py-3 border-b border-white/5 text-gray-300">Featured Tech</a>
+    <a href="#pc" class="mobile-link py-3 border-b border-white/5 text-gray-300">PC & Gaming</a>
+    <a href="#networking" class="mobile-link py-3 border-b border-white/5 text-gray-300">Networking</a>
+    <a href="#workspace" class="mobile-link py-3 border-b border-white/5 text-gray-300">Workspace</a>
+    <a href="#tools" class="mobile-link py-3 border-b border-white/5 text-gray-300">Tech Tools</a>
+    <a href="#guides" class="mobile-link py-3 text-gray-300">Buying Guides</a>
+  </div>
+</header>
+
+<main>
+
+<section id="home" class="pt-40 pb-24 min-h-[80vh] flex items-center relative z-10">
+  <div class="container mx-auto px-6">
+    <div class="max-w-6xl mx-auto text-center animate-fade-up glass-panel p-8 md:p-16 rounded-[2rem] relative overflow-hidden">
+      <div class="hero-orbit"></div>
+      <div class="relative z-10">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-arcade-lavender/40 bg-arcade-lavender/10 text-arcade-lavender text-xs font-mono tracking-widest uppercase mb-7">
+          <span class="w-2 h-2 rounded-full bg-arcade-lavender animate-pulse"></span>
+          Cyberdelia Tech Picks
+        </div>
+
+```
+    <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white leading-[1.05] mb-7">
+      Better tech.<br>
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-arcade-cyan via-arcade-lavender to-arcade-green">Smarter choices.</span>
+    </h1>
+
+    <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto font-light leading-relaxed mb-10">
+      Practical technology recommendations from Cyberdelia. Discover PC hardware, networking equipment, peripherals, repair tools, office technology, and everyday gear worth considering before you buy.
+    </p>
+
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <a href="#featured" class="btn-chic-cyan px-8 py-4 rounded-full text-sm font-semibold">
+        <i class="fa-solid fa-microchip mr-2"></i>Browse Tech Picks
+      </a>
+      <a href="#guides" class="px-8 py-4 rounded-full text-sm font-medium text-gray-200 border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all">
+        <i class="fa-solid fa-list-check mr-2"></i>Buying Guides
+      </a>
+    </div>
+
+    <div class="mt-8 max-w-2xl mx-auto text-xs text-gray-500 leading-relaxed">
+      As an Amazon Associate I earn from qualifying purchases.
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<section id="featured" class="py-20 relative z-10">
+  <div class="container mx-auto px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-5 mb-10">
+        <div>
+          <span class="text-arcade-cyan text-xs font-mono tracking-[0.25em] uppercase">Recommended Tech</span>
+          <h2 class="text-4xl md:text-5xl font-display font-bold text-white mt-3">Featured Tech Picks</h2>
+        </div>
+        <p class="text-gray-400 max-w-md text-sm leading-relaxed">
+          A curated selection of technology and accessories for computers, workspaces, networking, and everyday use.
+        </p>
+      </div>
+
+```
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    <article class="glass-panel rounded-2xl p-6 border border-white/10 hover:border-arcade-cyan/40 transition-all group">
+      <div class="h-48 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center mb-6">
+        <i class="fa-solid fa-microchip text-6xl text-arcade-cyan group-hover:scale-110 transition-transform"></i>
+      </div>
+      <span class="text-[10px] font-mono uppercase tracking-widest text-arcade-cyan">PC Hardware</span>
+      <h3 class="text-xl font-display font-bold text-white mt-2 mb-3">PC Building Essentials</h3>
+      <p class="text-sm text-gray-400 leading-relaxed mb-6">
+        Components and accessories for building, upgrading, and maintaining a reliable PC.
+      </p>
+      <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="inline-flex items-center text-sm font-semibold text-arcade-cyan hover:text-white transition-all">
+        View Recommendations <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i>
+      </a>
+      <p class="mt-3 text-[10px] text-gray-600">Paid link</p>
+    </article>
+
+    <article class="glass-panel rounded-2xl p-6 border border-white/10 hover:border-arcade-lavender/40 transition-all group">
+      <div class="h-48 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center mb-6">
+        <i class="fa-solid fa-keyboard text-6xl text-arcade-lavender group-hover:scale-110 transition-transform"></i>
+      </div>
+      <span class="text-[10px] font-mono uppercase tracking-widest text-arcade-lavender">Peripherals</span>
+      <h3 class="text-xl font-display font-bold text-white mt-2 mb-3">Desk & PC Accessories</h3>
+      <p class="text-sm text-gray-400 leading-relaxed mb-6">
+        Keyboards, mice, webcams, headsets, USB accessories, monitors, and useful desk gear.
+      </p>
+      <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="inline-flex items-center text-sm font-semibold text-arcade-lavender hover:text-white transition-all">
+        View Recommendations <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i>
+      </a>
+      <p class="mt-3 text-[10px] text-gray-600">Paid link</p>
+    </article>
+
+    <article class="glass-panel rounded-2xl p-6 border border-white/10 hover:border-arcade-green/40 transition-all group">
+      <div class="h-48 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center mb-6">
+        <i class="fa-solid fa-network-wired text-6xl text-arcade-green group-hover:scale-110 transition-transform"></i>
+      </div>
+      <span class="text-[10px] font-mono uppercase tracking-widest text-arcade-green">Networking</span>
+      <h3 class="text-xl font-display font-bold text-white mt-2 mb-3">Home & Business Networking</h3>
+      <p class="text-sm text-gray-400 leading-relaxed mb-6">
+        Routers, Wi-Fi equipment, Ethernet accessories, switches, adapters, and networking tools.
+      </p>
+      <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="inline-flex items-center text-sm font-semibold text-arcade-green hover:text-white transition-all">
+        View Recommendations <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i>
+      </a>
+      <p class="mt-3 text-[10px] text-gray-600">Paid link</p>
+    </article>
+
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<section id="pc" class="py-20 relative z-10 border-t border-white/5">
+  <div class="container mx-auto px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+```
+    <div>
+      <span class="text-arcade-cyan text-xs font-mono tracking-[0.25em] uppercase">01 / PC & GAMING</span>
+      <h2 class="text-4xl md:text-5xl font-display font-bold text-white mt-3 mb-6">Build a better PC.</h2>
+      <p class="text-gray-400 leading-relaxed mb-8">
+        Whether you're building from scratch, upgrading an older system, or putting together a gaming rig, these are the types of components and accessories worth researching before you buy.
+      </p>
+
+      <div class="grid grid-cols-2 gap-3">
+        <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="p-5 rounded-xl border border-white/10 bg-white/[0.03] hover:border-arcade-cyan/40 transition-all">
+          <i class="fa-solid fa-microchip text-arcade-cyan mb-3"></i>
+          <div class="text-sm text-white font-medium">CPUs & Components</div>
+        </a>
+        <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="p-5 rounded-xl border border-white/10 bg-white/[0.03] hover:border-arcade-cyan/40 transition-all">
+          <i class="fa-solid fa-memory text-arcade-cyan mb-3"></i>
+          <div class="text-sm text-white font-medium">RAM & Storage</div>
+        </a>
+        <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="p-5 rounded-xl border border-white/10 bg-white/[0.03] hover:border-arcade-cyan/40 transition-all">
+          <i class="fa-solid fa-display text-arcade-cyan mb-3"></i>
+          <div class="text-sm text-white font-medium">Monitors</div>
+        </a>
+        <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="p-5 rounded-xl border border-white/10 bg-white/[0.03] hover:border-arcade-cyan/40 transition-all">
+          <i class="fa-solid fa-gamepad text-arcade-cyan mb-3"></i>
+          <div class="text-sm text-white font-medium">Gaming Gear</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="glass-panel rounded-3xl p-10 border border-arcade-cyan/20 text-center">
+      <i class="fa-solid fa-desktop text-7xl text-arcade-cyan mb-6"></i>
+      <h3 class="text-2xl font-display font-bold text-white mb-4">PC Upgrade Picks</h3>
+      <p class="text-gray-400 text-sm leading-relaxed mb-7">
+        Start with components and accessories that can make a meaningful difference to your setup.
+      </p>
+      <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="btn-chic-cyan inline-flex px-7 py-3 rounded-full text-sm font-semibold">
+        Shop PC Picks
+      </a>
+      <p class="mt-4 text-[10px] text-gray-600">Paid link</p>
+    </div>
+
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<section id="networking" class="py-20 relative z-10 border-t border-white/5">
+  <div class="container mx-auto px-6">
+    <div class="max-w-6xl mx-auto">
+
+```
+  <div class="text-center max-w-2xl mx-auto mb-12">
+    <span class="text-arcade-green text-xs font-mono tracking-[0.25em] uppercase">02 / NETWORKING</span>
+    <h2 class="text-4xl md:text-5xl font-display font-bold text-white mt-3 mb-5">Connect everything.</h2>
+    <p class="text-gray-400 leading-relaxed">
+      Better networking starts with the right equipment. Explore technology for home networks, gaming, remote work, and small businesses.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <article class="glass-panel p-7 rounded-2xl hover:border-arcade-green/30 transition-all">
+      <i class="fa-solid fa-wifi text-3xl text-arcade-green mb-5"></i>
+      <h3 class="text-lg font-display font-bold text-white mb-3">Wi-Fi</h3>
+      <p class="text-sm text-gray-400 leading-relaxed mb-5">
+        Routers, mesh systems, Wi-Fi adapters, and wireless accessories.
+      </p>
+      <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="text-sm text-arcade-green font-semibold">Explore Wi-Fi →</a>
+    </article>
+
+    <article class="glass-panel p-7 rounded-2xl hover:border-arcade-green/30 transition-all">
+      <i class="fa-solid fa-ethernet text-3xl text-arcade-green mb-5"></i>
+      <h3 class="text-lg font-display font-bold text-white mb-3">Ethernet</h3>
+      <p class="text-sm text-gray-400 leading-relaxed mb-5">
+        Ethernet cables, switches, connectors, testers, and network accessories.
+      </p>
+      <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="text-sm text-arcade-green font-semibold">Explore Ethernet →</a>
+    </article>
+
+    <article class="glass-panel p-7 rounded-2xl hover:border-arcade-green/30 transition-all">
+      <i class="fa-solid fa-server text-3xl text-arcade-green mb-5"></i>
+      <h3 class="text-lg font-display font-bold text-white mb-3">Small-Business IT</h3>
+      <p class="text-sm text-gray-400 leading-relaxed mb-5">
+        Networking and technology for offices, workspaces, and small teams.
+      </p>
+      <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="text-sm text-arcade-green font-semibold">Explore IT Gear →</a>
+    </article>
+
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<section id="workspace" class="py-20 relative z-10 border-t border-white/5">
+  <div class="container mx-auto px-6">
+    <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+
+```
+  <div class="glass-panel rounded-3xl p-10 border border-arcade-lavender/20">
+    <div class="grid grid-cols-2 gap-4">
+
+      <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="p-5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-arcade-lavender/40 transition-all">
+        <i class="fa-solid fa-keyboard text-arcade-lavender text-2xl mb-3"></i>
+        <div class="text-sm text-white">Keyboards</div>
+      </a>
+
+      <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="p-5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-arcade-lavender/40 transition-all">
+        <i class="fa-solid fa-computer-mouse text-arcade-lavender text-2xl mb-3"></i>
+        <div class="text-sm text-white">Mice</div>
+      </a>
+
+      <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="p-5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-arcade-lavender/40 transition-all">
+        <i class="fa-solid fa-headphones text-arcade-lavender text-2xl mb-3"></i>
+        <div class="text-sm text-white">Audio</div>
+      </a>
+
+      <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="p-5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-arcade-lavender/40 transition-all">
+        <i class="fa-solid fa-video text-arcade-lavender text-2xl mb-3"></i>
+        <div class="text-sm text-white">Webcams</div>
+      </a>
+
+      <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="p-5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-arcade-lavender/40 transition-all">
+        <i class="fa-solid fa-display text-arcade-lavender text-2xl mb-3"></i>
+        <div class="text-sm text-white">Monitors</div>
+      </a>
+
+      <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="p-5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-arcade-lavender/40 transition-all">
+        <i class="fa-solid fa-plug text-arcade-lavender text-2xl mb-3"></i>
+        <div class="text-sm text-white">USB & Power</div>
+      </a>
+
+    </div>
+  </div>
+
+  <div>
+    <span class="text-arcade-lavender text-xs font-mono tracking-[0.25em] uppercase">03 / WORKSPACE</span>
+    <h2 class="text-4xl md:text-5xl font-display font-bold text-white mt-3 mb-6">Upgrade your workspace.</h2>
+    <p class="text-gray-400 leading-relaxed mb-6">
+      The right peripherals can make everyday computing more comfortable and productive. Discover gear for home offices, creators, professionals, students, and gamers.
+    </p>
+    <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="inline-flex items-center text-arcade-lavender font-semibold text-sm">
+      Browse Workspace Picks <i class="fa-solid fa-arrow-right ml-2"></i>
+    </a>
+  </div>
+
+</div>
+```
+
+  </div>
+</section>
+
+<section id="tools" class="py-20 relative z-10 border-t border-white/5">
+  <div class="container mx-auto px-6">
+    <div class="max-w-6xl mx-auto">
+
+```
+  <div class="text-center max-w-2xl mx-auto mb-12">
+    <span class="text-arcade-cyan text-xs font-mono tracking-[0.25em] uppercase">04 / PC REPAIR</span>
+    <h2 class="text-4xl md:text-5xl font-display font-bold text-white mt-3 mb-5">Tools for the tech bench.</h2>
+    <p class="text-gray-400 leading-relaxed">
+      Useful tools and accessories for maintaining, upgrading, cleaning, troubleshooting, and organizing computer equipment.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+    <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="glass-panel rounded-2xl p-6 hover:border-arcade-cyan/30 transition-all group">
+      <i class="fa-solid fa-screwdriver-wrench text-3xl text-arcade-cyan mb-5 group-hover:scale-110 transition-transform"></i>
+      <h3 class="text-lg font-display font-bold text-white mb-2">Repair Kits</h3>
+      <p class="text-sm text-gray-400">Precision screwdrivers and PC repair tools.</p>
+    </a>
+
+    <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="glass-panel rounded-2xl p-6 hover:border-arcade-cyan/30 transition-all group">
+      <i class="fa-solid fa-temperature-half text-3xl text-arcade-cyan mb-5 group-hover:scale-110 transition-transform"></i>
+      <h3 class="text-lg font-display font-bold text-white mb-2">Thermal Supplies</h3>
+      <p class="text-sm text-gray-400">Thermal paste and cooling accessories.</p>
+    </a>
+
+    <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="glass-panel rounded-2xl p-6 hover:border-arcade-cyan/30 transition-all group">
+      <i class="fa-solid fa-wind text-3xl text-arcade-cyan mb-5 group-hover:scale-110 transition-transform"></i>
+      <h3 class="text-lg font-display font-bold text-white mb-2">Cleaning</h3>
+      <p class="text-sm text-gray-400">Cleaning supplies for PCs and electronics.</p>
+    </a>
+
+    <a href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank" rel="nofollow sponsored noopener" class="glass-panel rounded-2xl p-6 hover:border-arcade-cyan/30 transition-all group">
+      <i class="fa-solid fa-bolt text-3xl text-arcade-cyan mb-5 group-hover:scale-110 transition-transform"></i>
+      <h3 class="text-lg font-display font-bold text-white mb-2">Cables & Adapters</h3>
+      <p class="text-sm text-gray-400">Useful adapters, cables, and connectivity gear.</p>
+    </a>
+
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<section id="guides" class="py-20 relative z-10 border-t border-white/5">
+  <div class="container mx-auto px-6">
+    <div class="max-w-6xl mx-auto">
+
+```
+  <div class="text-center mb-12">
+    <span class="text-arcade-cyan text-xs font-mono tracking-[0.25em] uppercase">Cyberdelia Guides</span>
+    <h2 class="text-4xl md:text-5xl font-display font-bold text-white mt-3">Know before you buy.</h2>
+    <p class="text-gray-400 max-w-2xl mx-auto mt-5 leading-relaxed">
+      Practical guides designed to help you understand what actually matters when choosing technology.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <article class="glass-panel rounded-2xl p-7 hover:border-arcade-cyan/30 transition-all">
+      <div class="text-arcade-cyan font-mono text-xs mb-5">GUIDE / 01</div>
+      <h3 class="text-xl font-display font-bold text-white mb-4">How to choose PC components</h3>
+      <p class="text-sm text-gray-400 leading-relaxed mb-6">
+        Learn what matters when choosing processors, memory, storage, power supplies, cooling, and other PC components.
+      </p>
+      <a href="#pc" class="text-sm text-arcade-cyan font-semibold">Explore PC Picks →</a>
+    </article>
+
+    <article class="glass-panel rounded-2xl p-7 hover:border-arcade-lavender/30 transition-all">
+      <div class="text-arcade-lavender font-mono text-xs mb-5">GUIDE / 02</div>
+      <h3 class="text-xl font-display font-bold text-white mb-4">Build a better home office</h3>
+      <p class="text-sm text-gray-400 leading-relaxed mb-6">
+        Explore practical technology upgrades for productivity, comfort, video calls, and everyday computing.
+      </p>
+      <a href="#workspace" class="text-sm text-arcade-lavender font-semibold">Explore Workspace Picks →</a>
+    </article>
+
+    <article class="glass-panel rounded-2xl p-7 hover:border-arcade-green/30 transition-all">
+      <div class="text-arcade-green font-mono text-xs mb-5">GUIDE / 03</div>
+      <h3 class="text-xl font-display font-bold text-white mb-4">Improve your home network</h3>
+      <p class="text-sm text-gray-400 leading-relaxed mb-6">
+        Understand routers, Wi-Fi, Ethernet, switches, and other networking equipment before upgrading.
+      </p>
+      <a href="#networking" class="text-sm text-arcade-green font-semibold">Explore Networking Picks →</a>
+    </article>
+
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<section class="py-20 relative z-10">
+  <div class="container mx-auto px-6">
+    <div class="max-w-5xl mx-auto glass-panel rounded-[2rem] p-8 md:p-12 border border-arcade-cyan/20">
+      <div class="text-center">
+
+```
+    <span class="text-xs font-mono tracking-[0.25em] text-arcade-cyan uppercase">Need More Than A Product?</span>
+
+    <h2 class="text-3xl md:text-5xl font-display font-bold text-white mt-4 mb-5">
+      We can help put it all together.
+    </h2>
+
+    <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed mb-8">
+      Cyberdelia provides PC repair, custom PC builds, technology support, networking assistance, and web development throughout Broward County and South Florida.
+    </p>
+
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <a href="tel:+17863001144" class="btn-chic-cyan px-8 py-4 rounded-full text-sm font-semibold">
+        <i class="fa-solid fa-phone mr-2"></i>(786) 300-1144
+      </a>
+      <a href="mailto:cyberdeliatech@gmail.com" class="px-8 py-4 rounded-full text-sm font-medium text-gray-200 border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all">
+        <i class="fa-solid fa-envelope mr-2"></i>Contact Cyberdelia
+      </a>
+    </div>
+
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<section class="py-10 border-t border-white/5">
+  <div class="container mx-auto px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="text-xs text-gray-500 leading-relaxed">
+        <strong class="text-gray-400">Affiliate Disclosure:</strong>
+        As an Amazon Associate I earn from qualifying purchases. Some links on this website are affiliate links. If you purchase through one of these links, Cyberdelia may earn a commission at no additional cost to you.
+      </p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="bg-[#050607]/95 backdrop-blur-2xl border-t border-white/5 pt-14 pb-8 relative z-10">
+  <div class="container mx-auto px-6">
+
+```
+<div class="flex flex-col md:flex-row justify-between items-start gap-10 mb-10">
+
+  <div class="md:w-1/3">
+    <a href="#home" class="mb-4 block">
+      <img src="./content/img/ct_logo.png" alt="Cyberdelia Technologies" class="h-32 w-auto">
+    </a>
+
+    <p class="text-gray-400 text-sm mb-6 max-w-sm leading-relaxed">
+      Technology recommendations, PC solutions, IT support, custom computers, networking, and web development.
+    </p>
+
+    <div class="flex gap-4">
+      <a href="https://www.linkedin.com/in/naiffasilis/details/experience/" aria-label="LinkedIn" target="_blank" rel="noopener" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-arcade-cyan transition-all">
+        <i class="fa-brands fa-linkedin-in text-sm"></i>
+      </a>
+
+      <a href="https://www.instagram.com/cyberdeliatech/" aria-label="Instagram" target="_blank" rel="noopener" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-arcade-lavender transition-all">
+        <i class="fa-brands fa-instagram text-sm"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="md:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-8">
+
+    <div>
+      <h4 class="font-display text-white font-bold mb-5">Tech</h4>
+      <ul class="space-y-3 text-sm text-gray-400">
+        <li><a href="#featured" class="hover:text-white">Featured Picks</a></li>
+        <li><a href="#pc" class="hover:text-white">PC & Gaming</a></li>
+        <li><a href="#networking" class="hover:text-white">Networking</a></li>
+        <li><a href="#workspace" class="hover:text-white">Workspace</a></li>
+        <li><a href="#tools" class="hover:text-white">Tech Tools</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="font-display text-white font-bold mb-5">Guides</h4>
+      <ul class="space-y-3 text-sm text-gray-400">
+        <li><a href="#guides" class="hover:text-white">Buying Guides</a></li>
+        <li><a href="#pc" class="hover:text-white">PC Builds</a></li>
+        <li><a href="#networking" class="hover:text-white">Networking</a></li>
+        <li><a href="#workspace" class="hover:text-white">Workspaces</a></li>
+      </ul>
+    </div>
+
+    <div class="col-span-2 md:col-span-1">
+      <h4 class="font-display text-white font-bold mb-5">Cyberdelia</h4>
+      <ul class="space-y-4 text-sm text-gray-400">
+
+        <li>
+          <i class="fa-solid fa-phone text-arcade-cyan mr-3"></i>
+          <a href="tel:+17863001144">(786) 300-1144</a>
+        </li>
+
+        <li>
+          <i class="fa-solid fa-envelope text-arcade-lavender mr-3"></i>
+          <a href="mailto:cyberdeliatech@gmail.com">cyberdeliatech@gmail.com</a>
+        </li>
+
+        <li>
+          <i class="fa-solid fa-location-dot text-arcade-green mr-3"></i>
+          Broward County, FL
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div class="border-t border-white/5 pt-7 text-center md:text-left text-xs font-mono text-gray-500 flex flex-col md:flex-row justify-between gap-3">
+  <p>&copy; 2026 Cyberdelia IT Solutions. All Rights Reserved.</p>
+  <p>Tech recommendations by Cyberdelia.</p>
+</div>
+```
+
+  </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const menuButton = document.getElementById("mobileMenuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  if (menuButton && mobileMenu) {
+    menuButton.addEventListener("click", function() {
+      mobileMenu.classList.toggle("hidden");
+      mobileMenu.classList.toggle("flex");
+    });
+  }
+
+  document.querySelectorAll(".mobile-link").forEach(function(link) {
+    link.addEventListener("click", function() {
+      mobileMenu.classList.add("hidden");
+      mobileMenu.classList.remove("flex");
+    });
+  });
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script src="./js/pg_web.js"></script>
+
+</body>
+</html>
