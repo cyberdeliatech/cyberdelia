@@ -248,9 +248,9 @@ function createServerRack() {
     );
 
     const frontMaterial = new THREE.MeshBasicMaterial({
-      color: 0x090c10,
+      color: colorHex,
       transparent: true,
-      opacity: 0.88
+      opacity: 0.18
     });
 
     const frontPanel = new THREE.Mesh(
