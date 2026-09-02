@@ -615,3 +615,21 @@ transition-duration:.01ms!important;
 }
 
 }
+
+/* =========================
+   CYBERDELIA TEXT GRADIENT
+========================= */
+
+.cyber-gradient {
+  background: linear-gradient(
+    90deg,
+    #00E5FF 0%,
+    #C084FC 50%,
+    #00FF88 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
