@@ -38,6 +38,108 @@
 <!-- Custom CSS -->
 <style>
 html{scroll-behavior:smooth}body{overflow-x:hidden}address{font-style:normal}.carousel-window{width:100%;overflow:hidden;position:relative}.carousel-track{display:flex;width:max-content;transform:translate3d(0,0,0);will-change:transform}.carousel-set{display:flex;gap:24px;padding:0 12px;flex-shrink:0}.carousel-card{width:288px;height:400px;flex:0 0 288px;position:relative;overflow:hidden;background:#eee;border:4px solid #fff;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.12)}.carousel-card img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s ease}.carousel-card:hover img{transform:scale(1.05)}#merch-modal{transition:opacity .25s ease}#merch-modal.hidden{opacity:0;pointer-events:none}#merch-modal:not(.hidden){opacity:1}#merch-modal>div{animation:merchPopup .25s ease-out}@keyframes merchPopup{from{opacity:0;transform:scale(.92) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}@media(min-width:640px){.carousel-set{padding:0 16px}.carousel-card{width:320px;height:430px;flex-basis:320px}}@media(min-width:1024px){.carousel-set{padding:0 20px}.carousel-card{width:384px;height:450px;flex-basis:384px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}#merch-modal>div{animation:none}}
+
+/* CyberDeliaTech Floating Watermark */
+.cdt-watermark {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 9px 13px;
+  border-radius: 999px;
+
+  color: #ffffff;
+  background: rgba(20, 20, 20, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.22),
+    0 2px 8px rgba(0, 0, 0, 0.12);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  font-family: Inter, sans-serif;
+  font-size: 11px;
+  line-height: 1;
+  text-decoration: none;
+
+  opacity: 0.78;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.cdt-watermark:hover {
+  opacity: 1;
+  transform: translateY(-3px);
+  background: rgba(20, 20, 20, 0.94);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(167, 46, 30, 0.25);
+}
+
+.cdt-watermark-text {
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.cdt-watermark-text strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.cdt-watermark-arrow {
+  width: 21px;
+  height: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: #A72E1E;
+  color: #ffffff;
+
+  font-size: 9px;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.cdt-watermark:hover .cdt-watermark-arrow {
+  transform: rotate(8deg);
+  background: #c63a27;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .cdt-watermark {
+    right: 10px;
+    bottom: 10px;
+    padding: 8px 10px;
+    font-size: 10px;
+    gap: 7px;
+  }
+
+  .cdt-watermark-arrow {
+    width: 19px;
+    height: 19px;
+    font-size: 8px;
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .cdt-watermark,
+  .cdt-watermark-arrow {
+    transition: none;
+  }
+}
+  
 </style>
 </head>
 
@@ -269,6 +371,22 @@ html{scroll-behavior:smooth}body{overflow-x:hidden}address{font-style:normal}.ca
 <!-- Close Popup -->
 <button id="merch-close-btn" type="button" class="bg-white text-brand-red px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition">Got It!</button>
 
+<!-- CyberDeliaTech Website Watermark -->
+<a
+  href="https://cyberdeliatech.com/websites"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="cdt-watermark"
+  aria-label="Website by CyberDeliaTech"
+>
+  <span class="cdt-watermark-text">
+    Website by <strong>CyberDeliaTech</strong>
+  </span>
+  <span class="cdt-watermark-arrow" aria-hidden="true">
+    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+  </span>
+</a>
+  
 </div>
 </div>
 
