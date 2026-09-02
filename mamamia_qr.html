@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mamamia Da Vie QR Code</title>
+
+  <!-- QR Code Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+
+    .qr-wrapper {
+      position: relative;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background: white;
+      border-radius: 16px;
+    }
+
+    #qrcode {
+      position: relative;
+      line-height: 0;
+    }
+
+    #qrcode canvas,
+    #qrcode img {
+      display: block;
+    }
+
+    .qr-logo {
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      background: white;
+      padding: 7px;
+      border-radius: 12px;
+      box-sizing: border-box;
+    }
+
+    .website {
+      position: absolute;
+      bottom: -45px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      color: #222;
+      font-size: 15px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="qr-wrapper">
+    <div id="qrcode"></div>
+
+    <img
+      class="qr-logo"
+      src="https://img1.wsimg.com/isteam/ip/48ac6487-9874-4edd-94b4-d3e76c016902/blob-f582726.png/:/rs=w:207,h:200,cg:true,m/cr=w:207,h:200/qt=q:95"
+      alt="Mamamia Da Vie Logo"
+    >
+
+  <!--  <div class="website">mamamiadavie.com</div> -->
+  </div>
+
+  <script>
+    new QRCode(document.getElementById("qrcode"), {
+      text: "https://mamamiadavie.com/menu",
+      width: 300,
+      height: 300,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  </script>
+
+</body>
+</html>
