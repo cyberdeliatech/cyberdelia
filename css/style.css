@@ -102,7 +102,7 @@ select.chic-input option{background:#1A1A1A;color:#E2E8F0}
 
    It is a direct child of <body>.
 */
-#cyberdelia-review-floater{position:fixed!important;right:25px!important;bottom:25px!important;z-index:2147483647!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:10px!important;width:auto!important;min-width:175px!important;height:54px!important;padding:0 22px!important;margin:0!important;background:#08090b!important;color:#fff!important;border:2px solid #00FF88!important;border-radius:999px!important;font-family:'DM Mono',monospace!important;font-size:13px!important;font-weight:500!important;line-height:1!important;text-decoration:none!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important;isolation:isolate!important;box-shadow:0 8px 30px rgba(0,0,0,.7),0 0 20px rgba(0,255,136,.3)!important;transition:transform .25s ease,background .25s ease,box-shadow .25s ease,border-color .25s ease!important}
+#cyberdelia-review-floater{position:fixed!important;right:25px!important;bottom:25px!important;z-index:2147483647!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:10px!important;width:auto!important;min-width:175px!important;height:54px!important;padding:0 22px!important;margin:0!important;background:rgba(8,9,11,.55)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;color:#fff!important;border:2px solid #00FF88!important;border-radius:999px!important;font-family:'DM Mono',monospace!important;font-size:13px!important;font-weight:500!important;line-height:1!important;text-decoration:none!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important;isolation:isolate!important;box-shadow:0 8px 30px rgba(0,0,0,.7),0 0 20px rgba(0,255,136,.3)!important;transition:transform .25s ease,background .25s ease,box-shadow .25s ease,border-color .25s ease!important}
 
 /* STAR */
 #cyberdelia-review-floater .review-star{display:block!important;width:auto!important;height:auto!important;color:#FFD700!important;font-family:Arial,sans-serif!important;font-size:24px!important;font-weight:normal!important;line-height:1!important;text-shadow:0 0 6px rgba(255,215,0,.9),0 0 15px rgba(255,215,0,.5)!important}
@@ -111,7 +111,7 @@ select.chic-input option{background:#1A1A1A;color:#E2E8F0}
 #cyberdelia-review-floater .review-label{display:block!important;color:#fff!important;font-family:'DM Mono',monospace!important;font-size:13px!important;font-weight:500!important;line-height:1!important;white-space:nowrap!important}
 
 /* HOVER */
-#cyberdelia-review-floater:hover{background:#11151b!important;border-color:#00FF88!important;transform:translateY(-4px)!important;box-shadow:0 12px 40px rgba(0,0,0,.8),0 0 35px rgba(0,255,136,.45)!important}
+#cyberdelia-review-floater:hover{background:rgba(17,21,27,.75)!important;border-color:#00FF88!important;transform:translateY(-4px)!important;box-shadow:0 12px 40px rgba(0,0,0,.8),0 0 35px rgba(0,255,136,.45)!important}
 
 /* ========================================
    REVIEW BUTTON — MOBILE
