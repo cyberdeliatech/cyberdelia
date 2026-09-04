@@ -1,550 +1,654 @@
-*{box-sizing:border-box}
-
-html{scroll-behavior:smooth}
-
-body{
-background:#050505;
-color:#E2E8F0;
-font-family:'Plus Jakarta Sans',sans-serif;
-overflow-x:hidden;
--webkit-font-smoothing:antialiased;
-margin:0;
+* {
+  box-sizing: border-box;
 }
 
-h1,h2,h3,h4,h5,h6,.font-display{
-font-family:'Syne',sans-serif;
-letter-spacing:-.02em;
+html {
+  scroll-behavior: smooth;
 }
 
-#canvas-container{
-position:fixed;
-inset:0;
-width:100vw;
-height:100vh;
-z-index:0;
-background:#050505;
-pointer-events:none;
-overflow:hidden;
+body {
+  background: #050505;
+  color: #E2E8F0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
 }
 
-#canvas-container canvas{
-display:block;
-width:100%;
-height:100%;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-display {
+  font-family: 'Syne', sans-serif;
+  letter-spacing: -0.02em;
 }
 
-header,section,footer{
-position:relative;
-z-index:10;
-}
-
-.noise{
-position:fixed;
-inset:0;
-z-index:2;
-pointer-events:none;
-opacity:.035;
-background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
-}
-
-::-webkit-scrollbar{
-width:6px;
-}
-
-::-webkit-scrollbar-track{
-background:#050505;
-}
-
-::-webkit-scrollbar-thumb{
-background:#1A1A1A;
-border-radius:10px;
-border:1px solid rgba(0,229,255,.2);
-}
-
-::-webkit-scrollbar-thumb:hover{
-background:#00E5FF;
-}
-
-.glass-panel {
-  background:rgba(10,12,16,.48);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  border:1px solid rgba(255,255,255,.08);
-  box-shadow:
-  0 8px 32px rgba(0,0,0,.3);
-  transition:
-  all .4s cubic-bezier(.4,0,.2,1);
-}
-
-.glass-panel:hover {
-  background:rgba(15,18,22,.6);
-  border-color:
-  rgba(255,255,255,.15);
-  transform:
-  translateY(-4px);
-
-}
-
-
-.btn-chic-cyan{
-background:rgba(0,229,255,.05);
-backdrop-filter:blur(4px);
-color:#fff;
-border:1px solid rgba(0,229,255,.4);
-position:relative;
-overflow:hidden;
-transition:all .3s ease;
-}
-
-.btn-chic-cyan:before{
-content:'';
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:linear-gradient(
-90deg,
-transparent,
-rgba(0,229,255,.15),
-transparent
-);
-transform:translateX(-100%);
-transition:transform .5s ease;
-}
-
-.btn-chic-cyan:hover:before{
-transform:translateX(100%);
-}
-
-.btn-chic-cyan:hover{
-border-color:#00E5FF;
-box-shadow:0 0 20px rgba(0,229,255,.2);
-background:rgba(0,229,255,.1);
-}
-
-.chic-input{
-background:rgba(255,255,255,.03);
-backdrop-filter:blur(8px);
-border:1px solid rgba(255,255,255,.1);
-color:#E2E8F0;
-transition:all .3s ease;
-}
-
-.chic-input:focus{
-outline:none;
-background:rgba(255,255,255,.08);
-border-color:rgba(0,229,255,.6);
-box-shadow:0 0 20px rgba(0,229,255,.15);
-}
-
-select.chic-input{
-color-scheme:dark;
-background-color:rgba(26,26,26,.9);
-color:#E2E8F0;
-}
-
-select.chic-input option{
-background:#1A1A1A;
-color:#E2E8F0;
-}
-
-.chic-input::placeholder{
-color:#6B7280;
-}
-
-@keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(20px);
-}
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-.animate-fade-up{
-animation:fadeUp .8s ease forwards;
-}
-
-.form-status{
-display:none;
-padding:14px 18px;
-border-radius:12px;
-font-size:14px;
-font-family:'DM Mono',monospace;
-}
-
-.form-status.success{
-display:block;
-color:#00FF88;
-background:rgba(0,255,136,.08);
-border:1px solid rgba(0,255,136,.3);
-}
-
-.form-status.error{
-display:block;
-color:#ff7777;
-background:rgba(255,50,50,.08);
-border:1px solid rgba(255,50,50,.3);
-}
-
-.server-rack{
-position:relative;
-width:100%;
-height:100%;
-transform-style:preserve-3d;
-}
-
-.server-rack-frame{
-position:absolute;
-inset:0;
-border:1px solid rgba(255,255,255,.18);
-border-radius:10px;
-background:
-linear-gradient(
-90deg,
-rgba(0,229,255,.035),
-rgba(177,156,217,.025),
-rgba(0,255,136,.035)
-),
-rgba(0,0,0,.5);
-box-shadow:
-inset 0 0 30px rgba(0,229,255,.035),
-0 0 30px rgba(0,0,0,.5);
-overflow:hidden;
-}
-
-.server-rack-frame:before,
-.server-rack-frame:after{
-content:'';
-position:absolute;
-top:0;
-bottom:0;
-width:2px;
-opacity:.55;
-}
-
-.server-rack-frame:before{
-left:14px;
-background:#00E5FF;
-box-shadow:0 0 12px rgba(0,229,255,.7);
-}
-
-.server-rack-frame:after{
-right:14px;
-background:#00FF88;
-box-shadow:0 0 12px rgba(0,255,136,.7);
-}
-
-.server-top{
-position:absolute;
-top:8px;
-left:24px;
-right:24px;
-height:18px;
-border:1px solid rgba(177,156,217,.35);
-border-radius:4px;
-background:
-linear-gradient(
-90deg,
-rgba(0,229,255,.08),
-rgba(177,156,217,.12),
-rgba(0,255,136,.08)
-);
-}
-
-.server-units{
-position:absolute;
-top:35px;
-left:24px;
-right:24px;
-bottom:24px;
-display:flex;
-flex-direction:column;
-gap:7px;
-}
-
-.server-unit{
-flex:1;
-min-height:18px;
-border:1px solid rgba(255,255,255,.12);
-border-radius:3px;
-background:
-linear-gradient(
-90deg,
-rgba(255,255,255,.04),
-rgba(0,0,0,.55)
-);
-position:relative;
-overflow:hidden;
-}
-
-.server-unit:before{
-content:'';
-position:absolute;
-left:7px;
-top:50%;
-transform:translateY(-50%);
-width:22%;
-height:3px;
-background:rgba(255,255,255,.08);
-box-shadow:
-0 6px rgba(255,255,255,.05),
-0 -6px rgba(255,255,255,.05);
-}
-
-.server-unit:after{
-content:'';
-position:absolute;
-right:10px;
-top:50%;
-transform:translateY(-50%);
-width:4px;
-height:4px;
-border-radius:50%;
-background:#00E5FF;
-box-shadow:
--9px 0 #00FF88,
--18px 0 #B19CD9,
-0 0 8px #00E5FF;
-}
-
-.server-label{
-position:absolute;
-left:42%;
-top:50%;
-transform:translateY(-50%);
-font-family:'DM Mono',monospace;
-font-size:6px;
-letter-spacing:.12em;
-color:rgba(255,255,255,.25);
-text-transform:uppercase;
-}
-
-.server-glow{
-position:absolute;
-inset:0;
-pointer-events:none;
-background:
-linear-gradient(
-115deg,
-transparent 20%,
-rgba(0,229,255,.05) 45%,
-rgba(177,156,217,.04) 55%,
-transparent 80%
-);
-animation:serverSweep 6s linear infinite;
-}
-
-@keyframes serverSweep{
-0%{
-transform:translateX(-100%);
-}
-
-100%{
-transform:translateX(100%);
-}
-}
-
-@media(max-width:768px){
-.server-unit{
-min-height:15px;
-}
-
-.server-label{
-display:none;
-}
-}
-
-@media(prefers-reduced-motion:reduce){
-*,
-*:before,
-*:after{
-scroll-behavior:auto!important;
-animation-duration:.01ms!important;
-animation-iteration-count:1!important;
-transition-duration:.01ms!important;
-}
-}
 
 /* ========================================
-   FLOATING GOOGLE REVIEW BUTTON
+   THREE.JS BACKGROUND
 ======================================== */
 
-#reviews {
-  position: relative;
-  z-index: 99999;
+#canvas-container {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 0;
+
+  background: #050505;
+
+  pointer-events: none;
+  overflow: hidden;
 }
 
-.floating-review-btn {
+#canvas-container canvas {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
+
+
+/* ========================================
+   PAGE LAYERS
+======================================== */
+
+header,
+section,
+footer {
+  position: relative;
+  z-index: 10;
+}
+
+
+/* ========================================
+   NOISE
+======================================== */
+
+.noise {
   position: fixed;
-  right: 25px;
-  bottom: 25px;
+  inset: 0;
 
-  z-index: 999999;
+  z-index: 2;
 
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  pointer-events: none;
 
-  min-width: 170px;
-  padding: 14px 20px;
+  opacity: 0.035;
 
-  color: #ffffff !important;
-  background: rgba(5, 8, 12, 0.88);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+}
+
+
+/* ========================================
+   SCROLLBAR
+======================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1A1A1A;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00E5FF;
+}
+
+
+/* ========================================
+   GLASS PANELS
+======================================== */
+
+.glass-panel {
+  background: rgba(10, 12, 16, 0.48);
 
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 
-  border: 1px solid rgba(255, 215, 0, 0.75);
-  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 
   box-shadow:
-    0 8px 30px rgba(0, 0, 0, 0.55),
-    0 0 20px rgba(255, 215, 0, 0.18);
-
-  font-family: 'DM Mono', monospace;
-  font-size: 13px;
-  font-weight: 500;
-
-  text-decoration: none !important;
-  cursor: pointer;
-
-  opacity: 1 !important;
-  visibility: visible !important;
+    0 8px 32px rgba(0, 0, 0, 0.3);
 
   transition:
-    transform 0.3s ease,
-    background 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.floating-review-btn .review-star {
-  display: inline-block;
-  color: #FFD700 !important;
-  font-size: 19px;
-  line-height: 1;
+.glass-panel:hover {
+  background: rgba(15, 18, 22, 0.6);
 
-  text-shadow:
-    0 0 6px rgba(255, 215, 0, 0.8),
-    0 0 14px rgba(255, 215, 0, 0.4);
-}
+  border-color: rgba(255, 255, 255, 0.15);
 
-.floating-review-btn .review-text {
-  display: inline-block;
-  color: #ffffff !important;
-  white-space: nowrap;
-}
-
-.floating-review-btn:hover {
   transform: translateY(-4px);
+}
 
-  background: rgba(10, 14, 20, 0.96);
 
-  border-color: #FFD700;
+/* ========================================
+   CYAN BUTTON
+======================================== */
+
+.btn-chic-cyan {
+  background: rgba(0, 229, 255, 0.05);
+
+  backdrop-filter: blur(4px);
+
+  color: #fff;
+
+  border: 1px solid rgba(0, 229, 255, 0.4);
+
+  position: relative;
+  overflow: hidden;
+
+  transition: all 0.3s ease;
+}
+
+.btn-chic-cyan:before {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 229, 255, 0.15),
+      transparent
+    );
+
+  transform: translateX(-100%);
+
+  transition: transform 0.5s ease;
+}
+
+.btn-chic-cyan:hover:before {
+  transform: translateX(100%);
+}
+
+.btn-chic-cyan:hover {
+  border-color: #00E5FF;
 
   box-shadow:
-    0 12px 35px rgba(0, 0, 0, 0.6),
-    0 0 30px rgba(255, 215, 0, 0.35);
+    0 0 20px rgba(0, 229, 255, 0.2);
+
+  background: rgba(0, 229, 255, 0.1);
 }
 
-/* Mobile */
 
-@media (max-width: 768px) {
-  .floating-review-btn {
-    right: 16px;
-    bottom: 16px;
+/* ========================================
+   FORM INPUTS
+======================================== */
 
-    width: 52px;
-    min-width: 52px;
-    height: 52px;
+.chic-input {
+  background: rgba(255, 255, 255, 0.03);
 
-    padding: 0;
+  backdrop-filter: blur(8px);
 
-    border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 
-    gap: 0;
+  color: #E2E8F0;
+
+  transition: all 0.3s ease;
+}
+
+.chic-input:focus {
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  border-color: rgba(0, 229, 255, 0.6);
+
+  box-shadow:
+    0 0 20px rgba(0, 229, 255, 0.15);
+}
+
+select.chic-input {
+  color-scheme: dark;
+
+  background-color: rgba(26, 26, 26, 0.9);
+
+  color: #E2E8F0;
+}
+
+select.chic-input option {
+  background: #1A1A1A;
+  color: #E2E8F0;
+}
+
+.chic-input::placeholder {
+  color: #6B7280;
+}
+
+
+/* ========================================
+   FADE ANIMATION
+======================================== */
+
+@keyframes fadeUp {
+
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
 
-  .floating-review-btn .review-text {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s ease forwards;
+}
+
+
+/* ========================================
+   FORM STATUS
+======================================== */
+
+.form-status {
+  display: none;
+
+  padding: 14px 18px;
+
+  border-radius: 12px;
+
+  font-size: 14px;
+
+  font-family: 'DM Mono', monospace;
+}
+
+.form-status.success {
+  display: block;
+
+  color: #00FF88;
+
+  background: rgba(0, 255, 136, 0.08);
+
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.form-status.error {
+  display: block;
+
+  color: #ff7777;
+
+  background: rgba(255, 50, 50, 0.08);
+
+  border: 1px solid rgba(255, 50, 50, 0.3);
+}
+
+
+/* ========================================
+   SERVER RACK
+======================================== */
+
+.server-rack {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  transform-style: preserve-3d;
+}
+
+.server-rack-frame {
+  position: absolute;
+  inset: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 229, 255, 0.035),
+      rgba(177, 156, 217, 0.025),
+      rgba(0, 255, 136, 0.035)
+    ),
+    rgba(0, 0, 0, 0.5);
+
+  box-shadow:
+    inset 0 0 30px rgba(0, 229, 255, 0.035),
+    0 0 30px rgba(0, 0, 0, 0.5);
+
+  overflow: hidden;
+}
+
+.server-rack-frame:before,
+.server-rack-frame:after {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  width: 2px;
+
+  opacity: 0.55;
+}
+
+.server-rack-frame:before {
+  left: 14px;
+
+  background: #00E5FF;
+
+  box-shadow:
+    0 0 12px rgba(0, 229, 255, 0.7);
+}
+
+.server-rack-frame:after {
+  right: 14px;
+
+  background: #00FF88;
+
+  box-shadow:
+    0 0 12px rgba(0, 255, 136, 0.7);
+}
+
+.server-top {
+  position: absolute;
+
+  top: 8px;
+  left: 24px;
+  right: 24px;
+
+  height: 18px;
+
+  border: 1px solid rgba(177, 156, 217, 0.35);
+
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 229, 255, 0.08),
+      rgba(177, 156, 217, 0.12),
+      rgba(0, 255, 136, 0.08)
+    );
+}
+
+.server-units {
+  position: absolute;
+
+  top: 35px;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.server-unit {
+  flex: 1;
+
+  min-height: 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(0, 0, 0, 0.55)
+    );
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.server-unit:before {
+  content: '';
+
+  position: absolute;
+
+  left: 7px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 22%;
+  height: 3px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 6px rgba(255, 255, 255, 0.05),
+    0 -6px rgba(255, 255, 255, 0.05);
+}
+
+.server-unit:after {
+  content: '';
+
+  position: absolute;
+
+  right: 10px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: #00E5FF;
+
+  box-shadow:
+    -9px 0 #00FF88,
+    -18px 0 #B19CD9,
+    0 0 8px #00E5FF;
+}
+
+.server-label {
+  position: absolute;
+
+  left: 42%;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  font-family: 'DM Mono', monospace;
+
+  font-size: 6px;
+
+  letter-spacing: 0.12em;
+
+  color: rgba(255, 255, 255, 0.25);
+
+  text-transform: uppercase;
+}
+
+.server-glow {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      115deg,
+      transparent 20%,
+      rgba(0, 229, 255, 0.05) 45%,
+      rgba(177, 156, 217, 0.04) 55%,
+      transparent 80%
+    );
+
+  animation: serverSweep 6s linear infinite;
+}
+
+@keyframes serverSweep {
+
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .server-unit {
+    min-height: 15px;
+  }
+
+  .server-label {
     display: none;
   }
 
-  .floating-review-btn .review-star {
-    font-size: 21px;
-  }
 }
 
-#googleReviewButton {
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *:before,
+  *:after {
+
+    scroll-behavior: auto !important;
+
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+
+  }
+
+}
+
+
+/* ========================================
+   GOOGLE REVIEW FLOATING BUTTON
+======================================== */
+
+/*
+   IMPORTANT:
+   This button is intentionally NOT inside
+   a section or footer.
+
+   It is a direct child of <body>.
+*/
+
+#cyberdelia-review-floater {
+
   position: fixed !important;
 
   right: 25px !important;
   bottom: 25px !important;
 
-  width: auto !important;
-  min-width: 175px !important;
-  height: 52px !important;
+  z-index: 2147483647 !important;
 
   display: flex !important;
+
   align-items: center !important;
   justify-content: center !important;
+
   gap: 10px !important;
 
-  padding: 0 20px !important;
+  width: auto !important;
+  min-width: 175px !important;
+
+  height: 54px !important;
+
+  padding: 0 22px !important;
+  margin: 0 !important;
 
   background: #08090b !important;
+
   color: #ffffff !important;
 
   border: 2px solid #FFD700 !important;
+
   border-radius: 999px !important;
 
-  z-index: 2147483647 !important;
+  font-family: 'DM Mono', monospace !important;
 
-  opacity: 1 !important;
-  visibility: visible !important;
+  font-size: 13px !important;
+
+  font-weight: 500 !important;
+
+  line-height: 1 !important;
 
   text-decoration: none !important;
 
-  font-family: 'DM Mono', monospace !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
+  opacity: 1 !important;
 
-  box-shadow:
-    0 8px 30px rgba(0, 0, 0, 0.7),
-    0 0 15px rgba(255, 215, 0, 0.25),
-    0 0 40px rgba(255, 215, 0, 0.10) !important;
+  visibility: visible !important;
+
+  pointer-events: auto !important;
 
   transform: none !important;
 
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease !important;
-}
-
-#googleReviewButton:hover {
-  background: #11151b !important;
-
-  transform: translateY(-4px) !important;
+  isolation: isolate !important;
 
   box-shadow:
-    0 12px 35px rgba(0, 0, 0, 0.75),
-    0 0 20px rgba(255, 215, 0, 0.4),
-    0 0 50px rgba(255, 215, 0, 0.15) !important;
+    0 8px 30px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(255, 215, 0, 0.30) !important;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease !important;
 }
 
-.google-review-star {
-  display: inline-block !important;
+
+/* STAR */
+
+#cyberdelia-review-floater .review-star {
+
+  display: block !important;
+
+  width: auto !important;
+  height: auto !important;
 
   color: #FFD700 !important;
 
   font-family: Arial, sans-serif !important;
-  font-size: 22px !important;
+
+  font-size: 24px !important;
+
+  font-weight: normal !important;
+
   line-height: 1 !important;
 
   text-shadow:
@@ -552,38 +656,74 @@ transition-duration:.01ms!important;
     0 0 15px rgba(255, 215, 0, 0.5) !important;
 }
 
-.google-review-text {
-  display: inline-block !important;
+
+/* TEXT */
+
+#cyberdelia-review-floater .review-label {
+
+  display: block !important;
 
   color: #ffffff !important;
+
+  font-family: 'DM Mono', monospace !important;
+
+  font-size: 13px !important;
+
+  font-weight: 500 !important;
+
+  line-height: 1 !important;
 
   white-space: nowrap !important;
 }
 
 
-/* MOBILE */
+/* HOVER */
+
+#cyberdelia-review-floater:hover {
+
+  background: #11151b !important;
+
+  border-color: #FFD700 !important;
+
+  transform: translateY(-4px) !important;
+
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.8),
+    0 0 35px rgba(255, 215, 0, 0.45) !important;
+}
+
+
+/* ========================================
+   REVIEW BUTTON — MOBILE
+======================================== */
 
 @media (max-width: 768px) {
 
-  #googleReviewButton {
+  #cyberdelia-review-floater {
+
     right: 16px !important;
     bottom: 16px !important;
 
-    width: 54px !important;
-    min-width: 54px !important;
+    width: 56px !important;
+    min-width: 56px !important;
 
-    height: 54px !important;
+    height: 56px !important;
 
     padding: 0 !important;
 
     border-radius: 50% !important;
+
+    gap: 0 !important;
   }
 
-  .google-review-text {
+  #cyberdelia-review-floater .review-label {
+
     display: none !important;
   }
 
-  .google-review-star {
-    font-size: 23px !important;
+  #cyberdelia-review-floater .review-star {
+
+    font-size: 25px !important;
   }
+
 }
