@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08090b">
+<meta name="description" content="Cyberdelia QR Code Generator.">
+<title>Cyberdelia | QR Code Generator</title>
+<link rel="icon" type="image/png" href="./content/img/logo.png">
+<link rel="apple-touch-icon" href="./content/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#050505;color:#E2E8F0;font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,h5,h6,.font-display{font-family:'Syne',sans-serif;letter-spacing:-.02em}
+header,main,footer{position:relative;z-index:10}
+
+#canvas-container{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;background:#050505;pointer-events:none;overflow:hidden}
+#canvas-container canvas{display:block;width:100%;height:100%}
+
+.noise{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}
+
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#050505}
+::-webkit-scrollbar-thumb{background:#1A1A1A;border-radius:10px;border:1px solid rgba(0,229,255,.2)}
+::-webkit-scrollbar-thumb:hover{background:#00E5FF}
+
+.glass-panel{background:rgba(10,12,16,.58);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 32px rgba(0,0,0,.3),0 0 40px rgba(0,229,255,.025);transition:border-color .3s ease,background .3s ease,box-shadow .3s ease}
+.glass-panel:hover{background:rgba(15,18,22,.65);border-color:rgba(255,255,255,.13);box-shadow:0 12px 40px rgba(0,0,0,.35),0 0 45px rgba(0,229,255,.04)}
+
+.cyber-gradient{background:linear-gradient(90deg,#00E5FF 0%,#C084FC 50%,#00FF88 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+
+.btn-chic-cyan{background:rgba(0,229,255,.05);backdrop-filter:blur(4px);color:#fff;border:1px solid rgba(0,229,255,.4);position:relative;overflow:hidden;transition:all .3s ease}
+.btn-chic-cyan:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(0,229,255,.15),transparent);transform:translateX(-100%);transition:transform .5s ease}
+.btn-chic-cyan:hover:before{transform:translateX(100%)}
+.btn-chic-cyan:hover{border-color:#00E5FF;box-shadow:0 0 20px rgba(0,229,255,.2);background:rgba(0,229,255,.1)}
+
+.hero-orbit{position:absolute;width:520px;height:520px;border:1px solid rgba(0,229,255,.08);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none}
+.hero-orbit:before,.hero-orbit:after{content:'';position:absolute;border-radius:50%;inset:40px;border:1px solid rgba(177,156,217,.06)}
+.hero-orbit:after{inset:90px;border-color:rgba(0,255,136,.05)}
+
+.generator-section{position:relative;z-index:10}
+.generator-panel{width:100%;max-width:1150px;margin:0 auto;border-radius:28px;padding:28px}
+.generator-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(350px,460px);gap:30px;align-items:stretch}
+
+.control-label{display:block;margin-bottom:9px;color:#cbd5e1;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.input-box{width:100%;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.1);color:white;border-radius:12px;padding:14px 15px;outline:none;transition:.25s ease}
+.input-box:focus{border-color:rgba(0,229,255,.65);box-shadow:0 0 0 3px rgba(0,229,255,.07)}
+.input-box::placeholder{color:#64748b}
+
+.color-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.color-control{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:9px 11px}
+.color-control input[type="color"]{width:42px;height:34px;padding:0;border:none;border-radius:8px;background:transparent;cursor:pointer}
+.color-value{color:#94a3b8;font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase}
+
+.slider-row{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:8px}
+.slider-value{min-width:65px;text-align:right;color:#00E5FF;font-family:'DM Mono',monospace;font-size:12px}
+input[type="range"]{width:100%;appearance:none;-webkit-appearance:none;height:5px;background:rgba(255,255,255,.1);border-radius:99px;outline:none;cursor:pointer}
+input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#00E5FF;border:3px solid #071014;box-shadow:0 0 14px rgba(0,229,255,.5);cursor:pointer}
+input[type="range"]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#00E5FF;border:3px solid #071014;box-shadow:0 0 14px rgba(0,229,255,.5);cursor:pointer}
+
+.preset-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.preset-btn{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);color:#94a3b8;border-radius:9px;padding:9px 5px;font-family:'DM Mono',monospace;font-size:10px;cursor:pointer;transition:.25s ease}
+.preset-btn:hover,.preset-btn.active{color:#00E5FF;border-color:rgba(0,229,255,.5);background:rgba(0,229,255,.08);box-shadow:0 0 12px rgba(0,229,255,.08)}
+
+.upload-box{position:relative;display:block;width:100%;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.035);border-radius:14px;padding:20px;text-align:center;cursor:pointer;transition:border-color .3s ease,background .3s ease,box-shadow .3s ease}
+.upload-box:hover{border-color:rgba(0,229,255,.45);background:rgba(0,229,255,.05);box-shadow:0 0 20px rgba(0,229,255,.06)}
+.upload-box i{font-size:24px;color:#00E5FF;margin-bottom:8px}
+.upload-box-title{color:#e2e8f0;font-size:13px;font-weight:600}
+.upload-box-subtitle{margin-top:4px;color:#64748b;font-family:'DM Mono',monospace;font-size:10px}
+#logoInput{display:none}
+
+.logo-url-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:10px}
+.logo-url-btn{min-width:82px;border:1px solid rgba(0,229,255,.4);background:rgba(0,229,255,.06);color:#fff;border-radius:12px;padding:0 16px;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;cursor:pointer;transition:.25s ease}
+.logo-url-btn:hover{border-color:#00E5FF;background:rgba(0,229,255,.12);box-shadow:0 0 18px rgba(0,229,255,.12);color:#00E5FF}
+.logo-url-btn:disabled{opacity:.5;cursor:wait}
+.logo-url-help{margin-top:7px;color:#64748b;font-family:'DM Mono',monospace;font-size:9px;text-align:center}
+
+.preview-panel{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:570px;border-radius:22px;background:rgba(3,5,7,.72);border:1px solid rgba(255,255,255,.08);padding:28px;overflow:hidden}
+.preview-label{align-self:stretch;display:flex;justify-content:space-between;margin-bottom:20px}
+.preview-label span:first-child{color:#fff;font-family:'Syne',sans-serif;font-weight:700}
+.preview-label span:last-child{color:#00E5FF;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em}
+
+.qr-stage{position:relative;display:flex;align-items:center;justify-content:center;padding:22px;background:#fff;border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 35px rgba(0,229,255,.08);max-width:100%;overflow:hidden}
+#qrcode{position:relative;line-height:0;flex-shrink:0}
+#qrcode canvas,#qrcode img{display:block;max-width:100%;height:auto}
+.qr-logo{position:absolute;object-fit:contain;background:#fff;border-radius:12px;box-sizing:border-box;display:none;z-index:5;box-shadow:0 1px 8px rgba(0,0,0,.12);pointer-events:none}
+
+.action-row{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.action-btn{border-radius:12px;padding:13px 15px;cursor:pointer;font-size:12px;font-weight:600;transition:.25s ease}
+.download-btn{background:rgba(0,229,255,.1);border:1px solid rgba(0,229,255,.45);color:#fff}
+.download-btn:hover{background:rgba(0,229,255,.18);border-color:#00E5FF;box-shadow:0 0 20px rgba(0,229,255,.15)}
+.reset-btn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);color:#cbd5e1}
+.reset-btn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25)}
+
+.status{min-height:18px;margin-top:12px;text-align:center;color:#64748b;font-family:'DM Mono',monospace;font-size:10px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.animate-fade-up{animation:fadeUp .8s ease forwards}
+
+@media(max-width:900px){
+.generator-grid{grid-template-columns:1fr}
+.preview-panel{min-height:auto}
+}
+@media(max-width:640px){
+.generator-panel{padding:18px;border-radius:20px}
+.generator-grid{gap:18px}
+.color-row{grid-template-columns:1fr}
+.preset-grid{grid-template-columns:repeat(3,1fr)}
+.preview-panel{padding:18px}
+.qr-stage{padding:14px}
+.action-row{grid-template-columns:1fr}
+.logo-url-row{grid-template-columns:1fr}
+.logo-url-btn{min-height:44px}
+.hero-orbit{width:300px;height:300px}
+}
+@media(prefers-reduced-motion:reduce){
+*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+
+<body class="antialiased">
+<div id="canvas-container"></div>
+<div class="noise"></div>
+
+<header class="fixed w-full top-0 z-50 border-b border-white/5 bg-[#0f0f0f]/40 backdrop-blur-xl">
+<div class="container mx-auto px-6 py-4 flex justify-between items-center">
+<a href="./" class="flex items-center gap-3 group">
+<img src="./content/img/logo.png" alt="Cyberdelia" class="h-12 w-auto">
+<div class="flex flex-col leading-none">
+<span class="text-2xl font-bold font-display tracking-wide text-white">Cyberdelia</span>
+<span class="mt-1 text-[9px] font-mono tracking-[0.3em] uppercase text-[#00FF88]">Technologies</span>
+</div>
+</a>
+
+<nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
+<a href="./#pc-repair" class="hover:text-white transition-all">PC Repair</a>
+<a href="./#web-design" class="hover:text-white transition-all">Web Design</a>
+<a href="./#custom-pcs" class="hover:text-white transition-all">Custom PCs</a>
+<a href="./#it-support" class="hover:text-white transition-all">Small-Biz IT</a>
+<a href="./#about" class="hover:text-white transition-all">About</a>
+</nav>
+
+<div class="hidden lg:flex items-center gap-6">
+<a href="tel:7863001144" class="text-sm font-mono text-gray-300 hover:text-[#00E5FF] transition-all"><i class="fa-solid fa-phone text-xs mr-2"></i>(786) 300-1144</a>
+<a href="./#contact" class="btn-chic-cyan px-6 py-2.5 rounded-full text-sm font-medium">Request a Quote</a>
+</div>
+
+<button id="mobileMenuBtn" class="lg:hidden text-gray-300 hover:text-white" aria-label="Open menu"><i class="fa-solid fa-bars text-2xl"></i></button>
+</div>
+
+<div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-[#08090b]/90 backdrop-blur-2xl border-b border-white/15 flex-col py-4 px-6 shadow-2xl">
+<a href="./#pc-repair" class="py-3 border-b border-white/5 text-gray-300">PC Repair & Tech Support</a>
+<a href="./#web-design" class="py-3 border-b border-white/5 text-gray-300">Web Design & Dev</a>
+<a href="./#custom-pcs" class="py-3 border-b border-white/5 text-gray-300">Custom PC Builds</a>
+<a href="./#it-support" class="py-3 border-b border-white/5 text-gray-300">Small-Business IT</a>
+<a href="./#about" class="py-3 border-b border-white/5 text-gray-300">About</a>
+<a href="./#contact" class="py-4 text-[#00E5FF] font-bold uppercase">Request a Quote</a>
+</div>
+</header>
+
+<main>
+<section id="qr-generator" class="pt-36 pb-24 min-h-screen relative z-10">
+<div class="container mx-auto px-6">
+<div class="max-w-4xl mx-auto text-center mb-12 animate-fade-up">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#B19CD9]/40 bg-[#B19CD9]/10 text-[#B19CD9] text-xs font-mono tracking-widest uppercase mb-7">
+<span class="w-2 h-2 rounded-full bg-[#B19CD9] animate-pulse"></span>Cyberdelia QR Generator
+</div>
+<h1 class="text-5xl md:text-7xl font-display font-bold text-white leading-[1.05] mb-6">Create your <span class="cyber-gradient">QR code.</span></h1>
+<p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed">Generate custom QR codes with your own colors, logo, image, and size. Ready to download and use anywhere.</p>
+</div>
+
+<div class="generator-panel glass-panel">
+<div class="generator-grid">
+<div class="space-y-6">
+<div>
+<label class="control-label">Website / URL</label>
+<input id="urlInput" class="input-box" type="url" value="" placeholder="https://cyberdeliatech.com/">
+</div>
+
+<div>
+<label class="control-label">Colors</label>
+<div class="color-row">
+<div class="color-control">
+<input id="foregroundColor" type="color" value="#000000">
+<div><div class="text-white text-xs font-semibold">QR Color</div><div id="foregroundValue" class="color-value">#000000</div></div>
+</div>
+<div class="color-control">
+<input id="backgroundColor" type="color" value="#ffffff">
+<div><div class="text-white text-xs font-semibold">Background</div><div id="backgroundValue" class="color-value">#FFFFFF</div></div>
+</div>
+</div>
+</div>
+
+<div>
+<div class="slider-row">
+<label class="control-label mb-0">QR Size</label>
+<span id="sizeValue" class="slider-value">300 px</span>
+</div>
+<input id="sizeSlider" type="range" min="150" max="800" step="10" value="300">
+</div>
+
+<div>
+<label class="control-label">Size Presets</label>
+<div class="preset-grid">
+<button type="button" class="preset-btn" data-size="200">200</button>
+<button type="button" class="preset-btn active" data-size="300">300</button>
+<button type="button" class="preset-btn" data-size="400">400</button>
+<button type="button" class="preset-btn" data-size="500">500</button>
+<button type="button" class="preset-btn" data-size="600">600</button>
+</div>
+</div>
+
+<div>
+<label class="control-label">Center Logo / Image</label>
+<label for="logoInput" class="upload-box">
+<i class="fa-solid fa-cloud-arrow-up block"></i>
+<div class="upload-box-title">Select Local Image</div>
+<div class="upload-box-subtitle">PNG / JPG / WEBP</div>
+</label>
+<input id="logoInput" type="file" accept="image/png,image/jpeg,image/webp">
+
+<div class="logo-url-row">
+<input id="logoUrlInput" class="input-box" type="url" placeholder="https://example.com/logo.png" autocomplete="off">
+<button id="loadLogoUrlBtn" type="button" class="logo-url-btn"><i class="fa-solid fa-link"></i> Load</button>
+</div>
+<div class="logo-url-help">Or paste a direct image URL</div>
+</div>
+
+<div id="logoSizeControl" style="display:none;">
+<div class="slider-row">
+<label class="control-label mb-0">Logo Size</label>
+<span id="logoSizeValue" class="slider-value">70 px</span>
+</div>
+<input id="logoSizeSlider" type="range" min="35" max="140" step="5" value="70">
+
+<div class="mt-4">
+<label class="control-label">Logo Size Presets</label>
+<div class="preset-grid">
+<button type="button" class="logo-preset-btn preset-btn" data-logo-size="40">40</button>
+<button type="button" class="logo-preset-btn preset-btn" data-logo-size="55">55</button>
+<button type="button" class="logo-preset-btn preset-btn active" data-logo-size="70">70</button>
+<button type="button" class="logo-preset-btn preset-btn" data-logo-size="90">90</button>
+<button type="button" class="logo-preset-btn preset-btn" data-logo-size="110">110</button>
+</div>
+</div>
+</div>
+
+<div class="action-row">
+<button id="downloadBtn" type="button" class="action-btn download-btn"><i class="fa-solid fa-download mr-2"></i>Download PNG</button>
+<button id="resetBtn" type="button" class="action-btn reset-btn"><i class="fa-solid fa-rotate-left mr-2"></i>Reset</button>
+</div>
+
+<div id="status" class="status">Ready to generate.</div>
+</div>
+
+<div class="preview-panel">
+<div class="preview-label"><span>Live Preview</span><span>QR / LIVE</span></div>
+<div id="qrStage" class="qr-stage">
+<div id="qrcode"></div>
+<img id="qrLogo" class="qr-logo" alt="QR center logo">
+</div>
+<div class="mt-5 text-center">
+<div id="previewUrl" class="text-gray-400 font-mono text-[10px] break-all">https://cyberdeliatech.com/</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="bg-[#050607]/90 backdrop-blur-2xl border-t border-white/5 pt-14 pb-8 relative z-10">
+<div class="container mx-auto px-6">
+<div class="flex flex-col md:flex-row justify-between items-start gap-10 mb-10">
+<div class="md:w-1/3">
+<a href="./" class="mb-4 block"><img src="./content/img/ct_logo.png" alt="Cyberdelia" class="h-32 w-auto"></a>
+<p class="text-gray-400 text-sm mb-6 max-w-sm leading-relaxed">IT Support • PC Repair • Custom PCs • Web Design. Serving Broward County and South Florida.</p>
+<div class="flex gap-4">
+<a href="https://www.linkedin.com/in/naiffasilis/details/experience/" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-[#00E5FF]"><i class="fa-brands fa-linkedin-in text-sm"></i></a>
+<a href="https://www.instagram.com/cyberdeliatech/" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-[#B19CD9]"><i class="fa-brands fa-instagram text-sm"></i></a>
+</div>
+</div>
+
+<div class="md:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-8">
+<div>
+<h4 class="font-display text-white font-bold mb-5">Services</h4>
+<ul class="space-y-3 text-sm text-gray-400">
+<li><a href="./#pc-repair" class="hover:text-white">PC Repair</a></li>
+<li><a href="./#web-design" class="hover:text-white">Web Design</a></li>
+<li><a href="./#custom-pcs" class="hover:text-white">Custom Builds</a></li>
+<li><a href="./#it-support" class="hover:text-white">Small-Biz IT</a></li>
+</ul>
+</div>
+
+<div>
+<h4 class="font-display text-white font-bold mb-5">Company</h4>
+<ul class="space-y-3 text-sm text-gray-400">
+<li><a href="./#about" class="hover:text-white">Meet Naiff</a></li>
+<li><a href="./#contact" class="hover:text-white">Contact</a></li>
+<li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+</ul>
+</div>
+
+<div class="col-span-2 md:col-span-1">
+<h4 class="font-display text-white font-bold mb-5">Contact</h4>
+<ul class="space-y-4 text-sm text-gray-400">
+<li><i class="fa-solid fa-phone text-[#00E5FF] mr-3"></i><a href="tel:+17863001144">(786) 300-1144</a></li>
+<li><i class="fa-solid fa-envelope text-[#B19CD9] mr-3"></i><a href="mailto:cyberdeliatech@gmail.com">cyberdeliatech@gmail.com</a></li>
+<li><i class="fa-solid fa-location-dot text-[#00FF88] mr-3"></i>Broward County, FL</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="border-t border-white/5 pt-7 text-center md:text-left text-xs font-mono text-gray-500 flex flex-col md:flex-row justify-between gap-3">
+<p>&copy; 2026 Cyberdelia IT Solutions. All Rights Reserved.</p>
+<p>Designed & Developed by Naiff.</p>
+</div>
+</div>
+</footer>
+
+<script>
+const mobileMenuBtn=document.getElementById('mobileMenuBtn'),mobileMenu=document.getElementById('mobileMenu');
+mobileMenuBtn.addEventListener('click',()=>{mobileMenu.classList.toggle('hidden')});
+document.querySelectorAll('#mobileMenu a').forEach(link=>{link.addEventListener('click',()=>{mobileMenu.classList.add('hidden')})});
+
+const urlInput=document.getElementById('urlInput'),
+foregroundColor=document.getElementById('foregroundColor'),
+backgroundColor=document.getElementById('backgroundColor'),
+foregroundValue=document.getElementById('foregroundValue'),
+backgroundValue=document.getElementById('backgroundValue'),
+sizeSlider=document.getElementById('sizeSlider'),
+sizeValue=document.getElementById('sizeValue'),
+logoInput=document.getElementById('logoInput'),
+logoUrlInput=document.getElementById('logoUrlInput'),
+loadLogoUrlBtn=document.getElementById('loadLogoUrlBtn'),
+logoSizeControl=document.getElementById('logoSizeControl'),
+logoSizeSlider=document.getElementById('logoSizeSlider'),
+logoSizeValue=document.getElementById('logoSizeValue'),
+qrCodeContainer=document.getElementById('qrcode'),
+qrStage=document.getElementById('qrStage'),
+qrLogo=document.getElementById('qrLogo'),
+previewUrl=document.getElementById('previewUrl'),
+status=document.getElementById('status'),
+downloadBtn=document.getElementById('downloadBtn'),
+resetBtn=document.getElementById('resetBtn');
+
+let currentLogoData=null;
+
+function setLogo(source,successMessage){
+currentLogoData=source;
+logoSizeControl.style.display='block';
+logoSizeSlider.value='70';
+document.querySelectorAll('.logo-preset-btn').forEach(btn=>{btn.classList.remove('active')});
+const defaultLogoPreset=document.querySelector('.logo-preset-btn[data-logo-size="70"]');
+if(defaultLogoPreset)defaultLogoPreset.classList.add('active');
+qrLogo.src=source;
+updateLogo();
+status.textContent=successMessage;
+}
+
+function generateQRCode(){
+const url=urlInput.value.trim()||'https://cyberdeliatech.com/',size=parseInt(sizeSlider.value,10),fg=foregroundColor.value,bg=backgroundColor.value;
+qrCodeContainer.innerHTML='';
+new QRCode(qrCodeContainer,{text:url,width:size,height:size,colorDark:fg,colorLight:bg,correctLevel:QRCode.CorrectLevel.H});
+updatePreview();
+status.textContent='QR code updated.';
+}
+
+function updatePreview(){
+const size=parseInt(sizeSlider.value,10);
+sizeValue.textContent=size+' px';
+previewUrl.textContent=urlInput.value.trim()||'https://cyberdeliatech.com/';
+const previewMax=window.innerWidth<=640?Math.min(size,270):Math.min(size,360);
+qrStage.style.width=(previewMax+44)+'px';
+qrStage.style.height=(previewMax+44)+'px';
+qrCodeContainer.style.width=previewMax+'px';
+qrCodeContainer.style.height=previewMax+'px';
+const canvas=qrCodeContainer.querySelector('canvas'),image=qrCodeContainer.querySelector('img');
+if(canvas){canvas.style.width=previewMax+'px';canvas.style.height=previewMax+'px'}
+if(image){image.style.width=previewMax+'px';image.style.height=previewMax+'px'}
+updateLogo();
+}
+
+function updateLogo(){
+if(!currentLogoData){qrLogo.style.display='none';return}
+const logoSize=parseInt(logoSizeSlider.value,10),qrVisualSize=parseInt(sizeSlider.value,10);
+const previewMax=window.innerWidth<=640?Math.min(qrVisualSize,270):Math.min(qrVisualSize,360);
+const scale=previewMax/qrVisualSize,displayLogoSize=Math.round(logoSize*scale);
+qrLogo.src=currentLogoData;
+qrLogo.style.display='block';
+qrLogo.style.width=displayLogoSize+'px';
+qrLogo.style.height=displayLogoSize+'px';
+qrLogo.style.padding=Math.max(4,Math.round(7*scale))+'px';
+logoSizeValue.textContent=logoSize+' px';
+}
+
+urlInput.addEventListener('input',generateQRCode);
+
+foregroundColor.addEventListener('input',()=>{
+foregroundValue.textContent=foregroundColor.value.toUpperCase();
+generateQRCode();
+});
+
+backgroundColor.addEventListener('input',()=>{
+backgroundValue.textContent=backgroundColor.value.toUpperCase();
+generateQRCode();
+});
+
+sizeSlider.addEventListener('input',()=>{
+document.querySelectorAll('.preset-btn[data-size]').forEach(btn=>{btn.classList.remove('active')});
+generateQRCode();
+});
+
+document.querySelectorAll('.preset-btn[data-size]').forEach(button=>{
+button.addEventListener('click',()=>{
+const size=parseInt(button.dataset.size,10);
+sizeSlider.value=size;
+document.querySelectorAll('.preset-btn[data-size]').forEach(btn=>{btn.classList.remove('active')});
+button.classList.add('active');
+generateQRCode();
+});
+});
+
+logoSizeSlider.addEventListener('input',()=>{
+document.querySelectorAll('.logo-preset-btn').forEach(btn=>{btn.classList.remove('active')});
+updateLogo();
+});
+
+document.querySelectorAll('.logo-preset-btn').forEach(button=>{
+button.addEventListener('click',()=>{
+const logoSize=parseInt(button.dataset.logoSize,10);
+logoSizeSlider.value=logoSize;
+document.querySelectorAll('.logo-preset-btn').forEach(btn=>{btn.classList.remove('active')});
+button.classList.add('active');
+updateLogo();
+});
+});
+
+logoInput.addEventListener('change',event=>{
+const file=event.target.files[0];
+if(!file)return;
+if(!file.type.startsWith('image/')){
+status.textContent='Please select an image file.';
+logoInput.value='';
+return;
+}
+const reader=new FileReader();
+reader.onload=function(e){setLogo(e.target.result,'Local image added to QR code.')};
+reader.onerror=function(){status.textContent='Unable to read the selected image.'};
+reader.readAsDataURL(file);
+});
+
+loadLogoUrlBtn.addEventListener('click',()=>{
+const url=logoUrlInput.value.trim();
+if(!url){status.textContent='Please enter an image URL.';return}
+let parsedUrl;
+try{parsedUrl=new URL(url)}catch(error){status.textContent='Please enter a valid image URL.';return}
+if(parsedUrl.protocol!=='http:'&&parsedUrl.protocol!=='https:'){
+status.textContent='Only HTTP and HTTPS image URLs are supported.';
+return;
+}
+loadLogoUrlBtn.disabled=true;
+loadLogoUrlBtn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Loading';
+status.textContent='Loading logo from URL...';
+const image=new Image();
+image.crossOrigin='anonymous';
+image.onload=function(){
+setLogo(url,'Logo loaded from URL.');
+image.decode().catch(()=>{});
+loadLogoUrlBtn.disabled=false;
+loadLogoUrlBtn.innerHTML='<i class="fa-solid fa-link"></i> Load';
+};
+image.onerror=function(){
+currentLogoData=null;
+qrLogo.style.display='none';
+logoSizeControl.style.display='none';
+status.textContent='Unable to load image. Check the URL or CORS settings.';
+loadLogoUrlBtn.disabled=false;
+loadLogoUrlBtn.innerHTML='<i class="fa-solid fa-link"></i> Load';
+};
+image.src=url;
+});
+
+logoUrlInput.addEventListener('keydown',event=>{
+if(event.key==='Enter'){
+event.preventDefault();
+loadLogoUrlBtn.click();
+}
+});
+
+downloadBtn.addEventListener('click',()=>{
+const url=urlInput.value.trim()||'https://cyberdeliatech.com/',
+size=parseInt(sizeSlider.value,10),
+fg=foregroundColor.value,
+bg=backgroundColor.value,
+exportContainer=document.createElement('div');
+
+exportContainer.style.position='fixed';
+exportContainer.style.left='-10000px';
+exportContainer.style.top='0';
+exportContainer.style.width=size+'px';
+exportContainer.style.height=size+'px';
+exportContainer.style.background=bg;
+document.body.appendChild(exportContainer);
+
+new QRCode(exportContainer,{text:url,width:size,height:size,colorDark:fg,colorLight:bg,correctLevel:QRCode.CorrectLevel.H});
+
+setTimeout(()=>{
+const qrCanvas=exportContainer.querySelector('canvas');
+if(!qrCanvas){
+document.body.removeChild(exportContainer);
+status.textContent='Unable to create download.';
+return;
+}
+
+const finalCanvas=document.createElement('canvas');
+finalCanvas.width=size;
+finalCanvas.height=size;
+const ctx=finalCanvas.getContext('2d');
+ctx.fillStyle=bg;
+ctx.fillRect(0,0,size,size);
+ctx.drawImage(qrCanvas,0,0,size,size);
+
+if(currentLogoData){
+const logo=new Image();
+if(!currentLogoData.startsWith('data:'))logo.crossOrigin='anonymous';
+
+logo.onload=function(){
+const logoSize=parseInt(logoSizeSlider.value,10),
+x=(size-logoSize)/2,
+y=(size-logoSize)/2;
+
+ctx.fillStyle=bg;
+ctx.beginPath();
+
+if(typeof ctx.roundRect==='function'){
+ctx.roundRect(x-7,y-7,logoSize+14,logoSize+14,12);
+}else{
+ctx.rect(x-7,y-7,logoSize+14,logoSize+14);
+}
+
+ctx.fill();
+
+try{
+ctx.drawImage(logo,x,y,logoSize,logoSize);
+downloadCanvas(finalCanvas);
+}catch(error){
+status.textContent='Logo cannot be exported. The image server may block CORS.';
+}
+};
+
+logo.onerror=function(){
+if(currentLogoData.startsWith('data:')){
+downloadCanvas(finalCanvas);
+}else{
+status.textContent='Logo cannot be downloaded because the image server blocks CORS.';
+}
+};
+
+logo.src=currentLogoData;
+}else{
+downloadCanvas(finalCanvas);
+}
+
+document.body.removeChild(exportContainer);
+},100);
+});
+
+function downloadCanvas(canvas){
+try{
+const link=document.createElement('a');
+link.download='cyberdelia-qr-code.png';
+link.href=canvas.toDataURL('image/png');
+document.body.appendChild(link);
+link.click();
+document.body.removeChild(link);
+status.textContent='QR code downloaded.';
+}catch(error){
+status.textContent='Unable to download. The image may be blocked by CORS.';
+}
+}
+
+resetBtn.addEventListener('click',()=>{
+urlInput.value='https://cyberdeliatech.com/';
+foregroundColor.value='#000000';
+backgroundColor.value='#FFFFFF';
+sizeSlider.value='300';
+logoSizeSlider.value='70';
+currentLogoData=null;
+logoInput.value='';
+logoUrlInput.value='';
+qrLogo.src='';
+qrLogo.style.display='none';
+logoSizeControl.style.display='none';
+foregroundValue.textContent='#000000';
+backgroundValue.textContent='#FFFFFF';
+
+document.querySelectorAll('.preset-btn[data-size]').forEach(btn=>{btn.classList.remove('active')});
+const defaultQrPreset=document.querySelector('.preset-btn[data-size="300"]');
+if(defaultQrPreset)defaultQrPreset.classList.add('active');
+
+document.querySelectorAll('.logo-preset-btn').forEach(btn=>{btn.classList.remove('active')});
+const defaultLogoPreset=document.querySelector('.logo-preset-btn[data-logo-size="70"]');
+if(defaultLogoPreset)defaultLogoPreset.classList.add('active');
+
+loadLogoUrlBtn.disabled=false;
+loadLogoUrlBtn.innerHTML='<i class="fa-solid fa-link"></i> Load';
+generateQRCode();
+status.textContent='Generator reset.';
+});
+
+window.addEventListener('resize',updatePreview);
+generateQRCode();
+
+const container=document.getElementById('canvas-container');
+const scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x050508,.012);
+
+const camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,.1,1000);
+camera.position.set(0,10,42);
+
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});
+renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+container.appendChild(renderer.domElement);
+
+const colors=[0x00E5FF,0xB19CD9,0x00FF88];
+const world=new THREE.Group();
+scene.add(world);
+
+const grid=new THREE.Group(),glowGrid=new THREE.Group();
+const gridSize=280,divisions=56,step=gridSize/divisions;
+
+const gridMaterials=colors.map(color=>new THREE.LineBasicMaterial({color,transparent:true,opacity:.24}));
+const glowMaterials=colors.map(color=>new THREE.LineBasicMaterial({color,transparent:true,opacity:.045}));
+
+for(let i=0;i<=divisions;i++){
+const x=-gridSize/2+i*step,colorIndex=Math.floor(Math.random()*colors.length);
+let geometry=new THREE.BufferGeometry();
+geometry.setAttribute('position',new THREE.Float32BufferAttribute([x,-4,-gridSize/2,x,-4,gridSize/2],3));
+grid.add(new THREE.Line(geometry,gridMaterials[colorIndex]));
+
+geometry=new THREE.BufferGeometry();
+geometry.setAttribute('position',new THREE.Float32BufferAttribute([x,-3.98,-gridSize/2,x,-3.98,gridSize/2],3));
+glowGrid.add(new THREE.Line(geometry,glowMaterials[colorIndex]));
+}
+
+for(let i=0;i<=divisions;i++){
+const z=-gridSize/2+i*step,colorIndex=Math.floor(Math.random()*colors.length);
+let geometry=new THREE.BufferGeometry();
+geometry.setAttribute('position',new THREE.Float32BufferAttribute([-gridSize/2,-4,z,gridSize/2,-4,z],3));
+grid.add(new THREE.Line(geometry,gridMaterials[colorIndex]));
+
+geometry=new THREE.BufferGeometry();
+geometry.setAttribute('position',new THREE.Float32BufferAttribute([-gridSize/2,-3.98,z,gridSize/2,-3.98,z],3));
+glowGrid.add(new THREE.Line(geometry,glowMaterials[colorIndex]));
+}
+
+world.add(grid,glowGrid);
+
+const particleGroups=[],particleCount=160;
+
+colors.forEach((color,index)=>{
+const geometry=new THREE.BufferGeometry();
+const positions=new Float32Array(particleCount*3);
+
+for(let i=0;i<positions.length;i++)positions[i]=(Math.random()-.5)*260;
+
+geometry.setAttribute('position',new THREE.BufferAttribute(positions,3));
+
+const particles=new THREE.Points(geometry,new THREE.PointsMaterial({
+color,size:.7,transparent:true,opacity:.5,depthWrite:false
+}));
+
+particles.userData.offset=index*.8;
+world.add(particles);
+particleGroups.push(particles);
+});
+
+let mouseX=0,mouseY=0,targetMouseX=0,targetMouseY=0;
+
+window.addEventListener('mousemove',event=>{
+targetMouseX=event.clientX/window.innerWidth*2-1;
+targetMouseY=-(event.clientY/window.innerHeight)*2+1;
+},{passive:true});
+
+window.addEventListener('touchmove',event=>{
+if(!event.touches.length)return;
+const touch=event.touches[0];
+targetMouseX=touch.clientX/window.innerWidth*2-1;
+targetMouseY=-(touch.clientY/window.innerHeight)*2+1;
+},{passive:true});
+
+let gyroX=0,gyroY=0,gyroEnabled=false;
+
+function handleOrientation(event){
+if(event.gamma==null||event.beta==null)return;
+gyroX=Math.max(-1,Math.min
