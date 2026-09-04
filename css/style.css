@@ -102,22 +102,24 @@ select.chic-input option{background:#1A1A1A;color:#E2E8F0}
 
    It is a direct child of <body>.
 */
-#cyberdelia-review-floater{position:fixed!important;right:25px!important;bottom:100px!important;z-index:2147483647!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:0!important;width:56px!important;min-width:56px!important;height:56px!important;padding:0!important;margin:0!important;background:rgba(8,9,11,.55)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;color:#fff!important;border:2px solid #00FF88!important;border-radius:50%!important;font-family:'DM Mono',monospace!important;font-size:13px!important;font-weight:500!important;line-height:1!important;text-decoration:none!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important;isolation:isolate!important;box-shadow:0 8px 30px rgba(0,0,0,.7),0 0 20px rgba(0,255,136,.3)!important;transition:transform .25s ease,background .25s ease,box-shadow .25s ease,border-color .25s ease!important}
+#cyberdelia-review-floater{position:fixed!important;right:25px!important;bottom:100px!important;z-index:2147483647!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:10px!important;width:56px!important;min-width:56px!important;height:56px!important;padding:0!important;margin:0!important;background:rgba(8,9,11,.55)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;color:#fff!important;border:2px solid #00FF88!important;border-radius:50%!important;font-family:'DM Mono',monospace!important;font-size:13px!important;font-weight:500!important;line-height:1!important;text-decoration:none!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important;isolation:isolate!important;box-shadow:0 8px 30px rgba(0,0,0,.7),0 0 20px rgba(0,255,136,.3)!important;transition:width .3s ease,min-width .3s ease,border-radius .3s ease,transform .25s ease,background .25s ease,box-shadow .25s ease!important;overflow:hidden!important;white-space:nowrap!important}
 
 /* STAR */
-#cyberdelia-review-floater .review-star{display:block!important;width:auto!important;height:auto!important;color:#FFD700!important;font-family:Arial,sans-serif!important;font-size:25px!important;font-weight:normal!important;line-height:1!important;text-shadow:0 0 6px rgba(255,215,0,.9),0 0 15px rgba(255,215,0,.5)!important}
+#cyberdelia-review-floater .review-star{display:block!important;flex-shrink:0!important;width:auto!important;height:auto!important;color:#FFD700!important;font-family:Arial,sans-serif!important;font-size:25px!important;font-weight:normal!important;line-height:1!important;text-shadow:0 0 6px rgba(255,215,0,.9),0 0 15px rgba(255,215,0,.5)!important}
 
 /* TEXT */
-#cyberdelia-review-floater .review-label{display:none!important}
+#cyberdelia-review-floater .review-label{display:block!important;max-width:0!important;opacity:0!important;overflow:hidden!important;color:#fff!important;font-family:'DM Mono',monospace!important;font-size:13px!important;font-weight:500!important;line-height:1!important;white-space:nowrap!important;transition:max-width .3s ease,opacity .2s ease!important}
 
 /* HOVER */
-#cyberdelia-review-floater:hover{background:rgba(17,21,27,.75)!important;border-color:#00FF88!important;transform:translateY(-4px)!important;box-shadow:0 12px 40px rgba(0,0,0,.8),0 0 35px rgba(0,255,136,.45)!important}
+#cyberdelia-review-floater:hover{width:175px!important;min-width:175px!important;border-radius:999px!important;background:rgba(17,21,27,.75)!important;border-color:#00FF88!important;transform:translateY(-4px)!important;box-shadow:0 12px 40px rgba(0,0,0,.8),0 0 35px rgba(0,255,136,.45)!important}
+
+#cyberdelia-review-floater:hover .review-label{max-width:120px!important;opacity:1!important}
 
 /* ========================================
    REVIEW BUTTON — MOBILE
 ======================================== */
 @media (max-width:768px){
-#cyberdelia-review-floater{right:16px!important;bottom:70px!important;width:56px!important;min-width:56px!important;height:56px!important;padding:0!important;border-radius:50%!important;gap:0!important}
-#cyberdelia-review-floater .review-label{display:none!important}
-#cyberdelia-review-floater .review-star{font-size:25px!important}
+#cyberdelia-review-floater{right:16px!important;bottom:70px!important;width:56px!important;min-width:56px!important;height:56px!important;padding:0!important;border-radius:50%!important}
+#cyberdelia-review-floater:hover{width:175px!important;min-width:175px!important;border-radius:999px!important}
+#cyberdelia-review-floater .review-label{display:block!important}
 }
