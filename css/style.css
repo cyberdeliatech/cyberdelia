@@ -479,3 +479,111 @@ transition-duration:.01ms!important;
     font-size: 21px;
   }
 }
+
+#googleReviewButton {
+  position: fixed !important;
+
+  right: 25px !important;
+  bottom: 25px !important;
+
+  width: auto !important;
+  min-width: 175px !important;
+  height: 52px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+
+  padding: 0 20px !important;
+
+  background: #08090b !important;
+  color: #ffffff !important;
+
+  border: 2px solid #FFD700 !important;
+  border-radius: 999px !important;
+
+  z-index: 2147483647 !important;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  text-decoration: none !important;
+
+  font-family: 'DM Mono', monospace !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.7),
+    0 0 15px rgba(255, 215, 0, 0.25),
+    0 0 40px rgba(255, 215, 0, 0.10) !important;
+
+  transform: none !important;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease !important;
+}
+
+#googleReviewButton:hover {
+  background: #11151b !important;
+
+  transform: translateY(-4px) !important;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.75),
+    0 0 20px rgba(255, 215, 0, 0.4),
+    0 0 50px rgba(255, 215, 0, 0.15) !important;
+}
+
+.google-review-star {
+  display: inline-block !important;
+
+  color: #FFD700 !important;
+
+  font-family: Arial, sans-serif !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+
+  text-shadow:
+    0 0 6px rgba(255, 215, 0, 0.9),
+    0 0 15px rgba(255, 215, 0, 0.5) !important;
+}
+
+.google-review-text {
+  display: inline-block !important;
+
+  color: #ffffff !important;
+
+  white-space: nowrap !important;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+  #googleReviewButton {
+    right: 16px !important;
+    bottom: 16px !important;
+
+    width: 54px !important;
+    min-width: 54px !important;
+
+    height: 54px !important;
+
+    padding: 0 !important;
+
+    border-radius: 50% !important;
+  }
+
+  .google-review-text {
+    display: none !important;
+  }
+
+  .google-review-star {
+    font-size: 23px !important;
+  }
+}
