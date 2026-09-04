@@ -370,40 +370,52 @@ transition-duration:.01ms!important;
 }
 }
 
+/* ========================================
+   FLOATING GOOGLE REVIEW BUTTON
+======================================== */
+
+#reviews {
+  position: relative;
+  z-index: 99999;
+}
+
 .floating-review-btn {
   position: fixed;
   right: 25px;
   bottom: 25px;
 
-  z-index: 99999;
+  z-index: 999999;
 
-  display: flex;
+  display: flex !important;
   align-items: center;
+  justify-content: center;
   gap: 10px;
 
+  min-width: 170px;
   padding: 14px 20px;
 
-  color: #ffffff;
-  text-decoration: none;
-
-  background: rgba(5, 8, 12, 0.55);
+  color: #ffffff !important;
+  background: rgba(5, 8, 12, 0.88);
 
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 
-  border: 1px solid rgba(255, 215, 0, 0.65);
-
+  border: 1px solid rgba(255, 215, 0, 0.75);
   border-radius: 50px;
 
   box-shadow:
-    0 8px 30px rgba(0, 0, 0, 0.5),
-    0 0 20px rgba(255, 215, 0, 0.15);
+    0 8px 30px rgba(0, 0, 0, 0.55),
+    0 0 20px rgba(255, 215, 0, 0.18);
 
   font-family: 'DM Mono', monospace;
   font-size: 13px;
   font-weight: 500;
 
+  text-decoration: none !important;
   cursor: pointer;
+
+  opacity: 1 !important;
+  visibility: visible !important;
 
   transition:
     transform 0.3s ease,
@@ -412,8 +424,9 @@ transition-duration:.01ms!important;
     box-shadow 0.3s ease;
 }
 
-.review-star {
-  color: #FFD700;
+.floating-review-btn .review-star {
+  display: inline-block;
+  color: #FFD700 !important;
   font-size: 19px;
   line-height: 1;
 
@@ -422,20 +435,22 @@ transition-duration:.01ms!important;
     0 0 14px rgba(255, 215, 0, 0.4);
 }
 
-.review-text {
+.floating-review-btn .review-text {
+  display: inline-block;
+  color: #ffffff !important;
   white-space: nowrap;
 }
 
 .floating-review-btn:hover {
   transform: translateY(-4px);
 
-  background: rgba(10, 14, 20, 0.75);
+  background: rgba(10, 14, 20, 0.96);
 
   border-color: #FFD700;
 
   box-shadow:
-    0 12px 35px rgba(0, 0, 0, 0.55),
-    0 0 30px rgba(255, 215, 0, 0.3);
+    0 12px 35px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(255, 215, 0, 0.35);
 }
 
 /* Mobile */
@@ -446,18 +461,21 @@ transition-duration:.01ms!important;
     bottom: 16px;
 
     width: 52px;
+    min-width: 52px;
     height: 52px;
 
     padding: 0;
 
-    justify-content: center;
+    border-radius: 50%;
+
+    gap: 0;
   }
 
-  .review-text {
+  .floating-review-btn .review-text {
     display: none;
   }
 
-  .review-star {
+  .floating-review-btn .review-star {
     font-size: 21px;
   }
 }
