@@ -1,38 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#08090b">
-
-  <meta
-    name="description"
-    content="Cyberdelia — Premium IT Support, PC Repair, Custom PCs & Web Design in South Florida."
-  >
-
+  <meta name="description" content="Cyberdelia — Premium IT Support, PC Repair, Custom PCs & Web Design in South Florida.">
   <title>Cyberdelia | Premium IT Support & PC Repair</title>
-
   <link rel="icon" type="image/png" href="./content/img/logo.png">
   <link rel="apple-touch-icon" href="./content/img/logo.png">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap"
-    rel="stylesheet"
-  >
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  >
-
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
-
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
   <script>
     tailwind.config = {
       theme: {
@@ -53,1397 +34,474 @@
       }
     };
   </script>
-
   <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body class="antialiased selection:bg-arcade-cyan selection:text-black relative">
-
   <div id="canvas-container"></div>
   <div class="noise"></div>
 
-
-  <!-- ========================================
-       HEADER
-  ======================================== -->
-
+  <!-- HEADER -->
   <header class="fixed w-full top-0 z-50 border-b border-white/5 bg-[#0f0f0f]/40 backdrop-blur-xl">
-
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-
       <a href="#home" class="flex items-center gap-3 group">
-
-        <img
-          src="./content/img/logo.png"
-          alt="Cyberdelia"
-          class="h-12 w-auto"
-        >
-
+        <img src="./content/img/logo.png" alt="Cyberdelia" class="h-12 w-auto">
         <div class="flex flex-col leading-none">
-
           <span class="text-2xl font-bold font-display tracking-wide">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white">
-              Cyberdelia
-            </span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white">Cyberdelia</span>
           </span>
-
-          <span class="mt-1 text-[9px] font-mono tracking-[0.3em] uppercase text-arcade-green">
-            Technologies
-          </span>
-
+          <span class="mt-1 text-[9px] font-mono tracking-[0.3em] uppercase text-arcade-green">Technologies</span>
         </div>
-
       </a>
-
 
       <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
-
-        <a href="#pc-repair" class="hover:text-white transition-all">
-          PC Repair
-        </a>
-
-        <a href="#web-design" class="hover:text-white transition-all">
-          Web Design
-        </a>
-
-        <a href="#custom-pcs" class="hover:text-white transition-all">
-          Custom PCs
-        </a>
-
-        <a href="#it-support" class="hover:text-white transition-all">
-          Small-Biz IT
-        </a>
-
-        <a href="#about" class="hover:text-white transition-all">
-          About
-        </a>
-
+        <a href="#pc-repair" class="hover:text-white transition-all">PC Repair</a>
+        <a href="#web-design" class="hover:text-white transition-all">Web Design</a>
+        <a href="#custom-pcs" class="hover:text-white transition-all">Custom PCs</a>
+        <a href="#it-support" class="hover:text-white transition-all">Small-Biz IT</a>
+        <a href="#about" class="hover:text-white transition-all">About</a>
       </nav>
 
-
       <div class="hidden lg:flex items-center gap-6">
-
-        <a
-          href="tel:7863001144"
-          class="text-sm font-mono text-gray-300 hover:text-arcade-cyan transition-all"
-        >
-          <i class="fa-solid fa-phone text-xs mr-2"></i>
-          (786) 300-1144
+        <a href="tel:7863001144" class="text-sm font-mono text-gray-300 hover:text-arcade-cyan transition-all">
+          <i class="fa-solid fa-phone text-xs mr-2"></i>(786) 300-1144
         </a>
-
-        <a
-          href="#contact"
-          class="btn-chic-cyan px-6 py-2.5 rounded-full text-sm font-medium"
-        >
-          Request a Quote
-        </a>
-
+        <a href="#contact" class="btn-chic-cyan px-6 py-2.5 rounded-full text-sm font-medium">Request a Quote</a>
       </div>
 
-
-      <button
-        id="mobileMenuBtn"
-        class="lg:hidden text-gray-300 hover:text-white"
-        type="button"
-        aria-label="Open menu"
-      >
+      <button id="mobileMenuBtn" class="lg:hidden text-gray-300 hover:text-white" type="button" aria-label="Open menu">
         <i class="fa-solid fa-bars text-2xl"></i>
       </button>
-
     </div>
 
-
-    <div
-      id="mobileMenu"
-      class="hidden lg:hidden absolute top-full left-0 w-full bg-[#08090b]/90 backdrop-blur-2xl border-b border-white/15 flex-col py-4 px-6 shadow-2xl"
-    >
-
-      <a
-        href="#pc-repair"
-        class="mobile-link py-3 border-b border-white/5 text-gray-300"
-      >
-        PC Repair & Tech Support
-      </a>
-
-      <a
-        href="#web-design"
-        class="mobile-link py-3 border-b border-white/5 text-gray-300"
-      >
-        Web Design & Dev
-      </a>
-
-      <a
-        href="#custom-pcs"
-        class="mobile-link py-3 border-b border-white/5 text-gray-300"
-      >
-        Custom PC Builds
-      </a>
-
-      <a
-        href="#it-support"
-        class="mobile-link py-3 border-b border-white/5 text-gray-300"
-      >
-        Small-Business IT
-      </a>
-
-      <a
-        href="#about"
-        class="mobile-link py-3 border-b border-white/5 text-gray-300"
-      >
-        About
-      </a>
-
-      <a
-        href="#contact"
-        class="mobile-link py-4 text-arcade-cyan font-bold uppercase"
-      >
-        Request a Quote
-      </a>
-
+    <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-[#08090b]/90 backdrop-blur-2xl border-b border-white/15 flex-col py-4 px-6 shadow-2xl">
+      <a href="#pc-repair" class="mobile-link py-3 border-b border-white/5 text-gray-300">PC Repair & Tech Support</a>
+      <a href="#web-design" class="mobile-link py-3 border-b border-white/5 text-gray-300">Web Design & Dev</a>
+      <a href="#custom-pcs" class="mobile-link py-3 border-b border-white/5 text-gray-300">Custom PC Builds</a>
+      <a href="#it-support" class="mobile-link py-3 border-b border-white/5 text-gray-300">Small-Business IT</a>
+      <a href="#about" class="mobile-link py-3 border-b border-white/5 text-gray-300">About</a>
+      <a href="#contact" class="mobile-link py-4 text-arcade-cyan font-bold uppercase">Request a Quote</a>
     </div>
-
   </header>
 
-
-
-  <!-- ========================================
-       HOME
-  ======================================== -->
-
-  <section
-    id="home"
-    class="pt-40 pb-24 min-h-[90vh] flex items-center relative z-10"
-  >
-
+  <!-- HOME -->
+  <section id="home" class="pt-40 pb-24 min-h-[90vh] flex items-center relative z-10">
     <div class="container mx-auto px-6">
-
-      <div
-        class="max-w-4xl mx-auto text-center animate-fade-up glass-panel p-8 md:p-12 rounded-[2rem]"
-      >
-
-        <div
-          class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-arcade-lavender/40 bg-arcade-lavender/10 text-arcade-lavender text-xs font-mono tracking-widest uppercase mb-8"
-        >
-
+      <div class="max-w-4xl mx-auto text-center animate-fade-up glass-panel p-8 md:p-12 rounded-[2rem]">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-arcade-lavender/40 bg-arcade-lavender/10 text-arcade-lavender text-xs font-mono tracking-widest uppercase mb-8">
           <span class="w-2 h-2 rounded-full bg-arcade-lavender animate-pulse"></span>
-
           IT Support • PC Repair • Custom PCs • Web Design
-
         </div>
 
-
-        <h1
-          class="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white leading-[1.1] mb-8"
-        >
-
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white leading-[1.1] mb-8">
           Technology without<br>
-
-          <span
-            class="text-transparent bg-clip-text bg-gradient-to-r from-arcade-cyan via-arcade-lavender to-arcade-green"
-          >
-            the frustration.
-          </span>
-
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-arcade-cyan via-arcade-lavender to-arcade-green">the frustration.</span>
         </h1>
 
-
-        <p
-          class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed"
-        >
+        <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
           Professional IT services, precision hardware repair, bespoke gaming rigs,
           and high-converting web design for homes and small businesses in South Florida.
         </p>
 
-
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-
-          <a
-            href="#contact"
-            class="btn-chic-cyan px-8 py-4 rounded-full text-sm font-semibold w-full sm:w-auto"
-          >
-            Get Started
-          </a>
-
-          <a
-            href="#pc-repair"
-            class="px-8 py-4 rounded-full text-sm font-medium text-gray-200 border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all w-full sm:w-auto"
-          >
-            Explore Services
-          </a>
-
+          <a href="#contact" class="btn-chic-cyan px-8 py-4 rounded-full text-sm font-semibold w-full sm:w-auto">Get Started</a>
+          <a href="#pc-repair" class="px-8 py-4 rounded-full text-sm font-medium text-gray-200 border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all w-full sm:w-auto">Explore Services</a>
         </div>
 
-
-        <div
-          class="mt-16 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm text-gray-400 font-mono"
-        >
-
-          <div class="flex flex-col items-center gap-2">
-            <i class="fa-solid fa-hand-holding-dollar text-arcade-cyan text-xl"></i>
-            <span>Flat-Rate Pricing</span>
-          </div>
-
-          <div class="flex flex-col items-center gap-2">
-            <i class="fa-solid fa-clock-rotate-left text-arcade-lavender text-xl"></i>
-            <span>Same-Day Fixes</span>
-          </div>
-
-          <div class="flex flex-col items-center gap-2">
-            <i class="fa-solid fa-headset text-arcade-green text-xl"></i>
-            <span>Remote & On-Site</span>
-          </div>
-
-          <div class="flex flex-col items-center gap-2">
-            <i class="fa-solid fa-shield-halved text-white text-xl"></i>
-            <span>30-Day Labor Warranty</span>
-          </div>
-
+        <div class="mt-16 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm text-gray-400 font-mono">
+          <div class="flex flex-col items-center gap-2"><i class="fa-solid fa-hand-holding-dollar text-arcade-cyan text-xl"></i><span>Flat-Rate Pricing</span></div>
+          <div class="flex flex-col items-center gap-2"><i class="fa-solid fa-clock-rotate-left text-arcade-lavender text-xl"></i><span>Same-Day Fixes</span></div>
+          <div class="flex flex-col items-center gap-2"><i class="fa-solid fa-headset text-arcade-green text-xl"></i><span>Remote & On-Site</span></div>
+          <div class="flex flex-col items-center gap-2"><i class="fa-solid fa-shield-halved text-white text-xl"></i><span>30-Day Labor Warranty</span></div>
         </div>
-
       </div>
-
     </div>
-
   </section>
 
-
-
-  <!-- ========================================
-       PC REPAIR
-  ======================================== -->
-
-  <section
-    id="pc-repair"
-    class="py-24 relative z-10 bg-black/20 backdrop-blur-sm border-y border-white/5"
-  >
-
+  <!-- PC REPAIR -->
+  <section id="pc-repair" class="py-24 relative z-10 bg-black/20 backdrop-blur-sm border-y border-white/5">
     <div class="container mx-auto px-6">
-
-      <div
-        class="mb-16 glass-panel inline-block p-8 rounded-3xl max-w-3xl border-l-4 border-l-arcade-cyan"
-      >
-
-        <div
-          class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-cyan/30 bg-arcade-cyan/10 text-arcade-cyan text-xs font-mono uppercase mb-4"
-        >
-          <i class="fa-solid fa-screwdriver-wrench"></i>
-          Pillar 01
+      <div class="mb-16 glass-panel inline-block p-8 rounded-3xl max-w-3xl border-l-4 border-l-arcade-cyan">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-cyan/30 bg-arcade-cyan/10 text-arcade-cyan text-xs font-mono uppercase mb-4">
+          <i class="fa-solid fa-screwdriver-wrench"></i> Pillar 01
         </div>
-
-        <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">
-          PC Repair & Technical Support
-        </h2>
-
-        <p class="text-gray-300 text-lg">
-          Reliable troubleshooting and hardware fixes for home users and small businesses
-          experiencing performance bottlenecks or hardware failures.
-        </p>
-
+        <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">PC Repair & Technical Support</h2>
+        <p class="text-gray-300 text-lg">Reliable troubleshooting and hardware fixes for home users and small businesses experiencing performance bottlenecks or hardware failures.</p>
       </div>
-
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
         <div class="glass-panel p-8 rounded-2xl flex items-start gap-5">
-
-          <div class="w-12 h-12 rounded-xl bg-arcade-cyan/10 border border-arcade-cyan/20 flex items-center justify-center shrink-0 text-arcade-cyan">
-            <i class="fa-solid fa-microchip"></i>
-          </div>
-
-          <div>
-
-            <h3 class="text-lg font-bold text-white mb-2">
-              Diagnostics & Hardware
-            </h3>
-
-            <p class="text-sm text-gray-400 leading-relaxed">
-              Complete system diagnostics, motherboard checks, power supply testing,
-              and hardware replacements.
-            </p>
-
-          </div>
-
+          <div class="w-12 h-12 rounded-xl bg-arcade-cyan/10 border border-arcade-cyan/20 flex items-center justify-center shrink-0 text-arcade-cyan"><i class="fa-solid fa-microchip"></i></div>
+          <div><h3 class="text-lg font-bold text-white mb-2">Diagnostics & Hardware</h3><p class="text-sm text-gray-400 leading-relaxed">Complete system diagnostics, motherboard checks, power supply testing, and hardware replacements.</p></div>
         </div>
 
-
         <div class="glass-panel p-8 rounded-2xl flex items-start gap-5">
-
-          <div class="w-12 h-12 rounded-xl bg-arcade-lavender/10 border border-arcade-lavender/20 flex items-center justify-center shrink-0 text-arcade-lavender">
-            <i class="fa-brands fa-windows"></i>
-          </div>
-
-          <div>
-
-            <h3 class="text-lg font-bold text-white mb-2">
-              Windows & OS Solutions
-            </h3>
-
-            <p class="text-sm text-gray-400 leading-relaxed">
-              Blue screen troubleshooting, crash fixes, clean Windows installations,
-              driver updates, and software help.
-            </p>
-
-          </div>
-
+          <div class="w-12 h-12 rounded-xl bg-arcade-lavender/10 border border-arcade-lavender/20 flex items-center justify-center shrink-0 text-arcade-lavender"><i class="fa-brands fa-windows"></i></div>
+          <div><h3 class="text-lg font-bold text-white mb-2">Windows & OS Solutions</h3><p class="text-sm text-gray-400 leading-relaxed">Blue screen troubleshooting, crash fixes, clean Windows installations, driver updates, and software help.</p></div>
         </div>
 
-
         <div class="glass-panel p-8 rounded-2xl flex items-start gap-5">
-
-          <div class="w-12 h-12 rounded-xl bg-arcade-green/10 border border-arcade-green/20 flex items-center justify-center shrink-0 text-arcade-green">
-            <i class="fa-solid fa-gauge-high"></i>
-          </div>
-
-          <div>
-
-            <h3 class="text-lg font-bold text-white mb-2">
-              Speed & Upgrades
-            </h3>
-
-            <p class="text-sm text-gray-400 leading-relaxed">
-              Slow computer optimization, SSD upgrades, RAM expansions,
-              and secure data migration to new drives.
-            </p>
-
-          </div>
-
+          <div class="w-12 h-12 rounded-xl bg-arcade-green/10 border border-arcade-green/20 flex items-center justify-center shrink-0 text-arcade-green"><i class="fa-solid fa-gauge-high"></i></div>
+          <div><h3 class="text-lg font-bold text-white mb-2">Speed & Upgrades</h3><p class="text-sm text-gray-400 leading-relaxed">Slow computer optimization, SSD upgrades, RAM expansions, and secure data migration to new drives.</p></div>
         </div>
 
-
         <div class="glass-panel p-8 rounded-2xl flex items-start gap-5">
-
-          <div class="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center shrink-0 text-red-400">
-            <i class="fa-solid fa-virus-slash"></i>
-          </div>
-
-          <div>
-
-            <h3 class="text-lg font-bold text-white mb-2">
-              Virus & Malware Cleanup
-            </h3>
-
-            <p class="text-sm text-gray-400 leading-relaxed">
-              Deep malware removal, pop-up elimination, security hardening,
-              and safe browser resets.
-            </p>
-
-          </div>
-
+          <div class="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center shrink-0 text-red-400"><i class="fa-solid fa-virus-slash"></i></div>
+          <div><h3 class="text-lg font-bold text-white mb-2">Virus & Malware Cleanup</h3><p class="text-sm text-gray-400 leading-relaxed">Deep malware removal, pop-up elimination, security hardening, and safe browser resets.</p></div>
         </div>
 
-
         <div class="glass-panel p-8 rounded-2xl flex items-start gap-5">
-
-          <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 text-blue-400">
-            <i class="fa-solid fa-wifi"></i>
-          </div>
-
-          <div>
-
-            <h3 class="text-lg font-bold text-white mb-2">
-              Network & Peripheral
-            </h3>
-
-            <p class="text-sm text-gray-400 leading-relaxed">
-              Wi-Fi dropouts, printer configuration, router setup,
-              and peripheral device troubleshooting.
-            </p>
-
-          </div>
-
+          <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 text-blue-400"><i class="fa-solid fa-wifi"></i></div>
+          <div><h3 class="text-lg font-bold text-white mb-2">Network & Peripheral</h3><p class="text-sm text-gray-400 leading-relaxed">Wi-Fi dropouts, printer configuration, router setup, and peripheral device troubleshooting.</p></div>
         </div>
 
-
         <div class="glass-panel p-8 rounded-2xl flex items-start gap-5">
-
-          <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center shrink-0 text-yellow-400">
-            <i class="fa-solid fa-headset"></i>
-          </div>
-
-          <div>
-
-            <h3 class="text-lg font-bold text-white mb-2">
-              Remote & On-Site Help
-            </h3>
-
-            <p class="text-sm text-gray-400 leading-relaxed">
-              Secure remote sessions for quick software fixes,
-              or convenient on-site dispatch across South Florida.
-            </p>
-
-          </div>
-
+          <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center shrink-0 text-yellow-400"><i class="fa-solid fa-headset"></i></div>
+          <div><h3 class="text-lg font-bold text-white mb-2">Remote & On-Site Help</h3><p class="text-sm text-gray-400 leading-relaxed">Secure remote sessions for quick software fixes, or convenient on-site dispatch across South Florida.</p></div>
         </div>
-
       </div>
-
     </div>
-
   </section>
 
-
-
-  <!-- ========================================
-       WEB DESIGN
-  ======================================== -->
-
+  <!-- WEB DESIGN -->
   <section id="web-design" class="py-24 relative z-10">
-
     <div class="container mx-auto px-6">
-
       <div class="glass-panel rounded-[2.5rem] p-8 md:p-16 overflow-hidden bg-black/40">
-
-        <div
-          class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-lavender/40 bg-arcade-lavender/10 text-arcade-lavender text-xs font-mono uppercase mb-6"
-        >
-          <i class="fa-solid fa-code"></i>
-          Pillar 02
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-lavender/40 bg-arcade-lavender/10 text-arcade-lavender text-xs font-mono uppercase mb-6">
+          <i class="fa-solid fa-code"></i> Pillar 02
         </div>
 
-
         <div class="flex flex-col lg:flex-row gap-16 items-center">
-
           <div class="w-full lg:w-1/2">
-
-            <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">
-              Web Design & Development.
-            </h2>
-
-            <p class="text-gray-300 mb-8 leading-relaxed text-lg">
-              Establish a striking online presence with custom web solutions tailored
-              for local businesses, creators, and professionals. From clean responsive
-              landing pages to full interactive web applications.
-            </p>
-
+            <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">Web Design & Development.</h2>
+            <p class="text-gray-300 mb-8 leading-relaxed text-lg">Establish a striking online presence with custom web solutions tailored for local businesses, creators, and professionals. From clean responsive landing pages to full interactive web applications.</p>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-300 mb-10 font-medium">
-
               <div>✓ Business Landing Pages</div>
               <div>✓ Portfolio & Creator Sites</div>
               <div>✓ Responsive HTML/CSS/JS</div>
               <div>✓ Forms & SEO Setup</div>
               <div>✓ Domain & Hosting Setup</div>
-
             </div>
-
 
             <div class="flex flex-wrap gap-4">
-
-              <a
-                href="#contact"
-                class="btn-chic-cyan px-8 py-3 rounded-full text-sm font-semibold inline-block"
-              >
-                Request Web Quote
-              </a>
-
-              <a
-                href="./websites"
-                class="px-8 py-3 rounded-full text-sm font-semibold border border-arcade-green/50 text-white hover:bg-arcade-lavender/10 transition"
-              >
-                View Websites
-              </a>
-
+              <a href="#contact" class="btn-chic-cyan px-8 py-3 rounded-full text-sm font-semibold inline-block">Request Web Quote</a>
+              <a href="./websites" class="px-8 py-3 rounded-full text-sm font-semibold border border-arcade-green/50 text-white hover:bg-arcade-lavender/10 transition">View Websites</a>
             </div>
-
           </div>
 
-
           <div class="w-full lg:w-1/2">
-
-            <div
-              class="w-full aspect-video bg-[#050607]/80 rounded-2xl border border-white/20 p-5 shadow-2xl flex flex-col gap-4"
-            >
-
+            <div class="w-full aspect-video bg-[#050607]/80 rounded-2xl border border-white/20 p-5 shadow-2xl flex flex-col gap-4">
               <div class="flex gap-2">
                 <div class="w-3.5 h-3.5 rounded-full bg-red-500/80"></div>
                 <div class="w-3.5 h-3.5 rounded-full bg-yellow-500/80"></div>
                 <div class="w-3.5 h-3.5 rounded-full bg-green-500/80"></div>
               </div>
-
               <div class="w-full h-8 bg-white/10 rounded-lg"></div>
-
               <div class="flex gap-4 h-full">
-
                 <div class="w-1/3 h-full bg-white/5 rounded-lg p-3">
-
                   <div class="w-full h-4 bg-white/20 rounded mb-3"></div>
                   <div class="w-3/4 h-4 bg-white/20 rounded mb-3"></div>
                   <div class="w-5/6 h-4 bg-white/20 rounded"></div>
-
                 </div>
-
                 <div class="w-2/3 flex flex-col gap-4">
-
-                  <div
-                    class="w-full h-1/2 bg-arcade-cyan/10 rounded-lg border border-arcade-cyan/40 flex items-center justify-center text-arcade-cyan text-sm font-bold font-mono"
-                  >
-                    HIGH CONVERTING UI
-                  </div>
-
+                  <div class="w-full h-1/2 bg-arcade-cyan/10 rounded-lg border border-arcade-cyan/40 flex items-center justify-center text-arcade-cyan text-sm font-bold font-mono">HIGH CONVERTING UI</div>
                   <div class="w-full h-1/2 bg-white/5 rounded-lg border border-white/10"></div>
-
                 </div>
-
               </div>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
-
   </section>
 
-
-
-  <!-- ========================================
-       CUSTOM PCS
-  ======================================== -->
-
-  <section
-    id="custom-pcs"
-    class="py-24 relative z-10 bg-black/40 backdrop-blur-md border-y border-white/5"
-  >
-
+  <!-- CUSTOM PCS -->
+  <section id="custom-pcs" class="py-24 relative z-10 bg-black/40 backdrop-blur-md border-y border-white/5">
     <div class="container mx-auto px-6">
-
       <div class="text-center max-w-3xl mx-auto mb-16 glass-panel px-10 py-8 rounded-3xl">
-
-        <div
-          class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-green/40 bg-arcade-green/10 text-arcade-green text-xs font-mono uppercase mb-4"
-        >
-          <i class="fa-solid fa-gamepad"></i>
-          Pillar 03
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-green/40 bg-arcade-green/10 text-arcade-green text-xs font-mono uppercase mb-4">
+          <i class="fa-solid fa-gamepad"></i> Pillar 03
         </div>
-
-        <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">
-          Custom PC Builds
-        </h2>
-
-        <p class="text-gray-300 text-lg">
-          Hand-assembled gaming rigs and professional content creation workstations
-          engineered for maximum thermal performance and aesthetics.
-        </p>
-
+        <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">Custom PC Builds</h2>
+        <p class="text-gray-300 text-lg">Hand-assembled gaming rigs and professional content creation workstations engineered for maximum thermal performance and aesthetics.</p>
       </div>
 
-
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-
         <div class="glass-panel p-8 rounded-[2rem]">
-
-          <h3 class="text-xs font-mono font-bold tracking-widest uppercase text-arcade-cyan mb-2">
-            Gaming & Entry
-          </h3>
-
-          <h4 class="text-3xl font-display font-bold text-white mb-4">
-            Essential
-          </h4>
-
-          <p class="text-sm text-gray-400 mb-8">
-            Smooth 1080p/1440p gaming and dependable daily performance.
-          </p>
-
+          <h3 class="text-xs font-mono font-bold tracking-widest uppercase text-arcade-cyan mb-2">Gaming & Entry</h3>
+          <h4 class="text-3xl font-display font-bold text-white mb-4">Essential</h4>
+          <p class="text-sm text-gray-400 mb-8">Smooth 1080p/1440p gaming and dependable daily performance.</p>
           <ul class="space-y-3 text-sm text-gray-300 mb-8 border-t border-white/10 pt-6">
             <li>✓ Entry/Mid-Range GPU</li>
             <li>✓ 16GB - 32GB RAM</li>
             <li>✓ NVMe SSD Storage</li>
             <li>✓ Clean Cable Management</li>
           </ul>
-
-          <a
-            href="#contact"
-            class="block text-center w-full py-3 rounded-full border border-white/20 hover:bg-white/10 text-sm font-semibold"
-          >
-            Inquire Build
-          </a>
-
+          <a href="#contact" class="block text-center w-full py-3 rounded-full border border-white/20 hover:bg-white/10 text-sm font-semibold">Inquire Build</a>
         </div>
 
-
-        <div
-          class="glass-panel p-10 rounded-[2.5rem] border-arcade-lavender/50 relative md:-translate-y-4 shadow-[0_0_40px_rgba(177,156,217,.15)]"
-        >
-
-          <div
-            class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-5 py-1.5 bg-arcade-lavender text-[#0f0f0f] text-xs font-mono font-bold uppercase rounded-full"
-          >
-            Most Popular
-          </div>
-
-          <h3 class="text-xs font-mono font-bold tracking-widest uppercase text-arcade-lavender mb-2 mt-2">
-            Competitive / Creator
-          </h3>
-
-          <h4 class="text-4xl font-display font-bold text-white mb-4">
-            Performance
-          </h4>
-
-          <p class="text-sm text-gray-300 mb-8">
-            High-refresh 1440p/4K gaming, live streaming, and robust video editing.
-          </p>
-
+        <div class="glass-panel p-10 rounded-[2.5rem] border-arcade-lavender/50 relative md:-translate-y-4 shadow-[0_0_40px_rgba(177,156,217,.15)]">
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-5 py-1.5 bg-arcade-lavender text-[#0f0f0f] text-xs font-mono font-bold uppercase rounded-full">Most Popular</div>
+          <h3 class="text-xs font-mono font-bold tracking-widest uppercase text-arcade-lavender mb-2 mt-2">Competitive / Creator</h3>
+          <h4 class="text-4xl font-display font-bold text-white mb-4">Performance</h4>
+          <p class="text-sm text-gray-300 mb-8">High-refresh 1440p/4K gaming, live streaming, and robust video editing.</p>
           <ul class="space-y-4 text-sm text-gray-200 mb-8 border-t border-white/10 pt-6">
             <li>✓ Enthusiast Multi-Core CPU</li>
             <li>✓ 32GB - 64GB DDR5 RAM</li>
             <li>✓ AIO Liquid Cooling</li>
             <li>✓ Fully Tuned BIOS & Fans</li>
           </ul>
-
-          <a
-            href="#contact"
-            class="block text-center w-full py-3.5 rounded-full bg-arcade-lavender text-[#0f0f0f] text-sm font-bold"
-          >
-            Inquire Build
-          </a>
-
+          <a href="#contact" class="block text-center w-full py-3.5 rounded-full bg-arcade-lavender text-[#0f0f0f] text-sm font-bold">Inquire Build</a>
         </div>
 
-
         <div class="glass-panel p-8 rounded-[2rem]">
-
-          <h3 class="text-xs font-mono font-bold tracking-widest uppercase text-arcade-green mb-2">
-            Workstations
-          </h3>
-
-          <h4 class="text-3xl font-display font-bold text-white mb-4">
-            Signature
-          </h4>
-
-          <p class="text-sm text-gray-400 mb-8">
-            Zero-compromise rigs for 3D rendering, music production, and 4K/8K editing.
-          </p>
-
+          <h3 class="text-xs font-mono font-bold tracking-widest uppercase text-arcade-green mb-2">Workstations</h3>
+          <h4 class="text-3xl font-display font-bold text-white mb-4">Signature</h4>
+          <p class="text-sm text-gray-400 mb-8">Zero-compromise rigs for 3D rendering, music production, and 4K/8K editing.</p>
           <ul class="space-y-3 text-sm text-gray-300 mb-8 border-t border-white/10 pt-6">
             <li>✓ Flagship Processors</li>
             <li>✓ 64GB+ High-Speed Memory</li>
             <li>✓ Top-Tier Flagship GPU</li>
             <li>✓ Extensive Stress Testing</li>
           </ul>
-
-          <a
-            href="#contact"
-            class="block text-center w-full py-3 rounded-full border border-white/20 hover:bg-white/10 text-sm font-semibold"
-          >
-            Inquire Build
-          </a>
-
+          <a href="#contact" class="block text-center w-full py-3 rounded-full border border-white/20 hover:bg-white/10 text-sm font-semibold">Inquire Build</a>
         </div>
-
       </div>
-
     </div>
-
   </section>
 
-
-
-  <!-- ========================================
-       SMALL BUSINESS IT
-  ======================================== -->
-
+  <!-- SMALL BUSINESS IT -->
   <section id="it-support" class="py-24 relative z-10">
-
     <div class="container mx-auto px-6">
-
-      <div
-        class="md:flex justify-between items-end glass-panel p-10 rounded-3xl mb-12 border-l-4 border-l-arcade-cyan"
-      >
-
+      <div class="md:flex justify-between items-end glass-panel p-10 rounded-3xl mb-12 border-l-4 border-l-arcade-cyan">
         <div>
-
-          <div
-            class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-cyan/40 bg-arcade-cyan/10 text-arcade-cyan text-xs font-mono uppercase mb-4"
-          >
-            <i class="fa-solid fa-building"></i>
-            Pillar 04
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-cyan/40 bg-arcade-cyan/10 text-arcade-cyan text-xs font-mono uppercase mb-4">
+            <i class="fa-solid fa-building"></i> Pillar 04
           </div>
-
-          <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">
-            Small-Business IT & Retainers
-          </h2>
-
-          <p class="text-gray-300 max-w-2xl text-lg">
-            Predictable Monthly Recurring Revenue (MRR) services designed to keep
-            your business securely online, fully backed up, and running without friction.
-          </p>
-
+          <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">Small-Business IT & Retainers</h2>
+          <p class="text-gray-300 max-w-2xl text-lg">Predictable Monthly Recurring Revenue (MRR) services designed to keep your business securely online, fully backed up, and running without friction.</p>
         </div>
-
-
-        <a
-          href="#contact"
-          class="btn-chic-cyan px-6 py-3 rounded-full text-sm font-semibold inline-flex items-center gap-2 mt-8 md:mt-0"
-        >
-          Request Business Audit
-          <i class="fa-solid fa-arrow-right"></i>
+        <a href="#contact" class="btn-chic-cyan px-6 py-3 rounded-full text-sm font-semibold inline-flex items-center gap-2 mt-8 md:mt-0">
+          Request Business Audit <i class="fa-solid fa-arrow-right"></i>
         </a>
-
       </div>
-
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-
         <div class="glass-panel p-8 rounded-2xl">
-
-          <div class="w-14 h-14 rounded-full bg-arcade-cyan/10 flex items-center justify-center mb-6 text-arcade-cyan">
-            <i class="fa-solid fa-network-wired text-xl"></i>
-          </div>
-
-          <h3 class="text-xl font-display font-bold text-white mb-3">
-            Network & Wi-Fi
-          </h3>
-
-          <p class="text-sm text-gray-400 leading-relaxed">
-            Secure office networking, mesh Wi-Fi routing, VLAN segregation,
-            and robust firewall configuration.
-          </p>
-
+          <div class="w-14 h-14 rounded-full bg-arcade-cyan/10 flex items-center justify-center mb-6 text-arcade-cyan"><i class="fa-solid fa-network-wired text-xl"></i></div>
+          <h3 class="text-xl font-display font-bold text-white mb-3">Network & Wi-Fi</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">Secure office networking, mesh Wi-Fi routing, VLAN segregation, and robust firewall configuration.</p>
         </div>
 
-
         <div class="glass-panel p-8 rounded-2xl">
-
-          <div class="w-14 h-14 rounded-full bg-arcade-lavender/10 flex items-center justify-center mb-6 text-arcade-lavender">
-            <i class="fa-brands fa-microsoft text-xl"></i>
-          </div>
-
-          <h3 class="text-xl font-display font-bold text-white mb-3">
-            Cloud & Workspace
-          </h3>
-
-          <p class="text-sm text-gray-400 leading-relaxed">
-            Microsoft 365 and Google Workspace administration,
-            business email setup, and user account management.
-          </p>
-
+          <div class="w-14 h-14 rounded-full bg-arcade-lavender/10 flex items-center justify-center mb-6 text-arcade-lavender"><i class="fa-brands fa-microsoft text-xl"></i></div>
+          <h3 class="text-xl font-display font-bold text-white mb-3">Cloud & Workspace</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">Microsoft 365 and Google Workspace administration, business email setup, and user account management.</p>
         </div>
 
-
         <div class="glass-panel p-8 rounded-2xl">
-
-          <div class="w-14 h-14 rounded-full bg-arcade-green/10 flex items-center justify-center mb-6 text-arcade-green">
-            <i class="fa-solid fa-shield-halved text-xl"></i>
-          </div>
-
-          <h3 class="text-xl font-display font-bold text-white mb-3">
-            Security & Backups
-          </h3>
-
-          <p class="text-sm text-gray-400 leading-relaxed">
-            Automated cloud/local backups, disaster recovery plans,
-            endpoint protection, and MFA setup.
-          </p>
-
+          <div class="w-14 h-14 rounded-full bg-arcade-green/10 flex items-center justify-center mb-6 text-arcade-green"><i class="fa-solid fa-shield-halved text-xl"></i></div>
+          <h3 class="text-xl font-display font-bold text-white mb-3">Security & Backups</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">Automated cloud/local backups, disaster recovery plans, endpoint protection, and MFA setup.</p>
         </div>
 
-
         <div class="glass-panel p-8 rounded-2xl">
-
-          <div class="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mb-6 text-white">
-            <i class="fa-solid fa-users-gear text-xl"></i>
-          </div>
-
-          <h3 class="text-xl font-display font-bold text-white mb-3">
-            Managed Support
-          </h3>
-
-          <p class="text-sm text-gray-400 leading-relaxed">
-            New employee hardware onboarding, ongoing device maintenance,
-            remote helpdesk, and priority on-site support.
-          </p>
-
+          <div class="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mb-6 text-white"><i class="fa-solid fa-users-gear text-xl"></i></div>
+          <h3 class="text-xl font-display font-bold text-white mb-3">Managed Support</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">New employee hardware onboarding, ongoing device maintenance, remote helpdesk, and priority on-site support.</p>
         </div>
-
       </div>
-
     </div>
-
   </section>
 
-
-
-  <!-- ========================================
-       ABOUT
-  ======================================== -->
-
-  <section
-    id="about"
-    class="py-24 relative z-10 bg-black/30 backdrop-blur-md border-t border-white/5"
-  >
-
+  <!-- ABOUT -->
+  <section id="about" class="py-24 relative z-10 bg-black/30 backdrop-blur-md border-t border-white/5">
     <div class="container mx-auto px-6">
-
-      <div
-        class="flex flex-col-reverse lg:flex-row gap-16 items-center glass-panel p-10 md:p-16 rounded-[3rem]"
-      >
-
+      <div class="flex flex-col-reverse lg:flex-row gap-16 items-center glass-panel p-10 md:p-16 rounded-[3rem]">
         <div class="w-full lg:w-1/2">
-
-          <div
-            class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/20 bg-white/5 text-white text-xs font-mono uppercase mb-4"
-          >
-            <i class="fa-solid fa-terminal text-arcade-lavender"></i>
-            Lead Technician
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/20 bg-white/5 text-white text-xs font-mono uppercase mb-4">
+            <i class="fa-solid fa-terminal text-arcade-lavender"></i> Lead Technician
           </div>
-
-          <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">
-            Meet Naiff.
-          </h2>
-
+          <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">Meet Naiff.</h2>
           <p class="text-gray-300 mb-6 text-lg leading-relaxed">
             Cyberdelia is an independent technology services business operated directly by me.
-            <strong class="text-arcade-green">
-              No call centers, no subcontractors, no bouncing you between support agents.
-            </strong>
+            <strong class="text-arcade-green">No call centers, no subcontractors, no bouncing you between support agents.</strong>
           </p>
-
           <p class="text-gray-400 mb-10 text-lg leading-relaxed">
             With over 20 years of technical expertise, I built Cyberdelia to provide honest,
             dependable IT support, custom hardware, and web design in plain English (or Spanish).
             Every repair and business audit is handled personally with meticulous attention to detail.
           </p>
-
           <div class="flex flex-wrap gap-4">
-
-            <div class="px-5 py-2.5 rounded-full border border-white/10 bg-black/40 text-sm text-gray-300">
-              <i class="fa-solid fa-clock mr-3 text-arcade-cyan"></i>
-              20+ Years Experience
-            </div>
-
-            <div class="px-5 py-2.5 rounded-full border border-white/10 bg-black/40 text-sm text-gray-300">
-              <i class="fa-solid fa-language mr-3 text-arcade-lavender"></i>
-              Bilingual Support
-            </div>
-
-            <div class="px-5 py-2.5 rounded-full border border-white/10 bg-black/40 text-sm text-gray-300">
-              <i class="fa-solid fa-certificate mr-3 text-arcade-green"></i>
-              Certified Specialist
-            </div>
-
+            <div class="px-5 py-2.5 rounded-full border border-white/10 bg-black/40 text-sm text-gray-300"><i class="fa-solid fa-clock mr-3 text-arcade-cyan"></i>20+ Years Experience</div>
+            <div class="px-5 py-2.5 rounded-full border border-white/10 bg-black/40 text-sm text-gray-300"><i class="fa-solid fa-language mr-3 text-arcade-lavender"></i>Bilingual Support</div>
+            <div class="px-5 py-2.5 rounded-full border border-white/10 bg-black/40 text-sm text-gray-300"><i class="fa-solid fa-certificate mr-3 text-arcade-green"></i>Certified Specialist</div>
           </div>
-
         </div>
-
 
         <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
-
-          <div
-            class="relative w-full max-w-md aspect-square rounded-full border border-white/20 p-3 bg-black/40 shadow-[0_0_40px_rgba(177,156,217,.15)]"
-          >
-
+          <div class="relative w-full max-w-md aspect-square rounded-full border border-white/20 p-3 bg-black/40 shadow-[0_0_40px_rgba(177,156,217,.15)]">
             <div class="w-full h-full rounded-full overflow-hidden border border-white/10">
-
-              <img
-                src="./content/img/profile.jpg?raw=true"
-                alt="Naiff - Cyberdelia Founder"
-                class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-              >
-
+              <img src="./content/img/profile.jpg?raw=true" alt="Naiff - Cyberdelia Founder" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
             </div>
-
-            <div
-              class="absolute bottom-6 right-6 bg-[#08090b]/90 border border-arcade-lavender/50 text-white p-4 rounded-full w-28 h-28 flex flex-col items-center justify-center text-center"
-            >
-
-              <span class="text-3xl font-bold font-display text-arcade-lavender">
-                20+
-              </span>
-
-              <span class="text-xs font-mono uppercase tracking-wider mt-1 text-gray-300">
-                Years
-              </span>
-
+            <div class="absolute bottom-6 right-6 bg-[#08090b]/90 border border-arcade-lavender/50 text-white p-4 rounded-full w-28 h-28 flex flex-col items-center justify-center text-center">
+              <span class="text-3xl font-bold font-display text-arcade-lavender">20+</span>
+              <span class="text-xs font-mono uppercase tracking-wider mt-1 text-gray-300">Years</span>
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
-
   </section>
 
-
-
-  <!-- ========================================
-       CONTACT
-  ======================================== -->
-
-  <section
-    id="contact"
-    class="py-24 relative z-10 border-t border-white/5 bg-[#050607]/70 backdrop-blur-xl"
-  >
-
+  <!-- CONTACT -->
+  <section id="contact" class="py-24 relative z-10 border-t border-white/5 bg-[#050607]/70 backdrop-blur-xl">
     <div class="container mx-auto px-6">
-
-      <div
-        class="max-w-4xl mx-auto glass-panel p-8 md:p-14 rounded-[3rem] border border-arcade-cyan/30"
-      >
-
+      <div class="max-w-4xl mx-auto glass-panel p-8 md:p-14 rounded-[3rem] border border-arcade-cyan/30">
         <div class="text-center mb-12">
-
-          <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">
-            Request a Quote
-          </h2>
-
-          <p class="text-gray-300 text-lg">
-            Describe your project or tech issue below. You are reaching Naiff directly,
-            and I'll get back to you promptly.
-          </p>
-
+          <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">Request a Quote</h2>
+          <p class="text-gray-300 text-lg">Describe your project or tech issue below. You are reaching Naiff directly, and I'll get back to you promptly.</p>
         </div>
-
 
         <form id="leadForm" class="space-y-6">
-
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
             <div>
-
-              <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">
-                Full Name
-              </label>
-
-              <input
-                type="text"
-                name="full_name"
-                required
-                placeholder="John Doe"
-                class="w-full chic-input rounded-xl px-5 py-4"
-              >
-
+              <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Full Name</label>
+              <input type="text" name="full_name" required placeholder="John Doe" class="w-full chic-input rounded-xl px-5 py-4">
             </div>
-
-
             <div>
-
-              <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">
-                Phone Number
-              </label>
-
-              <input
-                type="tel"
-                name="phone"
-                required
-                placeholder="(786) 000-0000"
-                class="w-full chic-input rounded-xl px-5 py-4"
-              >
-
+              <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Phone Number</label>
+              <input type="tel" name="phone" required placeholder="(786) 000-0000" class="w-full chic-input rounded-xl px-5 py-4">
             </div>
-
           </div>
 
-
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
             <div>
-
-              <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">
-                Email Address
-              </label>
-
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="john@example.com"
-                class="w-full chic-input rounded-xl px-5 py-4"
-              >
-
+              <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Email Address</label>
+              <input type="email" name="email" required placeholder="john@example.com" class="w-full chic-input rounded-xl px-5 py-4">
             </div>
-
-
             <div>
-
-              <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">
-                Client Type
-              </label>
-
-              <select
-                name="client_type"
-                required
-                class="w-full chic-input rounded-xl px-5 py-4"
-              >
-
-                <option value="" disabled selected>
-                  Select...
-                </option>
-
-                <option value="Residential / Home User">
-                  Residential / Home User
-                </option>
-
-                <option value="Small Business">
-                  Small Business
-                </option>
-
+              <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Client Type</label>
+              <select name="client_type" required class="w-full chic-input rounded-xl px-5 py-4">
+                <option value="" disabled selected>Select...</option>
+                <option value="Residential / Home User">Residential / Home User</option>
+                <option value="Small Business">Small Business</option>
               </select>
-
             </div>
-
           </div>
 
-
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
             <div>
-
-              <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">
-                Service Area Needed
-              </label>
-
-              <select
-                name="service"
-                required
-                class="w-full chic-input rounded-xl px-5 py-4"
-              >
-
-                <option value="" disabled selected>
-                  Select category...
-                </option>
-
-                <option value="PC Repair">
-                  1. PC Repair & Support
-                </option>
-
-                <option value="Web Design">
-                  2. Web Design & Dev
-                </option>
-
-                <option value="Custom PC Build">
-                  3. Custom PC Build
-                </option>
-
-                <option value="Small Business IT">
-                  4. Small-Business IT Retainer
-                </option>
-
-                <option value="Other">
-                  Other Inquiry
-                </option>
-
+              <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Service Area Needed</label>
+              <select name="service" required class="w-full chic-input rounded-xl px-5 py-4">
+                <option value="" disabled selected>Select category...</option>
+                <option value="PC Repair">1. PC Repair & Support</option>
+                <option value="Web Design">2. Web Design & Dev</option>
+                <option value="Custom PC Build">3. Custom PC Build</option>
+                <option value="Small Business IT">4. Small-Business IT Retainer</option>
+                <option value="Other">Other Inquiry</option>
               </select>
-
             </div>
-
-
             <div>
-
-              <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">
-                Preferred Contact Method
-              </label>
-
-              <select
-                name="contact_method"
-                required
-                class="w-full chic-input rounded-xl px-5 py-4"
-              >
-
-                <option value="Phone Call">
-                  Phone Call
-                </option>
-
-                <option value="Text Message">
-                  Text Message
-                </option>
-
-                <option value="Email">
-                  Email
-                </option>
-
+              <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Preferred Contact Method</label>
+              <select name="contact_method" required class="w-full chic-input rounded-xl px-5 py-4">
+                <option value="Phone Call">Phone Call</option>
+                <option value="Text Message">Text Message</option>
+                <option value="Email">Email</option>
               </select>
-
             </div>
-
           </div>
-
 
           <div>
-
-            <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">
-              Description of Problem / Project
-            </label>
-
-            <textarea
-              name="message"
-              required
-              rows="5"
-              placeholder="Share details about your system symptoms, build goals, or business IT requirements..."
-              class="w-full chic-input rounded-xl px-5 py-4 resize-none"
-            ></textarea>
-
+            <label class="block text-xs font-mono font-bold tracking-widest uppercase text-gray-400 mb-2">Description of Problem / Project</label>
+            <textarea name="message" required rows="5" placeholder="Share details about your system symptoms, build goals, or business IT requirements..." class="w-full chic-input rounded-xl px-5 py-4 resize-none"></textarea>
           </div>
 
-
-          <div
-            id="formStatus"
-            class="form-status"
-            role="status"
-          ></div>
-
+          <div id="formStatus" class="form-status" role="status"></div>
 
           <div class="pt-4 flex flex-col md:flex-row items-center justify-between gap-6">
-
-            <p class="text-xs text-gray-500 font-mono">
-
-              <i class="fa-solid fa-lock text-arcade-cyan mr-1"></i>
-
-              Respecting privacy. No spam ever.
-
-            </p>
-
-
-            <button
-              id="submitBtn"
-              type="submit"
-              class="btn-chic-cyan px-10 py-4 rounded-full text-sm font-bold tracking-widest uppercase w-full md:w-auto"
-            >
-
-              Submit Request
-
-              <i class="fa-solid fa-paper-plane ml-2"></i>
-
+            <p class="text-xs text-gray-500 font-mono"><i class="fa-solid fa-lock text-arcade-cyan mr-1"></i>Respecting privacy. No spam ever.</p>
+            <button id="submitBtn" type="submit" class="btn-chic-cyan px-10 py-4 rounded-full text-sm font-bold tracking-widest uppercase w-full md:w-auto">
+              Submit Request <i class="fa-solid fa-paper-plane ml-2"></i>
             </button>
-
           </div>
-
         </form>
-
       </div>
-
     </div>
-
   </section>
 
-
-
-  <!-- ========================================
-       FOOTER
-  ======================================== -->
-
-  <footer
-    class="bg-[#050607]/90 backdrop-blur-2xl border-t border-white/5 pt-16 pb-8 relative z-10"
-  >
-
+  <!-- FOOTER -->
+  <footer class="bg-[#050607]/90 backdrop-blur-2xl border-t border-white/5 pt-16 pb-8 relative z-10">
     <div class="container mx-auto px-6">
-
       <div class="flex flex-col md:flex-row justify-between items-start gap-10 mb-12">
-
         <div class="md:w-1/3">
-
           <a href="#home" class="mb-4 block">
-
-            <img
-              src="./content/img/ct_logo.png"
-              alt="Cyberdelia"
-              class="h-40 w-42"
-            >
-
+            <img src="./content/img/ct_logo.png" alt="Cyberdelia" class="h-40 w-42">
           </a>
-
-
-          <p class="text-gray-400 text-sm mb-6 max-w-sm leading-relaxed">
-            IT Support • PC Repair • Custom PCs • Web Design.
-            Serving Broward County and South Florida.
-          </p>
-
+          <p class="text-gray-400 text-sm mb-6 max-w-sm leading-relaxed">IT Support • PC Repair • Custom PCs • Web Design. Serving Broward County and South Florida.</p>
 
           <div class="flex gap-4">
-
-            <a
-              href="https://www.linkedin.com/in/naiffasilis/details/experience/"
-              aria-label="LinkedIn"
-              class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-arcade-cyan"
-            >
+            <a href="https://www.linkedin.com/in/naiffasilis/details/experience/" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-arcade-cyan">
               <i class="fa-brands fa-linkedin-in text-sm"></i>
             </a>
-
-
-            <a
-              href="https://www.instagram.com/cyberdeliatech/"
-              aria-label="Instagram"
-              class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-arcade-lavender"
-            >
+            <a href="https://www.instagram.com/cyberdeliatech/" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-arcade-lavender">
               <i class="fa-brands fa-instagram text-sm"></i>
             </a>
-
-
-            <a
-              href="https://maps.app.goo.gl/agr8bZeGqxrFt2Xj8"
-              aria-label="Google Business Profile"
-              class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-arcade-lavender"
-            >
+            <a href="https://maps.app.goo.gl/agr8bZeGqxrFt2Xj8" aria-label="Google Business Profile" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-arcade-lavender">
               <i class="fa-brands fa-google text-sm"></i>
             </a>
-
           </div>
-
         </div>
-
 
         <div class="md:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-8">
-
           <div>
-
-            <h4 class="font-display text-white font-bold mb-5">
-              Services
-            </h4>
-
+            <h4 class="font-display text-white font-bold mb-5">Services</h4>
             <ul class="space-y-3 text-sm text-gray-400">
-
-              <li>
-                <a href="#pc-repair">PC Repair</a>
-              </li>
-
-              <li>
-                <a href="#web-design">Web Design</a>
-              </li>
-
-              <li>
-                <a href="#custom-pcs">Custom Builds</a>
-              </li>
-
-              <li>
-                <a href="#it-support">Small-Biz IT</a>
-              </li>
-
+              <li><a href="#pc-repair">PC Repair</a></li>
+              <li><a href="#web-design">Web Design</a></li>
+              <li><a href="#custom-pcs">Custom Builds</a></li>
+              <li><a href="#it-support">Small-Biz IT</a></li>
+              <li><a href="./qr">QR Code Tool</a></li>
             </ul>
-
           </div>
 
-
           <div>
-
-            <h4 class="font-display text-white font-bold mb-5">
-              Company
-            </h4>
-
+            <h4 class="font-display text-white font-bold mb-5">Company</h4>
             <ul class="space-y-3 text-sm text-gray-400">
-
-              <li>
-                <a href="#about">Meet Naiff</a>
-              </li>
-
-              <li>
-                <a href="#contact">Contact</a>
-              </li>
-
-              <li>
-                <a href="#">Privacy Policy</a>
-              </li>
-
+              <li><a href="#about">Meet Naiff</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#">Privacy Policy</a></li>
             </ul>
-
           </div>
-
 
           <div class="col-span-2 md:col-span-1">
-
-            <h4 class="font-display text-white font-bold mb-5">
-              Contact
-            </h4>
-
+            <h4 class="font-display text-white font-bold mb-5">Contact</h4>
             <ul class="space-y-4 text-sm text-gray-400">
-
-              <li>
-
-                <i class="fa-solid fa-phone text-arcade-cyan mr-3"></i>
-
-                <a href="tel:+17863001144">
-                  (786) 300-1144
-                </a>
-
-              </li>
-
-
-              <li>
-
-                <i class="fa-solid fa-envelope text-arcade-lavender mr-3"></i>
-
-                <a href="mailto:cyberdeliatech@gmail.com">
-                  cyberdeliatech@gmail.com
-                </a>
-
-              </li>
-
-
-              <li>
-
-                <i class="fa-solid fa-location-dot text-arcade-green mr-3"></i>
-
-                Broward County, FL
-
-              </li>
-
+              <li><i class="fa-solid fa-phone text-arcade-cyan mr-3"></i><a href="tel:+17863001144">(786) 300-1144</a></li>
+              <li><i class="fa-solid fa-envelope text-arcade-lavender mr-3"></i><a href="mailto:cyberdeliatech@gmail.com">cyberdeliatech@gmail.com</a></li>
+              <li><i class="fa-solid fa-location-dot text-arcade-green mr-3"></i>Broward County, FL</li>
             </ul>
-
           </div>
-
         </div>
-
       </div>
 
-
-      <div
-        class="border-t border-white/5 pt-8 text-center md:text-left text-xs font-mono text-gray-500 flex flex-col md:flex-row justify-between gap-4"
-      >
-
-        <p>
-          &copy; 2026 Cyberdelia IT Solutions. All Rights Reserved.
-        </p>
-
-        <p>
-          Designed & Developed by Naiff.
-        </p>
-
+      <div class="border-t border-white/5 pt-8 text-center md:text-left text-xs font-mono text-gray-500 flex flex-col md:flex-row justify-between gap-4">
+        <p>&copy; 2026 Cyberdelia IT Solutions. All Rights Reserved.</p>
+        <p>Designed & Developed by Naiff.</p>
       </div>
-
     </div>
-
   </footer>
 
-
-
-  <!-- ========================================
-       GOOGLE REVIEW FLOATER
-       IMPORTANT: DIRECT CHILD OF BODY
-  ======================================== -->
-
-  <a
-    id="cyberdelia-review-floater"
-    href="https://g.page/r/Caf2KmOj1kG2EBM/review"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Leave a Google Review"
-  >
-
+  <!-- GOOGLE REVIEW FLOATER -->
+  <a id="cyberdelia-review-floater" href="https://g.page/r/Caf2KmOj1kG2EBM/review" target="_blank" rel="noopener noreferrer" aria-label="Leave a Google Review">
     <span class="review-star">★</span>
-
-    <span class="review-label">
-       Reviews
-    </span>
-
+    <span class="review-label">Reviews</span>
   </a>
 
-
-
-  <!-- ========================================
-       JAVASCRIPT
-  ======================================== -->
-
+  <!-- JAVASCRIPT -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
   <script src="./js/background.js"></script>
-
   <script src="./js/main.js"></script>
-
 </body>
-
 </html>
