@@ -2398,70 +2398,110 @@
         createHeartTexture();
       /* =================================================
       CREATE HEART SPRITES
+      (spread is computed from the camera's actual visible
+      area so hearts fill narrow mobile/portrait viewports
+      instead of spreading past the edges of the screen)
       ================================================= */
-      const hearts = [];
-      const heartCount =
-        window.innerWidth < 768
-          ? 70
-          : 150;
-      for (
-        let i = 0;
-        i < heartCount;
-        i++
-      ) {
-        const material =
-          new THREE.SpriteMaterial({
-            map: heartTexture,
-            transparent: true,
-            opacity:
-              0.08 +
-              Math.random() * 0.28,
-            depthWrite: false
-          });
-        const sprite =
-          new THREE.Sprite(material);
-        const spreadX = 18;
-        const spreadY = 12;
-        const spreadZ = 12;
-        sprite.position.set(
-          (Math.random() - 0.5) *
-          spreadX,
-          (Math.random() - 0.5) *
-          spreadY,
-          (Math.random() - 0.5) *
-          spreadZ
-        );
-        const scale =
-          0.07 +
-          Math.random() * 0.18;
-        sprite.scale.set(
-          scale,
-          scale,
-          1
-        );
-        sprite.userData = {
-          baseX: sprite.position.x,
-          baseY: sprite.position.y,
-          baseZ: sprite.position.z,
-          speed:
-            0.00025 +
-            Math.random() * 0.0008,
-          amplitude:
-            0.15 +
-            Math.random() * 0.5,
-          phase:
-            Math.random() *
-            Math.PI * 2,
-          rotationSpeed:
-            (Math.random() - 0.5) *
-            0.002,
-          pulse:
-            0.5 +
-            Math.random() * 1.5
-        };
-        scene.add(sprite);
-        hearts.push(sprite);
+      let hearts = [];
+
+      function getVisibleSize(depth) {
+        // depth is distance in front of the camera along Z
+        const vFovRad =
+          (camera.fov * Math.PI) / 180;
+        const height =
+          2 * Math.tan(vFovRad / 2) * depth;
+        const width =
+          height * camera.aspect;
+        return { width, height };
       }
+
+      function buildHearts() {
+        // clear any existing sprites first
+        hearts.forEach(sprite => {
+          scene.remove(sprite);
+          sprite.material.dispose();
+        });
+        hearts = [];
+
+        const isMobile =
+          window.innerWidth < 768;
+        const heartCount =
+          isMobile ? 70 : 150;
+
+        // use the visible area at the camera's average
+        // distance to the hearts so the field always
+        // matches what's actually on screen
+        const spreadZ = 12;
+        const avgDepth =
+          camera.position.z; // hearts average around z=0
+        const visible =
+          getVisibleSize(avgDepth);
+        // pad slightly past the edges so movement/parallax
+        // doesn't reveal a hard boundary
+        const spreadX =
+          visible.width * 1.15;
+        const spreadY =
+          visible.height * 1.15;
+
+        for (
+          let i = 0;
+          i < heartCount;
+          i++
+        ) {
+          const material =
+            new THREE.SpriteMaterial({
+              map: heartTexture,
+              transparent: true,
+              opacity:
+                0.08 +
+                Math.random() * 0.28,
+              depthWrite: false
+            });
+          const sprite =
+            new THREE.Sprite(material);
+          sprite.position.set(
+            (Math.random() - 0.5) *
+            spreadX,
+            (Math.random() - 0.5) *
+            spreadY,
+            (Math.random() - 0.5) *
+            spreadZ
+          );
+          const scale =
+            (isMobile ? 0.055 : 0.07) +
+            Math.random() *
+            (isMobile ? 0.14 : 0.18);
+          sprite.scale.set(
+            scale,
+            scale,
+            1
+          );
+          sprite.userData = {
+            baseX: sprite.position.x,
+            baseY: sprite.position.y,
+            baseZ: sprite.position.z,
+            speed:
+              0.00025 +
+              Math.random() * 0.0008,
+            amplitude:
+              0.15 +
+              Math.random() * 0.5,
+            phase:
+              Math.random() *
+              Math.PI * 2,
+            rotationSpeed:
+              (Math.random() - 0.5) *
+              0.002,
+            pulse:
+              0.5 +
+              Math.random() * 1.5
+          };
+          scene.add(sprite);
+          hearts.push(sprite);
+        }
+      }
+
+      buildHearts();
       /* =================================================
       MOUSE
       ================================================= */
