@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08090b">
+
+<!-- {{PAGE_TITLE}} / {{PAGE_DESCRIPTION}} -->
+<meta name="description" content="Free one-click Windows health scan from Cyberdelia. Check CPU, RAM, disk space, and network health in seconds, and see exactly what needs attention.">
+<title>Cyberdelia | PC Diagnostic Tool</title>
+
+<link rel="icon" type="image/png" href="./content/img/logo.png">
+<link rel="apple-touch-icon" href="./content/img/logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'arcade-dark': '#1A1A1A',
+          'arcade-black': '#0f0f0f',
+          'arcade-lavender': '#B19CD9',
+          'arcade-cyan': '#00E5FF',
+          'arcade-green': '#00FF88'
+        },
+        fontFamily: {
+          display: ['Syne', 'sans-serif'],
+          body: ['Plus Jakarta Sans', 'sans-serif'],
+          mono: ['DM Mono', 'monospace']
+        }
+      }
+    }
+  };
+</script>
+
+<!-- Shared look for every page except index.html -->
+<link rel="stylesheet" href="./css/pg_web.css">
+
+</head>
+
+<body class="antialiased selection:bg-arcade-cyan selection:text-black">
+
+<div id="canvas-container"></div>
+<div class="noise"></div>
+
+<!-- HEADER (identical on every page except index.html) -->
+<header class="fixed w-full top-0 z-50 border-b border-white/5 bg-[#0f0f0f]/40 backdrop-blur-xl">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="./" class="flex items-center gap-3 group">
+      <img src="./content/img/logo.png" alt="Cyberdelia" class="h-12 w-auto">
+      <div class="flex flex-col leading-none">
+        <span class="text-2xl font-bold font-display tracking-wide">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white">Cyberdelia</span>
+        </span>
+        <span class="mt-1 text-[9px] font-mono tracking-[0.3em] uppercase text-arcade-green">Technologies</span>
+      </div>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
+      <a href="./#pc-repair" class="hover:text-white transition-all">PC Repair</a>
+      <a href="./#web-design" class="hover:text-white transition-all">Web Design</a>
+      <a href="./#custom-pcs" class="hover:text-white transition-all">Custom PCs</a>
+      <a href="./#it-support" class="hover:text-white transition-all">Small-Biz IT</a>
+      <a href="./#about" class="hover:text-white transition-all">About</a>
+    </nav>
+
+    <div class="hidden lg:flex items-center gap-6">
+      <a href="tel:7863001144" class="text-sm font-mono text-gray-300 hover:text-arcade-cyan transition-all">
+        <i class="fa-solid fa-phone text-xs mr-2"></i>(786) 300-1144
+      </a>
+      <a href="./#contact" class="btn-chic-cyan px-6 py-2.5 rounded-full text-sm font-medium">Request a Quote</a>
+    </div>
+
+    <button id="mobileMenuBtn" class="lg:hidden text-gray-300 hover:text-white" type="button" aria-label="Open menu">
+      <i class="fa-solid fa-bars text-2xl"></i>
+    </button>
+  </div>
+
+  <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-[#08090b]/90 backdrop-blur-2xl border-b border-white/15 flex-col py-4 px-6 shadow-2xl">
+    <a href="./#pc-repair" class="mobile-link py-3 border-b border-white/5 text-gray-300">PC Repair & Tech Support</a>
+    <a href="./#web-design" class="mobile-link py-3 border-b border-white/5 text-gray-300">Web Design & Dev</a>
+    <a href="./#custom-pcs" class="mobile-link py-3 border-b border-white/5 text-gray-300">Custom PC Builds</a>
+    <a href="./#it-support" class="mobile-link py-3 border-b border-white/5 text-gray-300">Small-Business IT</a>
+    <a href="./#about" class="mobile-link py-3 border-b border-white/5 text-gray-300">About</a>
+    <a href="./#contact" class="mobile-link py-4 text-arcade-cyan font-bold uppercase">Request a Quote</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="pt-40 pb-24 relative z-10">
+    <div class="container mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+        <div>
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-cyan/30 bg-arcade-cyan/10 text-arcade-cyan text-xs font-mono uppercase">
+            Free Download &middot; Windows
+          </span>
+
+          <h1 class="font-display font-bold text-white text-4xl md:text-5xl lg:text-6xl mt-6 leading-tight">
+            Cyberdelia<br>PC Diagnostic Tool
+          </h1>
+
+          <p class="text-gray-400 text-lg mt-6 max-w-lg leading-relaxed">
+            A free, one-click health scan for your Windows PC. In seconds it
+            checks your CPU, RAM, disk space, and network connection, then
+            tells you — in plain English, not tech jargon — exactly what's
+            wrong and what to do about it.
+          </p>
+
+          <div class="flex flex-wrap gap-4 mt-10">
+            <a href="https://drive.google.com/file/d/190a_jh1rtahwtSC5RS3efyA1QS-8pUuv/view?usp=sharing"
+               target="_blank" rel="noopener"
+               class="btn-chic-cyan px-8 py-4 rounded-full text-sm font-semibold">
+              <i class="fa-solid fa-download mr-2"></i>Download Free
+            </a>
+            <a href="#what-it-checks"
+               class="px-8 py-4 rounded-full text-sm font-medium text-gray-200 border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all">
+              See What It Checks
+            </a>
+          </div>
+
+          <p class="text-gray-500 text-xs font-mono mt-6">
+            No account. No install required to try it. Windows only.
+          </p>
+        </div>
+
+        <div class="relative flex justify-center">
+          <div class="absolute inset-0 bg-gradient-to-br from-arcade-cyan/20 via-arcade-lavender/20 to-arcade-green/20 blur-3xl rounded-full"></div>
+          <img src="./content/img/ct_logo.png" alt="Cyberdelia PC Diagnostic Tool" class="relative w-full max-w-md">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IT CHECKS -->
+  <section id="what-it-checks" class="py-24 relative z-10">
+    <div class="container mx-auto px-6">
+      <div class="max-w-2xl mb-14">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-lavender/30 bg-arcade-lavender/10 text-arcade-lavender text-xs font-mono uppercase">
+          What It Checks
+        </span>
+        <h2 class="font-display font-bold text-white text-3xl md:text-4xl mt-5">
+          A full checkup, in one click
+        </h2>
+        <p class="text-gray-400 mt-4 leading-relaxed">
+          Every scan runs the same checks a technician would — automatically,
+          in the background, with results you can actually read.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div class="glass-panel p-8 rounded-2xl">
+          <i class="fa-solid fa-microchip text-arcade-cyan text-2xl mb-4"></i>
+          <h3 class="font-display font-bold text-white text-lg mb-2">CPU Load</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Is something quietly maxing out your processor in the background?</p>
+        </div>
+
+        <div class="glass-panel p-8 rounded-2xl">
+          <i class="fa-solid fa-memory text-arcade-lavender text-2xl mb-4"></i>
+          <h3 class="font-display font-bold text-white text-lg mb-2">RAM Usage</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">How much memory is actually free, and what's eating the rest.</p>
+        </div>
+
+        <div class="glass-panel p-8 rounded-2xl">
+          <i class="fa-solid fa-hard-drive text-arcade-green text-2xl mb-4"></i>
+          <h3 class="font-display font-bold text-white text-lg mb-2">Disk Space</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Low disk space quietly slows everything down — this catches it early.</p>
+        </div>
+
+        <div class="glass-panel p-8 rounded-2xl">
+          <i class="fa-solid fa-wifi text-arcade-cyan text-2xl mb-4"></i>
+          <h3 class="font-display font-bold text-white text-lg mb-2">Network & Internet</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Tests your router, DNS, and internet connection separately — so you know exactly which one is the problem.</p>
+        </div>
+
+        <div class="glass-panel p-8 rounded-2xl">
+          <i class="fa-solid fa-list-check text-arcade-lavender text-2xl mb-4"></i>
+          <h3 class="font-display font-bold text-white text-lg mb-2">Top Processes</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">See exactly which apps are actually consuming your CPU and memory right now.</p>
+        </div>
+
+        <div class="glass-panel p-8 rounded-2xl">
+          <i class="fa-solid fa-triangle-exclamation text-arcade-green text-2xl mb-4"></i>
+          <h3 class="font-display font-bold text-white text-lg mb-2">Issues & Fixes</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Every problem found comes with a plain-English recommendation — not just a red warning icon.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY IT HELPS -->
+  <section class="py-24 relative z-10">
+    <div class="container mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+        <div>
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-green/30 bg-arcade-green/10 text-arcade-green text-xs font-mono uppercase">
+            Why It Helps
+          </span>
+          <h2 class="font-display font-bold text-white text-3xl md:text-4xl mt-5">
+            Know what's wrong before you spend a dollar
+          </h2>
+          <p class="text-gray-400 mt-6 leading-relaxed">
+            Most people don't know why their computer feels slow — they just
+            know it is. This tool replaces the guesswork with a clear
+            Healthy / Warning / Critical readout, so you know whether you're
+            looking at a five-minute fix or something worth calling us about.
+          </p>
+        </div>
+
+        <div class="space-y-5">
+          <div class="glass-panel p-6 rounded-2xl flex gap-4 items-start">
+            <span class="w-9 h-9 rounded-full bg-arcade-cyan/10 border border-arcade-cyan/30 flex items-center justify-center text-arcade-cyan font-mono text-sm flex-shrink-0">1</span>
+            <p class="text-gray-300 text-sm leading-relaxed">Catch problems early — before slow performance turns into a real failure.</p>
+          </div>
+          <div class="glass-panel p-6 rounded-2xl flex gap-4 items-start">
+            <span class="w-9 h-9 rounded-full bg-arcade-lavender/10 border border-arcade-lavender/30 flex items-center justify-center text-arcade-lavender font-mono text-sm flex-shrink-0">2</span>
+            <p class="text-gray-300 text-sm leading-relaxed">Skip the guesswork — no more wondering if it's your Wi-Fi, your PC, or your ISP.</p>
+          </div>
+          <div class="glass-panel p-6 rounded-2xl flex gap-4 items-start">
+            <span class="w-9 h-9 rounded-full bg-arcade-green/10 border border-arcade-green/30 flex items-center justify-center text-arcade-green font-mono text-sm flex-shrink-0">3</span>
+            <p class="text-gray-300 text-sm leading-relaxed">Bring us the report — export it and show it to us for faster, more accurate repairs.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="py-24 relative z-10">
+    <div class="container mx-auto px-6">
+      <div class="max-w-2xl mb-14">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-arcade-cyan/30 bg-arcade-cyan/10 text-arcade-cyan text-xs font-mono uppercase">
+          How It Works
+        </span>
+        <h2 class="font-display font-bold text-white text-3xl md:text-4xl mt-5">
+          Three steps, no technical know-how needed
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <div class="glass-panel p-8 rounded-2xl">
+          <span class="font-display font-bold text-4xl text-arcade-cyan/40">01</span>
+          <h3 class="font-display font-bold text-white text-lg mt-4 mb-2">Download & open it</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Grab the free download above. No account, no setup wizard to fight through.</p>
+        </div>
+
+        <div class="glass-panel p-8 rounded-2xl">
+          <span class="font-display font-bold text-4xl text-arcade-lavender/40">02</span>
+          <h3 class="font-display font-bold text-white text-lg mt-4 mb-2">Click Run Diagnostic</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">The scan takes a few seconds and checks everything automatically.</p>
+        </div>
+
+        <div class="glass-panel p-8 rounded-2xl">
+          <span class="font-display font-bold text-4xl text-arcade-green/40">03</span>
+          <h3 class="font-display font-bold text-white text-lg mt-4 mb-2">Read the results</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Clear Healthy / Warning / Critical status for everything, with plain-English fixes.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="py-24 relative z-10">
+    <div class="container mx-auto px-6">
+      <div class="glass-panel rounded-3xl p-12 md:p-16 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-arcade-cyan/10 via-transparent to-arcade-lavender/10"></div>
+
+        <div class="relative">
+          <h2 class="font-display font-bold text-white text-3xl md:text-4xl mb-4">
+            See what's really going on with your PC
+          </h2>
+          <p class="text-gray-400 max-w-xl mx-auto mb-10">
+            Free to download, ready in seconds. And if it turns up something
+            you'd rather have a professional handle, we're right here in
+            Broward County.
+          </p>
+
+          <div class="flex flex-wrap gap-4 justify-center">
+            <a href="https://drive.google.com/file/d/190a_jh1rtahwtSC5RS3efyA1QS-8pUuv/view?usp=sharing"
+               target="_blank" rel="noopener"
+               class="btn-chic-cyan px-8 py-4 rounded-full text-sm font-semibold">
+              <i class="fa-solid fa-download mr-2"></i>Download the Tool
+            </a>
+            <a href="./#contact"
+               class="px-8 py-4 rounded-full text-sm font-medium text-gray-200 border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all">
+              Request a Repair Quote
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER (identical on every page except index.html) -->
+<footer class="bg-[#050607]/90 backdrop-blur-2xl border-t border-white/5 pt-16 pb-8 relative z-10">
+  <div class="container mx-auto px-6">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-10 mb-12">
+      <div class="md:w-1/3">
+        <a href="./" class="mb-4 block">
+          <img src="./content/img/ct_logo.png" alt="Cyberdelia" class="h-40 w-42">
+        </a>
+        <p class="text-gray-400 text-sm mb-6 max-w-sm leading-relaxed">IT Support • PC Repair • Custom PCs • Web Design. Serving Broward County and South Florida.</p>
+
+        <div class="flex gap-4">
+          <a href="https://www.linkedin.com/in/naiffasilis/details/experience/" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-arcade-cyan">
+            <i class="fa-brands fa-linkedin-in text-sm"></i>
+          </a>
+          <a href="https://www.instagram.com/cyberdeliatech/" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-arcade-lavender">
+            <i class="fa-brands fa-instagram text-sm"></i>
+          </a>
+          <a href="https://maps.app.goo.gl/agr8bZeGqxrFt2Xj8" aria-label="Google Business Profile" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 bg-white/5 hover:text-arcade-lavender">
+            <i class="fa-brands fa-google text-sm"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="md:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-8">
+        <div>
+          <h4 class="font-display text-white font-bold mb-5">Services</h4>
+          <ul class="space-y-3 text-sm text-gray-400">
+            <li><a href="./#pc-repair">PC Repair</a></li>
+            <li><a href="./#web-design">Web Design</a></li>
+            <li><a href="./#custom-pcs">Custom Builds</a></li>
+            <li><a href="./#it-support">Small-Biz IT</a></li>
+            <li><a href="./qr">QR Code Tool</a></li>
+            <li><a href="https://drive.google.com/file/d/190a_jh1rtahwtSC5RS3efyA1QS-8pUuv/view?usp=sharing">Cyberdelia PC Diagnostic Tool</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display text-white font-bold mb-5">Company</h4>
+          <ul class="space-y-3 text-sm text-gray-400">
+            <li><a href="./#about">Meet Naiff</a></li>
+            <li><a href="./#contact">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-span-2 md:col-span-1">
+          <h4 class="font-display text-white font-bold mb-5">Contact</h4>
+          <ul class="space-y-4 text-sm text-gray-400">
+            <li><i class="fa-solid fa-phone text-arcade-cyan mr-3"></i><a href="tel:+17863001144">(786) 300-1144</a></li>
+            <li><i class="fa-solid fa-envelope text-arcade-lavender mr-3"></i><a href="mailto:cyberdeliatech@gmail.com">cyberdeliatech@gmail.com</a></li>
+            <li><i class="fa-solid fa-location-dot text-arcade-green mr-3"></i>Broward County, FL</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-white/5 pt-8 text-center md:text-left text-xs font-mono text-gray-500 flex flex-col md:flex-row justify-between gap-4">
+      <p>&copy; 2026 Cyberdelia IT Solutions. All Rights Reserved.</p>
+      <p>Designed & Developed by Naiff.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile menu toggle (same script on every non-index page) -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const menuButton = document.getElementById("mobileMenuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  if (menuButton && mobileMenu) {
+    menuButton.addEventListener("click", function() {
+      mobileMenu.classList.toggle("hidden");
+      mobileMenu.classList.toggle("flex");
+    });
+  }
+
+  document.querySelectorAll("#mobileMenu a").forEach(function(link) {
+    link.addEventListener("click", function() {
+      mobileMenu.classList.add("hidden");
+      mobileMenu.classList.remove("flex");
+    });
+  });
+});
+</script>
+
+<!-- Animated background (same on every non-index page) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="./js/pg_web.js"></script>
+
+</body>
+</html>
