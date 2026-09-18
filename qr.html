@@ -115,9 +115,47 @@ header.top{ display:flex; align-items:center; justify-content:space-between; pad
   cursor:pointer; font-family:inherit; color:#E2E8F0; position:relative;
   transition:border-color .25s ease, background .25s ease, box-shadow .25s ease;
 }
-.type-card:hover{ border-color:rgba(0,229,255,.5); background:rgba(0,229,255,.06); box-shadow:0 0 20px rgba(0,229,255,.08); }
+.type-card:nth-child(3n + 1):hover{
+  border-color:rgba(0,255,136,.5);
+  box-shadow:0 0 20px rgba(0,255,136,.12);
+}
+
+.type-card:nth-child(3n + 2):hover{
+  border-color:rgba(177,156,217,.5);
+  box-shadow:0 0 20px rgba(177,156,217,.12);
+}
+
+.type-card:nth-child(3n):hover{
+  border-color:rgba(0,229,255,.5);
+  box-shadow:0 0 20px rgba(0,229,255,.12);
+}
 .type-card:focus-visible{ outline:2px solid #00E5FF; outline-offset:2px; }
-.type-card .ic{ width:20px; height:20px; flex-shrink:0; margin-top:2px; color:#00E5FF; }
+.type-card .ic{
+  width:20px;
+  height:20px;
+  flex-shrink:0;
+  margin-top:2px;
+  color:#00E5FF;
+}
+
+.type-card:nth-child(3n + 1) .ic{
+  color:#00FF88;
+}
+
+.type-card:nth-child(3n + 2) .ic{
+  color:#B19CD9;
+}
+
+.type-card:nth-child(3n) .ic{
+  color:#00E5FF;
+}
+
+.type-card .ic svg{
+  width:100%;
+  height:100%;
+  display:block;
+  filter:drop-shadow(0 0 6px currentColor);
+}
 .type-card .ic svg{ width:100%; height:100%; display:block; }
 .type-card .tc-label{ font-weight:600; font-size:14px; color:#fff; }
 .type-card .tc-sub{ font-size:11.5px; color:#64748b; margin-top:2px; line-height:1.35; }
