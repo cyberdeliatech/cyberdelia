@@ -41,47 +41,79 @@
   <div class="noise"></div>
 
   <!-- HEADER -->
-  <header class="fixed w-full top-0 z-50 border-b border-white/5 bg-[#0f0f0f]/40 backdrop-blur-xl">
-    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="./" class="flex items-center gap-3 group">
-        <img src="./content/img/logo.png" alt="Cyberdelia" class="h-12 w-auto">
-        <div class="flex flex-col leading-none">
-          <span class="text-2xl font-bold font-display tracking-wide">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white">Cyberdelia</span>
-          </span>
-          <span class="mt-1 text-[9px] font-mono tracking-[0.3em] uppercase text-arcade-green">Technologies</span>
-        </div>
-      </a>
-
-      <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
-        <a href="./#pc-repair" class="hover:text-white transition-all">PC Repair & Tech Support</a>
-        <a href="./#web-design" class="hover:text-white transition-all">Web Design</a>
-        <a href="./#custom-pcs" class="hover:text-white transition-all">Custom PCs</a>
-        <a href="./#it-support" class="hover:text-white transition-all">Small-Biz IT</a>
-        <a href="./#about" class="hover:text-white transition-all">About</a>
-      </nav>
-
-      <div class="hidden lg:flex items-center gap-6">
-        <a href="tel:7863001144" class="text-sm font-mono text-gray-300 hover:text-arcade-cyan transition-all">
-          <i class="fa-solid fa-phone text-xs mr-2"></i>(786) 300-1144
-        </a>
-        <a href="./#contact" class="btn-chic-cyan px-6 py-2.5 rounded-full text-sm font-medium">Request a Quote</a>
+  <!-- HEADER -->
+<header class="fixed w-full top-0 z-50 border-b border-white/5 bg-[#0f0f0f]/40 backdrop-blur-xl">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#home" class="flex items-center gap-3 group">
+      <img src="./content/img/logo.png" alt="Cyberdelia" class="h-12 w-auto">
+      <div class="flex flex-col leading-none">
+        <span class="text-2xl font-bold font-display tracking-wide">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white">Cyberdelia</span>
+        </span>
+        <span class="mt-1 text-[9px] font-mono tracking-[0.3em] uppercase text-arcade-green">Technologies</span>
       </div>
+    </a>
 
-      <button id="mobileMenuBtn" class="lg:hidden text-gray-300 hover:text-white" type="button" aria-label="Open menu">
-        <i class="fa-solid fa-bars text-2xl"></i>
-      </button>
+    <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
+      <a href="#pc-repair" class="hover:text-white transition-all">PC Repair & Tech Support</a>
+      <a href="#web-design" class="hover:text-white transition-all">Web Design</a>
+      <a href="#custom-pcs" class="hover:text-white transition-all">Custom PCs</a>
+      <a href="#it-support" class="hover:text-white transition-all">Small-Biz IT</a>
+      <a href="#about" class="hover:text-white transition-all">About</a>
+      <div class="relative group">
+        <button type="button" class="flex items-center gap-2 hover:text-white transition-all" aria-haspopup="true">
+          Tools
+          <i class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200 group-hover:rotate-180"></i>
+        </button>
+        <div class="absolute right-0 top-full pt-3 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200">
+          <div class="w-52 rounded-xl border border-white/10 bg-[#0b0c0e]/95 backdrop-blur-xl shadow-2xl overflow-hidden">
+            <a href="./diagnostic-tool" class="flex items-center gap-3 px-5 py-4 text-gray-300 hover:text-white hover:bg-white/5 transition-all">
+              <i class="fa-solid fa-stethoscope text-arcade-cyan w-5"></i>
+              <span>Diagnostic Tool</span>
+            </a>
+            <a href="/qr" class="flex items-center gap-3 px-5 py-4 text-gray-300 hover:text-white hover:bg-white/5 transition-all border-t border-white/5">
+              <i class="fa-solid fa-qrcode text-arcade-green w-5"></i>
+              <span>QR Creator</span>
+            </a>
+            <a href="/game" class="flex items-center gap-3 px-5 py-4 text-gray-300 hover:text-white hover:bg-white/5 transition-all border-t border-white/5">
+              <i class="fa-solid fa-gamepad text-arcade-lavender w-5"></i>
+              <span>Game</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hidden lg:flex items-center gap-6">
+      <a href="tel:7863001144" class="text-sm font-mono text-gray-300 hover:text-arcade-cyan transition-all">
+        <i class="fa-solid fa-phone text-xs mr-2"></i>(786) 300-1144
+      </a>
+      <a href="#contact" class="btn-chic-cyan px-6 py-2.5 rounded-full text-sm font-medium">Request a Quote</a>
     </div>
 
-    <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-[#08090b]/90 backdrop-blur-2xl border-b border-white/15 flex-col py-4 px-6 shadow-2xl">
-      <a href="./#pc-repair" class="mobile-link py-3 border-b border-white/5 text-gray-300">PC Repair & Tech Support</a>
-      <a href="./#web-design" class="mobile-link py-3 border-b border-white/5 text-gray-300">Web Design & Dev</a>
-      <a href="./#custom-pcs" class="mobile-link py-3 border-b border-white/5 text-gray-300">Custom PC Builds</a>
-      <a href="./#it-support" class="mobile-link py-3 border-b border-white/5 text-gray-300">Small-Business IT</a>
-      <a href="./#about" class="mobile-link py-3 border-b border-white/5 text-gray-300">About</a>
-      <a href="./#contact" class="mobile-link py-4 text-arcade-cyan font-bold uppercase">Request a Quote</a>
+    <button id="mobileMenuBtn" class="lg:hidden text-gray-300 hover:text-white" type="button" aria-label="Open menu">
+      <i class="fa-solid fa-bars text-2xl"></i>
+    </button>
+  </div>
+
+  <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-[#08090b]/90 backdrop-blur-2xl border-b border-white/15 flex-col py-4 px-6 shadow-2xl">
+    <a href="#pc-repair" class="mobile-link py-3 border-b border-white/5 text-gray-300">PC Repair & Tech Support</a>
+    <a href="#web-design" class="mobile-link py-3 border-b border-white/5 text-gray-300">Web Design & Dev</a>
+    <a href="#custom-pcs" class="mobile-link py-3 border-b border-white/5 text-gray-300">Custom PC Builds</a>
+    <a href="#it-support" class="mobile-link py-3 border-b border-white/5 text-gray-300">Small-Business IT</a>
+    <a href="#about" class="mobile-link py-3 border-b border-white/5 text-gray-300">About</a>
+    <div class="border-b border-white/5 py-2">
+      <div class="py-2 text-xs font-mono uppercase tracking-widest text-gray-500">Tools</div>
+      <a href="/diagnostic-tool" class="mobile-link flex items-center gap-3 py-3 pl-3 text-gray-300 hover:text-white">
+        <i class="fa-solid fa-stethoscope text-arcade-cyan w-5"></i>Diagnostic Tool
+      </a>
+      <a href="/qr-creator" class="mobile-link flex items-center gap-3 py-3 pl-3 text-gray-300 hover:text-white">
+        <i class="fa-solid fa-qrcode text-arcade-green w-5"></i>QR Creator
+      </a>
     </div>
-  </header>
+    <a href="#contact" class="mobile-link py-4 text-arcade-cyan font-bold uppercase">Request a Quote</a>
+  </div>
+</header>
 
   <!-- MAIN -->
   <main>
