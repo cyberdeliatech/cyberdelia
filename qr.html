@@ -138,6 +138,15 @@ header.top{ display:flex; align-items:center; justify-content:space-between; pad
 .input-box, select.input-box, textarea.input-box{
   width:100%; background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.1); color:#fff;
   border-radius:12px; padding:13px 14px; outline:none; font-family:inherit; font-size:14.5px; transition:.25s ease;
+}select.input-box {
+  color: #fff;
+  background-color: #0b0c0e;
+  color-scheme: dark;
+}
+
+select.input-box option {
+  background: #0b0c0e;
+  color: #fff;
 }
 .input-box::placeholder{ color:#64748b; }
 .input-box:focus{ border-color:rgba(0,229,255,.65); box-shadow:0 0 0 3px rgba(0,229,255,.07); }
@@ -577,7 +586,7 @@ const TYPES = [
     fields:[
       {id:'ssid', label:'Network name (SSID)', type:'text', placeholder:'Home-Network'},
       {id:'password', label:'Password', type:'text', placeholder:'••••••••', optional:true},
-      {id:'enc', label:'Security', type:'select', options:['WPA/WPA2','WEP','None']}
+      {id:'enc', label:'Security', type:'select', options:['WPA/WPA2/WPA3','WEP','None']}
     ],
     build:(v)=>{
       if(!v.ssid) return '';
