@@ -1,6 +1,6 @@
 # Cyberdelia PC Diagnostic Tool — Terms of Use & Disclaimer
 
-*Last updated: [DATE]*
+*Last updated: 9/11/2026
 
 ## 1. Acceptance of Terms
 
