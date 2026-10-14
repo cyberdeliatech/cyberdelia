@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privately Yours — Personal Chef & In-Home Dining | Beaufort & Lowcountry, SC</title>
+    <meta name="description" content="Editorial, high-end private chef and weekly meal preparation services in Beaufort, Bluffton, and Hilton Head, South Carolina. Hosted by Chef Josh Castillo.">
+
+    <!-- Fonts: Cinzel (Chic/Luxury Display Titles), Cormorant Garamond (Editorial Serif), Inter (Clean Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ivory: '#F7F4EE',
+                        charcoal: '#20211F',
+                        olive: '#737761',
+                        taupe: '#B5A99A',
+                        champagne: '#C8B38A',
+                        'champagne-light': '#E8DBBF',
+                        'charcoal-card': '#191A18',
+                    },
+                    fontFamily: {
+                        chic: ['Cinzel', 'serif'],
+                        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        'ultra': '0.3em',
+                        'mega': '0.4em',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Dependencies: Babylon.js + GSAP & ScrollTrigger -->
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* Custom Customizations & Refinements */
+        body {
+            background-color: #20211F;
+            color: #F7F4EE;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .chic-heading {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+        }
+
+        .editorial-serif {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+        }
+
+        /* Glassmorphism & Borders */
+        .glass-panel {
+            background: rgba(32, 33, 31, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(200, 179, 138, 0.18);
+        }
+
+        .border-gold-subtle {
+            border-color: rgba(200, 179, 138, 0.25);
+        }
+
+        /* Smooth Babylon canvas integration */
+        #babylon-canvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+            pointer-events: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #20211F;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3B3C38;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C8B38A;
+        }
+    </style>
+</head>
+<body class="bg-charcoal text-ivory antialiased selection:bg-champagne selection:text-charcoal">
+
+    <!-- Header / Navigation Bar -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-6 px-6 lg:px-12 border-b border-transparent">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#home" onclick="navTo('home')" class="group flex flex-col">
+                <span class="chic-heading text-lg lg:text-xl text-champagne tracking-ultra transition-all duration-300 group-hover:text-ivory">PRIVATELY YOURS</span>
+                <span class="text-[10px] tracking-mega text-taupe uppercase font-sans font-light -mt-1">In-Home Dining & Chef Services</span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-xs font-medium tracking-widest uppercase">
+                <button onclick="navTo('home')" class="hover:text-champagne transition-colors">Home</button>
+                <button onclick="navTo('weekly-meal-prep')" class="hover:text-champagne transition-colors">Weekly Meal Prep</button>
+                <button onclick="navTo('private-dining')" class="hover:text-champagne transition-colors">Private Dining</button>
+                <button onclick="navTo('cooking-classes')" class="hover:text-champagne transition-colors">Classes</button>
+                <button onclick="navTo('about')" class="hover:text-champagne transition-colors">About Chef</button>
+                <button onclick="navTo('faq')" class="hover:text-champagne transition-colors">FAQ</button>
+            </nav>
+
+            <!-- Primary Action CTA -->
+            <div class="hidden md:flex items-center">
+                <button onclick="openBookingModal()" class="px-6 py-2.5 bg-champagne text-charcoal chic-heading text-[11px] font-semibold tracking-wider hover:bg-ivory hover:text-charcoal transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg">
+                    Book Consultation
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button onclick="toggleMobileNav()" class="md:hidden text-champagne focus:outline-none p-2">
+                <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-nav" class="fixed inset-0 bg-charcoal/95 backdrop-blur-xl z-40 hidden flex-col justify-center items-center text-center px-6 transition-all duration-300">
+        <nav class="flex flex-col space-y-6 chic-heading text-sm tracking-widest">
+            <button onclick="mobileNavTo('home')" class="text-ivory hover:text-champagne py-2">Home</button>
+            <button onclick="mobileNavTo('weekly-meal-prep')" class="text-ivory hover:text-champagne py-2">Weekly Meal Prep</button>
+            <button onclick="mobileNavTo('private-dining')" class="text-ivory hover:text-champagne py-2">Private Dining</button>
+            <button onclick="mobileNavTo('cooking-classes')" class="text-ivory hover:text-champagne py-2">Cooking Classes</button>
+            <button onclick="mobileNavTo('about')" class="text-ivory hover:text-champagne py-2">About Chef Josh</button>
+            <button onclick="mobileNavTo('how-it-works')" class="text-ivory hover:text-champagne py-2">How It Works</button>
+            <button onclick="mobileNavTo('faq')" class="text-ivory hover:text-champagne py-2">FAQ</button>
+            <div class="pt-6">
+                <button onclick="mobileNavTo('book')" class="px-8 py-3 bg-champagne text-charcoal chic-heading text-xs font-bold tracking-wider">
+                    Book Consultation
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <!-- MAIN SINGLE PAGE CONTENT ROUTER -->
+    <main id="app-container">
+
+        <!-- SECTION 1: CINEMATIC HERO WITH BABYLON.JS TINY SPARKLE PARTICLE CANVAS -->
+        <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 px-6">
+            <!-- Babylon.js 3D Tiny Sparkle Engine Canvas -->
+            <div class="absolute inset-0 z-0 opacity-80">
+                <canvas id="babylon-canvas"></canvas>
+            </div>
+
+            <!-- Background Image Overlay Blend -->
+            <div class="absolute inset-0 z-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center">
+                <!-- Chic Micro-Header -->
+                <span class="gsap-hero chic-heading text-xs md:text-sm text-champagne tracking-mega mb-6 block font-medium">
+                    Beaufort & Lowcountry, South Carolina
+                </span>
+
+                <!-- Main Editorial Headline -->
+                <h1 class="gsap-hero chic-heading text-3xl md:text-5xl lg:text-6xl text-ivory leading-tight tracking-ultra mb-8 max-w-4xl font-normal">
+                    Exceptional Food.<br><span class="editorial-serif italic lowercase text-champagne font-light text-4xl md:text-6xl lg:text-7xl capitalize tracking-normal">More Time for Life.</span>
+                </h1>
+
+                <!-- Supporting Copy -->
+                <p class="gsap-hero text-taupe font-sans font-light text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-10">
+                    Personalized in-home chef services designed around your tastes, your schedule, and the way you live. Tailored weekly meal prep and bespoke culinary experiences.
+                </p>
+
+                <!-- CTA Cluster -->
+                <div class="gsap-hero flex flex-col sm:flex-row items-center justify-center gap-5 w-full sm:w-auto">
+                    <button onclick="navTo('weekly-meal-prep')" class="w-full sm:w-auto px-8 py-4 bg-champagne text-charcoal chic-heading text-xs font-semibold tracking-widest hover:bg-ivory transition-all duration-300 shadow-xl transform hover:-translate-y-0.5">
+                        Explore Weekly Meal Prep
+                    </button>
+                    <button onclick="openBookingModal()" class="w-full sm:w-auto px-8 py-4 bg-transparent border border-champagne/40 text-ivory chic-heading text-xs tracking-widest hover:border-champagne hover:bg-champagne/10 transition-all duration-300">
+                        Book A Consultation
+                    </button>
+                </div>
+
+                <!-- Scroll Indicator -->
+                <div class="gsap-hero mt-20 flex flex-col items-center space-y-3 opacity-60">
+                    <span class="text-[10px] uppercase tracking-ultra text-taupe">Scroll to Explore</span>
+                    <div class="w-0.5 h-10 bg-gradient-to-b from-champagne to-transparent animate-pulse"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: BRAND INTRODUCTION -->
+        <section class="py-24 px-6 md:px-12 bg-charcoal border-t border-gold-subtle">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                <!-- Editorial Image Column -->
+                <div class="lg:col-span-6 relative">
+                    <div class="relative overflow-hidden aspect-[4/5] border border-gold-subtle group">
+                        <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=1200&auto=format&fit=crop" alt="Chef Josh preparing organic seasonal ingredients in a residential kitchen" class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent"></div>
+                    </div>
+                    <!-- Subtle Floating Metric Badge -->
+                    <div class="absolute -bottom-6 -right-6 hidden sm:block p-6 glass-panel border border-champagne/30 text-left max-w-xs">
+                        <p class="chic-heading text-xs text-champagne mb-1">Tailored Dining</p>
+                        <p class="text-xs text-taupe leading-relaxed">Dedicated culinary care for households across Beaufort, Bluffton, and Hilton Head.</p>
+                    </div>
+                </div>
+
+                <!-- Text Content Column -->
+                <div class="lg:col-span-6 space-y-8">
+                    <span class="chic-heading text-xs text-olive tracking-mega uppercase font-medium">Bespoke In-Home Culinary Service</span>
+                    <h2 class="chic-heading text-2xl md:text-4xl text-ivory leading-snug tracking-wider">
+                        A More Personal Approach to Fine Dining
+                    </h2>
+                    <div class="w-12 h-0.5 bg-champagne/60"></div>
+                    <p class="editorial-serif text-xl md:text-2xl text-taupe leading-relaxed font-light italic">
+                        "From thoughtfully prepared weekly meals to intimate dinners at home, Privately Yours brings personalized culinary craftsmanship into your everyday life."
+                    </p>
+                    <p class="text-sm md:text-base text-taupe/90 font-sans font-light leading-relaxed">
+                        We eliminate the burden of menu planning, grocery sourcing, preparation, and kitchen cleanup. Every dish is cooked fresh in your home, honoring your nutritional goals, tastes, and seasonal Lowcountry produce.
+                    </p>
+                    <div class="pt-4">
+                        <button onclick="navTo('about')" class="inline-flex items-center space-x-3 text-xs chic-heading text-champagne tracking-widest hover:text-ivory transition-colors group">
+                            <span>Meet Chef Josh Castillo</span>
+                            <span class="transform group-hover:translate-x-2 transition-transform">&rarr;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: THREE CORE SERVICES PRESENTATION -->
+        <section class="py-24 px-6 md:px-12 bg-charcoal-card border-t border-b border-gold-subtle">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-20">
+                    <span class="chic-heading text-xs text-champagne tracking-mega uppercase block mb-3">Our Offerings</span>
+                    <h2 class="chic-heading text-3xl md:text-4xl text-ivory tracking-wider mb-6">Culinary Services</h2>
+                    <p class="text-taupe text-sm md:text-base font-light">Elegantly tailored experiences designed to simplify your week or elevate special moments.</p>
+                </div>
+
+                <!-- Service Cards - Composition Alternating Layout -->
+                <div class="space-y-20">
+                    <!-- Service 1: Weekly Meal Prep -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                        <div class="lg:col-span-7 order-2 lg:order-1">
+                            <span class="chic-heading text-xs text-olive tracking-widest">01 — Signature Service</span>
+                            <h3 class="chic-heading text-2xl md:text-3xl text-ivory tracking-wider mt-2 mb-4">Weekly Meal Preparation</h3>
+                            <p class="text-taupe font-sans font-light text-base leading-relaxed mb-6">
+                                Enjoy fresh, thoughtfully prepared meals tailored to your household, with zero planning, shopping, or cooking on your plate. Meals are packed, labeled, and stored with heating instructions in your home.
+                            </p>
+                            <ul class="text-xs text-taupe/90 space-y-2 mb-8 font-sans">
+                                <li class="flex items-center space-x-2">
+                                    <span class="text-champagne">&bull;</span>
+                                    <span>Chef cooks directly inside your kitchen</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <span class="text-champagne">&bull;</span>
+                                    <span>Four protein selections & five side dishes weekly</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <span class="text-champagne">&bull;</span>
+                                    <span>Complete grocery shopping & pantry management</span>
+                                </li>
+                            </ul>
+                            <button onclick="navTo('weekly-meal-prep')" class="px-6 py-3 bg-transparent border border-champagne/40 text-champagne chic-heading text-xs tracking-widest hover:bg-champagne hover:text-charcoal transition-all duration-300">
+                                Explore Weekly Meal Prep
+                            </button>
+                        </div>
+                        <div class="lg:col-span-5 order-1 lg:order-2">
+                            <div class="aspect-[4/3] overflow-hidden border border-gold-subtle">
+                                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=1000&auto=format&fit=crop" alt="Freshly prepared healthy organic meals in containers" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 2: Private Dining -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                        <div class="lg:col-span-5">
+                            <div class="aspect-[4/3] overflow-hidden border border-gold-subtle">
+                                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1000&auto=format&fit=crop" alt="Intimate private dining table setting with wine and fine china" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="lg:col-span-7">
+                            <span class="chic-heading text-xs text-olive tracking-widest">02 — Intimate Events</span>
+                            <h3 class="chic-heading text-2xl md:text-3xl text-ivory tracking-wider mt-2 mb-4">Private Dinners & Events</h3>
+                            <p class="text-taupe font-sans font-light text-base leading-relaxed mb-6">
+                                Bring a high-end restaurant experience into your residence. Custom multi-course tasting menus, wine pairings, plate service, and complete dining area restoration.
+                            </p>
+                            <ul class="text-xs text-taupe/90 space-y-2 mb-8 font-sans">
+                                <li class="flex items-center space-x-2">
+                                    <span class="text-champagne">&bull;</span>
+                                    <span>3 to 7 course personalized tasting menus</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <span class="text-champagne">&bull;</span>
+                                    <span>Full tableside presentation and narrative</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <span class="text-champagne">&bull;</span>
+                                    <span>Ideal for birthdays, anniversaries & executive dinners</span>
+                                </li>
+                            </ul>
+                            <button onclick="navTo('private-dining')" class="px-6 py-3 bg-transparent border border-champagne/40 text-champagne chic-heading text-xs tracking-widest hover:bg-champagne hover:text-charcoal transition-all duration-300">
+                                Discover Private Dining
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Service 3: Cooking Classes -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                        <div class="lg:col-span-7 order-2 lg:order-1">
+                            <span class="chic-heading text-xs text-olive tracking-widest">03 — Culinary Education</span>
+                            <h3 class="chic-heading text-2xl md:text-3xl text-ivory tracking-wider mt-2 mb-4">In-Home Cooking Classes</h3>
+                            <p class="text-taupe font-sans font-light text-base leading-relaxed mb-6">
+                                Master classic culinary techniques, regional Lowcountry seafood, knife mastery, or artisanal pasta making in your own kitchen under expert guidance.
+                            </p>
+                            <ul class="text-xs text-taupe/90 space-y-2 mb-8 font-sans">
+                                <li class="flex items-center space-x-2">
+                                    <span class="text-champagne">&bull;</span>
+                                    <span>Hands-on individual or small group workshops</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <span class="text-champagne">&bull;</span>
+                                    <span>Includes printed recipe cards & ingredient sourcing</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <span class="text-champagne">&bull;</span>
+                                    <span>Enjoy the dishes you create together</span>
+                                </li>
+                            </ul>
+                            <button onclick="navTo('cooking-classes')" class="px-6 py-3 bg-transparent border border-champagne/40 text-champagne chic-heading text-xs tracking-widest hover:bg-champagne hover:text-charcoal transition-all duration-300">
+                                Explore Cooking Classes
+                            </button>
+                        </div>
+                        <div class="lg:col-span-5 order-1 lg:order-2">
+                            <div class="aspect-[4/3] overflow-hidden border border-gold-subtle">
+                                <img src="https://images.unsplash.com/photo-1507048331197-7d4ac70811cf?q=80&w=1000&auto=format&fit=crop" alt="Chef teaching culinary knife skills in a light kitchen" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: THE WEEKLY MEAL PREP OFFER & INTERACTIVE ESTIMATOR -->
+        <section id="weekly-meal-prep" class="py-24 px-6 md:px-12 bg-charcoal">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="chic-heading text-xs text-champagne tracking-mega uppercase block mb-3">Transparent Published Pricing</span>
+                    <h2 class="chic-heading text-3xl md:text-5xl text-ivory tracking-wider mb-6">Your Week, Thoughtfully Prepared.</h2>
+                    <p class="text-taupe text-sm md:text-base font-light">
+                        Chef Josh arrives weekly to prepare wholesome, custom meals directly in your home. All plans are billed transparently for culinary labor, with groceries billed separately at exact receipt cost.
+                    </p>
+                </div>
+
+                <!-- Pricing Plan Columns -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                    <!-- Plan 1: Household of 4 -->
+                    <div class="glass-panel p-8 md:p-10 border border-gold-subtle flex flex-col justify-between hover:border-champagne/60 transition-all">
+                        <div>
+                            <span class="chic-heading text-xs text-olive tracking-widest block mb-2">Standard Household Plan</span>
+                            <h3 class="chic-heading text-2xl text-ivory tracking-wider mb-4">Up to 4 People</h3>
+                            <div class="flex items-baseline mb-6">
+                                <span class="chic-heading text-4xl text-champagne font-normal">$250</span>
+                                <span class="text-xs text-taupe tracking-wider ml-2">/ week (labor)</span>
+                            </div>
+                            <p class="text-xs text-taupe leading-relaxed mb-8 border-b border-gold-subtle pb-6 font-sans">
+                                Designed for couples or families of four needing structured weeknight meals without daily cooking and cleanup.
+                            </p>
+
+                            <p class="chic-heading text-xs text-ivory mb-4 tracking-wider">What's Included Weekly:</p>
+                            <ul class="text-xs text-taupe space-y-3 mb-8 font-sans">
+                                <li class="flex items-center justify-between">
+                                    <span>Protein Selections</span>
+                                    <span class="text-champagne font-medium">4 Varieties</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <span>Gourmet Side Dishes</span>
+                                    <span class="text-champagne font-medium">5 Varieties</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <span>Fresh Prepared Salad Kits</span>
+                                    <span class="text-champagne font-medium">Included</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <span>Weekly Artisan Dessert</span>
+                                    <span class="text-champagne font-medium">1 Specialty</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <span>Breakfast Varieties</span>
+                                    <span class="text-champagne font-medium">3 Selections</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <button onclick="selectPlan('Household 4 ($250/wk)')" class="w-full py-3.5 bg-champagne text-charcoal chic-heading text-xs font-semibold tracking-wider hover:bg-ivory transition-colors">
+                            Select 4-Person Plan
+                        </button>
+                    </div>
+
+                    <!-- Plan 2: Household of 6 to 8 -->
+                    <div class="glass-panel p-8 md:p-10 border border-champagne/40 flex flex-col justify-between relative hover:border-champagne transition-all">
+                        <div class="absolute -top-3 right-8 bg-champagne text-charcoal chic-heading text-[9px] px-3 py-1 font-bold tracking-widest uppercase">
+                            Large Family Preferred
+                        </div>
+                        <div>
+                            <span class="chic-heading text-xs text-olive tracking-widest block mb-2">Executive Family Plan</span>
+                            <h3 class="chic-heading text-2xl text-ivory tracking-wider mb-4">6 to 8 People</h3>
+                            <div class="flex items-baseline mb-6">
+                                <span class="chic-heading text-4xl text-champagne font-normal">$300</span>
+                                <span class="text-xs text-taupe tracking-wider ml-2">/ week (labor)</span>
+                            </div>
+                            <p class="text-xs text-taupe leading-relaxed mb-8 border-b border-gold-subtle pb-6 font-sans">
+                                Expanded portion yields for larger households, guests, or professionals wanting comprehensive food coverage for the entire week.
+                            </p>
+
+                            <p class="chic-heading text-xs text-ivory mb-4 tracking-wider">What's Included Weekly:</p>
+                            <ul class="text-xs text-taupe space-y-3 mb-8 font-sans">
+                                <li class="flex items-center justify-between">
+                                    <span>Protein Selections</span>
+                                    <span class="text-champagne font-medium">4 Large Varieties</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <span>Gourmet Side Dishes</span>
+                                    <span class="text-champagne font-medium">5 Large Varieties</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <span>Fresh Prepared Salad Kits</span>
+                                    <span class="text-champagne font-medium">Included</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <span>Weekly Artisan Dessert</span>
+                                    <span class="text-champagne font-medium">1 Family Specialty</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <span>Breakfast Varieties</span>
+                                    <span class="text-champagne font-medium">3 Selections</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <button onclick="selectPlan('Household 6-8 ($300/wk)')" class="w-full py-3.5 bg-champagne text-charcoal chic-heading text-xs font-semibold tracking-wider hover:bg-ivory transition-colors">
+                            Select 6-8 Person Plan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Optional Service Add-ons Interactive Module -->
+                <div class="glass-panel p-8 border border-gold-subtle mb-12">
+                    <h3 class="chic-heading text-lg text-ivory tracking-wider mb-6 text-center">Optional Weekly Add-On Enhancements</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs font-sans">
+                        <div class="p-4 border border-gold-subtle/50 rounded-sm">
+                            <p class="chic-heading text-xs text-champagne mb-1">In-Home Dinner Service</p>
+                            <p class="text-charcoal-light text-taupe/90 mb-2">Plated single-night dinner served during your weekly prep visit.</p>
+                            <span class="chic-heading text-xs text-ivory">+$50 / selected week</span>
+                        </div>
+                        <div class="p-4 border border-gold-subtle/50 rounded-sm">
+                            <p class="chic-heading text-xs text-champagne mb-1">Supermarket Sourcing</p>
+                            <p class="text-charcoal-light text-taupe/90 mb-2">Dedicated shopping trip for ingredients & specialized dietary requests.</p>
+                            <span class="chic-heading text-xs text-ivory">+$25 / shopping trip</span>
+                        </div>
+                        <div class="p-4 border border-gold-subtle/50 rounded-sm">
+                            <p class="chic-heading text-xs text-champagne mb-1">Lunch Varieties</p>
+                            <p class="text-charcoal-light text-taupe/90 mb-2">Additional packaged mid-day lunch selections for work or home.</p>
+                            <span class="chic-heading text-xs text-ivory">+$25 / selected week</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-taupe/70 text-center mt-6 italic">
+                        * Note: Groceries are purchased specifically for your household and charged separately at exact store receipt cost.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: HOW IT WORKS -->
+        <section id="how-it-works" class="py-24 px-6 md:px-12 bg-charcoal-card border-t border-gold-subtle">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="chic-heading text-xs text-champagne tracking-mega uppercase block mb-3">Seamless Experience</span>
+                    <h2 class="chic-heading text-3xl md:text-4xl text-ivory tracking-wider mb-6">How The Service Works</h2>
+                    <p class="text-taupe text-sm font-light">Four simple steps to enjoying high-end culinary convenience in your residence.</p>
+                </div>
+
+                <!-- Process Sequence -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col space-y-4 relative">
+                        <span class="chic-heading text-3xl text-champagne/40">01</span>
+                        <h3 class="chic-heading text-base text-ivory tracking-wider">Let's Talk</h3>
+                        <p class="text-xs text-taupe leading-relaxed font-sans font-light">
+                            We discuss your household needs, dietary restrictions, favorite cuisines, schedule, and preferred cook days during a brief consultation call.
+                        </p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col space-y-4 relative">
+                        <span class="chic-heading text-3xl text-champagne/40">02</span>
+                        <h3 class="chic-heading text-base text-ivory tracking-wider">Personalize Menu</h3>
+                        <p class="text-xs text-taupe leading-relaxed font-sans font-light">
+                            Each week, you receive a curated menu proposal. Approve choices or request adjustments based on seasonal Lowcountry offerings.
+                        </p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col space-y-4 relative">
+                        <span class="chic-heading text-3xl text-champagne/40">03</span>
+                        <h3 class="chic-heading text-base text-ivory tracking-wider">Chef Arrives</h3>
+                        <p class="text-xs text-taupe leading-relaxed font-sans font-light">
+                            Chef Josh arrives with fresh ingredients, prepares meals cleanly in your kitchen, packages and labels every item, and leaves the kitchen spotless.
+                        </p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="flex flex-col space-y-4 relative">
+                        <span class="chic-heading text-3xl text-champagne/40">04</span>
+                        <h3 class="chic-heading text-base text-ivory tracking-wider">Enjoy Your Week</h3>
+                        <p class="text-xs text-taupe leading-relaxed font-sans font-light">
+                            Savor effortless, restaurant-quality meals throughout your week with easy heating instructions and zero kitchen stress.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: ABOUT THE CHEF -->
+        <section id="about" class="py-24 px-6 md:px-12 bg-charcoal">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5">
+                    <div class="aspect-[3/4] border border-gold-subtle overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=1000&auto=format&fit=crop" alt="Chef Josh Castillo portrait in chef jacket" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="chic-heading text-xs text-olive tracking-mega uppercase">Meet Your Private Chef</span>
+                    <h2 class="chic-heading text-3xl md:text-4xl text-ivory tracking-wider">Chef Josh Castillo</h2>
+                    <div class="w-12 h-0.5 bg-champagne"></div>
+                    <p class="editorial-serif text-xl text-champagne italic font-light">
+                        "Thoughtful cooking, local ingredient respect, and dedicated personal service."
+                    </p>
+                    <p class="text-sm text-taupe font-sans font-light leading-relaxed">
+                        Privately Yours was founded on the belief that dining at home should feel like a luxury hospitality experience, not a daily chore. Based in Beaufort, SC, Chef Josh combines traditional culinary technique with a passion for Lowcountry seafood, farm-fresh coastal produce, and clean, wholesome cooking.
+                    </p>
+                    <p class="text-sm text-taupe font-sans font-light leading-relaxed">
+                        Whether designing grain-free weekly preps for busy executive families or executing 5-course private celebrations, Chef Josh brings quiet professionalism, meticulous food safety, and genuine hospitality into your home.
+                    </p>
+                    <div class="pt-4">
+                        <button onclick="openBookingModal()" class="px-8 py-3 bg-champagne text-charcoal chic-heading text-xs font-semibold tracking-widest hover:bg-ivory transition-colors">
+                            Schedule A Consultation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: THE SENSORY EXPERIENCE GALLERY -->
+        <section class="py-20 px-6 md:px-12 bg-charcoal-card border-t border-gold-subtle">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="chic-heading text-xs text-champagne tracking-mega uppercase block mb-2">Craftsmanship</span>
+                    <h2 class="chic-heading text-2xl md:text-3xl text-ivory tracking-wider">The Difference Is In The Details</h2>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="aspect-square overflow-hidden border border-gold-subtle">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=600&auto=format&fit=crop" alt="Plated salad dish with microgreens" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="aspect-square overflow-hidden border border-gold-subtle">
+                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop" alt="Grilled steak entree plated with herbs" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="aspect-square overflow-hidden border border-gold-subtle">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=600&auto=format&fit=crop" alt="Chef hands garnishing gourmet dish" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="aspect-square overflow-hidden border border-gold-subtle">
+                        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=600&auto=format&fit=crop" alt="Fresh artisan dessert plating" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 8: FAQ -->
+        <section id="faq" class="py-24 px-6 md:px-12 bg-charcoal">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <span class="chic-heading text-xs text-champagne tracking-mega uppercase block mb-3">Client Information</span>
+                    <h2 class="chic-heading text-3xl md:text-4xl text-ivory tracking-wider mb-4">Frequently Asked Questions</h2>
+                    <p class="text-taupe text-sm">Everything you need to know about our in-home chef service.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- FAQ Item 1 -->
+                    <div class="border border-gold-subtle p-6 rounded-sm glass-panel">
+                        <h3 class="chic-heading text-sm text-champagne tracking-wider mb-2">Are grocery costs included in the weekly rate?</h3>
+                        <p class="text-xs text-taupe font-sans font-light leading-relaxed">
+                            No. Grocery costs are kept separate so you only pay for the exact ingredients sourced for your household without markup. Receipts are provided weekly alongside your service invoice.
+                        </p>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="border border-gold-subtle p-6 rounded-sm glass-panel">
+                        <h3 class="chic-heading text-sm text-champagne tracking-wider mb-2">Do I need to be home while Chef Josh is cooking?</h3>
+                        <p class="text-xs text-taupe font-sans font-light leading-relaxed">
+                            Not at all. Many of our executive clients provide secure entry access. Chef Josh completes the preparation, packages all food with clear instructions, cleans the kitchen thoroughly, and locks up upon departure.
+                        </p>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="border border-gold-subtle p-6 rounded-sm glass-panel">
+                        <h3 class="chic-heading text-sm text-champagne tracking-wider mb-2">Can dietary preferences or allergies be accommodated?</h3>
+                        <p class="text-xs text-taupe font-sans font-light leading-relaxed">
+                            Yes. We routinely accommodate Gluten-Free, Keto, Paleo, Low-Sodium, Dairy-Free, and specific allergy profiles. All preferences are detailed during our initial consultation.
+                        </p>
+                    </div>
+
+                    <!-- FAQ Item 4 -->
+                    <div class="border border-gold-subtle p-6 rounded-sm glass-panel">
+                        <h3 class="chic-heading text-sm text-champagne tracking-wider mb-2">What geographic areas in South Carolina are served?</h3>
+                        <p class="text-xs text-taupe font-sans font-light leading-relaxed">
+                            We primary serve Beaufort, Bluffton, Hilton Head Island, Okatie, and surrounding Lowcountry South Carolina communities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 9: FINAL CONVERSION BANNER -->
+        <section class="py-24 px-6 md:px-12 bg-gradient-to-b from-charcoal-card to-charcoal border-t border-gold-subtle text-center">
+            <div class="max-w-4xl mx-auto space-y-8">
+                <span class="chic-heading text-xs text-champagne tracking-mega uppercase">Begin Your Service</span>
+                <h2 class="chic-heading text-3xl md:text-5xl text-ivory tracking-wider leading-tight">
+                    Make Room for More of What Matters.
+                </h2>
+                <p class="text-taupe text-base font-sans font-light max-w-2xl mx-auto leading-relaxed">
+                    Let's create a personalized culinary schedule tailored specifically to your residence, nutritional needs, and lifestyle.
+                </p>
+                <div class="pt-4 flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <button onclick="openBookingModal()" class="w-full sm:w-auto px-10 py-4 bg-champagne text-charcoal chic-heading text-xs font-semibold tracking-widest hover:bg-ivory transition-all shadow-2xl">
+                        Book A Consultation
+                    </button>
+                    <button onclick="navTo('weekly-meal-prep')" class="w-full sm:w-auto px-10 py-4 bg-transparent border border-gold-subtle text-ivory chic-heading text-xs tracking-widest hover:border-champagne transition-all">
+                        View Service Plans
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-charcoal border-t border-gold-subtle py-16 px-6 md:px-12 text-xs font-sans text-taupe">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            <div class="space-y-3">
+                <span class="chic-heading text-sm text-champagne tracking-widest block">PRIVATELY YOURS</span>
+                <p class="text-[11px] leading-relaxed font-light">
+                    Premium In-Home Personal Chef & Bespoke Dining Services for Beaufort & The Lowcountry, SC.
+                </p>
+            </div>
+            <div>
+                <span class="chic-heading text-xs text-ivory tracking-wider block mb-3">Service Areas</span>
+                <ul class="space-y-1.5 text-[11px]">
+                    <li>Beaufort, SC</li>
+                    <li>Bluffton, SC</li>
+                    <li>Hilton Head Island, SC</li>
+                    <li>Okatie & Port Royal</li>
+                </ul>
+            </div>
+            <div>
+                <span class="chic-heading text-xs text-ivory tracking-wider block mb-3">Quick Navigation</span>
+                <ul class="space-y-1.5 text-[11px]">
+                    <li><button onclick="navTo('weekly-meal-prep')" class="hover:text-champagne">Weekly Meal Prep</button></li>
+                    <li><button onclick="navTo('private-dining')" class="hover:text-champagne">Private Dinners</button></li>
+                    <li><button onclick="navTo('cooking-classes')" class="hover:text-champagne">Cooking Classes</button></li>
+                    <li><button onclick="navTo('about')" class="hover:text-champagne">About Chef Josh</button></li>
+                </ul>
+            </div>
+            <div>
+                <span class="chic-heading text-xs text-ivory tracking-wider block mb-3">Direct Contact</span>
+                <p class="text-[11px] leading-relaxed">
+                    Beaufort & Lowcountry, SC<br>
+                    Direct Inquiries: <a href="mailto:inquiries@privatelyyourschef.com" class="text-champagne hover:underline">inquiries@privatelyyourschef.com</a>
+                </p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-8 border-t border-gold-subtle/40 flex flex-col sm:flex-row items-center justify-between text-[10px] text-taupe/60">
+            <p>&copy; 2026 Privately Yours Personal Chef Services. All rights reserved.</p>
+            <p class="mt-2 sm:mt-0">Elegantly Crafted Personal Chef Brand</p>
+        </div>
+    </footer>
+
+    <!-- CONSULTATION & BOOKING MODAL -->
+    <div id="booking-modal" class="fixed inset-0 bg-charcoal/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-panel border border-gold-subtle max-w-xl w-full p-8 relative my-8 text-left">
+            <!-- Close Button -->
+            <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-taupe hover:text-champagne text-xl focus:outline-none">
+                &times;
+            </button>
+
+            <span class="chic-heading text-xs text-champagne tracking-mega uppercase block mb-2">Direct Inquiry</span>
+            <h3 class="chic-heading text-2xl text-ivory tracking-wider mb-6">Book Your Consultation</h3>
+
+            <form id="consultation-form" onsubmit="handleFormSubmit(event)" class="space-y-4 text-xs font-sans">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-taupe mb-1">Your Full Name *</label>
+                        <input type="text" required placeholder="e.g. Eleanor Vance" class="w-full bg-charcoal border border-gold-subtle px-4 py-2.5 text-ivory focus:border-champagne focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-taupe mb-1">Email Address *</label>
+                        <input type="email" required placeholder="eleanor@example.com" class="w-full bg-charcoal border border-gold-subtle px-4 py-2.5 text-ivory focus:border-champagne focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-taupe mb-1">Phone Number</label>
+                        <input type="tel" placeholder="(843) 555-0192" class="w-full bg-charcoal border border-gold-subtle px-4 py-2.5 text-ivory focus:border-champagne focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-taupe mb-1">Service Interest *</label>
+                        <select id="selected-service-input" required class="w-full bg-charcoal border border-gold-subtle px-4 py-2.5 text-ivory focus:border-champagne focus:outline-none">
+                            <option value="Weekly Meal Prep (Up to 4)">Weekly Meal Prep (Up to 4)</option>
+                            <option value="Weekly Meal Prep (6-8)">Weekly Meal Prep (6-8)</option>
+                            <option value="Private Dining Experience">Private Dinner Experience</option>
+                            <option value="In-Home Cooking Class">In-Home Cooking Class</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-taupe mb-1">Household Size / Guest Count</label>
+                    <input type="text" placeholder="e.g. 4 family members" class="w-full bg-charcoal border border-gold-subtle px-4 py-2.5 text-ivory focus:border-champagne focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-taupe mb-1">Dietary Preferences or Details</label>
+                    <textarea rows="3" placeholder="Mention any dietary preferences, gluten sensitivity, or preferred start dates..." class="w-full bg-charcoal border border-gold-subtle px-4 py-2.5 text-ivory focus:border-champagne focus:outline-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 bg-champagne text-charcoal chic-heading text-xs font-semibold tracking-widest hover:bg-ivory transition-colors mt-2">
+                    Submit Inquiry Request
+                </button>
+            </form>
+
+            <!-- Success Feedback -->
+            <div id="form-success" class="hidden text-center py-8 space-y-4">
+                <span class="chic-heading text-lg text-champagne block">Inquiry Received</span>
+                <p class="text-xs text-taupe leading-relaxed">
+                    Thank you. Chef Josh will review your household details and contact you within 24 hours to schedule your consultation.
+                </p>
+                <button onclick="closeBookingModal()" class="px-6 py-2 bg-transparent border border-champagne text-champagne chic-heading text-xs tracking-wider">
+                    Close Window
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC: BABYLON.JS TINY SPARKLE SYSTEM & GSAP & ROUTING -->
+    <script>
+        // --- 1. BABYLON.JS TINY SPARKLE / STARDUST ATMOSPHERE ---
+        window.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById("babylon-canvas");
+            if (!canvas) return;
+
+            // Initialize Engine and Scene
+            const engine = new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true });
+            const scene = new BABYLON.Scene(engine);
+            scene.clearColor = new BABYLON.Color4(0, 0, 0, 0); // Transparent canvas background
+
+            // Camera setup
+            const camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 0, -10), scene);
+            camera.setTarget(BABYLON.Vector3.Zero());
+
+            // Gentle ambient lighting
+            const light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
+            light.intensity = 0.5;
+
+            // CREATE TINY HIGH-DENSITY SPARKLE / STARDUST PARTICLE SYSTEM
+            const particleCount = 280;
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 4);
+
+            const pcs = new BABYLON.PointsCloudSystem("pcs", 1.5, scene); // Extremely small 1.5px point size
+            
+            pcs.addPoints(particleCount, (particle, i) => {
+                // Wide spread across the viewport
+                particle.position = new BABYLON.Vector3(
+                    (Math.random() - 0.5) * 22,
+                    (Math.random() - 0.5) * 14,
+                    (Math.random() - 0.5) * 10
+                );
+                
+                // Warm champagne gold and soft ivory hues with varying initial alpha/sparkle intensity
+                const isGold = Math.random() > 0.3;
+                particle.color = isGold 
+                    ? new BABYLON.Color4(0.78, 0.70, 0.54, Math.random() * 0.8 + 0.2) 
+                    : new BABYLON.Color4(0.96, 0.95, 0.93, Math.random() * 0.8 + 0.2);
+
+                // Custom velocity & oscillation frequencies for tiny twinkling
+                particle.velocity = new BABYLON.Vector3(
+                    (Math.random() - 0.5) * 0.003,
+                    (Math.random() - 0.5) * 0.003,
+                    (Math.random() - 0.5) * 0.003
+                );
+                particle.twinkleSpeed = Math.random() * 0.03 + 0.01;
+                particle.twinklePhase = Math.random() * Math.PI * 2;
+            });
+
+            pcs.buildMeshAsync();
+
+            // Cursor interaction tracking for micro spark displacement
+            let mouseX = 0;
+            let mouseY = 0;
+            window.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+                mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
+            });
+
+            // Animation Loop - Delicate Sparkle Movement & Twinkling
+            let time = 0;
+            scene.registerBeforeRender(() => {
+                time += 0.02;
+                if (pcs.mesh) {
+                    pcs.particles.forEach((p) => {
+                        // Gentle floating movement
+                        p.position.addInPlace(p.velocity);
+
+                        // Subtle boundary bounce to keep sparkles in frame
+                        if (Math.abs(p.position.x) > 12) p.velocity.x *= -1;
+                        if (Math.abs(p.position.y) > 8) p.velocity.y *= -1;
+
+                        // Micro sparkling / twinkling opacity oscillation
+                        p.twinklePhase += p.twinkleSpeed;
+                        p.color.a = 0.2 + 0.7 * Math.abs(Math.sin(p.twinklePhase));
+
+                        // React gently to cursor position
+                        p.position.x += mouseX * 0.0008;
+                        p.position.y += mouseY * 0.0008;
+                    });
+                    pcs.setParticles();
+                }
+            });
+
+            // Run render loop
+            engine.runRenderLoop(() => {
+                scene.render();
+            });
+
+            // Resize listener
+            window.addEventListener("resize", () => {
+                engine.resize();
+            });
+        });
+
+        // --- 2. GSAP ENTRANCE ANIMATIONS ---
+        window.addEventListener('load', () => {
+            if (typeof gsap !== 'undefined') {
+                gsap.from(".gsap-hero", {
+                    opacity: 0,
+                    y: 30,
+                    duration: 1.2,
+                    stagger: 0.15,
+                    ease: "power3.out"
+                });
+            }
+        });
+
+        // --- 3. NAVIGATION & APP ROUTING ---
+        function navTo(sectionId) {
+            const el = document.getElementById(sectionId);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobile-nav');
+            if (nav.classList.contains('hidden')) {
+                nav.classList.remove('hidden');
+                nav.classList.add('flex');
+            } else {
+                nav.classList.add('hidden');
+                nav.classList.remove('flex');
+            }
+        }
+
+        function mobileNavTo(target) {
+            toggleMobileNav();
+            if (target === 'book') {
+                openBookingModal();
+            } else {
+                navTo(target);
+            }
+        }
+
+        // --- 4. MODAL & FORM LOGIC ---
+        function openBookingModal() {
+            const modal = document.getElementById('booking-modal');
+            modal.classList.remove('hidden');
+        }
+
+        function closeBookingModal() {
+            const modal = document.getElementById('booking-modal');
+            modal.classList.add('hidden');
+            // Reset form
+            document.getElementById('consultation-form').classList.remove('hidden');
+            document.getElementById('form-success').classList.add('hidden');
+        }
+
+        function selectPlan(planName) {
+            const select = document.getElementById('selected-service-input');
+            if (select) {
+                select.value = planName.includes('4') ? 'Weekly Meal Prep (Up to 4)' : 'Weekly Meal Prep (6-8)';
+            }
+            openBookingModal();
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            document.getElementById('consultation-form').classList.add('hidden');
+            document.getElementById('form-success').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
