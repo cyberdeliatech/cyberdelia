@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privately Yours | Personal Chef & In-Home Dining — Beaufort & Lowcountry SC</title>
+  <meta name="description" content="Exceptional food. More time for life. Bespoke in-home weekly meal prep, private dining, and culinary experiences in Beaufort and the Lowcountry, SC." />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ivory: '#F7F4EE',
+            charcoal: '#20211F',
+            olive: '#737761',
+            taupe: '#B5A99A',
+            champagne: '#C8B38A',
+            cream: '#FAF8F5'
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- External Libraries: Babylon.js and GSAP -->
+  <script src="https://cdn.babylonjs.com/babylon.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <style>
+    body {
+      background-color: #20211F;
+      color: #F7F4EE;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .font-editorial {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #20211F;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #737761;
+      border-radius: 3px;
+    }
+
+    /* Image Clip Mask Animations */
+    .reveal-image-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+    .reveal-image-wrapper img {
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-image-wrapper:hover img {
+      transform: scale(1.04);
+    }
+
+    /* Subtle Glassmorphism */
+    .glass-card {
+      background: rgba(32, 33, 31, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(200, 179, 138, 0.15);
+    }
+
+    .glass-card-light {
+      background: rgba(247, 244, 238, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(115, 119, 97, 0.2);
+    }
+
+    /* Custom Smooth Tabs */
+    .tab-btn.active {
+      border-bottom-color: #C8B38A;
+      color: #C8B38A;
+    }
+
+    /* Canvas styling */
+    #hero-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      outline: none;
+      touch-action: none;
+    }
+
+    /* Accordion transitions */
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+    }
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      transition: max-height 0.4s ease-in-out;
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    /* Mobile Nav Overlay */
+    #mobile-menu {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    #mobile-menu.hidden-menu {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px);
+    }
+  </style>
+</head>
+<body class="selection:bg-champagne selection:text-charcoal">
+
+  <!-- Navigation Header -->
+  <header id="main-nav" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-6 px-6 md:px-12 glass-card border-b-0 border-white/5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a href="#home" onclick="navigateTo('home')" class="group flex flex-col">
+        <span class="font-editorial text-2xl md:text-3xl tracking-widest text-ivory group-hover:text-champagne transition-colors uppercase font-light">
+          Privately Yours
+        </span>
+        <span class="text-[9px] uppercase tracking-[0.3em] text-taupe font-medium -mt-1">
+          Personal Chef • Lowcountry SC
+        </span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center space-x-8 text-xs uppercase tracking-[0.2em] font-medium text-ivory/80">
+        <a href="#home" onclick="navigateTo('home')" class="hover:text-champagne transition-colors nav-link" data-page="home">Home</a>
+        <a href="#meal-prep" onclick="navigateTo('meal-prep')" class="hover:text-champagne transition-colors nav-link" data-page="meal-prep">Weekly Prep</a>
+        <a href="#private-dining" onclick="navigateTo('private-dining')" class="hover:text-champagne transition-colors nav-link" data-page="private-dining">Private Dining</a>
+        <a href="#cooking-classes" onclick="navigateTo('cooking-classes')" class="hover:text-champagne transition-colors nav-link" data-page="cooking-classes">Classes</a>
+        <a href="#chef" onclick="navigateTo('chef')" class="hover:text-champagne transition-colors nav-link" data-page="chef">Chef Josh</a>
+        <a href="#how-it-works" onclick="navigateTo('how-it-works')" class="hover:text-champagne transition-colors nav-link" data-page="how-it-works">How It Works</a>
+        <a href="#faq" onclick="navigateTo('faq')" class="hover:text-champagne transition-colors nav-link" data-page="faq">FAQ</a>
+      </nav>
+
+      <!-- Primary Action CTA -->
+      <div class="hidden md:flex items-center space-x-4">
+        <button onclick="openBookingModal()" class="px-6 py-3 border border-champagne/50 hover:border-champagne text-champagne hover:bg-champagne hover:text-charcoal text-xs uppercase tracking-widest font-medium transition-all duration-300 rounded-sm">
+          Book Consultation
+        </button>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="menu-toggle" onclick="toggleMobileMenu()" class="lg:hidden text-ivory p-2 focus:outline-none" aria-label="Toggle menu">
+        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden-menu lg:hidden absolute top-full left-0 w-full bg-charcoal/95 border-b border-champagne/20 backdrop-blur-xl py-8 px-6 flex flex-col space-y-6 text-center text-sm uppercase tracking-widest">
+      <a href="#home" onclick="navigateTo('home'); toggleMobileMenu();" class="hover:text-champagne transition-colors">Home</a>
+      <a href="#meal-prep" onclick="navigateTo('meal-prep'); toggleMobileMenu();" class="hover:text-champagne transition-colors">Weekly Meal Prep</a>
+      <a href="#private-dining" onclick="navigateTo('private-dining'); toggleMobileMenu();" class="hover:text-champagne transition-colors">Private Dining</a>
+      <a href="#cooking-classes" onclick="navigateTo('cooking-classes'); toggleMobileMenu();" class="hover:text-champagne transition-colors">Cooking Classes</a>
+      <a href="#chef" onclick="navigateTo('chef'); toggleMobileMenu();" class="hover:text-champagne transition-colors">About Chef Josh</a>
+      <a href="#how-it-works" onclick="navigateTo('how-it-works'); toggleMobileMenu();" class="hover:text-champagne transition-colors">How It Works</a>
+      <a href="#faq" onclick="navigateTo('faq'); toggleMobileMenu();" class="hover:text-champagne transition-colors">FAQ</a>
+      <button onclick="openBookingModal(); toggleMobileMenu();" class="w-full py-4 bg-champagne text-charcoal font-semibold tracking-widest text-xs uppercase">
+        Book Consultation
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main id="app-content">
+
+    <!-- HERO SECTION -->
+    <section id="home-section" class="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-6 overflow-hidden">
+      <!-- Babylon.js Ambient Particle WebGL Canvas -->
+      <canvas id="hero-canvas"></canvas>
+
+      <!-- Background Image with Dark Vignette Overlay -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=2070&auto=format&fit=crop" 
+          alt="Chef preparing fresh meal in lowcountry kitchen" 
+          class="w-full h-full object-cover opacity-35 scale-105 transition-transform duration-1000" 
+          id="hero-bg-img"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-charcoal/80"></div>
+      </div>
+
+      <!-- Hero Content Block -->
+      <div class="relative z-10 max-w-4xl mx-auto text-center space-y-8 mt-12">
+        <div class="inline-flex items-center space-x-3 px-4 py-1.5 rounded-full border border-champagne/30 bg-charcoal/60 backdrop-blur-md">
+          <span class="w-2 h-2 rounded-full bg-champagne animate-pulse"></span>
+          <span class="text-[11px] uppercase tracking-[0.25em] text-champagne font-medium">Serving Beaufort & The SC Lowcountry</span>
+        </div>
+
+        <h1 id="hero-headline" class="text-4xl md:text-6xl lg:text-7xl font-light text-ivory leading-[1.15] tracking-tight">
+          Exceptional Food. <br /><span class="italic text-champagne font-normal">More Time for Life.</span>
+        </h1>
+
+        <p id="hero-subtext" class="text-base md:text-xl text-taupe max-w-2xl mx-auto font-light leading-relaxed">
+          Personalized in-home chef services designed around your tastes, your schedule, and the way you live.
+        </p>
+
+        <div id="hero-ctas" class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <a href="#meal-prep" onclick="navigateTo('meal-prep')" class="w-full sm:w-auto px-8 py-4 bg-champagne text-charcoal hover:bg-ivory text-xs uppercase tracking-[0.2em] font-medium transition-all duration-300 shadow-lg shadow-champagne/10">
+            Explore Weekly Meal Prep
+          </a>
+          <button onclick="openBookingModal()" class="w-full sm:w-auto px-8 py-4 border border-ivory/30 text-ivory hover:border-champagne hover:text-champagne text-xs uppercase tracking-[0.2em] font-medium transition-all duration-300">
+            Book a Consultation
+          </button>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="pt-12 flex flex-col items-center opacity-60 hover:opacity-100 transition-opacity cursor-pointer" onclick="document.getElementById('brand-intro').scrollIntoView({behavior: 'smooth'})">
+          <span class="text-[10px] uppercase tracking-[0.3em] text-taupe mb-2">Scroll To Discover</span>
+          <div class="w-5 h-9 border border-taupe/40 rounded-full flex justify-center p-1">
+            <div class="w-1 h-2 bg-champagne rounded-full animate-bounce"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRAND INTRODUCTION SECTION -->
+    <section id="brand-intro" class="py-24 px-6 md:px-12 bg-charcoal border-t border-white/5">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <!-- Left Image Column -->
+        <div class="lg:col-span-5 relative">
+          <div class="reveal-image-wrapper rounded-sm overflow-hidden border border-white/10 shadow-2xl">
+            <img 
+              src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop" 
+              alt="Artisanal plated culinary dish" 
+              class="w-full h-[500px] object-cover"
+            />
+          </div>
+          <div class="absolute -bottom-6 -right-6 hidden sm:block bg-olive/90 backdrop-blur-md p-6 text-ivory max-w-xs border border-champagne/20">
+            <p class="font-editorial text-lg italic">"Fresh seasonal ingredients harvested locally across South Carolina."</p>
+          </div>
+        </div>
+
+        <!-- Right Content Column -->
+        <div class="lg:col-span-7 space-y-6">
+          <span class="text-xs uppercase tracking-[0.3em] text-champagne font-medium">Bespoke Hospitality</span>
+          <h2 class="text-3xl md:text-5xl font-light text-ivory leading-tight">
+            A More Personal Approach to Dining
+          </h2>
+          <div class="w-12 h-px bg-champagne/50 my-4"></div>
+          <p class="text-taupe text-base md:text-lg leading-relaxed font-light">
+            From thoughtfully prepared weekly meals to intimate dinners at home, Privately Yours brings personalized culinary service into your everyday life. We believe dinner should be an anchor of comfort, dynamic health, and joy—not a daily task on an overcrowded schedule.
+          </p>
+          <p class="text-taupe/80 text-sm md:text-base leading-relaxed font-light">
+            Chef Josh Castillo combines classic culinary technique with the warm, generous hospitality of Lowcountry coastal living. Every menu is handcrafted around your dietary preferences, household schedule, and preferred flavor profiles.
+          </p>
+          
+          <div class="pt-4 grid grid-cols-2 sm:grid-cols-3 gap-6 border-t border-white/10 text-center sm:text-left">
+            <div>
+              <span class="block text-2xl font-editorial text-champagne">100%</span>
+              <span class="text-xs text-taupe uppercase tracking-wider">In-Home Fresh</span>
+            </div>
+            <div>
+              <span class="block text-2xl font-editorial text-champagne">Tailored</span>
+              <span class="text-xs text-taupe uppercase tracking-wider">Nutritional Planning</span>
+            </div>
+            <div>
+              <span class="block text-2xl font-editorial text-champagne">Lowcountry</span>
+              <span class="text-xs text-taupe uppercase tracking-wider">Beaufort & Islands</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SERVICES OVERVIEW SECTION -->
+    <section id="services-overview" class="py-24 px-6 md:px-12 bg-cream text-charcoal">
+      <div class="max-w-7xl mx-auto space-y-16">
+        
+        <div class="text-center space-y-4 max-w-2xl mx-auto">
+          <span class="text-xs uppercase tracking-[0.3em] text-olive font-semibold">Our Offerings</span>
+          <h2 class="text-3xl md:text-5xl font-light text-charcoal">Culinary Craftsmanship, Delivered</h2>
+          <p class="text-charcoal/70 text-sm md:text-base">Designed to seamlessly fit your lifestyle with elegance and simplicity.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Service Card 1 -->
+          <div class="bg-ivory border border-taupe/30 p-8 flex flex-col justify-between space-y-8 hover:border-olive transition-all duration-300 shadow-sm">
+            <div class="space-y-4">
+              <div class="w-12 h-12 bg-olive/10 text-olive flex items-center justify-center text-xl">
+                <i class="fa-solid fa-utensils"></i>
+              </div>
+              <h3 class="text-2xl font-editorial text-charcoal">Weekly Meal Preparation</h3>
+              <p class="text-charcoal/70 text-sm leading-relaxed font-light">
+                Enjoy fresh, thoughtfully prepared meals tailored to your household, with less planning, shopping, and cooking on your plate.
+              </p>
+            </div>
+            <a href="#meal-prep" onclick="navigateTo('meal-prep')" class="inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-olive font-semibold hover:text-charcoal group">
+              <span>Explore Weekly Meal Prep</span>
+              <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+            </a>
+          </div>
+
+          <!-- Service Card 2 -->
+          <div class="bg-ivory border border-taupe/30 p-8 flex flex-col justify-between space-y-8 hover:border-olive transition-all duration-300 shadow-sm">
+            <div class="space-y-4">
+              <div class="w-12 h-12 bg-olive/10 text-olive flex items-center justify-center text-xl">
+                <i class="fa-solid fa-wine-glass"></i>
+              </div>
+              <h3 class="text-2xl font-editorial text-charcoal">Private Dining & Events</h3>
+              <p class="text-charcoal/70 text-sm leading-relaxed font-light">
+                Bring a restaurant-quality dining experience into your home with personalized menus and attentive culinary preparation.
+              </p>
+            </div>
+            <a href="#private-dining" onclick="navigateTo('private-dining')" class="inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-olive font-semibold hover:text-charcoal group">
+              <span>Discover Private Dining</span>
+              <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+            </a>
+          </div>
+
+          <!-- Service Card 3 -->
+          <div class="bg-ivory border border-taupe/30 p-8 flex flex-col justify-between space-y-8 hover:border-olive transition-all duration-300 shadow-sm">
+            <div class="space-y-4">
+              <div class="w-12 h-12 bg-olive/10 text-olive flex items-center justify-center text-xl">
+                <i class="fa-solid fa-hat-cowboy-side"></i>
+              </div>
+              <h3 class="text-2xl font-editorial text-charcoal">Cooking Classes</h3>
+              <p class="text-charcoal/70 text-sm leading-relaxed font-light">
+                Learn new techniques, explore seasonal ingredients, and enjoy a more personal hands-on culinary experience in your kitchen.
+              </p>
+            </div>
+            <a href="#cooking-classes" onclick="navigateTo('cooking-classes')" class="inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-olive font-semibold hover:text-charcoal group">
+              <span>Explore Cooking Classes</span>
+              <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WEEKLY MEAL PREP OFFER & INTERACTIVE CALCULATOR SECTION -->
+    <section id="meal-prep" class="py-24 px-6 md:px-12 bg-charcoal text-ivory border-t border-white/5">
+      <div class="max-w-7xl mx-auto space-y-16">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <span class="text-xs uppercase tracking-[0.3em] text-champagne font-medium">Signature Offering</span>
+            <h2 class="text-3xl md:text-5xl font-light leading-tight">Your Week, Thoughtfully Prepared.</h2>
+            <p class="text-taupe text-base leading-relaxed font-light">
+              Chef Josh prepares all meals directly inside your kitchen on a designated cook day. Meals are portioned, labeled with clear heating instructions, and stored safely in high-grade glassware or eco-friendly containers.
+            </p>
+            
+            <div class="space-y-3 pt-2">
+              <h4 class="text-sm font-semibold uppercase tracking-wider text-ivory">Standard Weekly Menu Inclusion:</h4>
+              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-taupe">
+                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-champagne"></i> <span>4 Entrée Protein Selections</span></li>
+                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-champagne"></i> <span>5 Gourmet Side Dishes</span></li>
+                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-champagne"></i> <span>Prepared Fresh Salad Options</span></li>
+                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-champagne"></i> <span>1 Artisanal Dessert</span></li>
+                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-champagne"></i> <span>3 Breakfast Selections</span></li>
+                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-champagne"></i> <span>Custom Dietary Formatting</span></li>
+              </ul>
+            </div>
+
+            <p class="text-xs text-taupe/70 italic">
+              * Note: Published rates cover chef labor, menu customization, prep, and kitchen sanitization. Grocery costs are billed separately at direct itemized receipt cost with zero hidden markups.
+            </p>
+          </div>
+
+          <!-- Interactive Plan Estimator Widget -->
+          <div class="lg:col-span-6 glass-card p-8 rounded-sm space-y-6">
+            <div class="border-b border-champagne/20 pb-4 flex justify-between items-center">
+              <h3 class="text-xl font-editorial text-champagne">Weekly Plan Estimator</h3>
+              <span class="text-[10px] uppercase tracking-widest text-taupe">Current Published Rates</span>
+            </div>
+
+            <!-- Household Selector -->
+            <div class="space-y-3">
+              <label class="text-xs uppercase tracking-wider text-ivory block">1. Select Household Size</label>
+              <div class="grid grid-cols-2 gap-4">
+                <button 
+                  onclick="selectPlan('plan4', 250)" 
+                  id="btn-plan4" 
+                  class="plan-btn active p-4 border border-champagne text-left bg-champagne/10 transition-all">
+                  <span class="block text-sm font-semibold text-ivory">Up to 4 People</span>
+                  <span class="block text-lg font-editorial text-champagne mt-1">$250 / week</span>
+                  <span class="block text-[10px] text-taupe mt-1">Chef labor fee</span>
+                </button>
+                <button 
+                  onclick="selectPlan('plan8', 300)" 
+                  id="btn-plan8" 
+                  class="plan-btn p-4 border border-white/20 text-left hover:border-champagne/50 transition-all">
+                  <span class="block text-sm font-semibold text-ivory">6 to 8 People</span>
+                  <span class="block text-lg font-editorial text-champagne mt-1">$300 / week</span>
+                  <span class="block text-[10px] text-taupe mt-1">Chef labor fee</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Optional Add-ons Checkboxes -->
+            <div class="space-y-3 pt-2">
+              <label class="text-xs uppercase tracking-wider text-ivory block">2. Optional Service Enhancements</label>
+              <div class="space-y-2">
+                
+                <label class="flex items-center justify-between p-3 border border-white/10 rounded-sm cursor-pointer hover:border-white/30 transition-colors">
+                  <div class="flex items-center space-x-3">
+                    <input type="checkbox" id="addon-dinner" onchange="calculateTotal()" class="accent-champagne w-4 h-4" />
+                    <span class="text-xs text-ivory">Plated Dinner Service (Cook Day)</span>
+                  </div>
+                  <span class="text-xs text-champagne font-mono">+$50</span>
+                </label>
+
+                <label class="flex items-center justify-between p-3 border border-white/10 rounded-sm cursor-pointer hover:border-white/30 transition-colors">
+                  <div class="flex items-center space-x-3">
+                    <input type="checkbox" id="addon-grocery" onchange="calculateTotal()" class="accent-champagne w-4 h-4" checked />
+                    <span class="text-xs text-ivory">Dedicated Grocery Shopping & Delivery</span>
+                  </div>
+                  <span class="text-xs text-champagne font-mono">+$25</span>
+                </label>
+
+                <label class="flex items-center justify-between p-3 border border-white/10 rounded-sm cursor-pointer hover:border-white/30 transition-colors">
+                  <div class="flex items-center space-x-3">
+                    <input type="checkbox" id="addon-lunch" onchange="calculateTotal()" class="accent-champagne w-4 h-4" />
+                    <span class="text-xs text-ivory">Expanded Lunch Varieties Option</span>
+                  </div>
+                  <span class="text-xs text-champagne font-mono">+$25</span>
+                </label>
+
+              </div>
+            </div>
+
+            <!-- Total Summary Card -->
+            <div class="bg-charcoal/80 p-4 border border-champagne/30 rounded-sm flex items-center justify-between">
+              <div>
+                <span class="block text-[10px] uppercase tracking-widest text-taupe">Estimated Weekly Service Fee</span>
+                <span id="estimated-total" class="text-3xl font-editorial text-champagne">$275</span>
+                <span class="block text-[10px] text-taupe/80">+ Grocery receipts</span>
+              </div>
+              <button onclick="openBookingModal('Weekly Meal Prep')" class="px-6 py-3 bg-champagne text-charcoal text-xs uppercase tracking-widest font-semibold hover:bg-ivory transition-colors">
+                Reserve Plan
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PRIVATE DINING & COOKING CLASSES PAGE/SECTIONS -->
+    <section id="private-dining" class="py-24 px-6 md:px-12 bg-ivory text-charcoal">
+      <div class="max-w-7xl mx-auto space-y-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="space-y-6">
+            <span class="text-xs uppercase tracking-[0.3em] text-olive font-semibold">Intimate Experiences</span>
+            <h2 class="text-3xl md:text-5xl font-light">Private Dinners & Special Events</h2>
+            <p class="text-charcoal/80 text-base leading-relaxed font-light">
+              Transform your dining room or coastal porch into Beaufort's finest dining establishment. Chef Josh handles every detail—menu design, wine pairing recommendations, fresh seasonal sourcing, course preparation, tableside service, and pristine kitchen cleanup.
+            </p>
+            <ul class="space-y-2 text-xs uppercase tracking-wider text-charcoal/80 font-medium">
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-leaf text-olive"></i> <span>Custom 3-to-6 Course Tasting Menus</span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-leaf text-olive"></i> <span>Lowcountry Seafood & Artisanal Meats</span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-leaf text-olive"></i> <span>Seamless Hospitality for 2 to 20 Guests</span></li>
+            </ul>
+            <button onclick="openBookingModal('Private Dining')" class="px-8 py-4 bg-charcoal text-ivory text-xs uppercase tracking-widest font-medium hover:bg-olive transition-colors">
+              Inquire About Private Dining
+            </button>
+          </div>
+          <div class="reveal-image-wrapper rounded-sm overflow-hidden border border-taupe/30 shadow-xl">
+            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1200&auto=format&fit=crop" alt="Intimate private dining candlelit table" class="w-full h-[450px] object-cover" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cooking-classes" class="py-24 px-6 md:px-12 bg-charcoal text-ivory border-t border-white/5">
+      <div class="max-w-7xl mx-auto space-y-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="order-2 lg:order-1 reveal-image-wrapper rounded-sm overflow-hidden border border-white/10 shadow-xl">
+            <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1200&auto=format&fit=crop" alt="Interactive cooking class hands-on technique" class="w-full h-[450px] object-cover" />
+          </div>
+          <div class="order-1 lg:order-2 space-y-6">
+            <span class="text-xs uppercase tracking-[0.3em] text-champagne font-medium">Culinary Education</span>
+            <h2 class="text-3xl md:text-5xl font-light">Interactive In-Home Cooking Classes</h2>
+            <p class="text-taupe text-base leading-relaxed font-light">
+              Master knife skills, classic French sauces, coastal Lowcountry boil secrets, or artisanal pasta making in the comfort of your home kitchen. Perfect for couples, family gatherings, or intimate friend celebrations.
+            </p>
+            <p class="text-taupe/80 text-sm font-light">
+              Classes include all ingredients, professional printed recipe booklets, hands-on instruction, and a multi-course dinner enjoying everything created during class.
+            </p>
+            <button onclick="openBookingModal('Cooking Class')" class="px-8 py-4 border border-champagne text-champagne text-xs uppercase tracking-widest font-medium hover:bg-champagne hover:text-charcoal transition-colors">
+              Book a Cooking Class
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS SECTION -->
+    <section id="how-it-works" class="py-24 px-6 md:px-12 bg-cream text-charcoal">
+      <div class="max-w-7xl mx-auto space-y-16">
+        
+        <div class="text-center space-y-4 max-w-2xl mx-auto">
+          <span class="text-xs uppercase tracking-[0.3em] text-olive font-semibold">Seamless Experience</span>
+          <h2 class="text-3xl md:text-5xl font-light">How In-Home Chef Service Works</h2>
+          <p class="text-charcoal/70 text-sm">Four simple steps to enjoying handcrafted chef meals every single week.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+          
+          <!-- Step 1 -->
+          <div class="space-y-4 p-6 bg-ivory border border-taupe/20 rounded-sm relative">
+            <span class="text-4xl font-editorial text-olive font-bold">01</span>
+            <h3 class="text-xl font-editorial text-charcoal">Let's Talk</h3>
+            <p class="text-xs text-charcoal/70 leading-relaxed">
+              Discuss household needs, dietary restrictions, favorite flavor profiles, and ideal weekly cook day schedules during a brief consultation call.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="space-y-4 p-6 bg-ivory border border-taupe/20 rounded-sm relative">
+            <span class="text-4xl font-editorial text-olive font-bold">02</span>
+            <h3 class="text-xl font-editorial text-charcoal">Personalize Menu</h3>
+            <p class="text-xs text-charcoal/70 leading-relaxed">
+              Receive your bespoke weekly menu proposal. Review entrée choices, sides, and snacks, making any adjustments before finalizing.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="space-y-4 p-6 bg-ivory border border-taupe/20 rounded-sm relative">
+            <span class="text-4xl font-editorial text-olive font-bold">03</span>
+            <h3 class="text-xl font-editorial text-charcoal">Chef Arrives</h3>
+            <p class="text-xs text-charcoal/70 leading-relaxed">
+              Chef Josh purchases fresh local ingredients and arrives on your cook day to prepare, portion, label, and clean your kitchen completely.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="space-y-4 p-6 bg-ivory border border-taupe/20 rounded-sm relative">
+            <span class="text-4xl font-editorial text-olive font-bold">04</span>
+            <h3 class="text-xl font-editorial text-charcoal">Enjoy Your Week</h3>
+            <p class="text-xs text-charcoal/70 leading-relaxed">
+              Open your refrigerator to effortless, restaurant-grade meals all week long. Simply follow quick heating instructions and enjoy your time.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT THE CHEF SECTION -->
+    <section id="chef" class="py-24 px-6 md:px-12 bg-charcoal text-ivory border-t border-white/5">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-5 reveal-image-wrapper rounded-sm overflow-hidden border border-white/10">
+          <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=1200&auto=format&fit=crop" alt="Chef Josh Castillo preparing dish in residential kitchen" class="w-full h-[550px] object-cover" />
+        </div>
+
+        <div class="lg:col-span-7 space-y-6">
+          <span class="text-xs uppercase tracking-[0.3em] text-champagne font-medium">Meet Your Private Chef</span>
+          <h2 class="text-3xl md:text-5xl font-light">Chef Josh Castillo</h2>
+          <div class="w-12 h-px bg-champagne/50"></div>
+          <p class="text-taupe text-base leading-relaxed font-light">
+            With years of dedicated culinary experience and a passion for South Carolina's rich coastal produce, Chef Josh Castillo brings artisanal technique and warm hospitality into residential kitchens throughout Beaufort and surrounding coastal islands.
+          </p>
+          <p class="text-taupe/80 text-sm leading-relaxed font-light">
+            Privately Yours was founded on a simple truth: dining at home should feel like a sanctuary. Chef Josh focuses on clean, nourishing ingredients, seasonal seafood, and customized menu formats that give busy families and professionals back their most valuable asset—time.
+          </p>
+          
+          <div class="pt-4 flex items-center space-x-6">
+            <div class="border-l-2 border-champagne pl-4">
+              <span class="block text-xs uppercase tracking-widest text-ivory">Core Culinary Values</span>
+              <span class="text-xs text-taupe">Seasonal • Local • Pristine Cleanliness • Tailored Nutrition</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-24 px-6 md:px-12 bg-ivory text-charcoal">
+      <div class="max-w-4xl mx-auto space-y-12">
+        
+        <div class="text-center space-y-4">
+          <span class="text-xs uppercase tracking-[0.3em] text-olive font-semibold">Clear Answers</span>
+          <h2 class="text-3xl md:text-5xl font-light">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="space-y-4">
+          
+          <!-- FAQ Item 1 -->
+          <div class="faq-item border border-taupe/30 bg-white p-6 rounded-sm cursor-pointer" onclick="toggleFaq(this)">
+            <div class="flex justify-between items-center">
+              <h3 class="text-lg font-editorial text-charcoal font-medium">What is included in weekly meal preparation?</h3>
+              <i class="fa-solid fa-plus faq-icon text-olive transition-transform"></i>
+            </div>
+            <div class="faq-answer mt-3 text-xs text-charcoal/70 leading-relaxed">
+              Standard weekly prep covers 4 entrée protein selections, 5 side dishes, prepared salad ingredients, 1 dessert, and 3 breakfast selections. All items are cooked in your kitchen, portioned, labeled, and accompanied by heating instructions.
+            </div>
+          </div>
+
+          <!-- FAQ Item 2 -->
+          <div class="faq-item border border-taupe/30 bg-white p-6 rounded-sm cursor-pointer" onclick="toggleFaq(this)">
+            <div class="flex justify-between items-center">
+              <h3 class="text-lg font-editorial text-charcoal font-medium">Are groceries included in the plan service price?</h3>
+              <i class="fa-solid fa-plus faq-icon text-olive transition-transform"></i>
+            </div>
+            <div class="faq-answer mt-3 text-xs text-charcoal/70 leading-relaxed">
+              No. Service rates ($250 for up to 4 people; $300 for 6-8 people) cover culinary labor, menu design, prep time, and kitchen sanitization. Groceries are billed separately at direct grocery receipt cost with zero markup.
+            </div>
+          </div>
+
+          <!-- FAQ Item 3 -->
+          <div class="faq-item border border-taupe/30 bg-white p-6 rounded-sm cursor-pointer" onclick="toggleFaq(this)">
+            <div class="flex justify-between items-center">
+              <h3 class="text-lg font-editorial text-charcoal font-medium">Can dietary preferences and food allergies be accommodated?</h3>
+              <i class="fa-solid fa-plus faq-icon text-olive transition-transform"></i>
+            </div>
+            <div class="faq-answer mt-3 text-xs text-charcoal/70 leading-relaxed">
+              Absolutely. We routinely accommodate Gluten-Free, Dairy-Free, Keto, Low Sodium, Paleo, Vegetarian, Vegan, and specific severe food allergies.
+            </div>
+          </div>
+
+          <!-- FAQ Item 4 -->
+          <div class="faq-item border border-taupe/30 bg-white p-6 rounded-sm cursor-pointer" onclick="toggleFaq(this)">
+            <div class="flex justify-between items-center">
+              <h3 class="text-lg font-editorial text-charcoal font-medium">What geographic areas in South Carolina are served?</h3>
+              <i class="fa-solid fa-plus faq-icon text-olive transition-transform"></i>
+            </div>
+            <div class="faq-answer mt-3 text-xs text-charcoal/70 leading-relaxed">
+              We serve Beaufort, Port Royal, Bluffton, Hilton Head Island, Dataw Island, Fripp Island, and the surrounding Lowcountry communities.
+            </div>
+          </div>
+
+          <!-- FAQ Item 5 -->
+          <div class="faq-item border border-taupe/30 bg-white p-6 rounded-sm cursor-pointer" onclick="toggleFaq(this)">
+            <div class="flex justify-between items-center">
+              <h3 class="text-lg font-editorial text-charcoal font-medium">Do I need to be home while the chef is cooking?</h3>
+              <i class="fa-solid fa-plus faq-icon text-olive transition-transform"></i>
+            </div>
+            <div class="faq-answer mt-3 text-xs text-charcoal/70 leading-relaxed">
+              No. Many clients provide keyless entry or garage codes. Chef Josh arrives, cooks, packages the food in your refrigerator, leaves your kitchen spotless, and locks up.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FINAL CTA SECTION -->
+    <section class="py-24 px-6 md:px-12 bg-charcoal text-center text-ivory border-t border-champagne/20">
+      <div class="max-w-3xl mx-auto space-y-8">
+        <h2 class="text-3xl md:text-5xl font-light">Make Room for More of What Matters.</h2>
+        <p class="text-taupe text-base font-light">
+          Let's create a personalized culinary experience that works for your home, your schedule, and your tastes.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+          <button onclick="openBookingModal()" class="px-8 py-4 bg-champagne text-charcoal hover:bg-ivory text-xs uppercase tracking-widest font-semibold transition-colors">
+            Book a Consultation
+          </button>
+          <a href="#meal-prep" onclick="navigateTo('meal-prep')" class="px-8 py-4 border border-ivory/30 text-ivory hover:border-champagne text-xs uppercase tracking-widest font-medium transition-colors">
+            Explore Service Plans
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BOOKING & CONSULTATION MODAL -->
+  <div id="booking-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-charcoal/90 backdrop-blur-md">
+    <div class="glass-card-light text-charcoal w-full max-w-2xl max-h-[90vh] overflow-y-auto p-8 rounded-sm relative shadow-2xl space-y-6">
+      
+      <!-- Close Button -->
+      <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-charcoal/60 hover:text-charcoal text-xl focus:outline-none">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="space-y-2">
+        <span class="text-[10px] uppercase tracking-[0.25em] text-olive font-semibold">Start the Conversation</span>
+        <h3 class="text-2xl md:text-3xl font-editorial text-charcoal">Book a Personal Consultation</h3>
+        <p class="text-xs text-charcoal/70">Tell us a bit about your household. Chef Josh will reach out within 24 hours.</p>
+      </div>
+
+      <form id="consultation-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-charcoal font-medium mb-1">Full Name *</label>
+            <input type="text" required class="w-full px-4 py-3 bg-white border border-taupe/40 text-xs focus:outline-none focus:border-olive" placeholder="Jane Doe" />
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-charcoal font-medium mb-1">Email Address *</label>
+            <input type="email" required class="w-full px-4 py-3 bg-white border border-taupe/40 text-xs focus:outline-none focus:border-olive" placeholder="jane@example.com" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-charcoal font-medium mb-1">Phone Number</label>
+            <input type="tel" class="w-full px-4 py-3 bg-white border border-taupe/40 text-xs focus:outline-none focus:border-olive" placeholder="(843) 555-0199" />
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-charcoal font-medium mb-1">Service of Interest *</label>
+            <select id="modal-service-select" class="w-full px-4 py-3 bg-white border border-taupe/40 text-xs focus:outline-none focus:border-olive">
+              <option value="Weekly Meal Prep">Weekly Meal Prep ($250-$300/wk)</option>
+              <option value="Private Dining">Private Dining / Special Event</option>
+              <option value="Cooking Class">In-Home Cooking Class</option>
+              <option value="General Inquiry">General Consultation</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-charcoal font-medium mb-1">Household Size</label>
+            <select class="w-full px-4 py-3 bg-white border border-taupe/40 text-xs focus:outline-none focus:border-olive">
+              <option value="1-2">1 - 2 People</option>
+              <option value="3-4">3 - 4 People</option>
+              <option value="5-6">5 - 6 People</option>
+              <option value="7+">7+ People</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-charcoal font-medium mb-1">Location / Island</label>
+            <input type="text" class="w-full px-4 py-3 bg-white border border-taupe/40 text-xs focus:outline-none focus:border-olive" placeholder="e.g., Beaufort, Bluffton, Fripp" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-charcoal font-medium mb-1">Dietary Restrictions & Preferences</label>
+          <textarea rows="3" class="w-full px-4 py-3 bg-white border border-taupe/40 text-xs focus:outline-none focus:border-olive" placeholder="Share any food allergies, favorite cuisines, or scheduling preferences..."></textarea>
+        </div>
+
+        <button type="submit" id="submit-btn" class="w-full py-4 bg-charcoal text-ivory font-semibold text-xs uppercase tracking-widest hover:bg-olive transition-colors">
+          Submit Consultation Request
+        </button>
+
+        <p class="text-[10px] text-charcoal/60 text-center">
+          We respect your privacy. Information is used strictly for scheduling your inquiry.
+        </p>
+
+      </form>
+
+      <!-- Success Feedback Alert Container -->
+      <div id="form-success-message" class="hidden p-6 bg-olive/10 border border-olive text-charcoal text-center space-y-3">
+        <i class="fa-solid fa-circle-check text-3xl text-olive"></i>
+        <h4 class="text-xl font-editorial">Consultation Request Received</h4>
+        <p class="text-xs text-charcoal/80">Thank you! Chef Josh will review your details and connect with you shortly.</p>
+        <button onclick="closeBookingModal()" class="px-6 py-2 bg-charcoal text-ivory text-xs uppercase tracking-widest mt-2">Close Window</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-charcoal text-ivory py-16 px-6 md:px-12 border-t border-white/10 text-xs font-light">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+      
+      <div class="space-y-4">
+        <span class="font-editorial text-2xl tracking-widest uppercase text-ivory block">Privately Yours</span>
+        <p class="text-taupe leading-relaxed">
+          Premium personal chef & in-home dining service delivering culinary craftsmanship to Beaufort and the South Carolina Lowcountry.
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <span class="text-xs uppercase tracking-widest text-champagne font-medium block">Services</span>
+        <ul class="space-y-2 text-taupe">
+          <li><a href="#meal-prep" onclick="navigateTo('meal-prep')" class="hover:text-ivory">Weekly Meal Prep</a></li>
+          <li><a href="#private-dining" onclick="navigateTo('private-dining')" class="hover:text-ivory">Private Dining</a></li>
+          <li><a href="#cooking-classes" onclick="navigateTo('cooking-classes')" class="hover:text-ivory">Cooking Classes</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-3">
+        <span class="text-xs uppercase tracking-widest text-champagne font-medium block">Service Area</span>
+        <p class="text-taupe leading-relaxed">
+          Beaufort • Bluffton • Hilton Head Island • Port Royal • Dataw Island • Fripp Island • Lowcountry SC
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <span class="text-xs uppercase tracking-widest text-champagne font-medium block">Direct Inquiries</span>
+        <p class="text-taupe">
+          Email: <a href="mailto:info@privatelyyoursssc.com" class="hover:text-champagne underline">info@privatelyyoursssc.com</a><br/>
+          Phone: <a href="tel:8435550199" class="hover:text-champagne underline">(843) 555-0199</a>
+        </p>
+      </div>
+
+    </div>
+
+    <div class="max-w-7xl mx-auto mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between text-taupe/60 text-[10px]">
+      <p>© 2026 Privately Yours Personal Chef Services. All rights reserved.</p>
+      <div class="flex space-x-4 mt-2 sm:mt-0">
+        <a href="#" class="hover:underline">Privacy Policy</a>
+        <a href="#" class="hover:underline">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT & BABYLON.JS LOGIC -->
+  <script>
+    /* -------------------------------------------------- */
+    /* 1. Global Interactive Plan Estimator Logic          */
+    /* -------------------------------------------------- */
+    let currentBasePrice = 250;
+
+    function selectPlan(planId, price) {
+      currentBasePrice = price;
+      document.querySelectorAll('.plan-btn').forEach(btn => {
+        btn.classList.remove('active', 'border-champagne', 'bg-champagne/10');
+        btn.classList.add('border-white/20');
+      });
+
+      const selectedBtn = document.getElementById('btn-' + planId);
+      selectedBtn.classList.add('active', 'border-champagne', 'bg-champagne/10');
+      selectedBtn.classList.remove('border-white/20');
+
+      calculateTotal();
+    }
+
+    function calculateTotal() {
+      let total = currentBasePrice;
+      if (document.getElementById('addon-dinner').checked) total += 50;
+      if (document.getElementById('addon-grocery').checked) total += 25;
+      if (document.getElementById('addon-lunch').checked) total += 25;
+
+      document.getElementById('estimated-total').innerText = '$' + total;
+    }
+
+    /* -------------------------------------------------- */
+    /* 2. Modal Controls & Form Submissions               */
+    /* -------------------------------------------------- */
+    function openBookingModal(defaultService) {
+      const modal = document.getElementById('booking-modal');
+      modal.classList.remove('hidden');
+      if (defaultService) {
+        document.getElementById('modal-service-select').value = defaultService;
+      }
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeBookingModal() {
+      const modal = document.getElementById('booking-modal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+      // Reset form state
+      document.getElementById('consultation-form').classList.remove('hidden');
+      document.getElementById('form-success-message').classList.add('hidden');
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.innerText = 'Sending...';
+      submitBtn.disabled = true;
+
+      // Simulate async submission (replace with real endpoint / fetch() as needed)
+      setTimeout(() => {
+        document.getElementById('consultation-form').classList.add('hidden');
+        document.getElementById('form-success-message').classList.remove('hidden');
+        submitBtn.innerText = 'Submit Consultation Request';
+        submitBtn.disabled = false;
+        document.getElementById('consultation-form').reset();
+      }, 1200);
+    }
+
+    // Close modal on backdrop click or Escape key
+    document.getElementById('booking-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeBookingModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeBookingModal();
+    });
+
+    /* -------------------------------------------------- */
+    /* 3. Navigation, Active Links & Mobile Menu          */
+    /* -------------------------------------------------- */
+    function navigateTo(page) {
+      const target = document.getElementById(page + '-section') || document.getElementById(page);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setActiveNav(page);
+    }
+
+    function setActiveNav(page) {
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('text-champagne', link.dataset.page === page);
+      });
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const icon = document.getElementById('menu-icon');
+      const isHidden = menu.classList.toggle('hidden-menu');
+      icon.classList.toggle('fa-bars', isHidden);
+      icon.classList.toggle('fa-xmark', !isHidden);
+    }
+
+    // Compact nav on scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('main-nav');
+      if (window.scrollY > 60) nav.classList.replace('py-6', 'py-3');
+      else nav.classList.replace('py-3', 'py-6');
+    }, { passive: true });
+
+    /* -------------------------------------------------- */
+    /* 4. FAQ Accordion                                   */
+    /* -------------------------------------------------- */
+    function toggleFaq(item) {
+      const wasActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+      if (!wasActive) item.classList.add('active');
+    }
+
+    /* -------------------------------------------------- */
+    /* 5. GSAP Scroll-Triggered Animations                */
+    /* -------------------------------------------------- */
+    function initScrollAnimations() {
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero entrance sequence
+      gsap.timeline({ defaults: { ease: 'power3.out' } })
+        .from('#hero-headline', { y: 48, opacity: 0, duration: 1.1, delay: 0.25 })
+        .from('#hero-subtext', { y: 32, opacity: 0, duration: 0.9 }, '-=0.65')
+        .from('#hero-ctas', { y: 32, opacity: 0, duration: 0.9 }, '-=0.65')
+        .from('#home-section .inline-flex.items-center', { y: 24, opacity: 0, duration: 0.8 }, '-=0.85')
+        .from('#hero-bg-img', { opacity: 0, duration: 1.4 }, '-=1.0');
+
+      // Slow background parallax while scrolling through hero
+      gsap.to('#hero-bg-img', {
+        scale: 1.18,
+        ease: 'none',
+        scrollTrigger: { trigger: '#home-section', start: 'top top', end: 'bottom top', scrub: true }
+      });
+
+      // Section content reveals
+      gsap.utils.toArray('#app-content > section:not(#home-section)').forEach(section => {
+        gsap.from(Array.from(section.children), {
+          y: 48,
+          opacity: 0,
+          duration: 1,
+          stagger: 0.1,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: section, start: 'top 82%', once: true }
+        });
+      });
+
+      // Cinematic clip-reveal for imagery
+      gsap.utils.toArray('.reveal-image-wrapper').forEach(wrapper => {
+        gsap.fromTo(wrapper,
+          { clipPath: 'inset(10% 6% 10% 6%)', opacity: 0.4 },
+          {
+            clipPath: 'inset(0% 0% 0% 0%)',
+            opacity: 1,
+            duration: 1.4,
+            ease: 'power4.out',
+            scrollTrigger: { trigger: wrapper, start: 'top 85%', once: true }
+          }
+        );
+      });
+
+      // Highlight nav link for the section currently in view
+      ['home-section', 'meal-prep', 'private-dining', 'cooking-classes', 'chef', 'how-it-works', 'faq'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        ScrollTrigger.create({
+          trigger: el,
+          start: 'top 45%',
+          end: 'bottom 45%',
+          onToggle: self => { if (self.isActive) setActiveNav(id.replace('-section', '')); }
+        });
+      });
+
+      window.addEventListener('load', () => ScrollTrigger.refresh());
+    }
+
+    /* -------------------------------------------------- */
+    /* 6. Babylon.js Ambient Hero Particles               */
+    /*    (Replaces the previous Three.js implementation) */
+    /* -------------------------------------------------- */
+    function initHeroParticles() {
+      if (typeof BABYLON === 'undefined') return;             // Graceful fallback if CDN fails
+      const canvas = document.getElementById('hero-canvas');
+      if (!canvas) return;
+
+      // Respect users who prefer reduced motion
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const isMobile = window.innerWidth < 768;
+
+      // Engine with alpha so the background photo shows through the canvas
+      const engine = new BABYLON.Engine(canvas, true, {
+        alpha: true,
+        antialias: true,
+        adaptToDeviceRatio: true
+      });
+
+      const scene = new BABYLON.Scene(engine);
+      scene.clearColor = new BABYLON.Color4(0, 0, 0, 0); // Fully transparent
+
+      const camera = new BABYLON.FreeCamera('heroCamera', new BABYLON.Vector3(0, 0, -20), scene);
+      camera.setTarget(BABYLON.Vector3.Zero());
+      camera.fov = 0.9;
+
+      /* --- Generate a soft radial champagne-glow texture (no external assets) --- */
+      const size = 64;
+      const glow = new BABYLON.DynamicTexture('glowTex', { width: size, height: size }, scene, false);
+      const gctx = glow.getContext();
+      const grad = gctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+      grad.addColorStop(0.0, 'rgba(255, 240, 214, 1)');
+      grad.addColorStop(0.35, 'rgba(200, 179, 138, 0.55)');   // champagne #C8B38A
+      grad.addColorStop(1.0, 'rgba(200, 179, 138, 0)');
+      gctx.fillStyle = grad;
+      gctx.fillRect(0, 0, size, size);
+      glow.update();
+      glow.hasAlpha = true;
+
+      /* --- Layer 1: fine champagne dust drifting upward --- */
+      const dust = new BABYLON.ParticleSystem('dust', isMobile ? 160 : 380, scene);
+      dust.particleTexture = glow;
+      dust.emitter = new BABYLON.Vector3(0, 0, 0);
+      dust.minEmitBox = new BABYLON.Vector3(-42, -22, 0);
+      dust.maxEmitBox = new BABYLON.Vector3(42, 22, 0);
+      dust.color1 = new BABYLON.Color4(0.92, 0.82, 0.62, 0.42);
+      dust.color2 = new BABYLON.Color4(0.55, 0.58, 0.48, 0.28);   // olive tint
+      dust.colorDead = new BABYLON.Color4(0.78, 0.70, 0.54, 0);
+      dust.minSize = 0.06;
+      dust.maxSize = 0.30;
+      dust.minLifeTime = 6;
+      dust.maxLifeTime = 14;
+      dust.emitRate = isMobile ? 14 : 34;
+      dust.blendMode = BABYLON.ParticleSystem.BLENDMODE_ADD;
+      dust.direction1 = new BABYLON.Vector3(-0.12, 0.30, 0);
+      dust.direction2 = new BABYLON.Vector3(0.12, 0.75, 0);
+      dust.minEmitPower = 0.25;
+      dust.maxEmitPower = 0.70;
+      dust.updateSpeed = 0.011;
+      dust.gravity = new BABYLON.Vector3(0, 0.02, 0);
+      dust.minAngularSpeed = 0;
+      dust.maxAngularSpeed = 0.2;
+      dust.preWarmCycles = 140;      // Fill the hero with particles instantly
+      dust.preWarmStepOffset = 6;
+      dust.start();
+
+      /* --- Layer 2: large, faint bokeh orbs for depth --- */
+      const bokeh = new BABYLON.ParticleSystem('bokeh', isMobile ? 30 : 60, scene);
+      bokeh.particleTexture = glow;
+      bokeh.emitter = new BABYLON.Vector3(0, 2, 3);
+      bokeh.minEmitBox = new BABYLON.Vector3(-38, -20, -4);
+      bokeh.maxEmitBox = new BABYLON.Vector3(38, 20, 4);
+      bokeh.color1 = new BABYLON.Color4(0.78, 0.70, 0.54, 0.10);
+      bokeh.color2 = new BABYLON.Color4(0.45, 0.47, 0.38, 0.06);
+      bokeh.colorDead = new BABYLON.Color4(0.78, 0.70, 0.54, 0);
+      bokeh.minSize = 0.9;
+      bokeh.maxSize = 2.2;
+      bokeh.minLifeTime = 12;
+      bokeh.maxLifeTime = 22;
+      bokeh.emitRate = isMobile ? 4 : 8;
+      bokeh.blendMode = BABYLON.ParticleSystem.BLENDMODE_ADD;
+      bokeh.direction1 = new BABYLON.Vector3(-0.08, 0.15, 0);
+      bokeh.direction2 = new BABYLON.Vector3(0.08, 0.40, 0);
+      bokeh.minEmitPower = 0.15;
+      bokeh.maxEmitPower = 0.40;
+      bokeh.updateSpeed = 0.01;
+      bokeh.gravity = new BABYLON.Vector3(0, 0.015, 0);
+      bokeh.preWarmCycles = 160;
+      bokeh.preWarmStepOffset = 8;
+      bokeh.start();
+
+      /* --- Gentle "coastal breeze": slow sine-driven gravity sway --- */
+      scene.onBeforeRenderObservable.add(() => {
+        const t = performance.now() * 0.001;
+        const windX = Math.sin(t * 0.25) * 0.012 + Math.sin(t * 0.11) * 0.008;
+        const lift = 0.02 + Math.sin(t * 0.17) * 0.006;
+        dust.gravity.x = windX;
+        dust.gravity.y = lift;
+        bokeh.gravity.x = windX * 0.6;
+        bokeh.gravity.y = lift * 0.7;
+      });
+
+      /* --- Subtle pointer parallax (canvas is pointer-events:none, so use window) --- */
+      let targetX = 0, targetY = 0, curX = 0, curY = 0;
+      window.addEventListener('mousemove', (e) => {
+        targetX = (e.clientX / window.innerWidth) * 2 - 1;
+        targetY = (e.clientY / window.innerHeight) * 2 - 1;
+      });
+
+      const renderFn = () => {
+        curX += (targetX - curX) * 0.04;
+        curY += (targetY - curY) * 0.04;
+        camera.position.x = curX * 1.6;
+        camera.position.y = -curY * 1.1;
+        camera.setTarget(BABYLON.Vector3.Zero());
+        scene.render();
+      };
+
+      engine.runRenderLoop(renderFn);
+      window.addEventListener('resize', () => engine.resize());
+
+      /* --- Pause the render loop when the hero scrolls out of view (battery-friendly) --- */
+      const hero = document.getElementById('home-section');
+      if (hero && 'IntersectionObserver' in window) {
+        new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) engine.runRenderLoop(renderFn);
+            else engine.stopRenderLoop();
+          });
+        }, { threshold: 0.02 }).observe(hero);
+      }
+    }
+
+    /* -------------------------------------------------- */
+    /* 7. Initialize                                      */
+    /* -------------------------------------------------- */
+    calculateTotal();          // Sync estimator with default-checked add-ons
+    initScrollAnimations();
+    initHeroParticles();
+  </script>
+</body>
+</html>
